@@ -18,8 +18,8 @@ git branch -M main
 git push -u origin main
 #######
 
-  git branch -m main Mahir
+  git branch -m main mahir
   git fetch origin
-  git branch -u origin/Mahir Mahir
+  git branch -u origin/Mahir mahir
   git remote set-head origin -a
   
