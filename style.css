@@ -12,3 +12,72 @@
   display: none !important;
 }
 
+
+body {
+  margin: 0;
+  background-color: #F6F7F8;
+}
+
+.d-none {
+  display: none;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-login {
+  width: 100px;
+  height: 120px;
+  padding-top: 40px;
+  padding-left: 35px;
+}
+
+.help-icon {
+  padding-right: 40px;
+}
+
+.login-nav {
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  width: 652px;
+  height: 449px;
+  border-radius: 30px;
+  background-color: white;
+}
+
+.input-Login {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.button-dark {
+  gap: 8px;
+  padding: 4px 16px;
+  color: white;
+  border-radius: 5px;
+  background-color: #2A3647;
+}
+
+.button-light {
+  gap: 8px;
+  padding: 4px 16px;
+  border-radius: 5px;
+}
