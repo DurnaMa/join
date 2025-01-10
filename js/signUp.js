@@ -9,7 +9,7 @@ function gesutLogin(){
 async function init(){
     onloadFunc();
     loadData();
-    postData();
+    postData("", {"name": "Mahir"});
 }
 
 function onloadFunc(){
