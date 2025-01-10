@@ -59,7 +59,7 @@ function renderTaskContainer() {
                         <div class="tasks-user3 tasks-user">DL</div>
                     </div>
                     <div>
-                        <img src="/assets/icons/capa2.png" alt="">
+                        <img src="/assets/icons/priom.png" alt="">
                     </div>
                 </div>
             </div>

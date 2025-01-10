@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Task</title>
+    <title>Board</title>
     <link rel="stylesheet" href="../templates/header/header.css" />
     <link rel="stylesheet" href="../templates/sidebar/sidebar.css" />
     <link rel="stylesheet" href="../css/board.css">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="../css/fonts.css">
-    <script src="../js/includeTemplates.js"></script>
-    <script src="../js/board.js"></script>
+    <script defer src="../js/includeTemplates.js"></script>
+    <script defer src="/script.js"></script>
+    <script defer src="../js/board.js"></script>
+    
 </head>
-<body>
+<body onload="renderTaskContainer()">
     <include-html src="../templates/header/header.html"></include-html>
     <include-html src="../templates/sidebar/sidebar.html"></include-html>
 
@@ -31,13 +33,15 @@
           <h2 class="column-titles-h2">Await feedback<button class="add-column"><img src="/assets/icons/plusblack.png" alt=""></button></h2>
           <h2 class="column-titles-h2">Done<button class="add-column"><img src="/assets/icons/plusblack.png" alt=""></button></h2>
         </div>
-    </div>
+    
 
     <div class="task-container" id="taskContainer">
         
     </div>
+  </div>1
 
   </div>
+</div>
 
 </body>
 </html>
