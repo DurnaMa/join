@@ -1,15 +1,23 @@
-// FUNKTION HEADER SIDEBAR EINBINDEN
-async function includeHTML() {
-    let includeElements = document.querySelectorAll("[w3-include-html]");
-    for (let i = 0; i < includeElements.length; i++) {
-      const element = includeElements[i];
-      file = element.getAttribute("w3-include-html"); // "includes/header.html"
-      let resp = await fetch(file);
-      if (resp.ok) {
-        element.innerHTML = await resp.text();
-      } else {
-        element.innerHTML = "Page not found";
-      }
+class IncludeHTML extends HTMLElement {
+    async connectedCallback() {
+        const file = this.getAttribute("src");
+        try {
+            const response = await fetch(file);
+            if (!response.ok)
+                throw new Error(
+                    `Failed to fetch ${file}: ${response.statusText}`
+                );
+
+            if (this.isConnected) {
+                this.innerHTML = await response.text();
+            }
+        } catch (error) {
+            if (this.isConnected) {
+                this.innerHTML = "Page not found";
+            }
+            console.error(error);
+        }
     }
-  }
-  
+}
+
+customElements.define("include-html", IncludeHTML);

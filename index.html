@@ -6,17 +6,14 @@
     <title>Join</title>
 
     <link rel="stylesheet" href="style.css"/>
+    <script src="./js/signUp.js"></script>
     
   </head>
 
   <body onload="init()">
     <header>
       <div>
-        <img class="logo-login" src="/assets/img/logodunkel.png" alt="" />
-      </div>
-      <div class="login-nav">
-        <span>Not a Join user?</span>
-        <a href="./pages/signUp.html" class="button-dark">sign Up</a>
+        <img class="logo-login" src="./assets/img/logodunkel.png" alt="" />
       </div>
     </header>
 
@@ -31,12 +28,13 @@
         </div>
         <div class="button-login">
           <button class="button-dark" onclick="login(); return false;">Log in</button>
-          <button class="button-light">Guest Log in</button>
+          <button onclick="gesutLogin()" class="button-light">Guest Log in</button>
+        </div>
+        <div class="login-nav">
+          <span>Not a Join user?</span>
+          <a href="./pages/signUp.html" class="button-dark">sign Up</a>
         </div>
       </form>
     </div>
-
-    <script src="js/login.js"></script>
-
   </body>
 </html>
