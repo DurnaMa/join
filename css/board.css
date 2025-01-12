@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   min-height: 100vh;
   margin-left: 235px;
+  margin-top: 96px;
   padding-left: 50px;
   padding-top: 96px;
   background-color: #f6f7f8;
@@ -11,11 +12,19 @@
 .boardHeader {
   flex-wrap: wrap;
   width: 1200px;
-  height: 96px;
+  height: 232px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0px 40px 0px 40px;
+}
+
+.board-title {
+  width: 176px;
+  height: 73px;
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 73px;
 }
 
 .boardHeaderRight {
@@ -25,14 +34,35 @@
   height: 48px;
   gap: 32px;
   font-size: 92px;
-  height: 24px;
 }
 
-.search {
+.searchDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 312px;
   height: 48px;
   border-radius: 10px;
+  background-color: white;
   border: 1px solid #a8a8a8;
+}
+
+.search {
+  width: 280px;
+  height: 32px;
+  padding: 8px;
+  border: none;
+}
+
+.searchIcon {
+  padding: 16px;
+  cursor: pointer;
+}
+
+.search-dividing-line {
+  width: 1px;
+  height: 31px;
+  background-color: #d1d1d1;
 }
 
 .addTaskBtn {
@@ -45,7 +75,20 @@
   height: 48px;
   border-radius: 10px;
   border: 1px solid #2a3647;
-  gap: 16px;
+  padding-top: 8px;
+  padding-right: 16px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.addTaskBtnText {
+  width: 92px;
+  height: 24px;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 25px;
 }
 
 .column-titles {
@@ -54,7 +97,6 @@
   display: flex;
   justify-content: space-between;
   gap: 40px;
-
   padding: 0px 40px 0px 40px;
 }
 
@@ -79,6 +121,12 @@
   padding-left: 40px;
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .column-todo {
   width: 252px;
   height: 688px;
@@ -91,6 +139,7 @@
   height: 24px;
   border-radius: 8px;
   border: 2px solid #2a3647;
+  cursor: pointer;
 }
 
 .task-card {
@@ -100,6 +149,7 @@
   padding: 16px;
   gap: 10px;
   background-color: white;
+  cursor: pointer;
 }
 
 .task-card-title {
