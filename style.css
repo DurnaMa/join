@@ -47,6 +47,7 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex-direction: column;
 }
 
 .login {
@@ -79,4 +80,19 @@ header {
 	gap: 8px;
 	padding: 4px 16px;
 	border-radius: 5px;
+}
+
+a {
+	display: flex;
+	text-decoration: none;
+}
+.test1 {
+	margin-top: 150px;
+	display: flex;
+	flex-direction: row;
+	gap: 25px;
+}
+
+.a-color {
+	color: #a8a8a8;
 }

@@ -1,40 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join</title>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Join</title>
 
-    <link rel="stylesheet" href="style.css"/>
-    <script src="./js/signUp.js"></script>
-    
-  </head>
+		<link rel="stylesheet" href="style.css" />
+		<script src="./js/signUp.js"></script>
+	</head>
 
-  <body onload="init()">
-    <header>
-      <div>
-        <img class="logo-login" src="./assets/img/logodunkel.png" alt="" />
-      </div>
-      <div class="login-nav">
-        <span>Not a Join user?</span>
-        <a href="./pages/signUp.html" class="button-dark">sign Up</a>
-      </div>
-    </header>
+	<body onload="init()">
+		<header>
+			<div>
+				<img class="logo-login" src="./assets/img/logodunkel.png" alt="" />
+			</div>
+			<div class="login-nav">
+				<span>Not a Join user?</span>
+				<a href="./pages/signUp.html" class="button-dark">sign Up</a>
+			</div>
+		</header>
 
-    <div class="login-container">
-      <form class="login" id="login">
-        <div class="h1">
-          <h1>Log in</h1>
-        </div>
-        <div class="input-Login">
-          <input type="email" placeholder="Email" id="email" required/>
-          <input type="password" placeholder="Password" id="password" required/>
-        </div>
-        <div class="button-login">
-          <button class="button-dark" onclick="login(); return false;">Log in</button>
-          <button onclick="gesutLogin()" class="button-light">Guest Log in</button>
-        </div>
-      </form>
-    </div>
-  </body>
+		<div class="login-container">
+			<form class="login" id="login">
+				<div class="h1">
+					<h1>Log in</h1>
+				</div>
+				<div class="input-Login">
+					<input type="email" placeholder="Email" id="email" required />
+					<input
+						type="password"
+						placeholder="Password"
+						id="password"
+						required
+					/>
+				</div>
+				<div class="button-login">
+					<button class="button-dark" onclick="login(); return false;">
+						Log in
+					</button>
+					<button onclick="gesutLogin()" class="button-light">
+						Guest Log in
+					</button>
+				</div>
+			</form>
+			<div class="test1">
+				<a class="a-color" href="./pages/data-protection.html"
+					>Privacy Policy</a
+				>
+				<a class="a-color" href="http://">Legal notice</a>
+			</div>
+		</div>
+	</body>
 </html>
