@@ -100,6 +100,6 @@ function updateProgressBar() {
   let update = (currentSelectedTask + 1) / todos.length;
 
   update = Math.round(update * 100);
-  document.getElementById("progressbar").innerHTML = `${update} %`;
+  document.getElementById("progressbar").innerHTML = `${update}%`;
   document.getElementById("progressbar").style = `width: ${update}%;`;
 }
