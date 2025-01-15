@@ -195,6 +195,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: white;
 }
 
+#addSubTask:focus-within {
+  border: 1px solid #29abe2;
+}
+
 .taskFormButtons {
   padding: 75px 0;
   width: 100%;
