@@ -1,0 +1,91 @@
+.help {
+	padding: 105px 114px 96px 330px;
+}
+
+/* Header Styles */
+.join-header {
+	background-color: #2a3647;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.join-header-title {
+	margin-bottom: 10px;
+}
+
+.join-header-subtitle {
+	font-style: italic;
+}
+
+/* Main Content Styles */
+.join-main {
+	background-color: white;
+	padding: 20px;
+	margin-top: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.join-section {
+	margin-bottom: 30px;
+}
+
+.join-section-title {
+	color: #2c3e50;
+	border-bottom: 2px solid #2a3647;
+	padding-bottom: 10px;
+}
+
+.join-section__content {
+	padding-left: 20px;
+}
+
+/* List Styles */
+.join-list {
+	padding-left: 20px;
+}
+
+.join-list__item {
+	margin-bottom: 20px;
+}
+
+.join-list__item-title {
+	color: #2980b9;
+	margin-bottom: 5px;
+}
+
+/* Contact Section Styles */
+.join-contact {
+	background-color: #ecf0f1;
+	padding: 15px;
+	border-radius: 5px;
+}
+
+.join-contact__title {
+	color: #34495e;
+}
+
+/* Footer Styles */
+.join-footer {
+	text-align: center;
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #2a3647;
+	color: white;
+	border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+	body {
+		padding: 10px;
+	}
+
+	.join-header,
+	.join-main,
+	.join-footer {
+		padding: 10px;
+	}
+}
