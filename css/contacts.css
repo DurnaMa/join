@@ -7,6 +7,7 @@
 }
 
 .contacts-list-div {
+    position: sticky;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,6 +53,22 @@
     width: 352px;
     height: 58px;
     gap: 8px;
+}
+
+.scrollbar {
+    width: 456px;
+    height: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    padding: 10px;
+}
+
+.item {
+    height: 50px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .contacts-list-item {
@@ -150,6 +167,3 @@
     gap: 21px;
     background-color: rgb(54, 201, 40);
 }
-
-
-
