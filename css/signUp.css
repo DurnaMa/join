@@ -1,0 +1,58 @@
+.impressum,
+.datenschutzerklaerung {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.main {
+	flex-grow: 1;
+	padding: 20px;
+}
+
+.blocksatz_r {
+	padding: 80px 114px 96px 330px;
+	hyphens: auto;
+	text-align: justify; /* für Edge */
+	-moz-text-align-last: right; /* für Firefox vor 58.0 */
+	text-align-last: right;
+}
+
+.blocksatz_c {
+	padding: 80px 114px 96px 330px;
+	hyphens: auto;
+	text-align: justify; /* für Edge */
+	-moz-text-align-last: center; /* für Firefox vor 58.0 */
+	text-align-last: center;
+}
+
+.blocksatz_j {
+	padding: 80px 114px 96px 330px;
+	hyphens: auto;
+	text-align: justify; /* für Edge */
+	-moz-text-align-last: justify; /* für Firefox vor 58.0 */
+	text-align-last: justify;
+}
+
+.blocksatz_l {
+	padding: 80px 114px 96px 330px;
+	hyphens: auto;
+	text-align: justify; /* für Edge */
+	-moz-text-align-last: left; /* für Firefox vor 58.0 */
+	text-align-last: left;
+	word-spacing: 0px;
+	line-height: 35px;
+	/* letter-spacing: 5px; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 700;
+}

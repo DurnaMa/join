@@ -1,0 +1,64 @@
+.join-help {
+	padding: 105px 114px 96px 330px;
+}
+
+.join {
+	color: #43b5e5;
+}
+
+p,
+h2 {
+	padding-bottom: 15px;
+	font-size: 32px;
+}
+
+h3 {
+	padding-bottom: 15px;
+	font-size: 16px;
+}
+
+ol {
+	display: flex;
+	flex-direction: column;
+	align-items: baseline;
+	font-size: 64px;
+}
+.join-header-title {
+	padding-bottom: 10px;
+	font-size: 73px;
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 700;
+}
+
+.join-text {
+	padding-bottom: 15px;
+	font-size: 16px;
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 300;
+}
+
+/* List Styles */
+.join-list {
+	padding-left: 20px;
+}
+
+.join-list-item {
+	margin-bottom: 20px;
+}
+
+/* Contact Section Styles */
+.join-contact {
+	background-color: #ecf0f1;
+	padding: 15px;
+	border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+	.join-header,
+	.join-main,
+	.join-footer {
+		padding: 10px;
+	}
+}
