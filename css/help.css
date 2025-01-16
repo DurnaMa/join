@@ -14,15 +14,22 @@ h2 {
 
 h3 {
 	padding-bottom: 15px;
-	font-size: 16px;
+	font-size: 24px;
 }
 
-ol {
+.join-list-item {
 	display: flex;
+	justify-content: start;
+	align-items: center;
 	flex-direction: column;
-	align-items: baseline;
-	font-size: 64px;
 }
+
+.join-list {
+	display: flex;
+	justify-content: start;
+	flex-direction: column;
+}
+
 .join-header-title {
 	padding-bottom: 10px;
 	font-size: 73px;
@@ -42,10 +49,6 @@ ol {
 /* List Styles */
 .join-list {
 	padding-left: 20px;
-}
-
-.join-list-item {
-	margin-bottom: 20px;
 }
 
 /* Contact Section Styles */
