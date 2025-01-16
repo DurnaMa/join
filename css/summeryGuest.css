@@ -113,6 +113,7 @@ h2 {
 }
 
 .largeBox {
+  display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   gap: 10px;
