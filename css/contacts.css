@@ -1,5 +1,6 @@
 .contacts-container {
     display: flex;
+    position: fixed;
     width: 1440px;
     padding-top: 96px;
     margin-left: 235px;
@@ -7,10 +8,10 @@
 }
 
 .contacts-list-div {
-    position: sticky;
     display: flex;
     flex-direction: column;
     align-items: center;
+    top: 96px;
     width: 456px;
     height: 928px;
     background-color: white;
