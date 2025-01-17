@@ -11,6 +11,27 @@
   color: #cdcdcd;
 }
 
+.sideBarLogin {
+  padding-top: 235px;
+  position: absolute;
+}
+
+.sideBarLogin a {
+  display: flex;
+  width: 235px;
+  gap: 8px;
+  padding: 8px 53px;
+  text-align: center;
+  place-items: center;
+  text-decoration: none;
+  color: #cdcdcd;
+}
+
+.sideBarLogin a:hover {
+  background-color: #091931;
+}
+
+
 .sideBarList {
   display: flex;
   justify-content: center;
