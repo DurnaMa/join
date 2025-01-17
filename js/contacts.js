@@ -1,3 +1,1 @@
-function renderContactsList() {
-
-}
+function renderContactsList() {}

@@ -1,67 +1,67 @@
 .join-help {
-	padding: 105px 114px 96px 330px;
+  padding: 105px 114px 96px 330px;
 }
 
 .join {
-	color: #43b5e5;
+  color: #43b5e5;
 }
 
 p,
 h2 {
-	padding-bottom: 15px;
-	font-size: 32px;
+  padding-bottom: 15px;
+  font-size: 32px;
 }
 
 h3 {
-	padding-bottom: 15px;
-	font-size: 24px;
+  padding-bottom: 15px;
+  font-size: 24px;
 }
 
 .join-list-item {
-	display: flex;
-	justify-content: start;
-	align-items: center;
-	flex-direction: column;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
 }
 
 .join-list {
-	display: flex;
-	justify-content: start;
-	flex-direction: column;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
 }
 
 .join-header-title {
-	padding-bottom: 10px;
-	font-size: 73px;
-	font-family: "Inter";
-	font-style: normal;
-	font-weight: 700;
+  padding-bottom: 10px;
+  font-size: 73px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
 }
 
 .join-text {
-	padding-bottom: 15px;
-	font-size: 16px;
-	font-family: "Inter";
-	font-style: normal;
-	font-weight: 300;
+  padding-bottom: 15px;
+  font-size: 16px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
 }
 
 /* List Styles */
 .join-list {
-	padding-left: 20px;
+  padding-left: 20px;
 }
 
 /* Contact Section Styles */
 .join-contact {
-	background-color: #ecf0f1;
-	padding: 15px;
-	border-radius: 5px;
+  background-color: #ecf0f1;
+  padding: 15px;
+  border-radius: 5px;
 }
 
 @media (max-width: 600px) {
-	.join-header,
-	.join-main,
-	.join-footer {
-		padding: 10px;
-	}
+  .join-header,
+  .join-main,
+  .join-footer {
+    padding: 10px;
+  }
 }

@@ -1,101 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link
-			rel="shortcut icon"
-			href="/assets/img/logodunkel.png"
-			type="image/x-icon"
-		/>
-		<link rel="stylesheet" href="/style.css" />
-		<link rel="stylesheet" href="/css/signUp.css" />
-		<link rel="stylesheet" href="/css/fonts.css" />
-		<script defer src="../js/signUp.js"></script>
-		<script defer src="/script.js"></script>
-		<title>Join</title>
-	</head>
-	<body onload="init()">
-		<div class="headerLogo">
-			<img src="/assets/img/logodunkel.png" alt="" />
-		</div>
-		<div class="signUpContainer">
-			<a class="signUpArrowLink" href="/index.html">
-				<img
-					class="arrowSignUpImg"
-					src="/assets/icons/arrow-left-line.png"
-					alt=""
-				/>
-			</a>
-			<h1>Sign Up</h1>
-			<hr />
-			<form class="formSignUp" action="/index.html">
-				<div class="signUpInput">
-					<input
-						id="name"
-						class="name"
-						type="text"
-						placeholder="Name"
-						required
-					/>
-					<input
-						id="email"
-						class="email"
-						type="email"
-						placeholder="Email"
-						required
-					/>
-					<div id="emailError" class="signUpEmailError"></div>
-					<div class="passwordContainer">
-						<input
-							id="password"
-							class="password"
-							type="password"
-							placeholder="Password"
-						/>
-						<img
-							id="toggleSignupPasswordIcon"
-							src="/assets/icons/lock.png"
-							alt=""
-						/>
-					</div>
-					<div class="passwordContainer">
-						<input
-							id="passwordContainer"
-							class="password"
-							type="password"
-							placeholder="Confirm Password"
-						/>
-						<img
-							id="toggleSignupPasswordIcon"
-							src="/assets/icons/lock.png"
-							alt=""
-						/>
-					</div>
-					<div id="passwordError" class="signUpPasswordError"></div>
-					<div class="checkboxSignUp">
-						<input id="" type="checkbox" name="checkboxPrivacyPolicy" />
-						<label for=""
-							>I accept the
-							<a href="/pages/data-protection.html">Privacy Policy</a>
-						</label>
-					</div>
-				</div>
-				<div class="signUpButton">
-					<button
-						onclick="toTheRegistration()"
-						id=""
-						class="button"
-						type="submit"
-					>
-						Sign up
-					</button>
-				</div>
-			</form>
-		</div>
-		<footer class="footerContent">
-			<a href="/pages/data-protection.html">Privacy Policy</a>
-			<a href="#">Legal notice</a>
-		</footer>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/css/signUp.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <script defer src="../js/signUp.js"></script>
+    <script defer src="/script.js"></script>
+    <title>Join</title>
+  </head>
+  <body onload="init()">
+    <div class="headerLogo">
+      <img src="/assets/img/logodunkel.png" alt="" />
+    </div>
+    <div class="signUpContainer">
+      <a class="signUpArrowLink" href="/index.html">
+        <img class="arrowSignUpImg" src="/assets/icons/arrow-left-line.png" alt="" />
+      </a>
+      <h1>Sign Up</h1>
+      <hr />
+      <form class="formSignUp" action="/index.html">
+        <div class="signUpInput">
+          <input id="name" class="name" type="text" placeholder="Name" required />
+          <input id="email" class="email" type="email" placeholder="Email" required />
+          <div id="emailError" class="signUpEmailError"></div>
+          <div class="passwordContainer">
+            <input id="password" class="password" type="password" placeholder="Password" />
+            <img id="toggleSignupPasswordIcon" src="/assets/icons/lock.png" alt="" />
+          </div>
+          <div class="passwordContainer">
+            <input id="passwordContainer" class="password" type="password" placeholder="Confirm Password" />
+            <img id="toggleSignupPasswordIcon" src="/assets/icons/lock.png" alt="" />
+          </div>
+          <div id="passwordError" class="signUpPasswordError"></div>
+          <div class="checkboxSignUp">
+            <input id="" type="checkbox" name="checkboxPrivacyPolicy" />
+            <label for=""
+              >I accept the
+              <a href="/pages/data-protection.html">Privacy Policy</a>
+            </label>
+          </div>
+        </div>
+        <div class="signUpButton">
+          <button onclick="toTheRegistration(); return false" id="" class="button" type="submit">Sign up</button>
+        </div>
+      </form>
+    </div>
+    <footer class="footerContent">
+      <a href="/pages/data-protection.html">Privacy Policy</a>
+      <a href="#">Legal notice</a>
+    </footer>
+  </body>
 </html>

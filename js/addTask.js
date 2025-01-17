@@ -1,57 +1,53 @@
-let subTask = document.getElementById("subTask");
+let subTask = document.getElementById('subTask');
 let subTasks = [];
 
 function prioUrgent() {
-  document.getElementById("prioUrgentEdit").classList.add("prioUrgentRed");
-  document.getElementById("urgentImg").src = "/assets/icons/urgentWhite.png";
-  document
-    .getElementById("prioMediumEdit")
-    .classList.remove("prioMediumYellow");
-  document.getElementById("prioLowEdit").classList.remove("prioLowGreen");
-  document.getElementById("mediumImg").src = "/assets/icons/mediumYellow.png";
-  document.getElementById("lowImg").src = "/assets/icons/lowGreen.png";
+  document.getElementById('prioUrgentEdit').classList.add('prioUrgentRed');
+  document.getElementById('urgentImg').src = '/assets/icons/urgentWhite.png';
+  document.getElementById('prioMediumEdit').classList.remove('prioMediumYellow');
+  document.getElementById('prioLowEdit').classList.remove('prioLowGreen');
+  document.getElementById('mediumImg').src = '/assets/icons/mediumYellow.png';
+  document.getElementById('lowImg').src = '/assets/icons/lowGreen.png';
 }
 function prioMedium() {
-  document.getElementById("prioMediumEdit").classList.add("prioMediumYellow");
-  document.getElementById("mediumImg").src = "/assets/icons/mediumWhite.png";
-  document.getElementById("prioLowEdit").classList.remove("prioLowGreen");
-  document.getElementById("prioUrgentEdit").classList.remove("prioUrgentRed");
-  document.getElementById("lowImg").src = "/assets/icons/lowGreen.png";
-  document.getElementById("urgentImg").src = "/assets/icons/urgentRed.png";
+  document.getElementById('prioMediumEdit').classList.add('prioMediumYellow');
+  document.getElementById('mediumImg').src = '/assets/icons/mediumWhite.png';
+  document.getElementById('prioLowEdit').classList.remove('prioLowGreen');
+  document.getElementById('prioUrgentEdit').classList.remove('prioUrgentRed');
+  document.getElementById('lowImg').src = '/assets/icons/lowGreen.png';
+  document.getElementById('urgentImg').src = '/assets/icons/urgentRed.png';
 }
 function prioLow() {
-  document.getElementById("prioLowEdit").classList.add("prioLowGreen");
-  document.getElementById("lowImg").src = "/assets/icons/lowWhite.png";
-  document
-    .getElementById("prioMediumEdit")
-    .classList.remove("prioMediumYellow");
-  document.getElementById("prioUrgentEdit").classList.remove("prioUrgentRed");
-  document.getElementById("mediumImg").src = "/assets/icons/mediumYellow.png";
-  document.getElementById("urgentImg").src = "/assets/icons/urgentRed.png";
+  document.getElementById('prioLowEdit').classList.add('prioLowGreen');
+  document.getElementById('lowImg').src = '/assets/icons/lowWhite.png';
+  document.getElementById('prioMediumEdit').classList.remove('prioMediumYellow');
+  document.getElementById('prioUrgentEdit').classList.remove('prioUrgentRed');
+  document.getElementById('mediumImg').src = '/assets/icons/mediumYellow.png';
+  document.getElementById('urgentImg').src = '/assets/icons/urgentRed.png';
 }
 
 function addSubtask() {
-  if (subTask.value != "") {
+  if (subTask.value != '') {
     subTasks.push({
       description: subTask.value,
       completed: false,
     });
     renderSubTaskList();
-    subTask.value = "";
+    subTask.value = '';
   }
 }
 
-subTask.addEventListener("keydown", function (event) {
-  if (event.key === "Enter") {
+subTask.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
     event.preventDefault();
     addSubtask();
   }
 });
 
 function renderSubTaskList() {
-  let subTasksList = document.getElementById("subTaskList");
+  let subTasksList = document.getElementById('subTaskList');
 
-  subTasksList.innerHTML = "";
+  subTasksList.innerHTML = '';
 
   for (let i = 0; i < subTasks.length; i++) {
     subTasksList.innerHTML += generateSubTaskList(i);
