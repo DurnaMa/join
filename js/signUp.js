@@ -49,6 +49,7 @@ async function toTheRegistration() {
       emailInput.value = '';
       passwordInput.value = '';
       console.log('Anmeldung erfolgreich');
+      window.location.href = './index.html';
     } catch (error) {
       console.error('Fehler bei der Anmeldung:', error);
     }

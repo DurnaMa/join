@@ -21,7 +21,7 @@
       </a>
       <h1>Sign Up</h1>
       <hr />
-      <form class="formSignUp" action="/index.html">
+      <form class="formSignUp" onsubmit="return false">
         <div class="signUpInput">
           <input id="name" class="name" type="text" placeholder="Name" required />
           <input id="email" class="email" type="email" placeholder="Email" required />
@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="signUpButton">
-          <button onclick="toTheRegistration(); return false" id="" class="button" type="submit">Sign up</button>
+          <button onclick="toTheRegistration()" id="" class="button" type="submit">Sign up</button>
         </div>
       </form>
     </div>
