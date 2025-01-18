@@ -1,10 +1,5 @@
 const BASE_URL = 'https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/';
 
-function guestLogin() {
-  sessionStorage.setItem('username', 'Guest');
-  window.location.href = '../pages/summary.html';
-}
-
 async function init() {
   onloadFunc();
   loadData();
