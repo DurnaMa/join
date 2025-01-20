@@ -1,3 +1,5 @@
+const BASE_URL = 'https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/';
+
 let contacts = [
   {
     name: 'Max Muster',
@@ -19,17 +21,14 @@ let contacts = [
   },
 ];
 
-/*const BASE_URL = 'https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/';
-
 async function loadData(path = '') {
   let response = await fetch(BASE_URL + path + '.json');
   return (responseToJson = await response.json());
-}*/
+}
 
 let currentSelectedContact = 0;
 
 function selectContact(index) {
-
   currentSelectedContact = index;
   renderContactsList();
 
