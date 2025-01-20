@@ -19,7 +19,27 @@ let contacts = [
   },
 ];
 
+/*const BASE_URL = 'https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/';
+
+async function loadData(path = '') {
+  let response = await fetch(BASE_URL + path + '.json');
+  return (responseToJson = await response.json());
+}*/
+
 let currentSelectedContact = 0;
+
+function selectContact(index) {
+
+  currentSelectedContact = index;
+  renderContactsList();
+
+  let contact = contacts[currentSelectedContact];
+  let contactDetails = document.getElementById('contactDetailsDiv');
+
+  contactDetails.innerHTML = /*html*/ `
+        <div class="contact-name">${contact.name}</div>
+    `;
+}
 
 function init() {
   renderContactsList();
@@ -37,7 +57,7 @@ function renderContactsList() {
 function generateContactsList(i) {
   return /*html*/ `
           <div class="contacts-list">
-            <div class="contacts-list-item-h3-div">
+            <div class="contacts-list-item-h3-div" onclick="selectContact(${i})">
               <div class="contacts-abbreviation-div">
                 <div class="contacts-abbreviation">${contacts[i].initial}</div>
               </div>
