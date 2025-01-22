@@ -240,7 +240,6 @@ function guestLogin() {
 // 		console.log("Fehler bei der Anmeldung");
 // 	}
 // }
->>>>>>> 7cc1958288d0649aff57687d3e733bd7198e6803
 
 // async function logIn(path = '') {
 //   // let BASE_URL = 'https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/';
