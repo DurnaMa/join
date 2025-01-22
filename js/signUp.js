@@ -1,5 +1,3 @@
-const BASE_URL = "https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/";
-
 async function init() {
   onloadFunc();
   loadData();
@@ -39,7 +37,7 @@ async function toTheRegistration() {
     };
 
     try {
-      await postData('/signup', data);
+      await postData('/contacts', data);
       nameInput.value = '';
       emailInput.value = '';
       passwordInput.value = '';
