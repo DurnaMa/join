@@ -1,3 +1,10 @@
+/**
+ * Handles the login process by validating the user's email, password, and acceptance of terms.
+ * Displays appropriate error messages if validation fails.
+ * Redirects to the summary page if login is successful.
+ *
+ * @returns {boolean} - Returns true if login is successful, otherwise false.
+ */
 function logIn() {
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;
