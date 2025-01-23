@@ -46,7 +46,7 @@ async function deleteDataFromFirebase(path = "") {
 }
 
 async function loadContacts() {
-  contacts = [];
+  // contacts = [];
   let contactsData = await getDataFromFirebase("contacts");
 
   for (const key in contactsData) {
