@@ -5,6 +5,11 @@ async function contactInit() {
 
 let currentSelectedContact = 0;
 
+/**
+ * Selects a contact by index, updates the current selected contact, and renders the contact details.
+ * @function selectContact
+ * @param {number} index - The index of the contact to select.
+ */
 function selectContact(index) {
   currentSelectedContact = index;
   renderContactsList();
@@ -17,6 +22,11 @@ function selectContact(index) {
     `;
 }
 
+/**
+ * Renders the list of contacts.
+ * @function renderContactsList
+ * @returns {void}
+ */
 function renderContactsList() {
   let contactsList = document.getElementById("scrollbar");
   contactsList.innerHTML = "";
@@ -26,6 +36,12 @@ function renderContactsList() {
   }
 }
 
+/**
+ * Generates the HTML for a contact list item.
+ * @function generateContactsList
+ * @param {number} i - The index of the contact.
+ * @returns {string} The HTML string for the contact list item.
+ */
 function generateContactsList(i) {
   const initials = generateInitials(contacts[i].name);
   return /*html*/ `
@@ -41,6 +57,12 @@ function generateContactsList(i) {
     `;
 }
 
+/**
+ * Generates the initials for a given name.
+ * @function generateInitials
+ * @param {string} name - The full name of the contact.
+ * @returns {string} The initials of the contact's name.
+ */
 function generateInitials(name) {
   const nameParts = name.split(" ");
   const firstInitial = nameParts[0]?.charAt(0) || "";
