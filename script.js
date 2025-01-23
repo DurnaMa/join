@@ -6,3 +6,13 @@ function init() {
   includeHTML();
   
 }
+
+
+function goBack() {
+  const referrer = document.referrer;
+  if (referrer) {
+    window.location.href = referrer;
+  } else {
+    window.location.href = "index.html";
+  }
+}
