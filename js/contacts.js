@@ -1,48 +1,49 @@
-const BASE_URL = 'https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/';
+// let contacts = [
+//   {
+//     name: 'Max Muster',
+//     initial: 'MM',
+//     email: 'max@mm.com',
+//     phone: '01234567890',
+//   },
+//   {
+//     name: 'Dax Duster',
+//     initial: 'DD',
+//     email: 'dax@mm.com',
+//     phone: '1234567890',
+//   },
+//   {
+//     name: 'Fax Fuster',
+//     initial: 'FF',
+//     email: 'fax@mm.com',
+//     phone: '234567890',
+//   },
+// ];
 
-let contacts = [
-  {
-    name: 'Max Muster',
-    initial: 'MM',
-    email: 'max@mm.com',
-    phone: '01234567890',
-  },
-  {
-    name: 'Dax Duster',
-    initial: 'DD',
-    email: 'dax@mm.com',
-    phone: '1234567890',
-  },
-  {
-    name: 'Fax Fuster',
-    initial: 'FF',
-    email: 'fax@mm.com',
-    phone: '234567890',
-  },
-];
-
-async function loadData(path = '') {
-  let response = await fetch(BASE_URL + path + '.json');
-  return (responseToJson = await response.json());
-}
-
-let currentSelectedContact = 0;
-
-function selectContact(index) {
-  currentSelectedContact = index;
-  renderContactsList();
-
-  let contact = contacts[currentSelectedContact];
-  let contactDetails = document.getElementById('contactDetailsDiv');
-
-  contactDetails.innerHTML = /*html*/ `
-        <div class="contact-name">${contact.name}</div>
-    `;
-}
-
-function init() {
+function contactInit() {
+  loadContacts();
   renderContactsList();
 }
+
+// async function loadData(path = '') {
+//   let response = await fetch(BASE_URL + path + '.json');
+//   return (responseToJson = await response.json());
+// }
+
+// let currentSelectedContact = 0;
+
+// function selectContact(index) {
+//   currentSelectedContact = index;
+//   renderContactsList();
+
+//   let contact = contacts[currentSelectedContact];
+//   let contactDetails = document.getElementById('contactDetailsDiv');
+
+//   contactDetails.innerHTML = /*html*/ `
+//         <div class="contact-name">${contact.name}</div>
+//     `;
+// }
+
+
 
 function renderContactsList() {
   let contactsList = document.getElementById('scrollbar');
