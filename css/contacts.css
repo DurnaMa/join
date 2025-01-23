@@ -62,7 +62,7 @@
   flex-direction: column;
   width: 456px;
   height: 75%;
-  overflow-y: scroll;
+  overflow-y: auto;
   scroll-behavior: smooth;
   padding: 16px;
 }
