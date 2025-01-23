@@ -19,6 +19,12 @@ function selectContact(index) {
 
   contactDetails.innerHTML = /*html*/ `
         <div class="contact-name">${contact.name}</div>
+        <div class="contact-details-div-initials">${generateInitials(contact.name)}</div>
+        <div class="contact-email">${contact.email}</div>
+        <div class="contact-phone">${contact.phone}</div>
+        <div class="contact-delete-btn-div">
+          <button class="contact-delete-btn" onclick="deleteContact(${currentSelectedContact})">Delete contact</button>
+        </div>
     `;
 }
 
