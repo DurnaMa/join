@@ -182,12 +182,20 @@
 }
 
 .contact-details-div-initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 120px;
   height: 120px;
   border-radius: 70px;
   border: 3px;
   gap: 10px;
   color: white;
+}
+
+.contacts-abbreviation-right-area {
+  width: 120px;
+  height: 120px;
 }
 
 .contact-details-div-name-icons {
