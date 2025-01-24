@@ -102,11 +102,21 @@ function generateInitials(name) {
   return `${firstInitial}${lastInitial}`.toUpperCase();
 }
 
-function renderAddNewContact(i) {
+/**
+ * Renders the "Add New Contact" form by making the corresponding div visible
+ * and populating it with the necessary HTML structure.
+ * 
+ * The form includes fields for name, email, and phone, as well as a button
+ * to submit the new contact. It also includes a button to close the form.
+ */
+function renderAddNewContact() {
   const addNewContactDiv = document.getElementById("addNewContactDiv");
   addNewContactDiv.classList.remove("d-none");
   addNewContactDiv.innerHTML = /*html*/ `
         <div class="add-new-contact-div">
+          <button onclick="closeAddNewContact()">
+          <img src="/assets/icons/cancel.png" alt="">
+          </button>
           <div class="contacts-seid-left">
           <div class="add-new-contact-h3-div">
             <h3>Add new contact</h3>
@@ -120,4 +130,8 @@ function renderAddNewContact(i) {
           </div>
         </div>
     `;
+}
+
+function closeAddNewContact() {
+  document.getElementById("addNewContactDiv").classList.add("d-none");
 }
