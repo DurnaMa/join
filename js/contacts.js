@@ -55,7 +55,6 @@ function renderContactsList() {
 
   for (let i = 0; i < contacts.length; i++) {
     contactsList.innerHTML += generateContactsList(i);
-    contactsList.innerHTML += renderAddNewContact(i);
   }
 }
 
