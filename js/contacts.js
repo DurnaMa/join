@@ -75,3 +75,21 @@ function generateInitials(name) {
   const lastInitial = nameParts[1]?.charAt(0) || "";
   return `${firstInitial}${lastInitial}`.toUpperCase();
 }
+
+function renderAddNewContact() {
+  const addNewContactDiv = document.getElementById("addNewContactDiv");
+  addNewContactDiv.classList.remove("d-none");
+  addNewContactDiv.innerHTML = /*html*/ `
+        <div class="add-new-contact-div">
+          <div class="add-new-contact-h3-div">
+            <h3>Add new contact</h3>
+          </div>
+          <div class="add-new-contact-form">
+            <input class="name" type="text" id="newContactName" placeholder="Name" />
+            <input class="email" type="text" id="newContactEmail" placeholder="Email" />
+            <input class="phone" type="text" id="newContactPhone" placeholder="Phone" />
+            <button class="add-new-contact-btn" onclick="addNewContact()">Add contact</button>
+          </div>
+        </div>
+    `;
+}
