@@ -55,6 +55,7 @@ function renderContactsList() {
 
   for (let i = 0; i < contacts.length; i++) {
     contactsList.innerHTML += generateContactsList(i);
+    contactsList.innerHTML += renderAddNewContact(i);
   }
 }
 
@@ -92,16 +93,18 @@ function generateInitials(name) {
   return `${firstInitial}${lastInitial}`.toUpperCase();
 }
 
-function renderAddNewContact() {
+function renderAddNewContact(i) {
   const addNewContactDiv = document.getElementById("addNewContactDiv");
   addNewContactDiv.classList.remove("d-none");
   addNewContactDiv.innerHTML = /*html*/ `
         <div class="add-new-contact-div">
+          <div class="contacts-seid-left">
           <div class="add-new-contact-h3-div">
             <h3>Add new contact</h3>
           </div>
+          </div>
           <div class="add-new-contact-form">
-            <input class="name" type="text" id="newContactName" placeholder="Name" />
+            <input class="name" type="text" id="newContactName" placeholder="Name">
             <input class="email" type="text" id="newContactEmail" placeholder="Email" />
             <input class="phone" type="text" id="newContactPhone" placeholder="Phone" />
             <button class="add-new-contact-btn" onclick="addNewContact()">Add contact</button>
