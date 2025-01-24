@@ -28,21 +28,25 @@ function selectContact(index) {
             <div class="contact-details-div-icons"></div>
         </div>
 
-        <div class="contact-email">${contact.email}</div>
-        <div class="contact-phone">${contact.phone}</div>
-        <div class="contact-delete-btn-div">
-          <button class="contact-delete-btn" onclick="deleteContact(${currentSelectedContact})">Delete contact</button>
-        </div>
-
         <div>
           <h3>Contact Information</h3>
         </div>
 
-            <div class="contact-details-div-email-phone">
-              <div class="contact-details-div-email"></div>
-              <div class="contact-details-div-phone"></div>
-            </div>
-          </div>
+        <div class="contact-details-div-email-phone">
+        <div class="contact-details-div-email">${contact.email}</div>
+        <div class="contact-details-div-phone">${contact.phone}</div>
+        </div>
+
+        <div class="contact-delete-btn-div">
+          <button class="contact-delete-btn" onclick="deleteContact(${currentSelectedContact})">Delete contact</button>
+        </div>
+
+
+
+        
+
+        
+        
         
 
 
