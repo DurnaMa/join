@@ -271,3 +271,15 @@
   background-size: 20px 20px;
   background-color: white;
 }
+
+.name{
+  padding-right: 30px;
+  background: url(/assets/icons/person.png) no-repeat right 21px center;
+  background-size: 20px 20px;
+}
+
+.phone {
+  padding-right: 30px;
+  background: url(/assets/icons/phone.png) no-repeat right 21px center;
+  background-size: 20px 20px;
+}
