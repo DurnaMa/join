@@ -25,7 +25,15 @@ function selectContact(index) {
           <div class="contact-name">${contact.name}</div>
           <div class="contact-details-div-name-icons">
             <div class="contact-details-div-name"></div>
-            <div class="contact-details-div-icons"></div>
+            <div class="contact-details-div-icons">
+              <div class="contact-details-div-icon-edit">
+                <img src="/assets/icons/edit-icon.png" alt="" /><h4>Edit</h4>
+              </div>
+              <div class="contact-details-div-icon-delete">
+                <img src="/assets/icons/delete-icon.png" onclick="deleteContact(${currentSelectedContact})" alt="" /><h4>Delete</h4>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -38,9 +46,7 @@ function selectContact(index) {
         <div class="contact-details-div-phone">${contact.phone}</div>
         </div>
 
-        <div class="contact-delete-btn-div">
-          <button class="contact-delete-btn" onclick="deleteContact(${currentSelectedContact})">Delete contact</button>
-        </div>
+
     `;
 }
 
