@@ -3,11 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="shortcut icon"
-      href="/assets/img/logodunkel.png"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
     <title>Contacts</title>
     <link rel="stylesheet" href="../templates/header/header.css" />
     <link rel="stylesheet" href="../templates/sidebar/sidebar.css" />
@@ -16,7 +12,7 @@
     <link rel="stylesheet" href="../css/fonts.css" />
     <script defer src="../js/includeTemplates.js"></script>
     <script defer src="/script.js"></script>
-    <script defer src="/js/contacts.js"></script>
+    <script defer src="../js/contacts.js"></script>
   </head>
 
   <body onload="contactInit()">
@@ -26,7 +22,7 @@
     <div class="contacts-container">
       <div class="contacts-list-div" id="contactsListDiv">
         <div class="add-contact-btn-div">
-          <button class="add-contact-btn" id="addContactBtn">
+          <button onclick="renderAddNewContact()" class="add-contact-btn" id="addContactBtn">
             Add new contact
             <img src="../assets/icons/person_add.png" alt="" />
           </button>
