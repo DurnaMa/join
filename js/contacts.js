@@ -18,13 +18,34 @@ function selectContact(index) {
   let contactDetails = document.getElementById("contactDetailsDiv");
 
   contactDetails.innerHTML = /*html*/ `
-        <div class="contact-name">${contact.name}</div>
-        <div class="contact-details-div-initials">${generateInitials(contact.name)}</div>
+        <div class="contact-details-div-header">
+          <div class="contact-details-div-initials">
+            <div class="contacts-abbreviation">${generateInitials(contact.name)}</div>
+          </div>
+          <div class="contact-name">${contact.name}</div>
+          <div class="contact-details-div-name-icons">
+            <div class="contact-details-div-name"></div>
+            <div class="contact-details-div-icons"></div>
+        </div>
+
         <div class="contact-email">${contact.email}</div>
         <div class="contact-phone">${contact.phone}</div>
         <div class="contact-delete-btn-div">
           <button class="contact-delete-btn" onclick="deleteContact(${currentSelectedContact})">Delete contact</button>
         </div>
+
+        <div>
+          <h3>Contact Information</h3>
+        </div>
+
+            <div class="contact-details-div-email-phone">
+              <div class="contact-details-div-email"></div>
+              <div class="contact-details-div-phone"></div>
+            </div>
+          </div>
+        
+
+
     `;
 }
 
