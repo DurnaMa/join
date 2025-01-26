@@ -123,6 +123,7 @@
 .column {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   gap: 16px;
 }
 
@@ -141,7 +142,15 @@
   cursor: pointer;
 }
 
+.task-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .task-card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   width: 252px;
   height: 244px;
   border-radius: 24px;
