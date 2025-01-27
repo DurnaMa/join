@@ -101,7 +101,7 @@ function generateInitials(name) {
 /**
  * Renders the "Add New Contact" form by making the corresponding div visible
  * and populating it with the necessary HTML structure.
- * 
+ *
  * The form includes fields for name, email, and phone, as well as a button
  * to submit the new contact. It also includes a button to close the form.
  */
@@ -130,4 +130,29 @@ function renderAddNewContact() {
 
 function closeAddNewContact() {
   document.getElementById("addNewContactDiv").classList.add("d-none");
+}
+
+async function addNewContact() {
+  let nameInput = document.getElementById("newContactName").value;
+  let emailInput = document.getElementById("newContactEmail").value;
+  let phoneInput = document.getElementById("newContactPhone").value;
+
+  if (nameInput.value && emailInput.value && phoneInput.value) {
+    let data = {
+      name: nameInput.value,
+      email: emailInput.value,
+      phone: phoneInput.value,
+    };
+
+    try {
+      await postData("/contacts", data);
+      nameInput.value = "";
+      emailInput.value = "";
+      phoneInput.value = "";
+      console.log("addNewcontact erfolgreich");
+    } catch (error) {
+      console.error("Fehler bei der addNewcontact:", error);
+    }
+  }
+  postDataToFirebase();
 }
