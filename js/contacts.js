@@ -133,26 +133,25 @@ function closeAddNewContact() {
 }
 
 async function addNewContact() {
-  let nameInput = document.getElementById("newContactName").value;
-  let emailInput = document.getElementById("newContactEmail").value;
-  let phoneInput = document.getElementById("newContactPhone").value;
+  let name = document.getElementById("newContactName").value;
+  let email = document.getElementById("newContactEmail").value;
+  let phone = document.getElementById("newContactPhone").value;
 
-  if (nameInput.value && emailInput.value && phoneInput.value) {
+  if (name && email && phone) {
     let data = {
-      name: nameInput.value,
-      email: emailInput.value,
-      phone: phoneInput.value,
+      name: name,
+      email: email,
+      phone: phone,
     };
 
     try {
-      await postData("/contacts", data);
-      nameInput.value = "";
-      emailInput.value = "";
-      phoneInput.value = "";
+      await postDataToFirebase("/contacts", data);
+      name = "";
+      email = "";
+      phone = "";
       console.log("addNewcontact erfolgreich");
     } catch (error) {
       console.error("Fehler bei der addNewcontact:", error);
     }
   }
-  postDataToFirebase();
 }
