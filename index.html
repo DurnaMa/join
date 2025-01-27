@@ -1,60 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Join</title>
-
-		<link rel="stylesheet" href="./style.css" />
-		<script src="./js/signUp.js"></script>
-	</head>
-
-	<body onload="init()">
-		<header>
-			<img class="logo-login" src="./assets/img/logodunkel.png" alt="" />
-			<div id="moveLogoToCorner">
-				<img
-					class="logo-login"
-					src="./assets/img/logodunkel.png"
-					alt=""
-					id="animatedLogo"
-				/>
-			</div>
-			<div class="login-nav">
-				<span>Not a Join user?</span>
-				<a href="./pages/signUp.html" class="button-dark">sign Up</a>
-			</div>
-		</header>
-
-		<div class="login-container">
-			<form class="login" id="login">
-				<div class="h1">
-					<h1>Log in</h1>
-				</div>
-				<div class="input-Login">
-					<input type="email" placeholder="Email" id="email" required />
-					<input
-						type="password"
-						placeholder="Password"
-						id="password"
-						required
-					/>
-				</div>
-				<div class="button-login">
-					<button class="button-dark" onclick="login(); return false;">
-						Log in
-					</button>
-					<button onclick="gesutLogin()" class="button-light">
-						Guest Log in
-					</button>
-				</div>
-			</form>
-			<div class="test1">
-				<a class="a-color" href="./pages/data-protection.html"
-					>Privacy Policy</a
-				>
-				<a class="a-color" href="http://">Legal notice</a>
-			</div>
-		</div>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/css/logIn.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
+    <script defer src="./js/signUp.js"></script>
+    <script defer src="/js/logIn.js"></script>
+    <script defer src="script.js"></script>
+    <title>Join</title>
+  </head>
+  <body onload="loadDataUsers()">
+    <div id="animationBg" class="animationBg"></div>
+    <div id="animatedLogo animationEnd" class="animationLogo"></div>
+    <div class="signUpContainer">
+      <div class="signUpButtonContainer">
+        <h3>Not a Join user?</h3>
+        <button onclick="window.location.href='/pages/signUp.html';" class="button">Sign up</button>
+      </div>
+    </div>
+    <div class="logInContainer">
+      <h1>Log in</h1>
+      <hr />
+      <form id="loginForm" action="/pages/summary.html">
+        <div class="inputLogIn">
+          <input class="email" type="email" placeholder="Email" id="loginEmail" required />
+          <div class="inputPassword">
+            <input class="password" type="password" placeholder="Password" id="loginPassword" required />
+            <img id="togglePassword" src="/assets/icons/lock.png" alt="" />
+          </div>
+          <div id="loginError" class="loginError"></div>
+          <div class="checkboxLogin">
+            <input type="checkbox" name="" id="checkboxLogin" required />
+            <label class="checkboxLabel" for="">Remember me</label>
+          </div>
+          <div class="buttonLogin">
+            <button onclick="logIn()" class="button" type="button">Log in</button>
+            <button onclick="guestLogin()" class="guestButton" type="button">Guest Log in</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <footer class="footerContent">
+      <a href="/pages/data-protection.html">Privacy Policy</a>
+      <a href="/pages/">Legal notice</a>
+    </footer>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </body>
 </html>

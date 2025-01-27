@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-      rel="shortcut icon"
-      href="/assets/img/logodunkel.png"
-      type="image/x-icon"
-    />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
     <title>Board</title>
     <link rel="stylesheet" href="../templates/header/header.css" />
-    <link rel="stylesheet" href="../templates/sidebar/sidebar.css" />
     <link rel="stylesheet" href="../css/board.css" />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="../css/fonts.css" />
@@ -19,7 +14,7 @@
     <script defer src="../js/board.js"></script>
   </head>
 
-  <body onload="renderTaskContainer()">
+  <body onload="updateHTML()">
     <include-html src="../templates/header/header.html"></include-html>
     <include-html src="../templates/sidebar/sidebar.html"></include-html>
 
@@ -28,14 +23,9 @@
         <h1 class="board-title">Board</h1>
         <div class="boardHeaderRight">
           <div class="searchDiv">
-            <input
-              class="search"
-              type="text"
-              placeholder="Find Task"
-              id="search"
-            />
+            <input class="search" type="text" placeholder="Find Task" id="search" />
             <div class="search-dividing-line"></div>
-            <img class="searchIcon" src="/assets/icons/search.png" alt=""> 
+            <img class="searchIcon" src="/assets/icons/search.png" alt="" />
           </div>
           <button class="addTaskBtn">
             <p class="addTaskBtnText">Add task</p>
@@ -44,7 +34,9 @@
         </div>
       </div>
 
-      <div class="task-container" id="taskContainer"></div>
+      <div class="task-container" id="taskContainer">
+        <div class="column-container" id="columnContainer" ondrop="moveTo('${element}')" ondragover="allowDrop(event)"></div>
+      </div>
     </div>
   </body>
 </html>

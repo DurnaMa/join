@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-      rel="shortcut icon"
-      href="/assets/img/logodunkel.png"
-      type="image/x-icon"
-    />
-    <title>Board</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
+    <title>Contacts</title>
     <link rel="stylesheet" href="../templates/header/header.css" />
     <link rel="stylesheet" href="../templates/sidebar/sidebar.css" />
     <link rel="stylesheet" href="../css/contacts.css" />
@@ -19,46 +15,33 @@
     <script defer src="../js/contacts.js"></script>
   </head>
 
-  <body>
+  <body onload="contactInit()">
     <include-html src="../templates/header/header.html"></include-html>
     <include-html src="../templates/sidebar/sidebar.html"></include-html>
 
     <div class="contacts-container">
-        <div class="contacts-list-div" id="contactsListDiv">
-          <div class="add-contact-btn-div">
-            <button class="add-contact-btn" id="addContactBtn">
-              Add new contact
-              <img src="../assets/icons/person_add.png" alt="" />
-            </button>
-          </div>
-  
-          <div class="contacts-list">
-            <div class="contacts-list-item-h3-div">
-              <div class="contacts-abbreviation-div">
-                <div class="contacts-abbreviation">MM</div>
-              </div>
-              <div class="contacts-list-item"><h3>Max Muster</h3></div>
-            </div>
-            <div class="contacts-list-item-dividing"></div>
-          </div>
+      <div class="contacts-list-div" id="contactsListDiv">
+        <div class="add-contact-btn-div">
+          <button onclick="renderAddNewContact()" class="add-contact-btn" id="addContactBtn">
+            Add new contact
+            <img src="../assets/icons/person_add.png" alt="" />
+          </button>
         </div>
-  
-        <div class="scrollbar"></div>
-  
-        <div class="contact-right-area">
-          <div class="contact-right-area-header">
-            <h1>Contacts</h1>
-            <div class="contact-right-area-header-dividing-line"></div>
-            <h2>Better with a team</h2>
-          </div>
-          <div class="contact-details-div" id="contactDetailsDiv">
-            HAAALLLL TTTTEEESSST
-          </div>
-        </div>
+        <div class="d-none" id="addNewContactDiv"></div>
+        <div class="scrollbar" id="scrollbar"></div>
       </div>
 
+      <div class="contact-right-area">
+        <div class="contact-right-area-header">
+          <h1>Contacts</h1>
+          <div class="contact-right-area-header-dividing-line"></div>
+          <h2>Better with a team</h2>
+        </div>
 
-
-
+        <div class="contact-details-div" id="contactDetailsDiv">
+          
+        </div>
+      </div>
+    </div>
   </body>
 </html>

@@ -1,57 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Join</title>
-
-		<link rel="stylesheet" href="../style.css" />
-		<script src="../js/signUp.js"></script>
-	</head>
-
-	<body onload="init()">
-		<header>
-			<div>
-				<img class="logo-login" src="/assets/img/logodunkel.png" alt="" />
-			</div>
-			<div class="login-nav">
-				<span>You signed Up successfully</span>
-			</div>
-		</header>
-
-		<div class="login-container">
-			<div class="login" id="login">
-				<div class="h1">
-					<h1>Sign up</h1>
-				</div>
-				<div class="input-Login">
-					<input type="text" placeholder="Name" id="name" />
-					<input type="email" placeholder="Email" id="email" />
-					<input type="password" placeholder="Password" id="password" />
-					<input
-						type="password"
-						placeholder="Confirm Password"
-						id="confirmPassword"
-					/>
-					<div>
-						<input type="checkbox" id="checkbox" />
-						<label for="checkbox"
-							>I accept the <a href="#">Privacy Policy</a></label
-						>
-					</div>
-				</div>
-				<div class="button-login">
-					<button onclick="toTheRegistration()" class="button-dark">
-						Sign up
-					</button>
-				</div>
-			</div>
-			<div class="test1">
-				<a class="a-color" href="./pages/data-protection.html"
-					>Privacy Policy</a
-				>
-				<a class="a-color" href="http://">Legal notice</a>
-			</div>
-		</div>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/css/signUp.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <script defer src="../js/signUp.js"></script>
+    <script defer src="/script.js"></script>
+    <title>Join</title>
+  </head>
+  <body>
+    <div class="headerLogo">
+      <img src="/assets/img/logodunkel.png" alt="" />
+    </div>
+    <div class="signUpContainer">
+      <a class="signUpArrowLink" href="/index.html">
+        <img class="arrowSignUpImg" src="/assets/icons/arrow-left-line.png" alt="" />
+      </a>
+      <h1>Sign Up</h1>
+      <hr />
+      <form class="formSignUp" onsubmit="return false">
+        <div class="signUpInput">
+          <input id="name" class="name" type="text" placeholder="Name" required />
+          <input id="email" class="email" type="email" placeholder="Email" required />
+          <div id="emailError" class="signUpEmailError"></div>
+          <div class="passwordContainer">
+            <input id="password" class="password" type="password" placeholder="Password" />
+            <img id="toggleSignupPasswordIcon" src="/assets/icons/lock.png" alt="" />
+          </div>
+          <div class="passwordContainer">
+            <input id="passwordContainer" class="password" type="password" placeholder="Confirm Password" />
+            <img id="toggleSignupConfirmPasswordIcon" src="/assets/icons/lock.png" alt="" />
+          </div>
+          <div id="passwordError" class="signUpPasswordError"></div>
+          <div class="checkboxSignUp">
+            <input id="" type="checkbox" name="checkboxPrivacyPolicy" />
+            <label for=""
+              >I accept the
+              <a href="/pages/data-protection.html">Privacy Policy</a>
+            </label>
+          </div>
+        </div>
+        <div class="signUpButton">
+          <button onclick="toTheRegistration()" id="" class="button" type="submit">Sign up</button>
+        </div>
+      </form>
+    </div>
+    <footer class="footerContent">
+      <a href="/pages/data-protection.html">Privacy Policy</a>
+      <a href="#">Legal notice</a>
+    </footer>
+  </body>
 </html>
