@@ -111,11 +111,4 @@ function guestLogin() {
 //   renderContacts();
 // }
 
-// async function deleteContact(contactId) {
-//   let path = `contacts/${contactId}`;
-//   await deleteDataFromFirebase(path);
-//   await loadContacts();
-//   renderContacts();
-// }
-
 // Code ende von Oliver(Mentor)

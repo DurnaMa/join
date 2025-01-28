@@ -29,9 +29,9 @@ function selectContact(index) {
               <div class="contact-details-div-icon-edit">
                 <img src="/assets/icons/edit-icon.png" alt="" /><h4>Edit</h4>
               </div>
-              <div class="contact-details-div-icon-delete">
-                <img src="/assets/icons/delete-icon.png" onclick="deleteContact(${currentSelectedContact})" alt="" /><h4>Delete</h4>
-              </div>
+              <button onclick="deleteContact(${currentSelectedContact})" class="contact-details-div-icon-delete">
+                <img src="/assets/icons/delete-icon.png" alt="" /><h4>Delete</h4>
+              </button>
             </div>
 
           </div>
@@ -45,9 +45,7 @@ function selectContact(index) {
         <div class="contact-details-div-email">${contact.email}</div>
         <div class="contact-details-div-phone">${contact.phone}</div>
         </div>
-
-
-    `;
+        `;
 }
 
 /**
@@ -154,4 +152,12 @@ async function addNewContact() {
       console.error("Fehler bei der addNewcontact:", error);
     }
   }
+  closeAddNewContact();
+}
+
+async function deleteContact(id) {
+  let path = `/contacts/${contacts[id].id}`;
+  await deleteDataFromFirebase(path);
+  //await loadDataUsers();
+  renderContactsList();
 }
