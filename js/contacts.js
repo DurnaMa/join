@@ -29,9 +29,9 @@ function selectContact(index) {
               <div class="contact-details-div-icon-edit">
                 <img src="/assets/icons/edit-icon.png" alt="" /><h4>Edit</h4>
               </div>
-              <button onclick="deleteContact(${currentSelectedContact})" class="contact-details-div-icon-delete">
-                <img src="/assets/icons/delete-icon.png" alt="" /><h4>Delete</h4>
-              </button>
+              <div class="contact-details-div-icon-edit img">
+                <img  src="/assets/icons/deleteContactIcon.png" alt="" onclick="deleteContact(${currentSelectedContact})"><span>Delete</span>
+              </div>
             </div>
 
           </div>
@@ -134,30 +134,33 @@ async function addNewContact() {
   let name = document.getElementById("newContactName").value;
   let email = document.getElementById("newContactEmail").value;
   let phone = document.getElementById("newContactPhone").value;
+    if (name && email && phone) {
+      let data = {
+        name: name,
+        email: email,
+        phone: phone,
+      };
 
-  if (name && email && phone) {
-    let data = {
-      name: name,
-      email: email,
-      phone: phone,
-    };
-
-    try {
-      await postDataToFirebase("/contacts", data);
-      name = "";
-      email = "";
-      phone = "";
-      console.log("addNewcontact erfolgreich");
-    } catch (error) {
-      console.error("Fehler bei der addNewcontact:", error);
+      try {
+        await postDataToFirebase("/contacts", data);
+        name = "";
+        email = "";
+        phone = "";
+        console.log("addNewcontact erfolgreich");
+      } catch (error) {
+        console.error("Fehler bei der addNewcontact:", error);
+      }
     }
-  }
+  
+  await loadDataUsers();
   closeAddNewContact();
+  document.getElementById("scrollbar").innerHTML = "";
+  renderContactsList()
 }
 
 async function deleteContact(id) {
   let path = `/contacts/${contacts[id].id}`;
   await deleteDataFromFirebase(path);
-  //await loadDataUsers();
-  renderContactsList();
+  await loadDataUsers();
+  renderContactsList()
 }

@@ -300,3 +300,19 @@
   background: url(/assets/icons/call.png) no-repeat right 21px center;
   background-size: 20px 20px;
 }
+
+.contact-details-div-icon-edit img{
+  cursor: pointer;
+}
+
+.contact-details-div-icon-edit img:hover{
+  color: #29abe2;
+}
+
+.contact-details-div-icon-edit{
+  cursor: pointer;
+}
+
+.contact-details-div-icon-edit:hover{
+  color: #29abe2;
+}
