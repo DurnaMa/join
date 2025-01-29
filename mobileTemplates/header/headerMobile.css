@@ -39,7 +39,7 @@
   background-color: #e1e5ec;
 }
 
-#subMenu {
+#subMenuMobile {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,29 +55,28 @@
   text-align-last: left;
 }
 
-#subMenu a {
+#subMenuMobile a {
   text-decoration: none;
   padding: 10px;
   color: #cdcdcd;
 }
 
-#subMenu a:hover {
+#subMenuMobile a:hover {
   background-color: #2a3d59;
-
 }
 
-.firstLinkHover:hover{
-    background-color: #2a3d59;
-    border-radius: 20px 0px 0px 0px;
+.firstLinkHover:hover {
+  background-color: #2a3d59;
+  border-radius: 20px 0px 0px 0px;
 }
 
-.lastLinkHover:hover{
-    background-color: #2a3d59;
-    border-radius: 0px 0px 20px 20px;
+.lastLinkHover:hover {
+  background-color: #2a3d59;
+  border-radius: 0px 0px 20px 20px;
 }
 
 @media screen and (max-width: 992px) {
   .headerMobile {
-      display: flex;
+    display: flex;
   }
 }

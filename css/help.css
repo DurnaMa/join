@@ -64,11 +64,8 @@ h3 {
   flex-direction: column;
 }
 
-@media (max-width: 600px) {
-    .join-header,
-    .join-main,
-    .join-footer {
-      padding: 10px;
-    }
+@media (max-width: 992px) {
+  .helpContainer {
+    padding: 196px 40px 120px 40px;
   }
-  
+}
