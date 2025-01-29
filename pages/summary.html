@@ -3,10 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
+    <link
+      rel="shortcut icon"
+      href="/assets/img/logodunkel.png"
+      type="image/x-icon"
+    />
     <title>Summary</title>
-    <link rel="stylesheet" href="../templates/header/header.css" />
-    <link rel="stylesheet" href="../templates/sidebar/sidebar.css" />
     <link rel="stylesheet" href="/css/summeryGuest.css" />
     <link rel="stylesheet" href="/css/summeryUser.css" />
     <link rel="stylesheet" href="/style.css" />
@@ -14,10 +16,13 @@
     <script defer src="/js/summeryUser.js"></script>
     <script defer src="/script.js"></script>
     <script defer src="../js/includeTemplates.js"></script>
+    <script defer src="/js/header.js"></script>
   </head>
   <body>
     <include-html src="../templates/header/header.html"></include-html>
     <include-html src="../templates/sidebar/sidebar.html"></include-html>
+    <include-html src="/mobileTemplates/header/headerMobile.html"></include-html>
+    <include-html src="/mobileTemplates/footer/footerMobile.html"></include-html>
     <div class="summaryContainer">
       <div class="summaryHeadline">
         <h1>Join 407</h1>
@@ -28,16 +33,32 @@
         <div class="overview">
           <div class="summaryMediumContent">
             <a class="mediumBox pencil" href="/pages/bord.html">
-              <img class="mediumBoxImg" src="/assets/icons/pencilBgDunkel.png" alt="" />
-              <img class="mediumBoxImgHover" src="/assets/icons/pencilBgWhite.png" alt="" />
+              <img
+                class="mediumBoxImg"
+                src="/assets/icons/pencilBgDunkel.png"
+                alt=""
+              />
+              <img
+                class="mediumBoxImgHover"
+                src="/assets/icons/pencilBgWhite.png"
+                alt=""
+              />
               <div class="boxInfo">
                 <span class="amount" id="toDoCount">2</span>
                 <span class="title">To-do</span>
               </div>
             </a>
             <a class="mediumBox check" href="/pages/bord.html">
-              <img class="mediumBoxImg" src="/assets/icons/checkBgDunkel.png" alt="" />
-              <img class="mediumBoxImgHover" src="/assets/icons/checkBgWhite.png" alt="" />
+              <img
+                class="mediumBoxImg"
+                src="/assets/icons/checkBgDunkel.png"
+                alt=""
+              />
+              <img
+                class="mediumBoxImgHover"
+                src="/assets/icons/checkBgWhite.png"
+                alt=""
+              />
               <div class="boxInfo">
                 <span class="amount" id="doneCount">1</span>
                 <span class="title">Done</span>
@@ -48,7 +69,11 @@
           <div class="summarysLargeContent">
             <a class="largeBox" href="/pages/bord.html">
               <div class="urgent">
-                <img class="largeBoxImg" src="/assets/icons/urgent.png" alt="" />
+                <img
+                  class="largeBoxImg"
+                  src="/assets/icons/urgent.png"
+                  alt=""
+                />
                 <div class="boxInfo">
                   <span class="amount" id="urgentCount">3</span>
                   <span class="title">Urgent</span>
