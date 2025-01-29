@@ -74,7 +74,7 @@ function renderTaskContainer(element, index) {
   return /*html*/ `
     <div class="column">
         <h2 class="column-titles-h2">${element["columnTitles"]}<button class="add-column"><img src="/assets/icons/plusblack.png" alt=""></button></h2>
-        <div class="task-card" id="${index}" draggable="true" ondragstart="startDragging(${element['id']})">
+        <div class="task-card" id="${index}" draggable="true" ondragstart="startDragging(${element['id']})" ondrop="moveTo('${element['columnTitles']}')" ondragover="allowDrop(event)" >
         <div class="task-content">
             <div class="task-card-title">${element["category"]}</div>
             <h3 class="task-title">${element.title}</h3>
