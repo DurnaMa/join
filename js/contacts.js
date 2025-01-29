@@ -150,7 +150,7 @@ function editContact() {
             <input value="${email}" class="email" type="text" id="editContactEmail" placeholder="Email" />
             <input value="${phone}" class="phone" type="text" id="editContactPhone" placeholder="Phone" />
             <button class="add-new-contact-btn" onclick="deleteContact()">Delete</button>
-            <button class="add-new-contact-btn" onclick="updateContact(name, email, phone)">Save</button>
+            <button class="add-new-contact-btn" onclick="updateContact()">Save</button>
           </div>
         </div>
     `;
@@ -189,26 +189,28 @@ async function saveContact() {
   renderContactsList()
 }
 
-async function updateContact(name, email, phone) {
+async function updateContact() {
   let key = contacts[currentSelectedContact].id;
 
-  let nameValue = document.getElementById("editContactName").value;
-  let emailValue = document.getElementById("editContactEmail").value;
-  let phoneValue = document.getElementById("editContactPhone").value;
+  let name = document.getElementById("editContactName").value;
+  let email = document.getElementById("editContactEmail").value;
+  let phone = document.getElementById("editContactPhone").value;
+
+  let contact = contacts[currentSelectedContact];
+  contact.name;
+  contact.email;
+  contact.phone;
 
   if (name || email || phone) {
     let data = {
       id: key,
-      name: nameValue || name,
-      email: emailValue || email,
-      phone: phoneValue || phone,
+      name: name,
+      email: email,
+      phone: phone,
     };
 
     try {
       await putDataToFirebase("/contacts", data);
-      name = "";
-      email = "";
-      phone = "";
       console.log("editContact erfolgreich");
     } catch (error) {
       console.error("Fehler bei der editcontact:", error);
