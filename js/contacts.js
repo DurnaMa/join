@@ -27,7 +27,7 @@ function selectContact(index) {
             <div class="contact-details-div-name"></div>
             <div class="contact-details-div-icons">
               <div class="contact-details-div-icon-edit">
-                <img src="/assets/icons/edit-icon.png" alt="" /><h4>Edit</h4>
+                <img src="/assets/icons/edit-icon.png" alt="" onclick="editContact(${currentSelectedContact})"/><h4>Edit</h4>
               </div>
               <div class="contact-details-div-icon-edit img">
                 <img  src="/assets/icons/deleteContactIcon.png" alt="" onclick="deleteContact(${currentSelectedContact})"><span>Delete</span>
@@ -103,12 +103,12 @@ function generateInitials(name) {
  * The form includes fields for name, email, and phone, as well as a button
  * to submit the new contact. It also includes a button to close the form.
  */
-function renderAddNewContact() {
+function addNewContact() {
   const addNewContactDiv = document.getElementById("addNewContactDiv");
   addNewContactDiv.classList.remove("d-none");
   addNewContactDiv.innerHTML = /*html*/ `
-        <div class="add-new-contact-div">
-          <button onclick="closeAddNewContact()">
+        <div class="add-edit-popup-contact-div">
+          <button onclick="closePopUp()">
           <img src="/assets/icons/cancel.png" alt="">
           </button>
           <div class="contacts-seid-left">
@@ -120,17 +120,48 @@ function renderAddNewContact() {
             <input class="name" type="text" id="newContactName" placeholder="Name">
             <input class="email" type="text" id="newContactEmail" placeholder="Email" />
             <input class="phone" type="text" id="newContactPhone" placeholder="Phone" />
-            <button class="add-new-contact-btn" onclick="addNewContact()">Add contact</button>
+            <button class="add-new-contact-btn" onclick="closePopUp()">Cancel</button>
+            <button class="add-new-contact-btn" onclick="saveContact()">Create contact</button>
           </div>
         </div>
     `;
 }
 
-function closeAddNewContact() {
-  document.getElementById("addNewContactDiv").classList.add("d-none");
+function editContact() {
+  const editContactDiv = document.getElementById("editContactDiv");
+  let contact = contacts[currentSelectedContact];
+  let name = contact.name;
+  let email = contact.email;
+  let phone = contact.phone;
+
+  editContactDiv.classList.remove("d-none");
+  editContactDiv.innerHTML = /*html*/ `
+        <div class="add-edit-popup-contact-div">
+          <button onclick="closePopUp()">
+          <img src="/assets/icons/cancel.png" alt="">
+          </button>
+          <div class="contacts-seid-left">
+          <div class="add-new-contact-h3-div">
+            <h3>Edit contact</h3>
+          </div>
+          </div>
+          <div class="add-new-contact-form">
+            <input value="${name}" class="name" type="text" id="editContactName" placeholder="Name" >
+            <input value="${email}" class="email" type="text" id="editContactEmail" placeholder="Email" />
+            <input value="${phone}" class="phone" type="text" id="editContactPhone" placeholder="Phone" />
+            <button class="add-new-contact-btn" onclick="deleteContact()">Delete</button>
+            <button class="add-new-contact-btn" onclick="updateContact(name, email, phone)">Save</button>
+          </div>
+        </div>
+    `;
 }
 
-async function addNewContact() {
+function closePopUp() {
+  document.getElementById("addNewContactDiv").classList.add("d-none");
+  document.getElementById("editContactDiv").classList.add("d-none");
+}
+
+async function saveContact() {
   let name = document.getElementById("newContactName").value;
   let email = document.getElementById("newContactEmail").value;
   let phone = document.getElementById("newContactPhone").value;
@@ -153,9 +184,43 @@ async function addNewContact() {
     }
   
   await loadDataUsers();
-  closeAddNewContact();
+  closePopUp();
   document.getElementById("scrollbar").innerHTML = "";
   renderContactsList()
+}
+
+async function updateContact(name, email, phone) {
+  let key = contacts[currentSelectedContact].id;
+
+  let nameValue = document.getElementById("editContactName").value;
+  let emailValue = document.getElementById("editContactEmail").value;
+  let phoneValue = document.getElementById("editContactPhone").value;
+
+  if (name || email || phone) {
+    let data = {
+      id: key,
+      name: nameValue || name,
+      email: emailValue || email,
+      phone: phoneValue || phone,
+    };
+
+    try {
+      await putDataToFirebase("/contacts", data);
+      name = "";
+      email = "";
+      phone = "";
+      console.log("editContact erfolgreich");
+    } catch (error) {
+      console.error("Fehler bei der editcontact:", error);
+    }
+  }
+
+await loadDataUsers();
+closePopUp();
+document.getElementById("scrollbar").innerHTML = "";
+renderContactsList()
+
+
 }
 
 async function deleteContact(id) {

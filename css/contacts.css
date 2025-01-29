@@ -232,7 +232,7 @@
 
 /* Add new contact */
 
-.add-new-contact-div {
+.add-edit-popup-contact-div {
   display: flex;
   flex-direction: column;
   align-items: center;
