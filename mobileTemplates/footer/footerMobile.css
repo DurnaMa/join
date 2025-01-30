@@ -18,9 +18,14 @@
   gap: 12px;
   text-decoration: none;
   color: #cdcdcd;
-  width: 94px;
-  height: 80px;
+  /* width: 94px; */
+  /* height: 80px; */
   border-radius: 12px;
+}
+
+.mobileSideBarList img, .mobileSideBarList span{
+  width: 25px;
+font-size: 12px;
 }
 
 .mobileSideBarList:hover {
@@ -30,11 +35,5 @@
 @media screen and (max-width: 992px) {
   .mobileSideBar {
     display: flex;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .mobileSideBarList span {
-    font-size: 12px;
   }
 }

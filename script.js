@@ -1,5 +1,4 @@
-const BASE_URL =
-  "https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let contacts = [];
 
@@ -73,11 +72,12 @@ function goBack() {
   }
 }
 
-function showPassword() {
-  let change = document.getElementById('loginPassword');
-  if (change.type === "password") {
-    change.type = "text";
-  } else {
-    change.type = "password";
-  }
+async function putDataToFirebase(path, data = {}, key) {
+  await fetch(BASE_URL + path + key + ".json", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
 }

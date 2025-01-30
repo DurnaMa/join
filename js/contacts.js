@@ -165,69 +165,60 @@ async function saveContact() {
   let name = document.getElementById("newContactName").value;
   let email = document.getElementById("newContactEmail").value;
   let phone = document.getElementById("newContactPhone").value;
-    if (name && email && phone) {
-      let data = {
-        name: name,
-        email: email,
-        phone: phone,
-      };
-
-      try {
-        await postDataToFirebase("/contacts", data);
-        name = "";
-        email = "";
-        phone = "";
-        console.log("addNewcontact erfolgreich");
-      } catch (error) {
-        console.error("Fehler bei der addNewcontact:", error);
-      }
-    }
-  
-  await loadDataUsers();
-  closePopUp();
-  document.getElementById("scrollbar").innerHTML = "";
-  renderContactsList()
-}
-
-async function updateContact() {
-  let key = contacts[currentSelectedContact].id;
-
-  let name = document.getElementById("editContactName").value;
-  let email = document.getElementById("editContactEmail").value;
-  let phone = document.getElementById("editContactPhone").value;
-
-  let contact = contacts[currentSelectedContact];
-  contact.name;
-  contact.email;
-  contact.phone;
-
-  if (name || email || phone) {
+  if (name && email && phone) {
     let data = {
-      id: key,
       name: name,
       email: email,
       phone: phone,
     };
 
     try {
-      await putDataToFirebase("/contacts", data);
-      console.log("editContact erfolgreich");
+      await postDataToFirebase("/contacts", data);
+      name = "";
+      email = "";
+      phone = "";
+      console.log("addNewcontact erfolgreich");
     } catch (error) {
-      console.error("Fehler bei der editcontact:", error);
+      console.error("Fehler bei der addNewcontact:", error);
     }
   }
 
-await loadDataUsers();
-closePopUp();
-document.getElementById("scrollbar").innerHTML = "";
-renderContactsList()
+  await loadDataUsers();
+  closePopUp();
+  document.getElementById("scrollbar").innerHTML = "";
+  renderContactsList();
+}
 
+async function updateContact() {
+  let key = contacts[currentSelectedContact].id;
+  console.log(key);
+  let name = document.getElementById("editContactName").value;
+  let email = document.getElementById("editContactEmail").value;
+  let phone = document.getElementById("editContactPhone").value;
 
+  let data = {
+    name: name,
+    email: email,
+    phone: phone,
+  };
+
+  try {
+    await putDataToFirebase((path = "contacts/"), data, key);
+    console.log(key);
+    console.log("editContact erfolgreich");
+  } catch (error) {
+    console.error("Fehler bei der editcontact:", error);
+  }
+
+  await loadDataUsers();
+  closePopUp();
+  document.getElementById("scrollbar").innerHTML = "";
+  renderContactsList();
 }
 
 async function deleteContact(id) {
   let path = `/contacts/${contacts[id].id}`;
   await deleteDataFromFirebase(path);
   await loadDataUsers();
-  renderContactsList()
+  renderContactsList();
 }
