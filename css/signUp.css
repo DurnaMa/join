@@ -124,7 +124,6 @@ input:focus {
   color: red;
   font-size: 12px;
   margin: -18px;
-  /* height: 20px; */
 }
 
 .passwordContainer {
@@ -133,10 +132,8 @@ input:focus {
   align-items: center;
 }
 
-#togglePassword,
-#toggleLoginPasswordIcon,
-#toggleSignupPasswordIcon,
-#toggleSignupConfirmPasswordIcon {
+.passwordSignupIcon,
+.passwordSignupConfirmIcon {
   position: absolute;
   right: 20px;
   cursor: pointer;
