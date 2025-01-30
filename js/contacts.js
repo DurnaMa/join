@@ -214,6 +214,7 @@ async function updateContact() {
   closePopUp();
   document.getElementById("scrollbar").innerHTML = "";
   renderContactsList();
+  selectContact(currentSelectedContact);
 }
 
 async function deleteContact(id) {
