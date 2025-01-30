@@ -1,0 +1,151 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter";
+  scrollbar-width: thin;
+  scrollbar-color: #a8a8a8 #ffffff;
+  scroll-behavior: smooth;
+}
+
+h1 {
+  font-size: 61px;
+  font-weight: 700;
+}
+
+.hidden {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background-color: #f6f7f8;
+}
+
+.d-none {
+  display: none;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-login {
+  width: 100px;
+  height: 120px;
+  padding-top: 40px;
+  padding-left: 35px;
+}
+
+.help-icon {
+  padding-right: 40px;
+}
+
+.login-nav {
+  padding: 24px;
+  margin-bottom: 40px;
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  width: 652px;
+  height: 449px;
+  border-radius: 30px;
+  background-color: white;
+}
+
+.input-Login {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.button-dark {
+  gap: 8px;
+  padding: 4px 16px;
+  color: white;
+  border-radius: 5px;
+  background-color: #2a3647;
+}
+
+.button-light {
+  gap: 8px;
+  padding: 4px 16px;
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+}
+.test1 {
+  margin-top: 150px;
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.a-color {
+  color: #a8a8a8;
+}
+
+/* Startzustand für den Container */
+#moveLogoToCorner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  z-index: 10;
+  animation: fadeOutContainer 3s ease-in-out forwards;
+}
+
+/* Startzustand für das Logo */
+#animatedLogo {
+  width: 200px;
+  height: 240px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+  animation: moveLogoToCorner 3s ease-in-out forwards;
+}
+
+/* Keyframe-Animation: Logo-Bewegung */
+@keyframes moveLogoToCorner {
+  0% {
+    transform: translate(-50%, -50%) scale(1); /* Mitte, Originalgröße */
+    top: 50%;
+    left: 50%;
+  }
+  100% {
+    transform: translate(0, 0) scale(0.7); /* Zielposition und Skalierung */
+    top: 20px;
+    left: 20px;
+  }
+}
+
+/* Keyframe-Animation: Container-Verblassen */
+@keyframes fadeOutContainer {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

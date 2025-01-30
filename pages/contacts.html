@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
+    <title>Contacts</title>
+    <link rel="stylesheet" href="../css/contacts.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="../css/fonts.css" />
+    <script defer src="../js/includeTemplates.js"></script>
+    <script defer src="/script.js"></script>
+    <script defer src="../js/contacts.js"></script>
+    <script defer src="/js/header.js"></script>
+  </head>
+
+  <body onload="contactInit()">
+    <include-html src="../templates/header/header.html"></include-html>
+    <include-html src="../templates/sidebar/sidebar.html"></include-html>
+    <include-html src="/mobileTemplates/header/headerMobile.html"></include-html>
+    <include-html src="/mobileTemplates/footer/footerMobile.html"></include-html>
+
+    <div class="contacts-container">
+      <div class="contacts-list-div" id="contactsListDiv">
+        <div class="add-contact-btn-div">
+          <button onclick="addNewContact()" class="add-contact-btn" id="addContactBtn">
+            Add new contact
+            <img src="../assets/icons/person_add.png" alt="" />
+          </button>
+        </div>
+        <div class="d-none" id="addNewContactDiv"></div>
+        <div class="d-none" id="editContactDiv"></div>
+        <div class="scrollbar" id="scrollbar"></div>
+      </div>
+
+      <div class="contact-right-area">
+        <div class="contact-right-area-header">
+          <h1>Contacts</h1>
+          <div class="contact-right-area-header-dividing-line"></div>
+          <h2>Better with a team</h2>
+        </div>
+
+        <div class="contact-details-div" id="contactDetailsDiv">
+          
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

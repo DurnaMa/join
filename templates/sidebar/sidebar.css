@@ -1,0 +1,91 @@
+.sideBar {
+  display: flex;
+  position: fixed;
+  z-index: 3;
+  background: #2a3647;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 64px 0;
+  color: #cdcdcd;
+}
+
+.sideBarLogin {
+  padding-top: 235px;
+  position: absolute;
+}
+
+.sideBarLogin a {
+  display: flex;
+  width: 235px;
+  gap: 8px;
+  padding: 8px 53px;
+  text-align: center;
+  place-items: center;
+  text-decoration: none;
+  color: #cdcdcd;
+}
+
+.sideBarLogin a:hover {
+  background-color: #091931;
+}
+
+.sideBarList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sideBarList a {
+  display: flex;
+  width: 235px;
+  gap: 20px;
+  padding: 8px 53px;
+  text-align: center;
+  place-items: center;
+  text-decoration: none;
+  color: #cdcdcd;
+}
+
+.sideBarList a:hover {
+  background-color: #091931;
+}
+
+.policyAndNotice {
+  display: flex;
+  flex-direction: column;
+  text-align-last: left;
+}
+
+.policyAndNotice a {
+  display: flex;
+  width: 235px;
+  gap: 20px;
+  padding: 8px 53px;
+  text-align: center;
+  place-items: center;
+  text-decoration: none;
+  color: #cdcdcd;
+}
+
+.policyAndNotice span {
+  cursor: pointer;
+  width: 100%;
+  padding: 8px;
+  text-align: left;
+  font-weight: 400;
+  color: #a8a8a8;
+}
+
+.policyAndNotice span:hover {
+  color: #29abe2;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 992px) {
+  .sideBar {
+      display: none;
+  }
+}

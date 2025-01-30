@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/templates/header/header.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <script defer src="/js/script.js"></script>
+    <script defer src="/js/header.js"></script>
+    <title>Header</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="max-width">
+        <span>Kanban Project Management Tool</span>
+        <div class="headerNav">
+          <a class="headerHelp" href="/pages/help.html">
+            <img class="helpIcon" src="/assets/img/help.png" alt="" />
+          </a>
+          <a onclick="toggleMenu()" id="profileName" class="headerProfile">G</a>
+          <div id="subMenu" class="hidden">
+            <a class="hidden" href="/pages/help.html">Help</a>
+            <a href="/pages/impressum.html">Legal Notice</a>
+            <a href="/pages/data-protection.html">Privacy Policy</a>
+            <a href="/index.html">Log out</a>
+          </div>
+        </div>
+      </div>
+    </header>
+  </body>
+</html>

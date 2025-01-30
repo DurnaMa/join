@@ -1,0 +1,86 @@
+.header {
+  padding: 0px 40px 0px 350px;
+  position: fixed;
+  height: 96px;
+  box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
+  width: 100%;
+  background-color: white;
+  z-index: 3;
+  align-items: center;
+  display: flex;
+}
+
+.max-width {
+  max-width: 1920px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerNav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.headerHelp {
+  padding: 0;
+  width: 50px;
+}
+
+#profileName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border: 3px solid #2a3647;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  color: #29abe2;
+}
+
+#profileName:hover {
+  background-color: #e1e5ec;
+}
+
+#subMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 160px;
+  width: 150px;
+  list-style: none;
+  position: absolute;
+  z-index: 999;
+  right: 30px;
+  top: 100px;
+  border-radius: 20px 0px 20px 20px;
+  background: #2a3647;
+  text-align-last: left;
+}
+
+#subMenu a {
+  text-decoration: none;
+  padding: 10px;
+  color: #cdcdcd;
+}
+
+#subMenu a:hover {
+  background-color: #2a3d59;
+}
+
+/* .hidden {
+  display: none;
+} */
+
+@media screen and (max-width: 992px) {
+  .header {
+    display: none;
+  }
+}

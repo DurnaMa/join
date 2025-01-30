@@ -1,0 +1,71 @@
+p {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 27px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.helpContainer {
+  display: flex;
+  padding: 206px 114px 96px 330px;
+  width: 97%;
+  flex-direction: column;
+  background-color: #f6f7f8;
+}
+
+.arrowLeft {
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  position: fixed;
+  top: 22.1%;
+  left: 90%;
+}
+
+.arrowLeft:hover {
+  background-color: #eeeeee;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+}
+
+.headline {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.join {
+  color: #29abe2;
+}
+
+.helpList {
+  display: flex;
+  gap: 24px;
+}
+
+.helpNumber {
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.helpText {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 992px) {
+  .helpContainer {
+    padding: 196px 40px 120px 40px;
+  }
+}
