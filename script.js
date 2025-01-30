@@ -71,3 +71,31 @@ async function putDataToFirebase(path, data = {}, key) {
     body: JSON.stringify(data),
   });
 }
+
+function showLoginPassword() {
+  let change = document.getElementById("loginPassword");
+
+  if (change.type === "password") {
+    change.type = "text";
+  } else {
+    change.type = "password";
+  }
+}
+function showSignupPassword() {
+  let change = document.getElementById("signupPassword");
+
+  if (change.type === "password") {
+    change.type = "text";
+  } else {
+    change.type = "password";
+  }
+}
+function showConfirmPassword() {
+  let change = document.getElementById("confirmPassword");
+
+  if (change.type === "password") {
+    change.type = "text";
+  } else {
+    change.type = "password";
+  }
+}
