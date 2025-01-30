@@ -222,4 +222,5 @@ async function deleteContact(id) {
   await deleteDataFromFirebase(path);
   await loadDataUsers();
   renderContactsList();
+  document.getElementById("contactDetailsDiv").innerHTML = "";
 }
