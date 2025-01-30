@@ -206,7 +206,10 @@ input:focus {
   background-size: 20px 20px;
 }
 
-.passwordLoginIcon {
+#togglePassword,
+#toggleLoginPasswordIcon,
+#toggleSignupPasswordIcon,
+#toggleSignupConfirmPasswordIcon {
   position: absolute;
   right: 20px;
   cursor: pointer;
