@@ -83,3 +83,9 @@
   color: #29abe2;
   font-weight: 700;
 }
+
+@media screen and (max-width: 992px) {
+  .sideBar {
+      display: none;
+  }
+}

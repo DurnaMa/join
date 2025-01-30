@@ -46,7 +46,7 @@ async function deleteDataFromFirebase(path = "") {
 }
 
 async function loadContacts() {
-  // contacts = [];
+  contacts = [];
   let contactsData = await getDataFromFirebase("contacts");
 
   for (const key in contactsData) {
@@ -70,5 +70,14 @@ function goBack() {
     window.location.href = referrer;
   } else {
     window.location.href = "index.html";
+  }
+}
+
+function showPassword() {
+  let change = document.getElementById('loginPassword');
+  if (change.type === "password") {
+    change.type = "text";
+  } else {
+    change.type = "password";
   }
 }

@@ -4,8 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/help.css" />
-    <link rel="stylesheet" href="../templates/header/header.css" />
-    <link rel="stylesheet" href="../templates/sidebar/sidebar.css" />
     <link
       rel="shortcut icon"
       href="/assets/img/logodunkel.png"
@@ -13,11 +11,14 @@
     />
     <script defer src="../js/includeTemplates.js"></script>
     <script defer src="/script.js"></script>
+    <script defer src="/js/header.js"></script>
     <title>Help</title>
   </head>
   <body>
     <include-html src="../templates/header/header.html"></include-html>
     <include-html src="../templates/sidebar/sidebar.html"></include-html>
+    <include-html src="/mobileTemplates/header/headerMobile.html"></include-html>
+    <include-html src="/mobileTemplates/footer/footerMobile.html"></include-html>
     <div class="helpContainer">
       <a onclick="goBack()" href="javascript:void(0);">
         <img class="arrowLeft" src="/assets/icons/arrow-left-line.png" alt="" />

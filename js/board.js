@@ -7,7 +7,7 @@ let todos = [
     description: "Task 1 description",
     subtasks: [],
     users: [],
-    prio: []
+    prio: [],
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ let todos = [
     description: "Task 2 description",
     subtasks: [],
     users: [],
-    prio: []
+    prio: [],
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ let todos = [
     description: "Task 3 description",
     subtasks: [],
     users: [],
-    prio: []
+    prio: [],
   },
   {
     id: 4,
@@ -37,10 +37,9 @@ let todos = [
     description: "Task 4 description",
     subtasks: [],
     users: [],
-    prio: []
+    prio: [],
   },
 ];
-
 
 let currentDraggedElement;
 let currentSelectedTask;
@@ -66,19 +65,22 @@ function updateHTML() {
   }
 }
 
-function startDragging(id) {
-  currentDraggedElement = id;
+function startDragging(index) {
+  currentDraggedElement = index;
 }
 
 function renderTaskContainer(element, index) {
   return /*html*/ `
     <div class="column">
         <h2 class="column-titles-h2">${element["columnTitles"]}<button class="add-column"><img src="/assets/icons/plusblack.png" alt=""></button></h2>
-        <div class="task-card" id="${index}" draggable="true" ondragstart="startDragging(${element["id"]})">
-        <div class="task-content">
-            <div class="task-card-title">${element["category"]}</div>
-            <h3 class="task-title">${element.title}</h3>
-            <p class="task-description">${element.description}</p>
+        <div class="task-card-container" id="${element["columnTitles"]}" ondrop="moveTo('${element['columnTitles']}')" ondragover="allowDrop(event)">
+          <div class="task-card" id="${index}" draggable="true" ondragstart="startDragging(${element['id']})">
+            <div class="task-content">
+              <div class="task-card-title">${element["category"]}</div>
+              <h3 class="task-title">${element.title}</h3>
+              <p class="task-description">${element.description}</p>
+            </div>
+          </div>
         </div>
     </div>
   `;
@@ -92,4 +94,3 @@ function moveTo(columnTitles) {
   todos[currentDraggedElement]["columnTitles"] = columnTitles;
   updateHTML();
 }
-
