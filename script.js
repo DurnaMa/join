@@ -28,16 +28,6 @@ async function postDataToFirebase(path = "", data = {}) {
   });
 }
 
-async function putDataOnFirebase(path = "", data = {}) {
-  await fetch(BASE_URL + path + ".json", {
-    method: "PUT",
-    header: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-}
-
 async function deleteDataFromFirebase(path = "") {
   await fetch(BASE_URL + path + ".json", {
     method: "DELETE",
