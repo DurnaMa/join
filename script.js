@@ -72,3 +72,12 @@ function goBack() {
     window.location.href = "index.html";
   }
 }
+
+function showPassword() {
+  let change = document.getElementById('loginPassword');
+  if (change.type === "password") {
+    change.type = "text";
+  } else {
+    change.type = "password";
+  }
+}
