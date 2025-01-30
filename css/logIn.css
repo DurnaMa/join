@@ -26,7 +26,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: moveLogo 2.5s forwards;
+  animation: moveLogo 1.5s forwards;
 }
 
 @keyframes fadeOut {

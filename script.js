@@ -1,5 +1,4 @@
-const BASE_URL =
-  "https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let contacts = [];
 
@@ -22,16 +21,6 @@ async function getDataFromFirebase(path = "") {
 async function postDataToFirebase(path = "", data = {}) {
   await fetch(BASE_URL + path + ".json", {
     method: "POST",
-    header: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-}
-
-async function putDataOnFirebase(path = "", data = {}) {
-  await fetch(BASE_URL + path + ".json", {
-    method: "PUT",
     header: {
       "Content-Type": "application/json",
     },
@@ -73,8 +62,37 @@ function goBack() {
   }
 }
 
-function showPassword() {
-  let change = document.getElementById('loginPassword');
+async function putDataToFirebase(path, data = {}, key) {
+  await fetch(BASE_URL + path + key + ".json", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+}
+
+function showLoginPassword() {
+  let change = document.getElementById("loginPassword");
+
+  if (change.type === "password") {
+    change.type = "text";
+  } else {
+    change.type = "password";
+  }
+}
+function showSignupPassword() {
+  let change = document.getElementById("signupPassword");
+
+  if (change.type === "password") {
+    change.type = "text";
+  } else {
+    change.type = "password";
+  }
+}
+function showConfirmPassword() {
+  let change = document.getElementById("confirmPassword");
+
   if (change.type === "password") {
     change.type = "text";
   } else {
