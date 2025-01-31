@@ -49,28 +49,48 @@ function renderSubTaskList() {
 
   subTasksList.innerHTML = '';
 
-  for (let i = 0; i < subTasks.length; i++) {
-    subTasksList.innerHTML += generateSubTaskList(i);
+  for (let subTasksIndex = 0; subTasksIndex < subTasks.length; subTasksIndex++) {
+    subTasksList.innerHTML += generateSubTaskList(subTasksIndex);
   }
 }
 
-function generateSubTaskList(i) {
+function generateSubTaskList(subTasksIndex) {
   return `
-    <li class="subTask" data-index="${i}">
+    <li class="subTask" data-index="${subTasksIndex}">
       <input type="text" class="subTask-edit-input" value="${subTasks[i].description}" style="display: none;">
-      <span class="subTask-text">${subTasks[i].description}</span>
+      <span class="subTask-text">${subTasks[subTasksIndex].description}</span>
       <div class="subTask-actions">
         <div class="icon-wrapper">
-          <img src="/assets/icons/edit-icon.png" alt="Edit" onclick="editSubTask(${i})" class="action-icon edit-icon">
+          <img src="/assets/icons/edit-icon.png" alt="Edit" onclick="editSubTask(${subTasksIndex})" class="action-icon edit-icon">
         </div>
         <div class="icon-wrapper">
-          <img src="/assets/icons/delete-icon.png" alt="Delete" onclick="deleteSubTask(${i})" class="action-icon delete-icon">
+          <img src="/assets/icons/delete-icon.png" alt="Delete" onclick="deleteSubTask(${subTasksIndex})" class="action-icon delete-icon">
         </div>
         <div class="separator"></div>
         <div class="icon-wrapper">
-          <img src="/assets/icons/check.png" alt="Save" onclick="saveSubTask(${i})" class="action-icon save-icon" style="display: none;">
+          <img src="/assets/icons/check.png" alt="Save" onclick="saveSubTask(${subTasksIndex})" class="action-icon save-icon" style="display: none;">
         </div>
       </div>
     </li>
   `;
+}
+
+async function assignedTOUsser() {
+  let user = await loadDataUsers();
+  let assignedTo = document.getElementById('contactList').classList.toggle('show');
+  assignedTo.value = user.name;
+  assignedTo.disabled = true;
+}
+
+window.onclick = function (event) {
+  if (!event.target.matches('.assignedTo')) {
+    let dropdowns = document.getElementsByClassName('select');
+    let assignedTOUsserIndex;
+    for (assignedTOUsserIndex = 0; assignedTOUsserIndex < dropdowns.length; assignedTOUsserIndex++) {
+      let openDropdown = dropdowns[assignedTOUsserIndex];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
 }
