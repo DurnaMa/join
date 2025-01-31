@@ -1,3 +1,32 @@
+const alphabet = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
+
 async function contactInit() {
   await loadDataUsers();
   renderContactsList();
@@ -20,7 +49,9 @@ function selectContact(index) {
   contactDetails.innerHTML = /*html*/ `
         <div class="contact-details-div-header">
           <div class="contact-details-div-initials">
-            <div class="contacts-abbreviation">${generateInitials(contact.name)}</div>
+            <div class="contacts-abbreviation">${generateInitials(
+              contact.name
+            )}</div>
           </div>
           <div class="contact-name">${contact.name}</div>
           <div class="contact-details-div-name-icons">
@@ -57,11 +88,45 @@ function renderContactsList() {
   let contactsList = document.getElementById("scrollbar");
   contactsList.innerHTML = "";
 
+  //initials = generateInitials(contacts[currentSelectedContact].name);
+  
+
   for (let i = 0; i < contacts.length; i++) {
-    
     contactsList.innerHTML += generateContactsList(i);
     contacts.sort((a, b) => a.name.localeCompare(b.name));
+
+    let initials = generateInitials(contacts[i].name);
+
+    /*if (i == initials) {
+      contactsList.innerHTML += generateContactsList(i);
+      continue;
+    }
+
+    /*if (i == generateInitials(alphabet[i])) {
+      //contactsList.innerHTML += generateContactsList(i);
+      continue;
+    }
+
+    /*if (i == alphabet.length) {
+      contactsList.innerHTML += generateContactsList(i);
+      continue;
+    }
+
+    /*for (let i = 0; i < alphabet.length; i++) {
+      if (contacts[i].name.startsWith(alphabet[i])) {
+        //contactsList.innerHTML += generateContactsList(i);
+        //continue;
+      }
+
+      if (i == alphabet.length) {
+        //contactsList.innerHTML += generateContactsList(i);
+        continue;
+      }
+    }*/
+    
   }
+
+
 }
 
 /**
@@ -75,10 +140,13 @@ function generateContactsList(i) {
   return /*html*/ `
           <div class="contacts-list">
             <div class="contacts-list-item-h3-div" onclick="selectContact(${i})">
-              <div class="contacts-abbreviation-div">
-                <div class="contacts-abbreviation">${initials}</div>
+              <div class="contacts-list-alphabet">${alphabet[i]}</div>
+              <div class="contacts-abbreviation-list-item-div">
+                <div class="contacts-abbreviation-div">
+                  <div class="contacts-abbreviation">${initials}</div>
+                </div>
+                <div class="contacts-list-item"><h3>${contacts[i].name}</h3><p>${contacts[i].email}</p></div>
               </div>
-              <div class="contacts-list-item"><h3>${contacts[i].name}</h3><p>${contacts[i].email}</p></div>
             </div>
             <div class="contacts-list-item-dividing"></div>
           </div>
