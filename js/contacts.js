@@ -58,7 +58,9 @@ function renderContactsList() {
   contactsList.innerHTML = "";
 
   for (let i = 0; i < contacts.length; i++) {
+    
     contactsList.innerHTML += generateContactsList(i);
+    contacts.sort((a, b) => a.name.localeCompare(b.name));
   }
 }
 
