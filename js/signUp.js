@@ -27,7 +27,7 @@ async function postData(path, data) {
 async function toTheRegistration() {
   let nameInput = document.getElementById('name');
   let emailInput = document.getElementById('email');
-  let passwordInput = document.getElementById('password');
+  let passwordInput = document.getElementById('signupPassword');
 
   if (nameInput.value && emailInput.value && passwordInput.value) {
     let data = {
