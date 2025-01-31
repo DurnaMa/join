@@ -58,7 +58,6 @@ function renderContactsList() {
   contactsList.innerHTML = "";
 
   for (let i = 0; i < contacts.length; i++) {
-    
     contactsList.innerHTML += generateContactsList(i);
     contacts.sort((a, b) => a.name.localeCompare(b.name));
   }
@@ -129,6 +128,16 @@ function addNewContact() {
     `;
 }
 
+/**
+ * Displays the edit contact form with the current contact's details.
+ *
+ * This function retrieves the currently selected contact's information
+ * (name, email, and phone) and populates an editable form with these details.
+ * The form allows the user to update or delete the contact.
+ *
+ * @function
+ * @name editContact
+ */
 function editContact() {
   const editContactDiv = document.getElementById("editContactDiv");
   let contact = contacts[currentSelectedContact];
@@ -163,6 +172,15 @@ function closePopUp() {
   document.getElementById("editContactDiv").classList.add("d-none");
 }
 
+/**
+ * Asynchronously saves a new contact by retrieving input values from the DOM,
+ * sending the data to Firebase, and updating the UI accordingly.
+ *
+ * @async
+ * @function saveContact
+ * @returns {Promise<void>} A promise that resolves when the contact is saved and the UI is updated.
+ * @throws Will log an error message if there is an issue with saving the contact.
+ */
 async function saveContact() {
   let name = document.getElementById("newContactName").value;
   let email = document.getElementById("newContactEmail").value;
@@ -191,6 +209,19 @@ async function saveContact() {
   renderContactsList();
 }
 
+/**
+ * Updates the selected contact with new information from the input fields.
+ *
+ * This function retrieves the contact's ID, name, email, and phone number from the input fields,
+ * constructs a data object, and sends it to Firebase to update the contact information.
+ * After updating, it reloads the user data, closes the popup, clears the scrollbar content,
+ * re-renders the contacts list, and re-selects the current contact.
+ *
+ * @async
+ * @function updateContact
+ * @returns {Promise<void>} A promise that resolves when the contact update process is complete.
+ * @throws Will log an error message if the update process fails.
+ */
 async function updateContact() {
   let key = contacts[currentSelectedContact].id;
   console.log(key);
