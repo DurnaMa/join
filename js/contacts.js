@@ -84,50 +84,31 @@ function selectContact(index) {
  * @function renderContactsList
  * @returns {void}
  */
-function renderContactsList() {
+function renderContactsList(name) {
   let contactsList = document.getElementById("scrollbar");
   contactsList.innerHTML = "";
 
-  //initials = generateInitials(contacts[currentSelectedContact].name);
-  
+  //let initialsTest = generateInitials(firstInitial);
 
   for (let i = 0; i < contacts.length; i++) {
     contactsList.innerHTML += generateContactsList(i);
     contacts.sort((a, b) => a.name.localeCompare(b.name));
 
-    let initials = generateInitials(contacts[i].name);
+    //let initials = generateInitialsTest(contacts[i].name);
 
-    /*if (i == initials) {
+    /*if (initialsTest == alphabet.length) {
       contactsList.innerHTML += generateContactsList(i);
       continue;
-    }
-
-    /*if (i == generateInitials(alphabet[i])) {
-      //contactsList.innerHTML += generateContactsList(i);
-      continue;
-    }
-
-    /*if (i == alphabet.length) {
-      contactsList.innerHTML += generateContactsList(i);
-      continue;
-    }
-
-    /*for (let i = 0; i < alphabet.length; i++) {
-      if (contacts[i].name.startsWith(alphabet[i])) {
-        //contactsList.innerHTML += generateContactsList(i);
-        //continue;
-      }
-
-      if (i == alphabet.length) {
-        //contactsList.innerHTML += generateContactsList(i);
-        continue;
-      }
     }*/
-    
   }
 
-
 }
+
+/*function generateInitialsTest(nameTest) {
+  //const nameParts = name.split(" ");
+  const firstInitial = nameTest[0]?.charAt(0) || "";
+
+}*/
 
 /**
  * Generates the HTML for a contact list item.
