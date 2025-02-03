@@ -1,32 +1,3 @@
-const alphabet = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-];
-
 async function contactInit() {
   await loadDataUsers();
   renderContactsList();
@@ -79,57 +50,42 @@ function selectContact(index) {
         `;
 }
 
-/**
- * Renders the list of contacts.
- * @function renderContactsList
- * @returns {void}
- */
-function renderContactsList(name) {
+function renderContactsList() {
   let contactsList = document.getElementById("scrollbar");
   contactsList.innerHTML = "";
 
-  //let initialsTest = generateInitials(firstInitial);
+  // Kontakte alphabetisch sortieren
+  contacts.sort((a, b) => a.name.localeCompare(b.name));
+
+  let lastLetter = "";
 
   for (let i = 0; i < contacts.length; i++) {
+    let firstLetter = contacts[i].name.charAt(0).toUpperCase();
+
+    if (firstLetter !== lastLetter) {
+      if (lastLetter !== "") {
+        contactsList.innerHTML += `<div class="contacts-list-item-dividing"></div>`;
+      }
+      contactsList.innerHTML += `<div class="contacts-letter-header">${firstLetter}</div>`;
+      lastLetter = firstLetter;
+    }
     contactsList.innerHTML += generateContactsList(i);
-    contacts.sort((a, b) => a.name.localeCompare(b.name));
-
-    //let initials = generateInitialsTest(contacts[i].name);
-
-    /*if (initialsTest == alphabet.length) {
-      contactsList.innerHTML += generateContactsList(i);
-      continue;
-    }*/
   }
-
 }
 
-/*function generateInitialsTest(nameTest) {
-  //const nameParts = name.split(" ");
-  const firstInitial = nameTest[0]?.charAt(0) || "";
-
-}*/
-
-/**
- * Generates the HTML for a contact list item.
- * @function generateContactsList
- * @param {number} i - The index of the contact.
- * @returns {string} The HTML string for the contact list item.
- */
 function generateContactsList(i) {
   const initials = generateInitials(contacts[i].name);
   return /*html*/ `
           <div class="contacts-list">
             <div class="contacts-list-item-h3-div" onclick="selectContact(${i})">
-              <div class="contacts-list-alphabet">${alphabet[i]}</div>
-              <div class="contacts-abbreviation-list-item-div">
-                <div class="contacts-abbreviation-div">
-                  <div class="contacts-abbreviation">${initials}</div>
-                </div>
-                <div class="contacts-list-item"><h3>${contacts[i].name}</h3><p>${contacts[i].email}</p></div>
+              <div class="contacts-abbreviation-div">
+                <div class="contacts-abbreviation">${initials}</div>
+              </div>
+              <div class="contacts-list-item">
+                <h3>${contacts[i].name}</h3>
+                <p>${contacts[i].email}</p>
               </div>
             </div>
-            <div class="contacts-list-item-dividing"></div>
           </div>
     `;
 }
