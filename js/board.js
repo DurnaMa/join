@@ -45,6 +45,28 @@ let currentDraggedElement;
 let currentSelectedTask;
 
 function updateHTML() {
+  let tasksTodo = todos.filter((c) => c["columnTitles"] == "To Do");
+
+  document.getElementById('columnContainer').innerHTML = '';
+
+  for (let index = 0; index < tasksTodo.length; index++) {
+    let tasksTodoTest = tasksTodo[index];
+    document.getElementById('columnContainer').innerHTML += rendertest(tasksTodoTest, index);
+  }
+
+  /*let columnTitleProgress = todos.filter((c) => c["columnTitles"] == "In progress");
+
+  document.getElementById('InProgress').innerHTML = '';
+
+  for (let index = 0; index < columnTitleProgress.length; index++) {
+    let elementProgress = columnTitleProgress[index];
+    document.getElementById('InProgress').innerHTML += renderTaskContainer(elementProgress);
+  }*/
+
+}
+
+
+/*function updateHTML() {
   let columnTitle = todos.filter(
     (c) =>
       c["columnTitles"] == "To do" ||
@@ -63,22 +85,43 @@ function updateHTML() {
       element["columnTitles"]
     );
   }
+}*/
+
+function startDragging(id) {
+  currentDraggedElement = id;
 }
 
-function startDragging(index) {
-  currentDraggedElement = index;
+function rendertest(tasksTodoTest, index) {
+  return /*html*/ `
+  
+  <div id="taskContainerTest">
+    <div id="taskTitle">To Do
+      <div id="taskColumn" ondrop="moveTo('taskColumn')" ondragover="allowDrop(event)">
+        <div id="${index}" draggable="true" ondragstart="startDragging(${tasksTodoTest['id']})">
+
+        </div>
+      </div>
+
+    </div>
+    
+  </div>
+  
+  `;
 }
 
-function renderTaskContainer(element, index) {
+
+
+
+function renderTaskContainer(tasksTodo, index) {
   return /*html*/ `
     <div class="column">
-        <h2 class="column-titles-h2">${element["columnTitles"]}<button class="add-column"><img src="/assets/icons/plusblack.png" alt=""></button></h2>
-        <div class="task-card-container" id="${element["columnTitles"]}" ondrop="moveTo('${element['columnTitles']}')" ondragover="allowDrop(event)">
-          <div class="task-card" id="${index}" draggable="true" ondragstart="startDragging(${element['id']})">
+        <h2 class="column-titles-h2">To Do<button class="add-column"><img src="/assets/icons/plusblack.png" alt=""></button></h2>
+        <div class="task-card-container" id="ToDo" ondrop="moveTo('ToDo')" ondragover="allowDrop(event)">
+          <div class="task-card" id="${index}" draggable="true" ondragstart="startDragging(${tasksTodo['id']})">
             <div class="task-content">
-              <div class="task-card-title">${element["category"]}</div>
-              <h3 class="task-title">${element.title}</h3>
-              <p class="task-description">${element.description}</p>
+              <div class="task-card-title">${tasksTodo["category"]}</div>
+              <h3 class="task-title">${tasksTodo.title}</h3>
+              <p class="task-description">${tasksTodo.description}</p>
             </div>
           </div>
         </div>
