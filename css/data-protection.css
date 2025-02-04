@@ -1,51 +1,51 @@
-.impressum,
+/* .impressum,
 .datenschutzerklaerung {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .main {
-  flex-grow: 1;
+  /* flex-grow: 1; */
   padding: 20px;
 }
 
-.blocksatz_r {
+/* .blocksatz_r {
   padding: 80px 114px 96px 330px;
   hyphens: auto;
-  text-align: justify; /* für Edge */
-  -moz-text-align-last: right; /* für Firefox vor 58.0 */
+  text-align: justify;
+  -moz-text-align-last: right;
   text-align-last: right;
-}
+} */
 
-.blocksatz_c {
+/* .blocksatz_c {
   padding: 80px 114px 96px 330px;
   hyphens: auto;
-  text-align: justify; /* für Edge */
-  -moz-text-align-last: center; /* für Firefox vor 58.0 */
+  text-align: justify;
+  -moz-text-align-last: center;
   text-align-last: center;
-}
+} */
 
-.blocksatz_j {
+/* .blocksatz_j {
   padding: 80px 114px 96px 330px;
   hyphens: auto;
-  text-align: justify; /* für Edge */
-  -moz-text-align-last: justify; /* für Firefox vor 58.0 */
+  text-align: justify;
+  -moz-text-align-last: justify; 
   text-align-last: justify;
-}
+} */
 
 .blocksatz_l {
-  padding: 80px 114px 96px 330px;
+  padding: 206px 114px 96px 330px;
   hyphens: auto;
-  text-align: justify; /* für Edge */
+  /* text-align: justify; für Edge */
   -moz-text-align-last: left; /* für Firefox vor 58.0 */
   text-align-last: left;
-  word-spacing: 0px;
+  /* word-spacing: 0px; */
   line-height: 35px;
   /* letter-spacing: 5px; */
 }
 
-h1,
+/* h1,
 h2,
 h3,
 h4,
@@ -55,4 +55,52 @@ h5 {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
+} */
+
+h1 {
+  padding-bottom: 20px;
 }
+
+h2 {
+  padding-bottom: 20px;
+}
+
+h3 {
+  padding-bottom: 20px;
+}
+
+p {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+@media (max-width: 555px) {
+  h1 {
+    font-size: 35px !important;
+  }
+
+  h2 {
+    font-size: 15px !important;
+  }
+
+  h3 {
+    font-size: 15px !important;
+  }
+
+  p {
+    font-size: 15px !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .blocksatz_l {
+    padding: 196px 20px 120px 20px;
+  }
+}
+
+@media (max-width: 375px) {
+  h1{
+    font-size: 32px !important;
+  }
+}
+
