@@ -10,9 +10,10 @@
     <script defer src="/script.js"></script>
     <script defer src="/js/addTask.js"></script>
     <script defer src="/js/header.js"></script>
+    <script src="/js/contacts.js"></script>
     <title>Add Task</title>
   </head>
-  <body onload="init()">
+  <body onload="initAddTask()">
     <include-html src="../templates/header/header.html"></include-html>
     <include-html src="../templates/sidebar/sidebar.html"></include-html>
     <include-html src="/mobileTemplates/header/headerMobile.html"></include-html>
@@ -29,9 +30,9 @@
             <textarea id="descriptionTextarea" rows="5" placeholder="Enter a Description"></textarea>
             <br />
             <label for="contactSelection">Assigned to</label>
-            <select name="contactList" id="contactList">
-              <option value disabled selected hidden>Select contacts to assign</option>
-              <option value=""></option>
+            <select class="assignedTo" name="contactList" id="contactList">
+              <!-- <option value disabled selected hidden>Select contacts to assign</option>
+              <option value=""></option> -->
             </select>
           </section>
           <hr />
