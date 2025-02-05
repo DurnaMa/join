@@ -12,6 +12,7 @@
     <script defer src="/script.js"></script>
     <script defer src="../js/board.js"></script>
     <script defer src="/js/header.js"></script>
+    <script defer src="../js/templates.js"></script>
   </head>
 
   <body onload="initBord()">
@@ -29,12 +30,14 @@
             <div class="search-dividing-line"></div>
             <img class="searchIcon" src="/assets/icons/search.png" alt="" />
           </div>
-          <button class="addTaskBtn">
+          <button class="addTaskBtn" onclick="addTaskPopup()">
             <p class="addTaskBtnText">Add task</p>
             <img src="/assets/icons/addTaskBtn.png" alt="" />
           </button>
         </div>
       </div>
+
+      <div class="addNewTaskDiv d-none" id="addNewTaskDiv"></div>
 
       <div class="task-container" id="taskContainer">
         <div class="column-container" id="columnContainer"></div>

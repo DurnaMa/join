@@ -55,7 +55,7 @@ function renderTasks() {
     let column = document.createElement("div");
     column.classList.add("column");
     column.innerHTML = /*html*/ `
-      <h2 class="column-titles-h2">${todo.columnTitles}<button class="add-column"><img src="/assets/icons/plusblack.png" alt=""></button></h2>
+      <h2 class="column-titles-h2">${todo.columnTitles}<button class="add-column"><img src="/assets/icons/plusblack.png" alt="" onclick="addTaskPlus()"></button></h2>
       <div class="task-card" id="${todo.id}" draggable="true" ondragstart="startDragging(event)" ondragover="allowDrop(event)" ondrop="moveTo(event)">
         <h3>${todo.title}</h3>
         <p>${todo.description}</p>
@@ -63,6 +63,41 @@ function renderTasks() {
     `;
     columnContainer.appendChild(column);
   });
+}
+
+function addTaskPlus() {
+  let title = document.getElementById("title").value;
+  let description = document.getElementById("description").value;
+  let columnTitles = document.getElementById("columnTitles").value;
+  let newTask = {
+    id: todos.length + 1,
+    columnTitles: columnTitles,
+    category: [],
+    title: title,
+    description: description,
+    subtasks: [],
+    users: [],
+    prio: [],
+  };
+  todos.push(newTask);
+  updateHTML();
+}
+
+function addTaskBtn() {
+  let title = document.getElementById("title").value;
+  let description = document.getElementById("description").value;
+  let newTask = {
+    id: todos.length + 1,
+    columnTitles: "To Do",
+    category: [],
+    title: title,
+    description: description,
+    subtasks: [],
+    users: [],
+    prio: [],
+  };
+  todos.push(newTask);
+  updateHTML();
 }
 
 function startDragging(event) {
@@ -78,8 +113,15 @@ function moveTo(event) {
   event.target.appendChild(currentDraggedElement);  
 }
 
+function addTaskPopup() {
+  let addNewTaskDiv = document.getElementById("addNewTaskDiv");
+  addNewTaskDiv.classList.remove("d-none");
+  addNewTaskDiv.innerHTML = renderAddTaskPoup();
+}
 
-
+function closeAddTaskPopUp() {
+  document.getElementById("addNewTaskDiv").classList.add("d-none");
+}
 
 
 
