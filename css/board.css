@@ -39,7 +39,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 312px;
+  width: 350px;
   height: 48px;
   border-radius: 10px;
   background-color: white;
@@ -50,8 +50,8 @@
   width: 280px;
   height: 32px;
   padding: 8px;
-  border: none;
-  outline: none;
+  border: none !important;
+  outline: none !important;
 }
 
 .searchIcon {
@@ -138,6 +138,9 @@
 }
 
 .add-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 24px;
   height: 24px;
   border-radius: 8px;
