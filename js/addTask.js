@@ -1,3 +1,48 @@
+let todos = [
+  {
+    id: 1,
+    columnTitles: "To do",
+    category: "User story",
+    title: "Task 1",
+    description: "Task 1 description",
+    subtasks: [],
+    users: [],
+    prio: [],
+  },
+  {
+    id: 2,
+    columnTitles: "In progress",
+    category: "Technical task",
+    title: "Task 2",
+    description: "Task 2 description",
+    subtasks: [],
+    users: [],
+    prio: [],
+  },
+  {
+    id: 3,
+    columnTitles: "Await feedback",
+    category: [],
+    title: "Task 3",
+    description: "Task 3 description",
+    subtasks: [],
+    users: [],
+    prio: [],
+  },
+  {
+    id: 4,
+    columnTitles: "Done",
+    category: [],
+    title: "Task 4",
+    description: "Task 4 description",
+    subtasks: [],
+    users: [],
+    prio: [],
+  },
+];
+
+
+
 async function initAddTask() {
   await loadDataUsers();
   contactList();
@@ -110,4 +155,34 @@ function contactList() {
     `;
   });
   contactList.classList.toggle("show");
+}
+
+function createtTaskBtn() {
+  let title = document.getElementById("titleInput");
+  let description = document.getElementById("descriptionTextarea");
+  title = titleInput.value;
+  description = descriptionTextarea.value;
+
+  let newTask = {
+    id: todos.length + 1,
+    columnTitles: "To Do",
+    category: [],
+    title: title,
+    description: description,
+    //subtasks: [],
+    users: [],
+    prio: [],
+  };
+  todos.push(newTask);
+  //window.location.href = "index.html";
+  //goBack()
+}
+
+function goBack() {
+  const referrer = document.referrer;
+  if (referrer) {
+    window.location.href = referrer;
+  } else {
+    window.location.href = "index.html";
+  }
 }

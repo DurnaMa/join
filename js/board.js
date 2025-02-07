@@ -55,7 +55,7 @@ function renderTasks() {
     let column = document.createElement("div");
     column.classList.add("column");
     column.innerHTML = /*html*/ `
-      <h2 class="column-titles-h2">${todo.columnTitles}<button class="add-column"><img src="/assets/icons/plusblack.png" alt="" onclick="addTaskPopupPlus()"></button></h2>
+      <h2 class="column-titles-h2">${todo.columnTitles}<button class="add-column"><img src="/assets/icons/plusblack.png" alt="" onclick="addTaskPlus()"></button></h2>
       <div class="task-card" id="${todo.id}" draggable="true" ondragstart="startDragging(event)" ondragover="allowDrop(event)" ondrop="moveTo(event)">
         <h3>${todo.title}</h3>
         <p>${todo.description}</p>
@@ -66,9 +66,12 @@ function renderTasks() {
 }
 
 function addTaskPlus() {
-  let title = document.getElementById("title");
-  let description = document.getElementById("description");
-  let columnTitles = document.getElementById("columnTitles");
+  let title = document.getElementById("titleInput");
+  let description = document.getElementById("descriptionTextarea");
+  //let columnTitles = document.getElementById("columnTitles");
+  title = titleInput.value;
+  description = descriptionTextarea.value;
+
   let newTask = {
     id: todos.length + 1,
     columnTitles: columnTitles,
@@ -83,9 +86,12 @@ function addTaskPlus() {
   renderTasks();
 }
 
-function addTaskBtn() {
-  let title = document.getElementById("title").value;
-  let description = document.getElementById("description").value;
+function createtTaskBtn() {
+  let title = document.getElementById("titleInput");
+  let description = document.getElementById("descriptionTextarea");
+  title = titleInput.value;
+  description = descriptionTextarea.value;
+
   let newTask = {
     id: todos.length + 1,
     columnTitles: "To Do",
@@ -97,6 +103,7 @@ function addTaskBtn() {
     prio: [],
   };
   todos.push(newTask);
+  closeAddTaskPopUp()
   renderTasks();
 }
 
