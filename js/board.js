@@ -55,7 +55,6 @@ function renderTasks() {
     let column = document.createElement("div");
     column.classList.add("column");
     column.innerHTML = /*html*/ `
-      <h2 class="column-titles-h2">${todo.columnTitles}<button class="add-column"><img src="/assets/icons/plusblack.png" alt="" onclick="addTaskPlus()"></button></h2>
       <div class="task-card" id="${todo.id}" draggable="true" ondragstart="startDragging(event)" ondragover="allowDrop(event)" ondrop="moveTo(event)">
         <h3>${todo.title}</h3>
         <p>${todo.description}</p>
@@ -124,6 +123,7 @@ function addTaskPopup() {
   let addNewTaskDiv = document.getElementById("addNewTaskDiv");
   addNewTaskDiv.classList.remove("d-none");
   addNewTaskDiv.innerHTML = renderAddTaskPoup();
+  addTaskPlus();
 }
 
 function addTaskPopupPlus() {
