@@ -49,8 +49,19 @@ async function toTheRegistration() {
   } else {
     console.log('Bitte füllen Sie alle Felder aus');
   }
+  emailValidation();
 }
 
+function emailValidation() {
+  let emailInput = document.getElementById('email');
+  let emailValue = emailInput.value;
+
+  if (emailValue.includes('@') && emailValue.includes('.')) {
+    emailInput.style.border = '1px solid green';
+  } else {
+    emailInput.style.border = '1px solid red';
+  }
+}
 // async function deleteData(path=""){
 //     let response = await fetch(BASE_URL + path +".json",{
 //         method: "DELETE",

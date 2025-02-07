@@ -61,7 +61,6 @@ function renderContactsList() {
 
   for (let i = 0; i < contacts.length; i++) {
     let firstLetter = contacts[i].name.charAt(0).toUpperCase();
-
     if (firstLetter !== lastLetter) {
       if (lastLetter !== "") {
         contactsList.innerHTML += `<div class="contacts-list-item-dividing"></div>`;
