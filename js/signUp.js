@@ -58,10 +58,14 @@ function emailValidation() {
 
   if (emailValue.includes('@') && emailValue.includes('.')) {
     emailInput.style.border = '1px solid green';
-  } else {
+  } else if (emailValue) {
     emailInput.style.border = '1px solid red';
+  } else if (emailValue) {
+    emailInput.style.border = '1px solid blue';
   }
 }
+
+
 // async function deleteData(path=""){
 //     let response = await fetch(BASE_URL + path +".json",{
 //         method: "DELETE",
