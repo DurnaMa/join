@@ -174,8 +174,7 @@ function createtTaskBtn() {
     prio: [],
   };
   todos.push(newTask);
-  //window.location.href = "index.html";
-  //goBack()
+  goBack();
 }
 
 function goBack() {

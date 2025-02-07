@@ -6,7 +6,7 @@ function renderAddTaskPoup() {
           <img src="/assets/icons/cancel.png" alt="">
           </button>
       <div class="headlineDiv"><h1>Add Task</h1></div>
-      <form method="post">
+      <form>
         <div class="formParts">
           <section class="formPartLeft">
             <label for="title">Title<span class="required">*</span> </label>
@@ -65,7 +65,7 @@ function renderAddTaskPoup() {
             <button onclick="resetAddTask()" type="reset" class="clearBtn">
               Clear <img src="/assets/icons/cancel.png" alt="" />
             </button>
-            <button onclick="createtTaskBtn()" type="submit" class="button">Create Task <img src="/assets/icons/check.png" alt="" /></button>
+            <button onclick="createtTaskBtn()" class="button">Create Task <img src="/assets/icons/check.png" alt="" /></button>
           </div>
         </div>
       </form>
