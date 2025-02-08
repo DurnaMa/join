@@ -45,7 +45,7 @@ let todos = [
 
 async function initAddTask() {
   await loadDataUsers();
-  contactList();
+  // contactList();
 }
 
 let subTask = document.getElementById("subTask");
@@ -132,30 +132,30 @@ function generateSubTaskList(subTasksIndex) {
 //   assignedTo.disabled = true;
 // }
 
-window.onclick = function (event) {
-  if (!event.target.matches(".assignedTo")) {
-    let dropdowns = document.getElementsByClassName("selecassignedTot");
-    let assignedTOUsserIndex;
-    for (assignedTOUsserIndex = 0; assignedTOUsserIndex < dropdowns.length; assignedTOUsserIndex++) {
-      let openDropdown = dropdowns[assignedTOUsserIndex];
-      if (openDropdown.classList.contains("show")) {
-        openDropdown.classList.remove("show");
-      }
-    }
-  }
-};
+// window.onclick = function (event) {
+//   if (!event.target.matches(".assignedTo")) {
+//     let dropdowns = document.getElementsByClassName("selecassignedTot");
+//     let assignedTOUsserIndex;
+//     for (assignedTOUsserIndex = 0; assignedTOUsserIndex < dropdowns.length; assignedTOUsserIndex++) {
+//       let openDropdown = dropdowns[assignedTOUsserIndex];
+//       if (openDropdown.classList.contains("show")) {
+//         openDropdown.classList.remove("show");
+//       }
+//     }
+//   }
+// };
 
-function contactList() {
-  console.log("triger");
-  let contactList = document.getElementById("contactList");
-  contactList.innerHTML = "";
-  contacts.forEach((contact) => {
-    contactList.innerHTML += `
-      <option class="contact-list-item" onclick="selectContact(${contact.id})">${contact.name}</option>
-    `;
-  });
-  contactList.classList.toggle("show");
-}
+// function contactList() {
+//   console.log("triger");
+//   let contactList = document.getElementById("contactList");
+//   contactList.innerHTML = "";
+//   contacts.forEach((contact) => {
+//     contactList.innerHTML += `
+//       <option class="contact-list-item" onclick="selectContact(${contact.id})">${contact.name}<input type="checkbox" name="" id=""></option>
+//     `;
+//   });
+//   contactList.classList.toggle("show");
+// }
 
 function createtTaskBtn() {
   let title = document.getElementById("titleInput");
