@@ -54,6 +54,7 @@ function renderTasks() {
   todos.forEach((todo) => {
     let column = document.createElement("div");
     column.classList.add("column");
+    column.id = todo.columnTitles;
     column.innerHTML = /*html*/ `
       <div class="task-card" id="${todo.id}" draggable="true" ondragstart="startDragging(event)" ondragover="allowDrop(event)" ondrop="moveTo(event)">
         <h3>${todo.title}</h3>
@@ -64,12 +65,13 @@ function renderTasks() {
   });
 }
 
-function addTaskPlus() {
+function createtTaskPlus(event) {
   let title = document.getElementById("titleInput");
   let description = document.getElementById("descriptionTextarea");
-  //let columnTitles = document.getElementById("columnTitles");
+  let columnTitles = document.getElementById(event.target.id);
   title = titleInput.value;
   description = descriptionTextarea.value;
+  columnTitles = columnTitles.id;
 
   let newTask = {
     id: todos.length + 1,
@@ -123,7 +125,6 @@ function addTaskPopup() {
   let addNewTaskDiv = document.getElementById("addNewTaskDiv");
   addNewTaskDiv.classList.remove("d-none");
   addNewTaskDiv.innerHTML = renderAddTaskPoup();
-  addTaskPlus();
 }
 
 function addTaskPopupPlus() {

@@ -65,7 +65,7 @@ function renderAddTaskPoup() {
             <button onclick="resetAddTask()" type="reset" class="clearBtn">
               Clear <img src="/assets/icons/cancel.png" alt="" />
             </button>
-            <button onclick="createtTaskBtn()" class="button">Create Task <img src="/assets/icons/check.png" alt="" /></button>
+            <button onclick="createtTaskPlus()" class="button">Create Task <img src="/assets/icons/check.png" alt="" /></button>
           </div>
         </div>
       </form>
