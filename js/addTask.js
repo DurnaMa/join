@@ -185,3 +185,12 @@ function goBack() {
     window.location.href = "index.html";
   }
 }
+function toggleCheckbox(event) {
+  if (event.target.type !== "checkbox") {
+    let checkbox = event.currentTarget.querySelector('input[type="checkbox"]');
+    if (checkbox) {
+      checkbox.checked = !checkbox.checked;
+      event.currentTarget.classList.toggle("selectedContact", checkbox.checked);
+    }
+  }
+}

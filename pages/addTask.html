@@ -42,12 +42,42 @@
             ></textarea>
             <br />
             <label for="contactSelection">Assigned to</label>
-            <select class="assignedTo" name="contactList" id="contactList">
-              <option value disabled selected hidden>
-                Select contacts to assign
-              </option>
-              <option value=""></option>
-            </select>
+            <div class="assignedContainer">
+              <span>Select contacts to assign</span>
+              <img
+                id="assignedArrowDown"
+                src="/assets/icons/arrow_drop_down.png"
+                alt=""
+              />
+              <img
+                id="assignedArrowUp"
+                class="d-none"
+                src="/assets/icons/arrow_drop_up.png"
+                alt=""
+              />
+            </div>
+            <div id="assignedContactsList" class="d-none">
+              <div
+                onclick="toggleCheckbox(event)"
+                class="assignedContactContent"
+              >
+                <div class="assignedContacts">
+                  <span class="assignedShortcutName">HA</span>
+                  <span class="assignedName">Hardavan Alaie</span>
+                </div>
+                <input type="checkbox" name="" id="" />
+              </div>
+              <div
+                onclick="toggleCheckbox(event)"
+                class="assignedContactContent"
+              >
+                <div class="assignedContacts">
+                  <span class="assignedShortcutName">DL</span>
+                  <span class="assignedName">Dominique Lieblang</span>
+                </div>
+                <input type="checkbox" name="" id="" />
+              </div>
+            </div>
           </section>
           <hr />
           <section class="formPartRight">
