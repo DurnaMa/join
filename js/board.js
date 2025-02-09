@@ -43,6 +43,7 @@ let todos = [
 
 let currentDraggedElement;
 let currentSelectedTask;
+let currentSelectedColumn;
 
 function initBord() {
   renderTasks();
@@ -65,13 +66,23 @@ function renderTasks() {
   });
 }
 
-function createtTaskPlus(event) {
+function createtTaskPlus() {
   let title = document.getElementById("titleInput");
   let description = document.getElementById("descriptionTextarea");
-  let columnTitles = document.getElementById(event.target.id);
+  let columnTitles = document.getElementById("columnTitles");
   title = titleInput.value;
   description = descriptionTextarea.value;
-  columnTitles = columnTitles.id;
+  columnTitles = columnTitles;
+
+  if (columnTitles === "In Progress") {
+    columnTitles = "In progress";
+  } else if (columnTitles === "Await Feedback") {
+    columnTitles = "Await feedback";
+  } else if (columnTitles === "Done") {
+    columnTitles = "Done";
+  } else {
+    columnTitles = "To do";
+  } 
 
   let newTask = {
     id: todos.length + 1,
@@ -127,10 +138,33 @@ function addTaskPopup() {
   addNewTaskDiv.innerHTML = renderAddTaskPoup();
 }
 
-function addTaskPopupPlus() {
+function addTaskPopupPlus(event, columnTitles) {
   let addNewTaskDiv = document.getElementById("addNewTaskDiv");
   addNewTaskDiv.classList.remove("d-none");
-  addNewTaskDiv.innerHTML = renderAddTaskPoup();
+  addNewTaskDiv.innerHTML = renderAddTaskPoup(event);
+
+  if (id === "ToDoId") {
+    columnTitles = "To do";
+    addNewTaskDiv.innerHTML = renderAddTaskPoup();
+  } else if (id === "InProgressId") {
+    columnTitles = "In progress";
+    addNewTaskDiv.innerHTML = renderAddTaskPoup();
+  } else if (id === "AwaitFeedbackId") {
+    columnTitles = "Await feedback";
+    addNewTaskDiv.innerHTML = renderAddTaskPoup();
+  } 
+
+  ToDoId.addEventListener("click", () => {
+    addNewTaskDiv.innerHTML = renderAddTaskPoup();
+  });
+  InProgressId.addEventListener("click", () => {
+    addNewTaskDiv.innerHTML = renderAddTaskPoup();
+  });
+  AwaitFeedbackId.addEventListener("click", () => {
+    addNewTaskDiv.innerHTML = renderAddTaskPoup();
+  });
+
+  //createtTaskPlus();
 }
 
 function closeAddTaskPopUp() {
