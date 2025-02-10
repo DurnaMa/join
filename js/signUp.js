@@ -1,23 +1,24 @@
 async function init() {
   onloadFunc();
   loadData();
-  postData('', {});
+  postData("", {});
+  await loadDataUsers();
 }
 
 function onloadFunc() {
-  console.log('test');
+  console.log("test");
 }
 
-async function loadData(path = '') {
-  let response = await fetch(BASE_URL + path + '.json');
+async function loadData(path = "") {
+  let response = await fetch(BASE_URL + path + ".json");
   return (responseToJson = await response.json());
 }
 
 async function postData(path, data) {
   let response = await fetch(`${BASE_URL}${path}.json`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
@@ -25,9 +26,12 @@ async function postData(path, data) {
 }
 
 async function toTheRegistration() {
-  let nameInput = document.getElementById('name');
-  let emailInput = document.getElementById('email');
-  let passwordInput = document.getElementById('signupPassword');
+  let array = loadData();
+  let nameInput = document.getElementById("name");
+  let emailInput = document.getElementById("email");
+  let passwordInput = document.getElementById("signupPassword");
+  // const user = contacts.find(
+  //   (contact) => contact.email);
 
   if (nameInput.value && emailInput.value && passwordInput.value) {
     let data = {
@@ -35,36 +39,56 @@ async function toTheRegistration() {
       email: emailInput.value,
       password: passwordInput.value,
     };
-
-    try {
-      await postData('/contacts', data);
-      nameInput.value = '';
-      emailInput.value = '';
-      passwordInput.value = '';
-      console.log('Anmeldung erfolgreich');
-      window.location.href = '/index.html';
-    } catch (error) {
-      console.error('Fehler bei der Anmeldung:', error);
+    if (emailInput.value !== array.email) {
+      try {
+        await postData("/contacts", data);
+        nameInput.value = "";
+        emailInput.value = "";
+        passwordInput.value = "";
+        console.log("Anmeldung erfolgreich");
+        window.location.href = "/index.html";
+      } catch (error) {
+        console.error("Fehler bei der Anmeldung:", error);
+      }
+    } else {
+     // toTheRegistration();
     }
-  } else {
-    console.log('Bitte füllen Sie alle Felder aus');
   }
-  emailValidation();
 }
 
 function emailValidation() {
-  let emailInput = document.getElementById('email');
+  let emailInput = document.getElementById("email");
   let emailValue = emailInput.value;
 
-  if (emailValue.includes('@') && emailValue.includes('.')) {
-    emailInput.style.border = '1px solid green';
+  if (emailValue.includes("@") && emailValue.includes(".")) {
+    emailInput.style.border = "1px solid green";
   } else if (emailValue) {
-    emailInput.style.border = '1px solid red';
+    emailInput.style.border = "1px solid red";
   } else if (emailValue) {
-    emailInput.style.border = '1px solid blue';
+    emailInput.style.border = "1px solid blue";
   }
 }
 
+// async function emailCheck(data) {
+//   let userEmailAdress = contacts.find((contact) => contact.email === email);
+
+//   if (!userEmailAdress === data.email) {
+//     errorDiv.textContent = "die E-Mail ist ist vorhanden.";
+
+//     try {
+//       await postData("/contacts", data);
+//       nameInput.value = "";
+//       emailInput.value = "";
+//       passwordInput.value = "";
+//       console.log("Anmeldung erfolgreich");
+//       window.location.href = "/index.html";
+//     } catch (error) {
+//       console.error("Fehler bei der Anmeldung:", error);
+//     }
+//   } else {
+//     toTheRegistration();
+//   }
+// }
 
 // async function deleteData(path=""){
 //     let response = await fetch(BASE_URL + path +".json",{
