@@ -85,7 +85,7 @@
   gap: 8px;
 }
 
-.contacts-list-item-h3-div {
+.contacts-abbreviation-list-item-div {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -93,7 +93,7 @@
   margin-top: 8px;
 }
 
-.contacts-list-item-h3-div:hover {
+.contacts-abbreviation-list-item-div:hover {
   color: #ffffff;
   background-color: #2a3647;
 }

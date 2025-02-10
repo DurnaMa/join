@@ -20,7 +20,9 @@ function selectContact(index) {
   contactDetails.innerHTML = /*html*/ `
         <div class="contact-details-div-header">
           <div class="contact-details-div-initials">
-            <div class="contacts-abbreviation">${generateInitials(contact.name)}</div>
+            <div class="contacts-abbreviation">${generateInitials(
+              contact.name
+            )}</div>
           </div>
           <div class="contact-name">${contact.name}</div>
           <div class="contact-details-div-name-icons">
@@ -48,26 +50,28 @@ function selectContact(index) {
         `;
 }
 
-/**
- * Renders the list of contacts.
- * @function renderContactsList
- * @returns {void}
- */
 function renderContactsList() {
   let contactsList = document.getElementById("scrollbar");
   contactsList.innerHTML = "";
 
+  // Kontakte alphabetisch sortieren
+  contacts.sort((a, b) => a.name.localeCompare(b.name));
+
+  let lastLetter = "";
+
   for (let i = 0; i < contacts.length; i++) {
+    let firstLetter = contacts[i].name.charAt(0).toUpperCase();
+    if (firstLetter !== lastLetter) {
+      if (lastLetter !== "") {
+        contactsList.innerHTML += `<div class="contacts-list-item-dividing"></div>`;
+      }
+      contactsList.innerHTML += `<div class="contacts-letter-header">${firstLetter}</div>`;
+      lastLetter = firstLetter;
+    }
     contactsList.innerHTML += generateContactsList(i);
   }
 }
 
-/**
- * Generates the HTML for a contact list item.
- * @function generateContactsList
- * @param {number} i - The index of the contact.
- * @returns {string} The HTML string for the contact list item.
- */
 function generateContactsList(i) {
   const initials = generateInitials(contacts[i].name);
   return /*html*/ `
@@ -76,9 +80,11 @@ function generateContactsList(i) {
               <div class="contacts-abbreviation-div">
                 <div class="contacts-abbreviation">${initials}</div>
               </div>
-              <div class="contacts-list-item"><h3>${contacts[i].name}</h3><p>${contacts[i].email}</p></div>
+              <div class="contacts-list-item">
+                <h3>${contacts[i].name}</h3>
+                <p>${contacts[i].email}</p>
+              </div>
             </div>
-            <div class="contacts-list-item-dividing"></div>
           </div>
     `;
 }
@@ -127,6 +133,16 @@ function addNewContact() {
     `;
 }
 
+/**
+ * Displays the edit contact form with the current contact's details.
+ *
+ * This function retrieves the currently selected contact's information
+ * (name, email, and phone) and populates an editable form with these details.
+ * The form allows the user to update or delete the contact.
+ *
+ * @function
+ * @name editContact
+ */
 function editContact() {
   const editContactDiv = document.getElementById("editContactDiv");
   let contact = contacts[currentSelectedContact];
@@ -161,6 +177,15 @@ function closePopUp() {
   document.getElementById("editContactDiv").classList.add("d-none");
 }
 
+/**
+ * Asynchronously saves a new contact by retrieving input values from the DOM,
+ * sending the data to Firebase, and updating the UI accordingly.
+ *
+ * @async
+ * @function saveContact
+ * @returns {Promise<void>} A promise that resolves when the contact is saved and the UI is updated.
+ * @throws Will log an error message if there is an issue with saving the contact.
+ */
 async function saveContact() {
   let name = document.getElementById("newContactName").value;
   let email = document.getElementById("newContactEmail").value;
@@ -189,6 +214,19 @@ async function saveContact() {
   renderContactsList();
 }
 
+/**
+ * Updates the selected contact with new information from the input fields.
+ *
+ * This function retrieves the contact's ID, name, email, and phone number from the input fields,
+ * constructs a data object, and sends it to Firebase to update the contact information.
+ * After updating, it reloads the user data, closes the popup, clears the scrollbar content,
+ * re-renders the contacts list, and re-selects the current contact.
+ *
+ * @async
+ * @function updateContact
+ * @returns {Promise<void>} A promise that resolves when the contact update process is complete.
+ * @throws Will log an error message if the update process fails.
+ */
 async function updateContact() {
   let key = contacts[currentSelectedContact].id;
   console.log(key);
@@ -222,4 +260,5 @@ async function deleteContact(id) {
   await deleteDataFromFirebase(path);
   await loadDataUsers();
   renderContactsList();
+  document.getElementById("contactDetailsDiv").innerHTML = "";
 }

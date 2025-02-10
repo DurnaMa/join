@@ -21,16 +21,22 @@
   <body>
     <include-html src="../templates/header/header.html"></include-html>
     <include-html src="../templates/sidebar/sidebar.html"></include-html>
-    <include-html src="/mobileTemplates/header/headerMobile.html"></include-html>
-    <include-html src="/mobileTemplates/footer/footerMobile.html"></include-html>
+    <include-html
+      src="/mobileTemplates/header/headerMobile.html"
+    ></include-html>
+    <include-html
+      src="/mobileTemplates/footer/footerMobile.html"
+    ></include-html>
     <div class="summaryContainer">
       <div class="summaryHeadline">
         <h1>Join 407</h1>
-        <hr class="headlineHr" />
-        <h2>Key Metrics at a Glance</h2>
+        <div class="mobileHeader">
+          <hr class="headlineHr" />
+          <h2>Key Metrics at a Glance</h2>
+        </div>
       </div>
       <div class="summaryOverview">
-        <div class="overview">
+        <div class="overviewContent">
           <div class="summaryMediumContent">
             <a class="mediumBox pencil" href="/pages/bord.html">
               <img
