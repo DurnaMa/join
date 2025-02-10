@@ -11,7 +11,7 @@
     <script defer src="/script.js"></script>
     <title>Join</title>
   </head>
-  <body>
+  <body onload="singUpInit()">
     <div class="headerLogo">
       <img src="/assets/img/logodunkel.png" alt="" />
     </div>
@@ -36,12 +36,13 @@
           </div>
           <div id="passwordError" class="signUpPasswordError"></div>
           <div class="checkboxSignUp">
-            <input id="" type="checkbox" name="checkboxPrivacyPolicy" />
+            <input id="checkboxSingUp" type="checkbox" name="checkboxPrivacyPolicy" />
             <label for=""
               >I accept the
               <a href="/pages/data-protection.html">Privacy Policy</a>
             </label>
-          </div>
+          </div> 
+          <div id="signUpError"></div>
         </div>
         <div class="signUpButton">
           <button onclick="toTheRegistration()" id="" class="button" type="submit">Sign up</button>

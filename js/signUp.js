@@ -1,4 +1,4 @@
-async function init() {
+async function singUpInit() {
   onloadFunc();
   loadData();
   postData("", {});
@@ -26,33 +26,37 @@ async function postData(path, data) {
 }
 
 async function toTheRegistration() {
-  let array = loadData();
   let nameInput = document.getElementById("name");
   let emailInput = document.getElementById("email");
   let passwordInput = document.getElementById("signupPassword");
-  // const user = contacts.find(
-  //   (contact) => contact.email);
+  const checkbox = document.getElementById("checkboxSingUp");
+  const errorDiv = document.getElementById("signUpError");
 
-  if (nameInput.value && emailInput.value && passwordInput.value) {
+  if (!checkbox.checked) {
+    errorDiv.textContent =
+      "accept the Privacy policy";
+    errorDiv.style.color = "red";
+    return false;
+  }
+
+  if (nameInput.value && emailInput.value && passwordInput.value && emailInput.value != contacts) {
     let data = {
       name: nameInput.value,
       email: emailInput.value,
       password: passwordInput.value,
     };
-    if (emailInput.value !== array.email) {
-      try {
-        await postData("/contacts", data);
-        nameInput.value = "";
-        emailInput.value = "";
-        passwordInput.value = "";
-        console.log("Anmeldung erfolgreich");
-        window.location.href = "/index.html";
-      } catch (error) {
-        console.error("Fehler bei der Anmeldung:", error);
-      }
-    } else {
-     // toTheRegistration();
+    try {
+      await postData("/contacts", data);
+      nameInput.value = "";
+      emailInput.value = "";
+      passwordInput.value = "";
+      console.log("Anmeldung erfolgreich");
+      window.location.href = "/index.html";
+    } catch (error) {
+      console.error("Fehler bei der Anmeldung:", error);
     }
+  } else {
+    console.log("Fehler bei der Anmeldung:", error);
   }
 }
 
