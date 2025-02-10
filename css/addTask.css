@@ -70,7 +70,8 @@ label {
 
 input,
 textarea,
-.assignedTo {
+.assignedContainer,
+select {
   height: 48px;
   border: 1px solid #d1d1d1;
   line-height: 24px;
@@ -81,7 +82,9 @@ textarea,
 
 input:focus,
 textarea:focus,
-.assignedTo:focus {
+.assignedContainer:focus,
+.assignedContainer:hover,
+select:focus {
   outline: none !important;
   border: 1px solid #29abe2;
 }
@@ -90,7 +93,8 @@ label,
 input,
 textarea,
 button,
-.assignedTo {
+.assignedContainer,
+select {
   font-size: 20px;
   cursor: pointer;
 }
@@ -99,7 +103,7 @@ button,
   color: #d1d1d1;
 }
 
-input[type='date']::-webkit-calendar-picker-indicator {
+input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
   position: absolute;
   right: 10px;
@@ -240,7 +244,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .clearBtn:hover img {
-  filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg) brightness(100%) contrast(100%);
+  filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg)
+    brightness(100%) contrast(100%);
 }
 
 .button {
@@ -323,4 +328,54 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 .show {
   display: block;
+}
+
+.assignedContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  cursor: pointer;
+  background-color: white;
+  margin-bottom: -8px;
+}
+
+#assignedContactsList {
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.assignedContacts {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.assignedContacts span {
+  font-size: 20px;
+}
+
+input[type="checkbox"] {
+  width: 17px;
+}
+
+.assignedShortcutName {
+  display: flex;
+  width: 42px;
+  height: 42px;
+  border-radius: 45px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #ff7a00;
+}
+
+.assignedContactContent {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px 0px 20px;
+  padding-bottom: 14px;
+  width: 100%;
+  cursor: pointer;
 }
