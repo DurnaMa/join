@@ -118,7 +118,8 @@ input:focus {
 }
 
 .signUpEmailError,
-.signUpPasswordError {
+.signUpPasswordError,
+.signUpCheckboxError {
   display: flex;
   justify-content: center;
   color: red;

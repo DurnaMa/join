@@ -279,3 +279,27 @@ input:focus {
   text-align: left;
   color: #29abe2;
 }
+
+@media screen and (max-width: 680px) {
+  .logInContainer {
+   width: 85%;
+  }
+
+  .signUpButtonContainer{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .buttonLogin {
+   flex-direction: column;
+   padding: 0px 40px 0px 40px;
+   gap: 18px;
+  }
+
+  .button,
+  .guestButton {
+    justify-content: center;
+    font-size: 16px;
+  }
+}
