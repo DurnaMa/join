@@ -43,7 +43,7 @@ let todos = [
 
 let currentDraggedElement;
 let currentSelectedTask;
-let currentSelectedColumn;
+let currentSelectedColumn = "";
 
 function initBord() {
   renderTasks();
@@ -67,6 +67,7 @@ function renderTasks() {
 }
 
 function createtTaskPlus() {
+  let currentSelectedColumn = document.getElementById("columnTitles");
   let title = document.getElementById("titleInput");
   let description = document.getElementById("descriptionTextarea");
   let columnTitles = document.getElementById("columnTitles");
@@ -74,12 +75,10 @@ function createtTaskPlus() {
   description = descriptionTextarea.value;
   columnTitles = columnTitles;
 
-  if (columnTitles === "In Progress") {
+  if (currentSelectedColumn === "In Progress") {
     columnTitles = "In progress";
-  } else if (columnTitles === "Await Feedback") {
+  } else if (currentSelectedColumn === "Await Feedback") {
     columnTitles = "Await feedback";
-  } else if (columnTitles === "Done") {
-    columnTitles = "Done";
   } else {
     columnTitles = "To do";
   } 
@@ -138,23 +137,27 @@ function addTaskPopup() {
   addNewTaskDiv.innerHTML = renderAddTaskPoup();
 }
 
-function addTaskPopupPlus(event, columnTitles) {
+function addTaskPopupPlus(event) {
+  let columnTitles
+  let ToDoId = document.getElementById("ToDoId");
+  let InProgressId = document.getElementById("InProgressId");
+  let AwaitFeedbackId = document.getElementById("AwaitFeedbackId");
   let addNewTaskDiv = document.getElementById("addNewTaskDiv");
   addNewTaskDiv.classList.remove("d-none");
   addNewTaskDiv.innerHTML = renderAddTaskPoup(event);
 
-  if (id === "ToDoId") {
+  if (id === ToDoId) {
     columnTitles = "To do";
     addNewTaskDiv.innerHTML = renderAddTaskPoup();
-  } else if (id === "InProgressId") {
+  } else if (id === InProgressId) {
     columnTitles = "In progress";
     addNewTaskDiv.innerHTML = renderAddTaskPoup();
-  } else if (id === "AwaitFeedbackId") {
+  } else if (id === AwaitFeedbackId) {
     columnTitles = "Await feedback";
     addNewTaskDiv.innerHTML = renderAddTaskPoup();
   } 
 
-  ToDoId.addEventListener("click", () => {
+  /*ToDoId.addEventListener("click", () => {
     addNewTaskDiv.innerHTML = renderAddTaskPoup();
   });
   InProgressId.addEventListener("click", () => {
@@ -162,7 +165,7 @@ function addTaskPopupPlus(event, columnTitles) {
   });
   AwaitFeedbackId.addEventListener("click", () => {
     addNewTaskDiv.innerHTML = renderAddTaskPoup();
-  });
+  });*/
 
   //createtTaskPlus();
 }
