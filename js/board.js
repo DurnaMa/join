@@ -137,16 +137,50 @@ function addTaskPopup() {
   addNewTaskDiv.innerHTML = renderAddTaskPoup();
 }
 
-function addTaskPopupPlus(event) {
-  let columnTitles
-  let ToDoId = document.getElementById("ToDoId");
+function addTaskPopupPlus() {
+
+  let addNewTaskDiv = document.getElementById("addNewTaskDiv");
+  addNewTaskDiv.classList.remove("d-none");
+  addNewTaskDiv.innerHTML = renderAddTaskPoup();
+
+  //let currentSelectedColumn = document.getElementById("columnTitles");
+  //currentSelectedColumn.innerHTML = "";
+
+
+  if (currentSelectedColumn === "In Progress") {
+    currentSelectedColumn = "In progress";
+  } else if (currentSelectedColumn === "Await Feedback") {
+    currentSelectedColumn = "Await feedback";    
+  } else {
+    currentSelectedColumn = "To do";
+  }
+
+
+  //let todo = todos;
+  //let columnTitles = "";
+  
+  /*let ToDoId = document.getElementById("ToDoId");
   let InProgressId = document.getElementById("InProgressId");
   let AwaitFeedbackId = document.getElementById("AwaitFeedbackId");
   let addNewTaskDiv = document.getElementById("addNewTaskDiv");
   addNewTaskDiv.classList.remove("d-none");
-  addNewTaskDiv.innerHTML = renderAddTaskPoup(event);
+  addNewTaskDiv.innerHTML = renderAddTaskPoup(event);*/
 
-  if (id === ToDoId) {
+
+  /*if (ToDoId) {
+    columnTitles = "To do";
+    addNewTaskDiv.innerHTML = renderAddTaskPoup();
+  } else if (InProgressId) {
+    columnTitles = "In progress";
+    addNewTaskDiv.innerHTML = renderAddTaskPoup();
+  } else if (AwaitFeedbackId) {
+    columnTitles = "Await feedback";
+    addNewTaskDiv.innerHTML = renderAddTaskPoup();
+  }*/
+
+  
+
+  /*if (id === ToDoId) {
     columnTitles = "To do";
     addNewTaskDiv.innerHTML = renderAddTaskPoup();
   } else if (id === InProgressId) {
@@ -155,7 +189,7 @@ function addTaskPopupPlus(event) {
   } else if (id === AwaitFeedbackId) {
     columnTitles = "Await feedback";
     addNewTaskDiv.innerHTML = renderAddTaskPoup();
-  } 
+  } */
 
   /*ToDoId.addEventListener("click", () => {
     addNewTaskDiv.innerHTML = renderAddTaskPoup();
@@ -168,6 +202,38 @@ function addTaskPopupPlus(event) {
   });*/
 
   //createtTaskPlus();
+
+
+}
+
+function renderAddTaskPoupPlus() {
+  return /*html*/ `
+    <div class="addNewTaskDiv" id="addNewTaskDiv">
+      <div class="addNewTaskDivHeader">
+        <h2 class="addNewTaskDivHeaderH2">Add new task</h2>
+        <button type="button" class="btn-close" aria-label="Close" onclick="closeAddTaskPopUp()"></button>
+      </div>
+      <div class="addNewTaskDivContent">
+        <div class="addNewTaskDivContentLeft">
+          <label for="titleInput" class="addNewTaskDivContentLeftLabel">Title</label>
+          <input type="text" id="titleInput" class="addNewTaskDivContentLeftInput">
+          <label for="descriptionTextarea" class="addNewTaskDivContentLeftLabel">Description</label>
+          <textarea id="descriptionTextarea" class="addNewTaskDivContentLeftInput"></textarea>
+        </div>
+        <div class="addNewTaskDivContentRight">
+          <label for="columnTitles" class="addNewTaskDivContentRightLabel">Column</label>
+          <select id="columnTitles" class="addNewTaskDivContentRightSelect">
+            <option value="To Do">To Do</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Await Feedback">Await Feedback</option>                                                            
+          </select>
+        </div>
+      </div>
+      <div class="addNewTaskDivFooter">
+        <button type="button" class="addNewTaskDivFooterBtn" onclick="createtTaskPlus()">Create task</button>
+      </div>
+    </div>
+  `;
 }
 
 function closeAddTaskPopUp() {
