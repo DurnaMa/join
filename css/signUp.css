@@ -209,3 +209,50 @@ input:focus {
   text-align: left;
   color: #29abe2;
 }
+
+@media screen and (max-width: 680px) {
+  .signUpContainer {
+    width: 85%;
+    padding: 15px 0;
+  }
+
+  .signUpArrowLink {
+    margin-right: 423px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .signUpArrowLink {
+    margin-right: 350px;
+  }
+
+  h1 {
+    font-size: 50px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .signUpArrowLink {
+    margin-right: 300px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .signUpArrowLink {
+    margin-right: 215px;
+  }
+  h1 {
+    font-size: 40px;
+  }
+  .email,
+  .password,
+  .name {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  hr {
+    border: 1px solid #29abe2;
+    width: 110px;
+  }
+}
