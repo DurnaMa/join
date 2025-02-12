@@ -46,7 +46,20 @@
           <h2 class="column-titles-h2">Await feedback<button class="add-column" id="awaitFeedbackId" onclick="addTaskPopupPlus()"><img src="/assets/icons/plusblack.png" alt=""></button></h2>
           <h2 class="column-titles-h2">Done</h2>
         </div>
-        <div class="column-container" id="columnContainer"></div>
+        <div class="column-container" id="columnContainer">
+          <div class="columns">
+            <div class="column" id="todo" ondrop="drop(event)" ondragover="allowDrop(event); highlight('todo')" ondragleave="removeHighlight('todo')">
+                <div class="task" draggable="true" ondragstart="drag(event)" id="task1">Task 1</div>
+            </div>
+            <div class="column" id="inprogress" ondrop="drop(event)" ondragover="allowDrop(event); highlight('inprogress')" ondragleave="removeHighlight('inprogress')">
+              <div class="task" draggable="true" ondragstart="drag(event)" id="task2">Task 2</div>
+            </div>
+            <div class="column" id="awaitfeedback" ondrop="drop(event)" ondragover="allowDrop(event); highlight('awaitfeedback')" ondragleave="removeHighlight('awaitfeedback')">
+            </div>
+            <div class="column" id="done" ondrop="drop(event)" ondragover="allowDrop(event); highlight('done')" ondragleave="removeHighlight('done')">
+            </div>
+        </div>
+        </div>
       </div>
     </div>
   </body>
