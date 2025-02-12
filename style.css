@@ -17,6 +17,10 @@ h1 {
   display: none !important;
 }
 
+.d-flex {
+  display: flex;
+}
+
 body {
   margin: 0;
   background-color: #f6f7f8;

@@ -14,7 +14,7 @@
     <script defer src="/script.js"></script>
     <script defer src="/js/addTask.js"></script>
     <script defer src="/js/header.js"></script>
-    <!-- <script src="/js/contacts.js"></script> -->
+    <script src="/js/contacts.js"></script>
     <title>Add Task</title>
   </head>
   <body onload="initAddTask()">
@@ -42,7 +42,7 @@
             ></textarea>
             <br />
             <label for="contactSelection">Assigned to</label>
-            <div class="assignedContainer">
+            <div onclick="contactList()" class="assignedContainer">
               <span>Select contacts to assign</span>
               <img
                 id="assignedArrowDown"
@@ -56,28 +56,7 @@
                 alt=""
               />
             </div>
-            <div id="assignedContactsList" class="d-none">
-              <div
-                onclick="toggleCheckbox(event)"
-                class="assignedContactContent"
-              >
-                <div class="assignedContacts">
-                  <span class="assignedShortcutName">HA</span>
-                  <span class="assignedName">Hardavan Alaie</span>
-                </div>
-                <input type="checkbox" name="" id="" />
-              </div>
-              <div
-                onclick="toggleCheckbox(event)"
-                class="assignedContactContent"
-              >
-                <div class="assignedContacts">
-                  <span class="assignedShortcutName">DL</span>
-                  <span class="assignedName">Dominique Lieblang</span>
-                </div>
-                <input type="checkbox" name="" id="" />
-              </div>
-            </div>
+            <div id="assignedContactsList" class="d-flex"></div>
           </section>
           <hr />
           <section class="formPartRight">

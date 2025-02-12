@@ -1,7 +1,7 @@
 async function singUpInit() {
-  onloadFunc();
-  loadData();
-  postData("", {});
+  // onloadFunc();
+  // loadData();
+  // postData("", {});
   await loadDataUsers();
 }
 
@@ -30,23 +30,44 @@ async function toTheRegistration() {
   let emailInput = document.getElementById("email");
   let passwordInput = document.getElementById("signupPassword");
   const checkbox = document.getElementById("checkboxSingUp");
-  const errorDiv = document.getElementById("signUpError");
+  const errorDiv = document.getElementById("emailError");
+  const passwordErrorDiv = document.getElementById("passwordError");
+  const checkboxErrorDiv = document.getElementById("checkboxError");
+
+  // Fehler-Reset
+  errorDiv.textContent = "";
+  passwordErrorDiv.textContent = "";
+  checkboxErrorDiv.textContent = "";
 
   if (!checkbox.checked) {
-    errorDiv.textContent =
-      "accept the Privacy policy";
-    errorDiv.style.color = "red";
+    checkboxErrorDiv.textContent = "Accept the Privacy Policy";
+    checkboxErrorDiv.style.color = "red";
     return false;
   }
 
-  if (nameInput.value && emailInput.value && passwordInput.value && emailInput.value != contacts) {
-    let data = {
-      name: nameInput.value,
-      email: emailInput.value,
-      password: passwordInput.value,
-    };
+  if (nameInput.value && emailInput.value && passwordInput.value) {
     try {
-      await postData("/contacts", data);
+      await loadContacts();
+      // Prüfen, ob die E-Mail bereits existiert
+      let emailExists = contacts.find(
+        (contact) => contact.email === emailInput.value
+      );
+      if (emailExists) {
+        errorDiv.textContent = "Email already exists";
+        return false;
+      }
+      // Neue Registrierung, wenn E-Mail nicht existiert
+      let data = {
+        name: nameInput.value,
+        email: emailInput.value,
+        password: passwordInput.value,
+      };
+      let result = await postData("/contacts", data);
+      // Falls der Server eine ID zurückgibt, speichern wir den User
+      if (result && result.name) {
+        contacts.push(data); // Fügt den neuen User zur `contacts`-Liste hinzu
+      }
+      // Eingabefelder zurücksetzen
       nameInput.value = "";
       emailInput.value = "";
       passwordInput.value = "";
@@ -54,11 +75,48 @@ async function toTheRegistration() {
       window.location.href = "/index.html";
     } catch (error) {
       console.error("Fehler bei der Anmeldung:", error);
+      errorDiv.textContent = "Registration failed. Please try again.";
     }
   } else {
-    console.log("Fehler bei der Anmeldung:", error);
+    errorDiv.textContent = "Please fill in all fields";
   }
 }
+
+//Unser Code!!!!!!
+// async function toTheRegistration() {
+//   let nameInput = document.getElementById("name");
+//   let emailInput = document.getElementById("email");
+//   let passwordInput = document.getElementById("signupPassword");
+//   const checkbox = document.getElementById("checkboxSingUp");
+//   const errorDiv = document.getElementById("signUpError");
+
+//   if (!checkbox.checked) {
+//     errorDiv.textContent =
+//       "accept the Privacy policy";
+//     errorDiv.style.color = "red";
+//     return false;
+//   }
+
+//   if (nameInput.value && emailInput.value && passwordInput.value && emailInput.value != contacts) {
+//     let data = {
+//       name: nameInput.value,
+//       email: emailInput.value,
+//       password: passwordInput.value,
+//     };
+//     try {
+//       await postData("/contacts", data);
+//       nameInput.value = "";
+//       emailInput.value = "";
+//       passwordInput.value = "";
+//       console.log("Anmeldung erfolgreich");
+//       window.location.href = "/index.html";
+//     } catch (error) {
+//       console.error("Fehler bei der Anmeldung:", error);
+//     }
+//   } else {
+//     console.log("Fehler bei der Anmeldung:", error);
+//   }
+// }
 
 function emailValidation() {
   let emailInput = document.getElementById("email");

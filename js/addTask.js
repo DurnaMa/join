@@ -41,11 +41,9 @@ let todos = [
   },
 ];
 
-
-
 async function initAddTask() {
   await loadDataUsers();
-  // contactList();
+  contactList();
 }
 
 let subTask = document.getElementById("subTask");
@@ -125,12 +123,25 @@ function generateSubTaskList(subTasksIndex) {
   `;
 }
 
-// async function assignedTOUsser() {
-//   let user = await loadDataUsers();
-//   let assignedTo = document.getElementById("contactList").classList.toggle("show");
-//   assignedTo.value = user.name;
-//   assignedTo.disabled = true;
-// }
+function contactList() {
+  console.log("triger");
+  let contactList = document.getElementById("assignedContactsList");
+  contactList.innerHTML = "";
+  contacts.forEach((contact) => {
+    const  initials = generateInitials(contact.name);
+    contactList.innerHTML += /*html*/ `
+      <div class="assignedContactContent" onclick="toggleCheckbox(event)">
+        <div class="assignedContacts">
+          <span class="assignedShortcutName">${initials}</span>
+          <span class="assignedName">${contact.name}</span>
+        </div>
+        <input type="checkbox" name="contact-${contact.id}" id="contact-${contact.id}">
+      </div>
+    `;
+  });
+  contactList.classList.toggle("hidden");
+  contactList.classList.toggle("d-flex");
+}
 
 // window.onclick = function (event) {
 //   if (!event.target.matches(".assignedTo")) {
@@ -145,16 +156,11 @@ function generateSubTaskList(subTasksIndex) {
 //   }
 // };
 
-// function contactList() {
-//   console.log("triger");
-//   let contactList = document.getElementById("contactList");
-//   contactList.innerHTML = "";
-//   contacts.forEach((contact) => {
-//     contactList.innerHTML += `
-//       <option class="contact-list-item" onclick="selectContact(${contact.id})">${contact.name}<input type="checkbox" name="" id=""></option>
-//     `;
-//   });
-//   contactList.classList.toggle("show");
+// async function assignedTOUsser() {
+//   let user = await loadDataUsers();
+//   let assignedTo = document.getElementById("assignedContactsList").classList.toggle("show");
+//   assignedTo.value = user.name;
+//   assignedTo.disabled = true;
 // }
 
 function createtTaskBtn() {
