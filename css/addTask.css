@@ -379,3 +379,7 @@ input[type="checkbox"] {
   width: 100%;
   cursor: pointer;
 }
+
+.d-none {
+  display: none;
+}
