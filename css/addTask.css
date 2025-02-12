@@ -342,8 +342,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 #assignedContactsList {
   flex-direction: column;
+  gap: 8px;
   border-radius: 10px;
   background-color: white;
+  max-height: 165px;
+  overflow: auto;
 }
 
 .assignedContacts {
@@ -375,11 +378,10 @@ input[type="checkbox"] {
   display: flex;
   justify-content: space-between;
   padding: 0px 20px 0px 20px;
-  padding-bottom: 14px;
   width: 100%;
   cursor: pointer;
 }
 
-.d-none {
-  display: none;
+.assignedContactContent:hover {
+  background-color: #eeeeee;
 }

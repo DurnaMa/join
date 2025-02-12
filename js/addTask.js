@@ -139,7 +139,8 @@ function contactList() {
       </div>
     `;
   });
-  contactList.classList.toggle("d-none");
+  contactList.classList.toggle("hidden");
+  contactList.classList.toggle("d-flex");
 }
 
 // window.onclick = function (event) {
