@@ -112,24 +112,85 @@ function generateInitials(name) {
 function addNewContact() {
   const addNewContactDiv = document.getElementById("addNewContactDiv");
   addNewContactDiv.classList.remove("d-none");
-  addNewContactDiv.innerHTML = /*html*/ `
-        <div class="add-edit-popup-contact-div">
-          <button onclick="closePopUp()">
-          <img src="/assets/icons/cancel.png" alt="">
+  addNewContactDiv.innerHTML = /*html*/ `<div class="shadow-div d-none"></div>
+  <div class="add-edit-popup-contact-div">
+    <div class="popup-left">
+      <img src="/assets/img/logohell.png" alt="" />
+      <h1>Add contact</h1>
+      <span>Tasks are better with a team!</span>
+      <hr />
+    </div>
+    <div class="popup-right">
+      <div>
+        <img src="/assets/img/profileIMG.png" alt="" />
+      </div>
+      <div>
+        <img
+          class="popup-close-img"
+          onclick="closePopUp()"
+          src="/assets/icons/close.png"
+          alt=""
+        />
+      </div>
+      <div>
+        <form>
+          <input
+            class="name"
+            type="text"
+            id="newContactName"
+            placeholder="Name"
+          />
+          <input
+            class="email"
+            type="text"
+            id="newContactEmail"
+            placeholder="Email"
+          />
+          <input
+            class="phone"
+            type="text"
+            id="newContactPhone"
+            placeholder="Phone"
+          />
+        </form>
+        <div class="popup-buttons">
+          <button class="cancel-button" onclick="closePopUp()">
+            Cancel <img src="/assets/icons/cancel.png" alt="" />
           </button>
-          <div class="contacts-seid-left">
-          <div class="add-new-contact-h3-div">
+          <button class="create-button" onclick="saveContact()">
+            Create contact <img src="/assets/icons/check.png" alt="" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+        <!-- <div class="add-edit-popup-contact-div">
+          <div>
+            <img src="" alt="">
+            <h1></h1>
+            <span></span>
+            <hr>
+          </div>
+          <div>
+            <button onclick="closePopUp()">
+              <img src="/assets/icons/cancel.png" alt="">
+            </button>
+            <div class="contacts-seid-left">
+            <div class="add-new-contact-h3-div">
             <h3>Add new contact</h3>
-          </div>
-          </div>
-          <div class="add-new-contact-form">
+            </div>
+            </div>
+            <div class="add-new-contact-form">
             <input class="name" type="text" id="newContactName" placeholder="Name">
             <input class="email" type="text" id="newContactEmail" placeholder="Email" />
             <input class="phone" type="text" id="newContactPhone" placeholder="Phone" />
             <button class="add-new-contact-btn" onclick="closePopUp()">Cancel</button>
             <button class="add-new-contact-btn" onclick="saveContact()">Create contact</button>
           </div>
-        </div>
+          </div>
+          
+        </div> -->
     `;
 }
 
