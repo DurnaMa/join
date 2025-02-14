@@ -46,9 +46,9 @@ let currentSelectedTask;
 let currentSelectedColumn = "";
 
 function initBord() {
-  updateTasks();
-  //updateTasksTodo();
-  //updateTasksProgress();
+  //updateTasks();
+  updateTasksTodo();
+  updateTasksProgress();
 }
 
 
@@ -248,6 +248,11 @@ function removeHighlight(id) {
 
 function startDragging(element) {
   currentDraggedElement = element.target;
+}
+
+function moveTo(columnTitles) {
+  todos[currentDraggedElement]['columnTitles'] = columnTitles;
+  updateTasks();
 }
 
 function createtTaskPlusTodo() {
