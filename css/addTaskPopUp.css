@@ -1,0 +1,16 @@
+.task-added-popup {
+  display: flex;
+  position: absolute;
+  gap: 32px;
+  top: 50%;
+  left: 30%;
+  background-color: #2a3647;
+  height: 74px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  font-size: 21px;
+  width: 326px;
+}
