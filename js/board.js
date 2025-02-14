@@ -315,10 +315,10 @@ function startDragging(id) {
 }
 
 
-function moveTo(columnTitles) {
+/*function moveTo(columnTitles) {
   todos[currentDraggedElement]['columnTitles'] = columnTitles;
   updateTasks();
-}
+}*/
 
 function createtTaskPlusTodo() {
   let title = document.getElementById("titleInput");
