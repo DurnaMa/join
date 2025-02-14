@@ -39,31 +39,64 @@ let todos = [
     users: [],
     prio: [],
   },
+  {
+  id: 5,
+  'columnTitles': "In progress",
+  category: "User story",
+  title: "Task 5",
+  description: "Task 5 description",
+  subtasks: [],
+  users: [],
+  prio: [],
+}
 ];
 
 let currentDraggedElement;
 let currentSelectedTask;
 let currentSelectedColumn = "";
 
+
 function initBord() {
+  renderTasks();
   //updateTasks();
-  updateTasksTodo();
-  updateTasksProgress();
+  //updateTasksTodo();
+  //updateTasksProgress();
 }
 
+function renderTasks() {
+  for (let index = 0; index < todos.length; index++) {
+    const element = todos[index];
 
-async function updateTasks() {
+    if (element.columnTitles == "To do") {
+      generateTaskCardTodo(element);
+    }
+
+    if (element.columnTitles == "In progress") {
+      generateTaskCardProgress(element);
+    }
+
+    if (element.columnTitles == "Await feedback") {
+      generateTaskCardAwaitFeedback(element);
+    }
+
+    if (element.columnTitles == "Done") {
+      generateTaskCardDone(element);
+    }
+  }
+}
+
+/*async function updateTasks() {
   let toDo = todos.filter(t => t['columnTitles'] == "To do");
   let inProgress = todos.filter(t => t['columnTitles'] == "In progress");
   let awaitFeedback = todos.filter(t => t['columnTitles'] == "Await feedback");
   let done = todos.filter(t => t['columnTitles'] == "Done");
+*/
+  //document.getElementById("todo").innerHTML = '';
+  //document.getElementById("inprogress").innerHTML = '';
+  //document.getElementById("awaitfeedback").innerHTML = '';
+  //document.getElementById("done").innerHTML = '';
 
-  document.getElementById("todo").innerHTML = '';
-  document.getElementById("inprogress").innerHTML = '';
-  document.getElementById("awaitfeedback").innerHTML = '';
-  document.getElementById("done").innerHTML = '';
-
-  for (let index = 0; index < toDo.length; index++) {
+  /*for (let index = 0; index < toDo.length; index++) {
     const element = toDo[index];
     document.getElementById('todo').innerHTML += generateTaskCardTodo(element);
   }
@@ -81,7 +114,7 @@ async function updateTasks() {
   for (let index = 0; index < done.length; index++) {
     const element = done[index];
     document.getElementById('done').innerHTML += generateTaskCardDone(element);
-  }
+  }*/
 
   /*for (let index = 0; index < todos.length; index++) {
     const element = todos[index];
@@ -102,13 +135,13 @@ async function updateTasks() {
       document.getElementById('done').innerHTML += generateTaskCardDone(element);
     }
 
-}*/
-    }
+  }*/
+//}
 
-  function updateTasksTodo() {
+  /*function updateTasksTodo() {
     let toDo = todos.filter(t => t['columnTitles'] == "To do");
   
-    document.getElementById("todo").innerHTML = '';
+    //document.getElementById("todo").innerHTML = '';
   
     for (let index = 0; index < toDo.length; index++) {
       const element = toDo[index];
@@ -119,46 +152,45 @@ async function updateTasks() {
   function updateTasksProgress() {
     let inProgress = todos.filter(t => t['columnTitles'] == "In progress");
   
-    document.getElementById("inprogress").innerHTML = '';
+    //document.getElementById("inprogress").innerHTML = '';
   
     for (let index = 0; index < inProgress.length; index++) {
       const element = inProgress[index];
       document.getElementById('inprogress').innerHTML += generateTaskCardProgress(element);
     }
-  }
+  }*/
 
   function generateTaskCardTodo(element) {
-    let columnContainer = document.getElementById("columnContainer");
-    columnContainer.innerHTML = "";
+    let taskCardDiv = document.getElementById("todo");
+    //columnContainer.innerHTML = "";
 
     let column = document.createElement("div");
     column.classList.add("column");
-    column.id = element.columnTitles;
+    //column.id = element.columnTitles;
     column.innerHTML = /*html*/ `
-      <div class="task-card" id="${element.id}" draggable="true" ondragstart="drag(element) startDragging(element)">
+      <div class="task-card" id="${element.id}" draggable="true" ondragstart="drag(element) startDragging(${element['id']})">
         <h3>${element.title}</h3>
         <p>${element.description}</p>
       </div>
     `;
-    columnContainer.appendChild(column);
+    taskCardDiv.appendChild(column);
   }
 
   function generateTaskCardProgress(element) {
-    let columnContainer = document.getElementById("columnContainer");
-    columnContainer.innerHTML = "";
+    let taskCardDiv = document.getElementById("inprogress");
+    //columnContainer.innerHTML = "";
 
     let column = document.createElement("div");
     column.classList.add("column");
     column.id = element.columnTitles;
     column.innerHTML = /*html*/ `
-      <div class="task-card" id="${element.id}" draggable="true" ondragstart="drag(element) startDragging(element)">
+      <div class="task-card" id="${element.id}" draggable="true" ondragstart="drag(element) startDragging(${element['id']})">
         <h3>${element.title}</h3>
         <p>${element.description}</p>
       </div>
     `;
-    columnContainer.appendChild(column);
-  
-  
+    taskCardDiv.appendChild(column);
+
     /*todos.forEach((todo) => {
       let column = document.createElement("div");
       column.classList.add("column");
@@ -169,8 +201,40 @@ async function updateTasks() {
           <p>${todo.description}</p>
         </div>
       `;
-      columnContainer.appendChild(column);
+      taskCardDiv.appendChild(column);
     });*/
+  }
+
+  function generateTaskCardAwaitFeedback(element) {
+    let taskCardDiv = document.getElementById("awaitfeedback");
+    //columnContainer.innerHTML = "";
+
+    let column = document.createElement("div");
+    column.classList.add("column");
+    column.id = element.columnTitles;
+    column.innerHTML = /*html*/ `
+      <div class="task-card" id="${element.id}" draggable="true" ondragstart="drag(element) startDragging(${element['id']})">
+        <h3>${element.title}</h3>
+        <p>${element.description}</p>
+      </div>
+    `;
+    taskCardDiv.appendChild(column);
+  }
+
+  function generateTaskCardDone(element) {
+    let taskCardDiv = document.getElementById("done");
+    //columnContainer.innerHTML = "";
+
+    let column = document.createElement("div");
+    column.classList.add("column");
+    column.id = element.columnTitles;
+    column.innerHTML = /*html*/ `
+      <div class="task-card" id="${element.id}" draggable="true" ondragstart="drag(element) startDragging(${element['id']})">
+        <h3>${element.title}</h3>
+        <p>${element.description}</p>
+      </div>
+    `;
+    taskCardDiv.appendChild(column);
   }
 
 /*function updateTasks() {
@@ -233,8 +297,8 @@ function drag(element) {
 function drop(element) {
   element.preventDefault();
   let data = element.dataTransfer.getData("text");
-  let task = document.getElementById(data);
-  element.target.appendChild(task);
+  //let task = document.getElementById(data);
+  //element.target.appendChild(task);
 }
 
 function highlight(id) {
@@ -246,9 +310,10 @@ function removeHighlight(id) {
 }
 
 
-function startDragging(element) {
-  currentDraggedElement = element.target;
+function startDragging(id) {
+  currentDraggedElement = id;
 }
+
 
 function moveTo(columnTitles) {
   todos[currentDraggedElement]['columnTitles'] = columnTitles;
