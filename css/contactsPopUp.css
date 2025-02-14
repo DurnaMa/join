@@ -142,3 +142,19 @@ input:focus {
   background-color: #29abe2;
   box-shadow: 0px 4px 4px 0px #00000040;
 }
+
+.succesfull-popup {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  background-color: #2a3647;
+  height: 74px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  font-size: 21px;
+  width: 326px;
+}

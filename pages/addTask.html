@@ -10,11 +10,12 @@
     />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/css/addTask.css" />
+    <link rel="stylesheet" href="/css/addTaskPopUp.css">
     <script defer src="/js/includeTemplates.js"></script>
     <script defer src="/script.js"></script>
     <script defer src="/js/addTask.js"></script>
     <script defer src="/js/header.js"></script>
-    <script src="/js/contacts.js"></script>
+    <script defer src="/js/contacts.js"></script>
     <title>Add Task</title>
   </head>
   <body onload="initAddTask()">
@@ -144,5 +145,12 @@
         </div>
       </form>
     </div>
+
+<!-- muss ins JS gesetzt werden das Popup. Beachte das hier ein d-none vorhanden ist -->
+<div class="task-added-popup d-none"><span>Task added to board</span><img src="/assets/img/board-icon.png" alt=""></div>
+  
+
+
+
   </body>
 </html>
