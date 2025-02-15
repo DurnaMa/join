@@ -44,6 +44,13 @@ let todos = [
 async function initAddTask() {
   await loadDataUsers();
   contactList();
+  showContent();
+}
+
+function showContent() {
+  setTimeout(() => {
+    document.getElementById("contact").classList.remove("d-none");
+  }, 10);
 }
 
 let subTask = document.getElementById("subTask");
@@ -128,7 +135,7 @@ function contactList() {
   let contactList = document.getElementById("assignedContactsList");
   contactList.innerHTML = "";
   contacts.forEach((contact) => {
-    const  initials = generateInitials(contact.name);
+    const initials = generateInitials(contact.name);
     contactList.innerHTML += /*html*/ `
       <div class="assignedContactContent" onclick="toggleCheckbox(event)">
         <div class="assignedContacts">
