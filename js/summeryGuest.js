@@ -25,14 +25,5 @@ function daliyTime() {
             document.getElementById("time").innerHTML = "Good Evening";
             break;
     }
-}
-
-function generateGreeting() {
-    const time = getGreeting();
-    const htmlContent = /*html*/`
-        <div>
-            <h1>${time}</h1>
-        </div>
-    `;
-    return htmlContent;
+    
 }

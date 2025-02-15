@@ -11,12 +11,12 @@
     <script defer src="/js/summeryGuest.js"></script>
     <script defer src="/js/summeryUser.js"></script>
     <script defer src="/script.js"></script>
-    <script defer src="../js/includeTemplates.js"></script>
+    <script defer src="/js/includeTemplates.js"></script>
     <script defer src="/js/header.js"></script>
   </head>
-  <body>
-    <include-html src="../templates/header/header.html"></include-html>
-    <include-html src="../templates/sidebar/sidebar.html"></include-html>
+  <body onload="summeryGuestInit()">
+    <include-html src="/templates/header/header.html"></include-html>
+    <include-html src="/templates/sidebar/sidebar.html"></include-html>
     <include-html src="/mobileTemplates/header/headerMobile.html"></include-html>
     <include-html src="/mobileTemplates/footer/footerMobile.html"></include-html>
     <div class="summaryContainer">
@@ -87,7 +87,7 @@
           </div>
         </div>
         <div id="greetings" class="greetings">
-          <span id="time">Hello, </span>
+          <span id="time"></span>
           <h2>Guest</h2>
         </div>
       </div>
