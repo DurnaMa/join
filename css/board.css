@@ -665,6 +665,18 @@ input[type='date']::-webkit-calendar-picker-indicator {
   padding: 20px;
 }
 
+.addNewTaskBtnDiv {
+  display: flex;
+  width: 800px;
+  height: 600px;
+  position: fixed;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #d6d0d0;
+}
+
 
 
 

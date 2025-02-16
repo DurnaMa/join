@@ -1,4 +1,5 @@
-function renderAddTaskPoup() {
+//--------- Board page add task templates ---------
+function renderAddTaskPoupBtn() {
   return /*html*/ `
 <div class="add-edit-popup-task-div">
 <div class="addTaskContent">
@@ -123,6 +124,73 @@ function renderAddTaskPoup() {
     `;
 }
 
+function renderAddTaskPopupToDoPlus() {
+  return /*html*/ `
+    <div class="addNewTaskDiv" id="addNewTaskDiv">
+      <div class="addNewTaskDivHeader">
+        <h2 class="addNewTaskDivHeaderH2">Add new task</h2>
+        <button type="button" class="btn-close" aria-label="Close" onclick="closeAddTaskPopUp()">Schliessen</button>
+      </div>
+      <div class="addNewTaskDivContent">
+        <div class="addNewTaskDivContentLeft">
+          <label for="titleInput" class="addNewTaskDivContentLeftLabel">Title</label>
+          <input type="text" id="titleInput" class="addNewTaskDivContentLeftInput">
+          <label for="descriptionTextarea" class="addNewTaskDivContentLeftLabel">Description</label>
+          <textarea id="descriptionTextarea" class="addNewTaskDivContentLeftInput"></textarea>
+        </div>
+      </div>
+      <div class="addNewTaskDivFooter">
+        <button type="button" class="addNewTaskDivFooterBtn" onclick="createTaskPlusToDoBtn()">Create task</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderAddTaskPopupInProgressPlus() {
+  return /*html*/ `
+    <div class="addNewTaskDiv" id="addNewTaskDiv">
+      <div class="addNewTaskDivHeader">
+        <h2 class="addNewTaskDivHeaderH2">Add new task</h2>
+        <button type="button" class="btn-close" aria-label="Close" onclick="closeAddTaskPopUp()">Schliessen</button>
+      </div>
+      <div class="addNewTaskDivContent">
+        <div class="addNewTaskDivContentLeft">
+          <label for="titleInput" class="addNewTaskDivContentLeftLabel">Title</label>
+          <input type="text" id="titleInput" class="addNewTaskDivContentLeftInput">
+          <label for="descriptionTextarea" class="addNewTaskDivContentLeftLabel">Description</label>
+          <textarea id="descriptionTextarea" class="addNewTaskDivContentLeftInput"></textarea>
+        </div>
+      </div>
+      <div class="addNewTaskDivFooter">
+        <button type="button" class="addNewTaskDivFooterBtn" onclick="createTaskPlusInProgressBtn()">Create task</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderAddTaskPopupAwaitFeedbackPlus() {
+  return /*html*/ `
+    <div class="addNewTaskDiv" id="addNewTaskDiv">
+      <div class="addNewTaskDivHeader">
+        <h2 class="addNewTaskDivHeaderH2">Add new task</h2>
+        <button type="button" class="btn-close" aria-label="Close" onclick="closeAddTaskPopUp()">Schliessen</button>
+      </div>
+      <div class="addNewTaskDivContent">
+        <div class="addNewTaskDivContentLeft">
+          <label for="titleInput" class="addNewTaskDivContentLeftLabel">Title</label>
+          <input type="text" id="titleInput" class="addNewTaskDivContentLeftInput">
+          <label for="descriptionTextarea" class="addNewTaskDivContentLeftLabel">Description</label>
+          <textarea id="descriptionTextarea" class="addNewTaskDivContentLeftInput"></textarea>
+        </div>
+      </div>
+      <div class="addNewTaskDivFooter">
+        <button type="button" class="addNewTaskDivFooterBtn" onclick="createTaskPlusAwaitFeedbackBtn()">Create task</button>
+      </div>
+    </div>
+  `;
+}
+
+//--------- contact templates ---------
 function addNewContactPopup() {
   return /*html*/ `
   <div class="shadow-div d-none"></div>
@@ -241,3 +309,4 @@ function editContactPopup() {
   </div>
   `;
 }
+
