@@ -1,9 +1,54 @@
 let todos = [
-  { id: 1, columnTitles: "To do", category: "User story", title: "Task 1", description: "Task 1 description", subTask: [], users: [], prio: [] },
-  { id: 2, columnTitles: "In progress", category: "Technical task", title: "Task 2", description: "Task 2 description", subTask: [], users: [], prio: [] },
-  { id: 3, columnTitles: "Await feedback", category: "", title: "Task 3", description: "Task 3 description", subTask: [], users: [], prio: [] },
-  { id: 4, columnTitles: "Done", category: "", title: "Task 4", description: "Task 4 description", subTask: [], users: [], prio: [] },
-  { id: 5, columnTitles: "In progress", category: "User story", title: "Task 5", description: "Task 5 description", subTask: [], users: [], prio: [] }
+  {
+    id: 1,
+    columnTitles: "To do",
+    category: "User story",
+    title: "Task 1",
+    description: "Task 1 description",
+    subTask: [],
+    users: [],
+    prio: [],
+  },
+  {
+    id: 2,
+    columnTitles: "In progress",
+    category: "Technical task",
+    title: "Task 2",
+    description: "Task 2 description",
+    subTask: [],
+    users: [],
+    prio: [],
+  },
+  {
+    id: 3,
+    columnTitles: "Await feedback",
+    category: "",
+    title: "Task 3",
+    description: "Task 3 description",
+    subTask: [],
+    users: [],
+    prio: [],
+  },
+  {
+    id: 4,
+    columnTitles: "Done",
+    category: "",
+    title: "Task 4",
+    description: "Task 4 description",
+    subTask: [],
+    users: [],
+    prio: [],
+  },
+  {
+    id: 5,
+    columnTitles: "In progress",
+    category: "User story",
+    title: "Task 5",
+    description: "Task 5 description",
+    subTask: [],
+    users: [],
+    prio: [],
+  },
 ];
 
 let currentDraggedElement;
@@ -18,9 +63,11 @@ function renderTasks() {
   document.getElementById("awaitfeedback").innerHTML = "";
   document.getElementById("done").innerHTML = "";
 
-  todos.forEach(task => {
+  todos.forEach((task) => {
     let taskCard = generateTaskCard(task);
-    document.getElementById(task.columnTitles.toLowerCase().replace(" ", "")).appendChild(taskCard);
+    document
+      .getElementById(task.columnTitles.toLowerCase().replace(" ", ""))
+      .appendChild(taskCard);
   });
 }
 
@@ -56,7 +103,7 @@ function removeHighlight(task) {
 function drop(event, column) {
   event.preventDefault();
   let taskId = event.dataTransfer.getData("text");
-  let task = todos.find(t => t.id == taskId);
+  let task = todos.find((t) => t.id == taskId);
   if (task) {
     task.columnTitles = column;
     renderTasks();
@@ -93,7 +140,7 @@ function createTaskPlusToDoBtn() {
     description: description,
     subTask: [],
     users: [],
-    prio: []
+    prio: [],
   };
 
   todos.push(newTask);
@@ -113,7 +160,7 @@ function createTaskPlusInProgressBtn() {
     description: description,
     subTask: [],
     users: [],
-    prio: []
+    prio: [],
   };
 
   todos.push(newTask);
@@ -133,7 +180,7 @@ function createTaskPlusAwaitFeedbackBtn() {
     description: description,
     subTask: [],
     users: [],
-    prio: []
+    prio: [],
   };
 
   todos.push(newTask);
@@ -144,8 +191,6 @@ function createTaskPlusAwaitFeedbackBtn() {
 function closeAddTaskPopUp() {
   document.getElementById("addNewTaskDiv").classList.add("d-none");
 }
-
-
 
 function addTaskPopupBtn() {
   let addNewTaskBtnDiv = document.getElementById("addNewTaskBtnDiv");
@@ -159,7 +204,6 @@ function createtTaskBtn() {
   let category = document.getElementById("category").value;
   let subTask = document.getElementById("subTask").value;
 
-
   let newTask = {
     id: todos.length + 1,
     columnTitles: "To Do",
@@ -168,7 +212,7 @@ function createtTaskBtn() {
     description: description,
     subTask: [],
     users: [],
-    prio: ""
+    prio: "",
   };
 
   todos.push(newTask);
