@@ -75,12 +75,20 @@ function renderTasks() {
 function checkEmptyColumns() {
   document.querySelectorAll(".column").forEach((column) => {
     if (!column.hasChildNodes()) {
-      column.innerHTML = "<p class='no-tasks'>No tasks</p>";
+      column.innerHTML = generateEmptyColumn();
     } else {
       let noTasksElement = column.querySelector(".no-tasks");
       if (noTasksElement) noTasksElement.remove();
     }
   });
+}
+
+function generateEmptyColumn() {
+  return /*html*/ `
+    <div class="empty-column">
+      <p>No tasks</p>
+    </div>
+  `;
 }
 
 function generateTaskCard(task) {
@@ -89,11 +97,25 @@ function generateTaskCard(task) {
   taskCard.id = `task-${task.id}`;
   taskCard.draggable = true;
   taskCard.ondragstart = (event) => startDragging(event, task.id);
- 
+
   taskCard.innerHTML = /*html*/ `
+    <div class="task-card-category-div">
+      <div class="task-card-category">
+        <h2 class="task-card-category-h2">${task.category}</h2>
+      </div>
+    </div>
     <h3>${task.title}</h3>
     <p>${task.description}</p>
   `;
+
+let categoryElement = taskCard.querySelector(".task-card-category");
+if (categoryElement) {
+  if (task.category === "User story") {
+    categoryElement.style.backgroundColor = "#0038FF";
+  } else if (task.category === "Technical task") {
+    categoryElement.style.backgroundColor = "#1FD7C1";
+  }
+}
 
   return taskCard;
 }
