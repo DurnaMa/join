@@ -1,7 +1,7 @@
 let todos = [
   {
     id: 1,
-    columnTitles: "To do",
+    columnTitles: "Await feedback",
     category: "User story",
     title: "Task 1",
     description: "Task 1 description",
@@ -65,22 +65,37 @@ function renderTasks() {
 
   todos.forEach((task) => {
     let taskCard = generateTaskCard(task);
-    document
-      .getElementById(task.columnTitles.toLowerCase().replace(" ", ""))
-      .appendChild(taskCard);
+    let columnId = task.columnTitles.toLowerCase().replace(" ", "");
+    document.getElementById(columnId).appendChild(taskCard);
+  });
+
+  checkEmptyColumns();
+}
+
+function checkEmptyColumns() {
+  document.querySelectorAll(".column").forEach((column) => {
+    if (!column.hasChildNodes()) {
+      column.innerHTML = "<p class='no-tasks'>No tasks</p>";
+    } else {
+      let noTasksElement = column.querySelector(".no-tasks");
+      if (noTasksElement) noTasksElement.remove();
+    }
   });
 }
 
 function generateTaskCard(task) {
-  let column = document.createElement("div");
-  column.classList.add("column");
-  column.innerHTML = /*html*/ `
-    <div class="task-card" id="task-${task.id}" draggable="true" ondragstart="startDragging(event, ${task.id})">
-      <h3>${task.title}</h3>
-      <p>${task.description}</p>
-    </div>
+  let taskCard = document.createElement("div");
+  taskCard.classList.add("task-card");
+  taskCard.id = `task-${task.id}`;
+  taskCard.draggable = true;
+  taskCard.ondragstart = (event) => startDragging(event, task.id);
+ 
+  taskCard.innerHTML = /*html*/ `
+    <h3>${task.title}</h3>
+    <p>${task.description}</p>
   `;
-  return column;
+
+  return taskCard;
 }
 
 function startDragging(event, id) {
@@ -203,6 +218,7 @@ function createtTaskBtn() {
   let description = document.getElementById("descriptionTextarea").value;
   let category = document.getElementById("category").value;
   let subTask = document.getElementById("subTask").value;
+  //let addUser = document.getElementById('')
 
   let newTask = {
     id: todos.length + 1,
@@ -210,12 +226,12 @@ function createtTaskBtn() {
     category: category,
     title: title,
     description: description,
-    subTask: [],
+    subTask: subTask,
     users: [],
     prio: "",
   };
 
   todos.push(newTask);
   renderTasks();
-  closeAddTaskPopUp();
+  //closeAddTaskPopUp();
 }

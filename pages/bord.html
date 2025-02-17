@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <div class="addNewTaskBtnDiv d-none" id="addNewTaskBtnDiv"></div>
+      
 
       <div class="addNewTaskDiv d-none" id="addNewTaskDiv"></div>
 
@@ -50,13 +50,14 @@
         </div>
         <div class="column-container" id="columnContainer">
           <div class="columns" id="columns">
-            <div class="column" id="todo" ondrop="drop(event, 'todo')" ondragover="allowDrop(event); highlight('todo')" ondragleave="removeHighlight('todo')"></div>
-            <div class="column" id="inprogress" ondrop="drop(event, 'inprogress')" ondragover="allowDrop(event); highlight('inprogress')" ondragleave="removeHighlight('inprogress')"></div>
-            <div class="column" id="awaitfeedback" ondrop="drop(event, 'awaitfeedback')" ondragover="allowDrop(event); highlight('awaitfeedback')" ondragleave="removeHighlight('awaitfeedback')"></div>
-            <div class="column" id="done" ondrop="drop(event, 'done')" ondragover="allowDrop(event); highlight('done')" ondragleave="removeHighlight('done')"></div>
+            <div class="column" id="todo" ondrop="drop(event, 'todo'); checkEmptyColumns()" ondragover="allowDrop(event); highlight('todo')" ondragleave="removeHighlight('todo')"></div>
+            <div class="column" id="inprogress" ondrop="drop(event, 'inprogress'); checkEmptyColumns()" ondragover="allowDrop(event); highlight('inprogress')" ondragleave="removeHighlight('inprogress')"></div>
+            <div class="column" id="awaitfeedback" ondrop="drop(event, 'awaitfeedback'); checkEmptyColumns()" ondragover="allowDrop(event); highlight('awaitfeedback')" ondragleave="removeHighlight('awaitfeedback')"></div>
+            <div class="column" id="done" ondrop="drop(event, 'done'); checkEmptyColumns()" ondragover="allowDrop(event); highlight('done')" ondragleave="removeHighlight('done')"></div>
           </div>
         </div>
       </div>
     </div>
+    <div class="addNewTaskBtnDiv d-none" id="addNewTaskBtnDiv"></div>
   </body>
 </html>
