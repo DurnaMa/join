@@ -1,105 +1,58 @@
 //--------- Board page add task templates ---------
 function renderAddTaskPoupBtn() {
   return /*html*/ `
+<div class="shadow-div d-none"></div>
 <div class="add-edit-popup-task-div">
-<div class="addTaskContent">
+  <div class="addTaskContent">
       <div class="headlineDiv"><h1>Add Task</h1></div>
-      <form>
+      <form onsubmit="return false">
         <div class="formParts">
           <section class="formPartLeft">
             <label for="title">Title<span class="required">*</span> </label>
             <input id="titleInput" type="text" placeholder="Enter a title" />
             <br />
             <label for="description">Description</label>
-            <textarea
-              id="descriptionTextarea"
-              rows="5"
-              placeholder="Enter a Description"
-            ></textarea>
+            <textarea id="descriptionTextarea" rows="5" placeholder="Enter a Description"></textarea>
             <br />
             <label for="contactSelection">Assigned to</label>
             <div onclick="contactList()" class="assignedContainer">
               <span>Select contacts to assign</span>
-              <img
-                id="assignedArrowDown"
-                src="/assets/icons/arrow_drop_down.png"
-                alt=""
-              />
-              <img
-                id="assignedArrowUp"
-                class="d-none"
-                src="/assets/icons/arrow_drop_up.png"
-                alt=""
-              />
+              <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+              <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
             </div>
             <div id="assignedContactsList" class="d-flex"></div>
           </section>
           <hr />
           <section class="formPartRight">
-            <label for="dueDate"
-              >Due Date<span class="required">*</span>
-            </label>
+            <label for="dueDate">Due Date<span class="required">*</span> </label>
             <input type="date" id="date" />
             <br />
             <label for="prio">Prio</label>
             <section id="prio" class="prioContent">
-              <button
-                type="button"
-                id="prioUrgentEdit"
-                class="prioBtn"
-                onclick="prioUrgent()"
-              >
+              <button type="button" id="prioUrgentEdit" class="prioBtn" onclick="prioUrgent()">
                 Urgent
                 <img id="urgentImg" src="/assets/icons/urgentRed.png" alt="" />
               </button>
-              <button
-                type="button"
-                id="prioMediumEdit"
-                class="prioBtn"
-                onclick="prioMedium()"
-              >
+              <button type="button" id="prioMediumEdit" class="prioBtn" onclick="prioMedium()">
                 Medium
-                <img
-                  id="mediumImg"
-                  src="/assets/icons/mediumYellow.png"
-                  alt=""
-                />
+                <img id="mediumImg" src="/assets/icons/mediumYellow.png" alt="" />
               </button>
-              <button
-                type="button"
-                id="prioLowEdit"
-                class="prioBtn"
-                onclick="prioLow()"
-              >
+              <button type="button" id="prioLowEdit" class="prioBtn" onclick="prioLow()">
                 Low <img id="lowImg" src="/assets/icons/lowGreen.png" alt="" />
               </button>
             </section>
             <br />
-            <label for="category"
-              >Category<span class="required">*</span>
-            </label>
+            <label for="category">Category<span class="required">*</span> </label>
             <select id="category">
-              <option value disabled selected hidden>
-                Select Task Category
-              </option>
+              <option value disabled selected hidden>Select Task Category</option>
               <option value="Technical Task">Technical Task</option>
               <option value="User Story">User Story</option>
             </select>
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
-              <input
-                id="subTask"
-                class="addSubTask"
-                placeholder="Add new subtask"
-                type="text"
-              />
-              <img
-                onclick="addSubTask()"
-                style="cursor: pointer"
-                src="/assets/icons/Subtasks_plus.png"
-                alt=""
-              />
+              <input id="subTask" class="addSubTask" placeholder="Add new subtask" type="text" />
+              <img onclick="addSubTask()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
             <ul id="subTaskList"></ul>
           </section>
@@ -110,17 +63,18 @@ function renderAddTaskPoupBtn() {
             This field is required
           </p>
           <div class="btnSection">
-            <button type="reset" class="clearBtn">
-              Clear <img src="/assets/icons/cancel.png" alt="" />
-            </button>
-            <button onclick="createtTaskBtn()" class="button">
+            <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
+            <!-- <button onclick="createtTaskBtn()" class="button">
+              Create Task <img src="/assets/icons/check.png" alt="" />
+            </button> -->
+            <button onclick="postAddTask()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>
           </div>
         </div>
       </form>
     </div>
-</div>
+  </div>
     `;
 }
 
