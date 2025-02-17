@@ -254,6 +254,7 @@ function editContactPopup() {
   let email = contact.email;
   let phone = contact.phone;
   return /*html*/ `
+  <div class="shadow-div d-none"></div>
   <div class="add-edit-popup-contact-div">
     <div class="popup-left">
       <img src="/assets/img/logohell.png" alt="" />
