@@ -203,6 +203,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border: 1px solid #29abe2;
 }
 
+#subTaskList {
+  border-radius: 10px;
+  background-color: white;
+  max-height: 140px;
+  overflow: auto;
+  position: absolute;
+  top: 753px;
+  width: inherit;
+}
+
 .taskFormButtons {
   padding: 75px 0 0 0;
   width: 100%;
