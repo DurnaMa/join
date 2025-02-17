@@ -9,9 +9,7 @@ let subTasks = [];
 function prioUrgent() {
   document.getElementById("prioUrgentEdit").classList.add("prioUrgentRed");
   document.getElementById("urgentImg").src = "/assets/icons/urgentWhite.png";
-  document
-    .getElementById("prioMediumEdit")
-    .classList.remove("prioMediumYellow");
+  document.getElementById("prioMediumEdit").classList.remove("prioMediumYellow");
   document.getElementById("prioLowEdit").classList.remove("prioLowGreen");
   document.getElementById("mediumImg").src = "/assets/icons/mediumYellow.png";
   document.getElementById("lowImg").src = "/assets/icons/lowGreen.png";
@@ -27,9 +25,7 @@ function prioMedium() {
 function prioLow() {
   document.getElementById("prioLowEdit").classList.add("prioLowGreen");
   document.getElementById("lowImg").src = "/assets/icons/lowWhite.png";
-  document
-    .getElementById("prioMediumEdit")
-    .classList.remove("prioMediumYellow");
+  document.getElementById("prioMediumEdit").classList.remove("prioMediumYellow");
   document.getElementById("prioUrgentEdit").classList.remove("prioUrgentRed");
   document.getElementById("mediumImg").src = "/assets/icons/mediumYellow.png";
   document.getElementById("urgentImg").src = "/assets/icons/urgentRed.png";
@@ -116,7 +112,7 @@ function saveSubTask(index) {
   renderSubTaskList();
 }
 
-function deleteSubTask(index){
+function deleteSubTask(index) {
   let subInputEdit = document.getElementById(`subInputEdit-${index}`);
   subTasks[index].description = subInputEdit;
   subTasks.splice(index, 1);
@@ -180,4 +176,27 @@ function toggleCheckbox(event) {
       event.currentTarget.classList.toggle("selectedContact", checkbox.checked);
     }
   }
+}
+
+async function postAddTask() {
+  let title = document.getElementById("titleInput").value;
+  let description = document.getElementById("descriptionTextarea").value;
+  let dueDate = document.getElementById("date").value;
+  let priority = document.getElementById("prio").value;
+  let assignedContacts = [].value;
+
+  let data = {
+    title,
+    description,
+    dueDate,
+    priority,
+    subTasks,
+    assignedContacts,
+  };
+
+  try {
+    await putDataToFirebase("/tasks", data);
+  } catch (error) {}
+
+  await postDataTask(data);
 }
