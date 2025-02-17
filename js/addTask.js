@@ -42,12 +42,12 @@ function addSubTask() {
   }
 }
 
-subTask.addEventListener("keydown", function (event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    addSubTask();
-  }
-});
+// subTask.addEventListener("keydown", function (event) {
+//   if (event.key === "Enter") {
+//     event.preventDefault();
+//     addSubTask();
+//   }
+// });
 
 function renderSubTaskList() {
   let subTasksList = document.getElementById("subTaskList");

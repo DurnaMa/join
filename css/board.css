@@ -337,7 +337,7 @@
 
 /*----- POPUP -----*/
 
-.add-edit-popup-task-div {
+/* .add-edit-popup-task-div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -677,7 +677,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 .show {
   display: block;
-}
+} */
 
 /*----- zum Testen -----*/
 
