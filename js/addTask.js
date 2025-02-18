@@ -195,8 +195,8 @@ async function postAddTask() {
   };
 
   try {
-    await putDataToFirebase("/tasks", data);
-  } catch (error) {}
-
-  await postDataTask(data);
+    await postDataToFirebase("tasks/", data);
+  } catch (error) {
+    console.error(error);
+  }
 }
