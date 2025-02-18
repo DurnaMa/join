@@ -288,7 +288,7 @@
   flex-direction: column;
 }
 
-.progress {
+/*.progress {
   display: flex;
 }
 
@@ -297,6 +297,22 @@
   height: 8px;
   border-radius: 8px;
   padding-top: 8px;
+}*/
+
+.progress {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  height: 8px;
+  margin-top: 8px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #76c7c0);
+  transition: width 0.5s ease-in-out;
 }
 
 .tasks-user {
@@ -358,3 +374,5 @@
   height: 416px;
   padding: 20px;
 }
+
+

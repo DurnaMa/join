@@ -107,21 +107,20 @@ function generateTaskCard(task) {
     <h3>${task.title}</h3>
     <p>${task.description}</p>
     <div class="task-status">
-                <div class="progress">
-                    <div class="progress-bar" id="progressbar" style="width: 0%"></div>
-                    <span>0/2 Subtasks</span>
-                </div>
-                <div class="task-footer">    
-                    <div class="task-users">
-                        <div class="tasks-user1 tasks-user">HA</div>
-                        <div class="tasks-user2 tasks-user">MD</div>
-                        <div class="tasks-user3 tasks-user">DL</div>
-                    </div>
-                    <div>
-                        <img src="/assets/icons/priom.png" alt="">
-                    </div>
-                </div>
-            </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressbar" style="width: 0%"></div>
+          <span>0/2 Subtasks</span>
+        </div>
+        <div class="task-footer">    
+          <div class="task-users">
+            <div class="tasks-user1 tasks-user">HA</div>
+            <div class="tasks-user2 tasks-user">MD</div>
+            <div class="tasks-user3 tasks-user">DL</div>
+          </div>
+        <div>
+        <img src="/assets/icons/priom.png" alt="">
+      </div>
+    </div>
   `;
 
 let categoryElement = taskCard.querySelector(".task-card-category");
@@ -145,13 +144,13 @@ function allowDrop(event) {
   event.preventDefault();
 }
 
-function highlight(task) {
+/*function highlight(task) {
   document.getElementById(task).classList.add("drag-area-highlight");
 }
 
 function removeHighlight(task) {
   document.getElementById(task).classList.remove("drag-area-highlight");
-}
+}*/
 
 function drop(event, column) {
   event.preventDefault();
