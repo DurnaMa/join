@@ -1,612 +1,275 @@
 let todos = [
   {
     id: 1,
-    'columnTitles': "To do",
+    columnTitles: "Await feedback",
     category: "User story",
     title: "Task 1",
     description: "Task 1 description",
-    subtasks: [],
+    subTask: [],
     users: [],
     prio: [],
   },
   {
     id: 2,
-    'columnTitles': "In progress",
+    columnTitles: "In progress",
     category: "Technical task",
     title: "Task 2",
     description: "Task 2 description",
-    subtasks: [],
+    subTask: [],
     users: [],
     prio: [],
   },
   {
     id: 3,
-    'columnTitles': "Await feedback",
-    category: [],
+    columnTitles: "Await feedback",
+    category: "",
     title: "Task 3",
     description: "Task 3 description",
-    subtasks: [],
+    subTask: [],
     users: [],
     prio: [],
   },
   {
     id: 4,
-    'columnTitles': "Done",
-    category: [],
+    columnTitles: "Done",
+    category: "",
     title: "Task 4",
     description: "Task 4 description",
-    subtasks: [],
+    subTask: [],
     users: [],
     prio: [],
   },
   {
-  id: 5,
-  'columnTitles': "In progress",
-  category: "User story",
-  title: "Task 5",
-  description: "Task 5 description",
-  subtasks: [],
-  users: [],
-  prio: [],
-}
+    id: 5,
+    columnTitles: "In progress",
+    category: "User story",
+    title: "Task 5",
+    description: "Task 5 description",
+    subTask: [],
+    users: [],
+    prio: [],
+  },
 ];
 
 let currentDraggedElement;
-let currentSelectedTask;
-let currentSelectedColumn = "";
 
-
-function initBord() {
+function initBoard() {
   renderTasks();
-  //updateTasks();
-  //updateTasksTodo();
-  //updateTasksProgress();
 }
 
 function renderTasks() {
-  for (let index = 0; index < todos.length; index++) {
-    const element = todos[index];
+  document.getElementById("todo").innerHTML = "";
+  document.getElementById("inprogress").innerHTML = "";
+  document.getElementById("awaitfeedback").innerHTML = "";
+  document.getElementById("done").innerHTML = "";
 
-    if (element.columnTitles == "To do") {
-      generateTaskCardTodo(element);
-    }
+  todos.forEach((task) => {
+    let taskCard = generateTaskCard(task);
+    let columnId = task.columnTitles.toLowerCase().replace(" ", "");
+    document.getElementById(columnId).appendChild(taskCard);
+  });
 
-    if (element.columnTitles == "In progress") {
-      generateTaskCardProgress(element);
-    }
-
-    if (element.columnTitles == "Await feedback") {
-      generateTaskCardAwaitFeedback(element);
-    }
-
-    if (element.columnTitles == "Done") {
-      generateTaskCardDone(element);
-    }
-  }
+  checkEmptyColumns();
 }
 
-/*async function updateTasks() {
-  let toDo = todos.filter(t => t['columnTitles'] == "To do");
-  let inProgress = todos.filter(t => t['columnTitles'] == "In progress");
-  let awaitFeedback = todos.filter(t => t['columnTitles'] == "Await feedback");
-  let done = todos.filter(t => t['columnTitles'] == "Done");
-*/
-  //document.getElementById("todo").innerHTML = '';
-  //document.getElementById("inprogress").innerHTML = '';
-  //document.getElementById("awaitfeedback").innerHTML = '';
-  //document.getElementById("done").innerHTML = '';
-
-  /*for (let index = 0; index < toDo.length; index++) {
-    const element = toDo[index];
-    document.getElementById('todo').innerHTML += generateTaskCardTodo(element);
-  }
-
-  for (let index = 0; index < inProgress.length; index++) {
-    const element = inProgress[index];
-    document.getElementById('inprogress').innerHTML += generateTaskCardProgress(element);
-  }
-
-  for (let index = 0; index < awaitFeedback.length; index++) {
-    const element = awaitFeedback[index];
-    document.getElementById('awaitfeedback').innerHTML += generateTaskCardAwaitFeedback(element);
-  } 
-
-  for (let index = 0; index < done.length; index++) {
-    const element = done[index];
-    document.getElementById('done').innerHTML += generateTaskCardDone(element);
-  }*/
-
-  /*for (let index = 0; index < todos.length; index++) {
-    const element = todos[index];
-
-    if (element['columnTitles'] == "To do") {
-      document.getElementById('todo').innerHTML += generateTaskCardTodo(element);
+function checkEmptyColumns() {
+  document.querySelectorAll(".column").forEach((column) => {
+    if (!column.hasChildNodes()) {
+      column.innerHTML = generateEmptyColumn();
+    } else {
+      let noTasksElement = column.querySelector(".no-tasks");
+      if (noTasksElement) noTasksElement.remove();
     }
-
-    if (element['columnTitles'] == "In progress") {
-      document.getElementById('inprogress').innerHTML += generateTaskCardProgress(element);
-    }
-
-    if (element['columnTitles'] == "Await feedback") {
-      document.getElementById('awaitfeedback').innerHTML += generateTaskCardAwaitFeedback(element);
-    }
-
-    if (element['columnTitles'] == "Done") {
-      document.getElementById('done').innerHTML += generateTaskCardDone(element);
-    }
-
-  }*/
-//}
-
-  /*function updateTasksTodo() {
-    let toDo = todos.filter(t => t['columnTitles'] == "To do");
-  
-    //document.getElementById("todo").innerHTML = '';
-  
-    for (let index = 0; index < toDo.length; index++) {
-      const element = toDo[index];
-      document.getElementById('todo').innerHTML += generateTaskCardTodo(element);
-    }
-  }
-
-  function updateTasksProgress() {
-    let inProgress = todos.filter(t => t['columnTitles'] == "In progress");
-  
-    //document.getElementById("inprogress").innerHTML = '';
-  
-    for (let index = 0; index < inProgress.length; index++) {
-      const element = inProgress[index];
-      document.getElementById('inprogress').innerHTML += generateTaskCardProgress(element);
-    }
-  }*/
-
-  function generateTaskCardTodo(element) {
-    let taskCardDiv = document.getElementById("todo");
-    //columnContainer.innerHTML = "";
-
-    let column = document.createElement("div");
-    column.classList.add("column");
-    //column.id = element.columnTitles;
-    column.innerHTML = /*html*/ `
-      <div class="task-card" id="${element.id}" draggable="true" ondragstart="drag(element) startDragging(${element['id']})">
-        <h3>${element.title}</h3>
-        <p>${element.description}</p>
-      </div>
-    `;
-    taskCardDiv.appendChild(column);
-  }
-
-  function generateTaskCardProgress(element) {
-    let taskCardDiv = document.getElementById("inprogress");
-    //columnContainer.innerHTML = "";
-
-    let column = document.createElement("div");
-    column.classList.add("column");
-    column.id = element.columnTitles;
-    column.innerHTML = /*html*/ `
-      <div class="task-card" id="${element.id}" draggable="true" ondragstart="drag(element) startDragging(${element['id']})">
-        <h3>${element.title}</h3>
-        <p>${element.description}</p>
-      </div>
-    `;
-    taskCardDiv.appendChild(column);
-
-    /*todos.forEach((todo) => {
-      let column = document.createElement("div");
-      column.classList.add("column");
-      column.id = todo.columnTitles;
-      column.innerHTML = /*html*/ /*`
-        <div class="task-card" id="${todo.id}" draggable="true" ondragstart="startDragging(event)" ondragover="allowDrop(event)" ondrop="moveTo(event)">
-          <h3>${todo.title}</h3>
-          <p>${todo.description}</p>
-        </div>
-      `;
-      taskCardDiv.appendChild(column);
-    });*/
-  }
-
-  function generateTaskCardAwaitFeedback(element) {
-    let taskCardDiv = document.getElementById("awaitfeedback");
-    //columnContainer.innerHTML = "";
-
-    let column = document.createElement("div");
-    column.classList.add("column");
-    column.id = element.columnTitles;
-    column.innerHTML = /*html*/ `
-      <div class="task-card" id="${element.id}" draggable="true" ondragstart="drag(element) startDragging(${element['id']})">
-        <h3>${element.title}</h3>
-        <p>${element.description}</p>
-      </div>
-    `;
-    taskCardDiv.appendChild(column);
-  }
-
-  function generateTaskCardDone(element) {
-    let taskCardDiv = document.getElementById("done");
-    //columnContainer.innerHTML = "";
-
-    let column = document.createElement("div");
-    column.classList.add("column");
-    column.id = element.columnTitles;
-    column.innerHTML = /*html*/ `
-      <div class="task-card" id="${element.id}" draggable="true" ondragstart="drag(element) startDragging(${element['id']})">
-        <h3>${element.title}</h3>
-        <p>${element.description}</p>
-      </div>
-    `;
-    taskCardDiv.appendChild(column);
-  }
-
-/*function updateTasks() {
-  let toDo = todos.filter(t => t['columnTitles'] == "To do");
-  let inProgress = todos.filter(t => t['columnTitles'] == "In progress");
-  let awaitFeedback = todos.filter(t => t['columnTitles'] == "Await feedback");
-  let done = todos.filter(t => t['columnTitles'] == "Done");
-
-  //document.getElementById("toDo").innerHTML = '';
-  //document.getElementById("inProgress").innerHTML = '';
-  //document.getElementById("awaitFeedback").innerHTML = '';
-  //document.getElementById("done").innerHTML = '';
-
-  for (let i = 0; i < toDo.length; i++) {
-    let element = toDo[i];
-    document.getElementById("toDo").innerHTML += generateTaskCardTodo(element);
-  }
-
-  for (let i = 0; i < inProgress.length; i++) {
-    let element = inProgress[i];
-    document.getElementById("inProgress").innerHTML += generateTaskCard(element);
-  }
-
-  for (let i = 0; i < awaitFeedback.length; i++) {
-    let element = awaitFeedback[i];
-    document.getElementById("awaitFeedback").innerHTML += generateTaskCard(element);
-  }
-
-  for (let i = 0; i < done.length; i++) {
-    let element = done[i];
-    document.getElementById("done").innerHTML += generateTaskCard(element);
-  }
+  });
 }
-*/
-/*function generateTaskCard(element) {
-  let taskCardTodo = document.getElementById('todo');
-  taskCardTodo.innerHTML = '';
- 
-  let taskCardTodoDiv = document.createElement("div");
-  taskCardTodoDiv.classList.add("task");
-  taskCardTodoDiv.id = element.columnTitles;
-  taskCardTodoDiv.innerHTML = /*html*/ /*`
-    <div class="task-card" id="${element.id}" draggable="true" ondragstart="drag(element)">
-      <h3>${element.title}</h3>
-      <p>${element.description}</p>
+
+function generateEmptyColumn() {
+  return /*html*/ `
+    <div class="empty-column">
+      <p>No tasks</p>
     </div>
   `;
-  taskCardTodoDiv.appendChild(taskCardTodo);
-}*/
-
-
-function allowDrop(element) {
-  element.preventDefault();
 }
 
-function drag(element) {
-  element.dataTransfer.setData("text", element.target.id);
+function generateTaskCard(task) {
+  let taskCard = document.createElement("div");
+  taskCard.classList.add("task-card");
+  taskCard.id = `task-${task.id}`;
+  taskCard.draggable = true;
+  taskCard.ondragstart = (event) => startDragging(event, task.id);
+
+  taskCard.innerHTML = /*html*/ `
+    <div class="task-card-category-div">
+      <div class="task-card-category">
+        <h2 class="task-card-category-h2">${task.category}</h2>
+      </div>
+    </div>
+    <h3>${task.title}</h3>
+    <p>${task.description}</p>
+    <div class="task-status">
+                <div class="progress">
+                    <div class="progress-bar" id="progressbar" style="width: 0%"></div>
+                    <span>0/2 Subtasks</span>
+                </div>
+                <div class="task-footer">    
+                    <div class="task-users">
+                        <div class="tasks-user1 tasks-user">HA</div>
+                        <div class="tasks-user2 tasks-user">MD</div>
+                        <div class="tasks-user3 tasks-user">DL</div>
+                    </div>
+                    <div>
+                        <img src="/assets/icons/priom.png" alt="">
+                    </div>
+                </div>
+            </div>
+  `;
+
+let categoryElement = taskCard.querySelector(".task-card-category");
+if (categoryElement) {
+  if (task.category === "User story") {
+    categoryElement.style.backgroundColor = "#0038FF";
+  } else if (task.category === "Technical task") {
+    categoryElement.style.backgroundColor = "#1FD7C1";
+  }
 }
 
-function drop(element) {
-  element.preventDefault();
-  let data = element.dataTransfer.getData("text");
-  //let task = document.getElementById(data);
-  //element.target.appendChild(task);
+  return taskCard;
 }
 
-function highlight(id) {
-  document.getElementById(id).classList.add('drag-area-highlight');
-}
-
-function removeHighlight(id) {
-  document.getElementById(id).classList.remove('drag-area-highlight');
-}
-
-
-function startDragging(id) {
+function startDragging(event, id) {
   currentDraggedElement = id;
-}
-
-
-/*function moveTo(columnTitles) {
-  todos[currentDraggedElement]['columnTitles'] = columnTitles;
-  updateTasks();
-}*/
-
-function createtTaskPlusTodo() {
-  let title = document.getElementById("titleInput");
-  let description = document.getElementById("descriptionTextarea");
-  let columnTitles = document.getElementById("toDoId");
-  title = titleInput.value;
-  description = descriptionTextarea.value;
-  columnTitles = columnTitles;
-
-
-  let newTask = {
-    id: todos.length + 1,
-    columnTitles: columnTitles,
-    category: [],
-    title: title,
-    description: description,
-    subtasks: [],
-    users: [],
-    prio: [],
-  };
-  todos.push(newTask);
-  updateTasks();
-}
-
-function createtTaskPlusProgress() {
-  let title = document.getElementById("titleInput");
-  let description = document.getElementById("descriptionTextarea");
-  let columnTitles = document.getElementById("inProgressId");
-  title = titleInput.value;
-  description = descriptionTextarea.value;
-  columnTitles = columnTitles;
-
-
-  let newTask = {
-    id: todos.length + 1,
-    columnTitles: columnTitles,
-    category: [],
-    title: title,
-    description: description,
-    subtasks: [],
-    users: [],
-    prio: [],
-  };
-  todos.push(newTask);
-  updateTasks();
-}
-
-function createtTaskPlusFeedback() {
-  let title = document.getElementById("titleInput");
-  let description = document.getElementById("descriptionTextarea");
-  let columnTitles = document.getElementById("awaitFeedbackId");
-  title = titleInput.value;
-  description = descriptionTextarea.value;
-  columnTitles = columnTitles;
-
-
-  let newTask = {
-    id: todos.length + 1,
-    columnTitles: columnTitles,
-    category: [],
-    title: title,
-    description: description,
-    subtasks: [],
-    users: [],
-    prio: [],
-  };
-  todos.push(newTask);
-  updateTasks();
-}
-/*
-function createtTaskBtn() {
-  let title = document.getElementById("titleInput");
-  let description = document.getElementById("descriptionTextarea");
-  title = titleInput.value;
-  description = descriptionTextarea.value;
-
-  let newTask = {
-    id: todos.length + 1,
-    columnTitles: "To Do",
-    category: [],
-    title: title,
-    description: description,
-    subtasks: [],
-    users: [],
-    prio: [],
-  };
-  todos.push(newTask);
-  closeAddTaskPopUp()
-  renderTasks();
-}
-
-function startDragging(event) {
-  currentDraggedElement = event.target;
+  event.dataTransfer.setData("text", id);
 }
 
 function allowDrop(event) {
   event.preventDefault();
 }
 
-function moveTo(event) {
+function highlight(task) {
+  document.getElementById(task).classList.add("drag-area-highlight");
+}
+
+function removeHighlight(task) {
+  document.getElementById(task).classList.remove("drag-area-highlight");
+}
+
+function drop(event, column) {
   event.preventDefault();
-  event.target.appendChild(currentDraggedElement);  
+  let taskId = event.dataTransfer.getData("text");
+  let task = todos.find((t) => t.id == taskId);
+  if (task) {
+    task.columnTitles = column;
+    renderTasks();
+  }
 }
 
-function addTaskPopup() {
+function addTaskPopupPlusToDoBtn() {
   let addNewTaskDiv = document.getElementById("addNewTaskDiv");
   addNewTaskDiv.classList.remove("d-none");
-  addNewTaskDiv.innerHTML = renderAddTaskPoup();
+  addNewTaskDiv.innerHTML = renderAddTaskPopupToDoPlus();
 }
 
-*/
-function addTaskPopupPlusTodo() {
-  
+function addTaskPopupPlusInProgressBtn() {
   let addNewTaskDiv = document.getElementById("addNewTaskDiv");
   addNewTaskDiv.classList.remove("d-none");
-  addNewTaskDiv.innerHTML = renderAddTaskPoupPlusTodo();
+  addNewTaskDiv.innerHTML = renderAddTaskPopupInProgressPlus();
 }
 
-function addTaskPopupPlusProgress() {
-  
+function addTaskPopupPlusAwaitFeedbackBtn() {
   let addNewTaskDiv = document.getElementById("addNewTaskDiv");
   addNewTaskDiv.classList.remove("d-none");
-  addNewTaskDiv.innerHTML = renderAddTaskPoupPlusProgress();
+  addNewTaskDiv.innerHTML = renderAddTaskPopupAwaitFeedbackPlus();
 }
 
-function addTaskPopupPlusFeedback() {
-  
-  let addNewTaskDiv = document.getElementById("addNewTaskDiv");
-  addNewTaskDiv.classList.remove("d-none");
-  addNewTaskDiv.innerHTML = renderAddTaskPoupPlusFeedback();
+function createTaskPlusToDoBtn() {
+  let title = document.getElementById("titleInput").value;
+  let description = document.getElementById("descriptionTextarea").value;
+
+  let newTask = {
+    id: todos.length + 1,
+    columnTitles: "To do",
+    category: "",
+    title: title,
+    description: description,
+    subTask: [],
+    users: [],
+    prio: [],
+  };
+
+  todos.push(newTask);
+  renderTasks();
+  closeAddTaskPopUp();
 }
 
+function createTaskPlusInProgressBtn() {
+  let title = document.getElementById("titleInput").value;
+  let description = document.getElementById("descriptionTextarea").value;
 
-  //let currentSelectedColumn = document.getElementById("columnTitlesId");
-  //currentSelectedColumn = currentSelectedColumn.value;
+  let newTask = {
+    id: todos.length + 1,
+    columnTitles: "In progress",
+    category: "",
+    title: title,
+    description: description,
+    subTask: [],
+    users: [],
+    prio: [],
+  };
 
-  //let currentSelectedColumn = document.getElementById("columnTitles");
-  //currentSelectedColumn.innerHTML = "";
-
-  /*if (currentSelectedColumn === "In Progress") {
-    currentSelectedColumn = "In progress";
-  } else if (currentSelectedColumn === "Await Feedback") {
-    currentSelectedColumn = "Await feedback";    
-  } else {
-    currentSelectedColumn = "To do";
-  }*/
-
-
-  //let todo = todos;
-  //let columnTitles = "";
-  
-  /*let ToDoId = document.getElementById("ToDoId");
-  let InProgressId = document.getElementById("InProgressId");
-  let AwaitFeedbackId = document.getElementById("AwaitFeedbackId");
-  let addNewTaskDiv = document.getElementById("addNewTaskDiv");
-  addNewTaskDiv.classList.remove("d-none");
-  addNewTaskDiv.innerHTML = renderAddTaskPoup(event);*/
-
-  /*if (ToDoId) {
-    columnTitles = "To do";
-    addNewTaskDiv.innerHTML = renderAddTaskPoup();
-  } else if (InProgressId) {
-    columnTitles = "In progress";
-    addNewTaskDiv.innerHTML = renderAddTaskPoup();
-  } else if (AwaitFeedbackId) {
-    columnTitles = "Await feedback";
-    addNewTaskDiv.innerHTML = renderAddTaskPoup();
-  }*/
-
-  /*if (id === ToDoId) {
-    columnTitles = "To do";
-    addNewTaskDiv.innerHTML = renderAddTaskPoup();
-  } else if (id === InProgressId) {
-    columnTitles = "In progress";
-    addNewTaskDiv.innerHTML = renderAddTaskPoup();
-  } else if (id === AwaitFeedbackId) {
-    columnTitles = "Await feedback";
-    addNewTaskDiv.innerHTML = renderAddTaskPoup();
-  } */
-
-  /*ToDoId.addEventListener("click", () => {
-    addNewTaskDiv.innerHTML = renderAddTaskPoup();
-  });
-  InProgressId.addEventListener("click", () => {
-    addNewTaskDiv.innerHTML = renderAddTaskPoup();
-  });
-  AwaitFeedbackId.addEventListener("click", () => {
-    addNewTaskDiv.innerHTML = renderAddTaskPoup();
-  });*/
-
-  //createtTaskPlus();
-
-
-//}
-
-function renderAddTaskPoupPlusTodo() {
-  return /*html*/ `
-    <div class="addNewTaskDiv" id="addNewTaskDiv">
-      <div class="addNewTaskDivHeader">
-        <h2 class="addNewTaskDivHeaderH2">Add new task</h2>
-        <button type="button" class="btn-close" aria-label="Close" onclick="closeAddTaskPopUp()">Schliessen</button>
-      </div>
-      <div class="addNewTaskDivContent">
-        <div class="addNewTaskDivContentLeft">
-          <label for="titleInput" class="addNewTaskDivContentLeftLabel">Title</label>
-          <input type="text" id="titleInput" class="addNewTaskDivContentLeftInput">
-          <label for="descriptionTextarea" class="addNewTaskDivContentLeftLabel">Description</label>
-          <textarea id="descriptionTextarea" class="addNewTaskDivContentLeftInput"></textarea>
-        </div>
-        <div class="addNewTaskDivContentRight">
-          <label for="columnTitlesId" class="addNewTaskDivContentRightLabel">Column</label>
-          <select id="columnTitlesId" class="addNewTaskDivContentRightSelect">
-            <option value="To Do">To Do</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Await Feedback">Await Feedback</option>                                                            
-          </select>
-        </div>
-      </div>
-      <div class="addNewTaskDivFooter">
-        <button type="button" class="addNewTaskDivFooterBtn" onclick="createtTaskPlusTodo()">Create task</button>
-      </div>
-    </div>
-  `;
+  todos.push(newTask);
+  renderTasks();
+  closeAddTaskPopUp();
 }
 
-function renderAddTaskPoupPlusProgress() {
-  return /*html*/ `
-    <div class="addNewTaskDiv" id="addNewTaskDiv">
-      <div class="addNewTaskDivHeader">
-        <h2 class="addNewTaskDivHeaderH2">Add new task</h2>
-        <button type="button" class="btn-close" aria-label="Close" onclick="closeAddTaskPopUp()">Schliessen</button>
-      </div>
-      <div class="addNewTaskDivContent">
-        <div class="addNewTaskDivContentLeft">
-          <label for="titleInput" class="addNewTaskDivContentLeftLabel">Title</label>
-          <input type="text" id="titleInput" class="addNewTaskDivContentLeftInput">
-          <label for="descriptionTextarea" class="addNewTaskDivContentLeftLabel">Description</label>
-          <textarea id="descriptionTextarea" class="addNewTaskDivContentLeftInput"></textarea>
-        </div>
-        <div class="addNewTaskDivContentRight">
-          <label for="columnTitlesId" class="addNewTaskDivContentRightLabel">Column</label>
-          <select id="columnTitlesId" class="addNewTaskDivContentRightSelect">
-            <option value="To Do">To Do</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Await Feedback">Await Feedback</option>                                                            
-          </select>
-        </div>
-      </div>
-      <div class="addNewTaskDivFooter">
-        <button type="button" class="addNewTaskDivFooterBtn" onclick="createtTaskPlusProgress()">Create task</button>
-      </div>
-    </div>
-  `;
-}
+function createTaskPlusAwaitFeedbackBtn() {
+  let title = document.getElementById("titleInput").value;
+  let description = document.getElementById("descriptionTextarea").value;
 
-function renderAddTaskPoupPlusFeedback() {
-  return /*html*/ `
-    <div class="addNewTaskDiv" id="addNewTaskDiv">
-      <div class="addNewTaskDivHeader">
-        <h2 class="addNewTaskDivHeaderH2">Add new task</h2>
-        <button type="button" class="btn-close" aria-label="Close" onclick="closeAddTaskPopUp()">Schliessen</button>
-      </div>
-      <div class="addNewTaskDivContent">
-        <div class="addNewTaskDivContentLeft">
-          <label for="titleInput" class="addNewTaskDivContentLeftLabel">Title</label>
-          <input type="text" id="titleInput" class="addNewTaskDivContentLeftInput">
-          <label for="descriptionTextarea" class="addNewTaskDivContentLeftLabel">Description</label>
-          <textarea id="descriptionTextarea" class="addNewTaskDivContentLeftInput"></textarea>
-        </div>
-        <div class="addNewTaskDivContentRight">
-          <label for="columnTitlesId" class="addNewTaskDivContentRightLabel">Column</label>
-          <select id="columnTitlesId" class="addNewTaskDivContentRightSelect">
-            <option value="To Do">To Do</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Await Feedback">Await Feedback</option>                                                            
-          </select>
-        </div>
-      </div>
-      <div class="addNewTaskDivFooter">
-        <button type="button" class="addNewTaskDivFooterBtn" onclick="createtTaskPlusFeedback()">Create task</button>
-      </div>
-    </div>
-  `;
+  let newTask = {
+    id: todos.length + 1,
+    columnTitles: "Await feedback",
+    category: "",
+    title: title,
+    description: description,
+    subTask: [],
+    users: [],
+    prio: [],
+  };
+
+  todos.push(newTask);
+  renderTasks();
+  closeAddTaskPopUp();
 }
 
 function closeAddTaskPopUp() {
   document.getElementById("addNewTaskDiv").classList.add("d-none");
 }
 
+function addTaskPopupBtn() {
+  let addNewTaskBtnDiv = document.getElementById("addNewTaskBtnDiv");
+  addNewTaskBtnDiv.classList.remove("d-none");
+  addNewTaskBtnDiv.innerHTML = renderAddTaskPoupBtn();
+}
 
+function createtTaskBtn() {
+  let title = document.getElementById("titleInput").value;
+  let description = document.getElementById("descriptionTextarea").value;
+  let category = document.getElementById("category").value;
+  let subTask = document.getElementById("subTask").value;
+  //let addUser = document.getElementById('')
 
+  let newTask = {
+    id: todos.length + 1,
+    columnTitles: "To Do",
+    category: category,
+    title: title,
+    description: description,
+    subTask: subTask,
+    users: [],
+    prio: "",
+  };
+
+  todos.push(newTask);
+  renderTasks();
+  //closeAddTaskPopUp();
+}

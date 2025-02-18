@@ -1,56 +1,6 @@
-let todos = [
-  {
-    id: 1,
-    columnTitles: "To do",
-    category: "User story",
-    title: "Task 1",
-    description: "Task 1 description",
-    subtasks: [],
-    users: [],
-    prio: [],
-  },
-  {
-    id: 2,
-    columnTitles: "In progress",
-    category: "Technical task",
-    title: "Task 2",
-    description: "Task 2 description",
-    subtasks: [],
-    users: [],
-    prio: [],
-  },
-  {
-    id: 3,
-    columnTitles: "Await feedback",
-    category: [],
-    title: "Task 3",
-    description: "Task 3 description",
-    subtasks: [],
-    users: [],
-    prio: [],
-  },
-  {
-    id: 4,
-    columnTitles: "Done",
-    category: [],
-    title: "Task 4",
-    description: "Task 4 description",
-    subtasks: [],
-    users: [],
-    prio: [],
-  },
-];
-
 async function initAddTask() {
   await loadDataUsers();
   contactList();
-  showContent();
-}
-
-function showContent() {
-  setTimeout(() => {
-    document.getElementById("contact").classList.remove("d-none");
-  }, 10);
 }
 
 let subTask = document.getElementById("subTask");
@@ -81,53 +31,93 @@ function prioLow() {
   document.getElementById("urgentImg").src = "/assets/icons/urgentRed.png";
 }
 
-function addSubtask() {
+function addSubTask() {
   if (subTask.value != "") {
     subTasks.push({
       description: subTask.value,
-      completed: false,
+      completed: true,
     });
     renderSubTaskList();
     subTask.value = "";
   }
 }
 
-subTask.addEventListener("keydown", function (event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    addSubtask();
-  }
-});
+// subTask.addEventListener("keydown", function (event) {
+//   if (event.key === "Enter") {
+//     event.preventDefault();
+//     addSubTask();
+//   }
+// });
 
 function renderSubTaskList() {
   let subTasksList = document.getElementById("subTaskList");
 
   subTasksList.innerHTML = "";
 
-  for (let subTasksIndex = 0; subTasksIndex < subTasks.length; subTasksIndex++) {
-    subTasksList.innerHTML += generateSubTaskList(subTasksIndex);
+  for (let i = 0; i < subTasks.length; i++) {
+    subTasksList.innerHTML += generateSubTaskList(i);
   }
 }
 
-function generateSubTaskList(subTasksIndex) {
-  return `
-    <li class="subTask" data-index="${subTasksIndex}">
-      <input type="text" class="subTask-edit-input" value="${subTasks[i].description}" style="display: none;">
-      <span class="subTask-text">${subTasks[subTasksIndex].description}</span>
+function generateSubTaskList(i) {
+  return /*html*/ `
+    <li class="subTask" data-index="${i}">
+      <input id="subInputEdit-${i}" type="text" class="subTask-edit-input d-none" value="${subTasks[i].description}">
+      <span id="subEditSpan-${i}" class="subTask-text">${subTasks[i].description}</span>
       <div class="subTask-actions">
         <div class="icon-wrapper">
-          <img src="/assets/icons/edit-icon.png" alt="Edit" onclick="editSubTask(${subTasksIndex})" class="action-icon edit-icon">
+          <img id="subEditImgPen-${i}" src="/assets/icons/edit-icon.png" alt="Edit" onclick="editSubTask(${i})" class="action-icon edit-icon">
         </div>
         <div class="icon-wrapper">
-          <img src="/assets/icons/delete-icon.png" alt="Delete" onclick="deleteSubTask(${subTasksIndex})" class="action-icon delete-icon">
+          <img src="/assets/icons/delete-icon.png" alt="Delete" onclick="deleteSubTask(${i})" class="action-icon delete-icon">
         </div>
         <div class="separator"></div>
         <div class="icon-wrapper">
-          <img src="/assets/icons/check.png" alt="Save" onclick="saveSubTask(${subTasksIndex})" class="action-icon save-icon" style="display: none;">
+          <img id="subEditImgCheck-${i}" src="/assets/icons/checkBgWhite.png" alt="Save" onclick="saveSubTask(${i})" class="action-icon save-icon d-none">
         </div>
       </div>
     </li>
   `;
+}
+
+function editSubTask(index) {
+  let subInputEdit = document.getElementById(`subInputEdit-${index}`);
+  let subEditSpan = document.getElementById(`subEditSpan-${index}`);
+  let subEditImgPen = document.getElementById(`subEditImgPen-${index}`);
+  let subEditImgCheck = document.getElementById(`subEditImgCheck-${index}`);
+
+  subInputEdit.classList.toggle("d-none");
+  subEditSpan.classList.toggle("d-none");
+  subEditImgPen.classList.toggle("d-none");
+  subEditImgCheck.classList.toggle("d-none");
+
+  currentSelectedSubTask = index;
+}
+
+function saveSubTask(index) {
+  let subInputEdit = document.getElementById(`subInputEdit-${index}`).value;
+  subTasks[index].description = subInputEdit;
+
+  let subEditSpan = document.getElementById(`subEditSpan-${index}`);
+  let subEditImgPen = document.getElementById(`subEditImgPen-${index}`);
+  let subEditImgCheck = document.getElementById(`subEditImgCheck-${index}`);
+
+  subEditSpan.textContent = subInputEdit;
+
+  document.getElementById(`subInputEdit-${index}`).classList.toggle("d-none");
+  subEditSpan.classList.toggle("d-none");
+  subEditImgPen.classList.toggle("d-none");
+  subEditImgCheck.classList.toggle("d-none");
+
+  renderSubTaskList();
+}
+
+function deleteSubTask(index) {
+  let subInputEdit = document.getElementById(`subInputEdit-${index}`);
+  subTasks[index].description = subInputEdit;
+  subTasks.splice(index, 1);
+
+  renderSubTaskList();
 }
 
 function contactList() {
@@ -170,34 +160,14 @@ function contactList() {
 //   assignedTo.disabled = true;
 // }
 
-function createtTaskBtn() {
-  let title = document.getElementById("titleInput");
-  let description = document.getElementById("descriptionTextarea");
-  title = titleInput.value;
-  description = descriptionTextarea.value;
-
-  let newTask = {
-    id: todos.length + 1,
-    columnTitles: "To Do",
-    category: [],
-    title: title,
-    description: description,
-    //subtasks: [],
-    users: [],
-    prio: [],
-  };
-  todos.push(newTask);
-  goBack();
-}
-
-function goBack() {
-  const referrer = document.referrer;
-  if (referrer) {
-    window.location.href = referrer;
-  } else {
-    window.location.href = "index.html";
-  }
-}
+// function goBack() {
+//   const referrer = document.referrer;
+//   if (referrer) {
+//     window.location.href = referrer;
+//   } else {
+//     window.location.href = "index.html";
+//   }
+// }
 function toggleCheckbox(event) {
   if (event.target.type !== "checkbox") {
     let checkbox = event.currentTarget.querySelector('input[type="checkbox"]');
@@ -205,5 +175,28 @@ function toggleCheckbox(event) {
       checkbox.checked = !checkbox.checked;
       event.currentTarget.classList.toggle("selectedContact", checkbox.checked);
     }
+  }
+}
+
+async function postAddTask() {
+  let title = document.getElementById("titleInput").value;
+  let description = document.getElementById("descriptionTextarea").value;
+  let dueDate = document.getElementById("date").value;
+  let priority = document.getElementById("prio").value;
+  let assignedContacts = [].value;
+
+  let data = {
+    title,
+    description,
+    dueDate,
+    priority,
+    subTasks,
+    assignedContacts,
+  };
+
+  try {
+    await postDataToFirebase("tasks/", data);
+  } catch (error) {
+    console.error(error);
   }
 }
