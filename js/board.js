@@ -99,6 +99,7 @@ function generateTaskCard(task) {
   taskCard.ondragstart = (event) => startDragging(event, task.id);
 
   taskCard.innerHTML = /*html*/ `
+  <div onclick="editTaskPopup()">
     <div class="task-card-category-div">
       <div class="task-card-category">
         <h2 class="task-card-category-h2">${task.category}</h2>
@@ -121,6 +122,7 @@ function generateTaskCard(task) {
         <img src="/assets/icons/priom.png" alt="">
       </div>
     </div>
+    </div>
   `;
 
 let categoryElement = taskCard.querySelector(".task-card-category");
@@ -142,6 +144,12 @@ function startDragging(event, id) {
 
 function allowDrop(event) {
   event.preventDefault();
+}
+
+function editTaskPopup() {
+  let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
+  editTaskPopupDiv.classList.remove("d-none");
+  editTaskPopupDiv.innerHTML = renderTasksCardPopup();
 }
 
 /*function highlight(task) {
