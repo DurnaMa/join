@@ -188,6 +188,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-weight: 400;
 }
 
+.addSubTask{
+  border: none;
+}
+
+.addSubTask:focus{
+  border: none;
+}
+
 #addSubTask {
   display: flex;
   align-items: center;
@@ -199,7 +207,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 #addSubTask img {
-  margin-left: 10px;
+  margin-right: 10px;
   cursor: pointer;
 }
 
