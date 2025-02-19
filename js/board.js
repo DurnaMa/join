@@ -249,7 +249,11 @@ function createTaskPlusAwaitFeedbackBtn() {
 }
 
 function closeAddTaskPopUp() {
-  document.getElementById("addNewTaskDiv").classList.add("d-none");
+  document.getElementById("addNewTaskBtnDiv").classList.add("d-none");
+}
+
+function closeTaskCardPopUp() {
+  document.getElementById("editTaskPopupDiv").classList.add("d-none");
 }
 
 function addTaskPopupBtn() {

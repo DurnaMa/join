@@ -85,7 +85,7 @@ function renderTasksCardPopup() {
           <div class="taskCardPopupCategoryColor">
             <h2>Technical task</h2>
           </div>
-          <img src="/assets/icons/close.png" alt="" />
+          <img onclick="closeTaskCardPopUp()" src="/assets/icons/close.png" alt="" />
         </div>
         <div class="taskCardPopupTitle">Test Test Test Versuche</div>
         <div class="taskCardPopupDescription">
