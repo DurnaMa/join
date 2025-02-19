@@ -107,10 +107,13 @@ function generateTaskCard(task) {
     </div>
     <h3>${task.title}</h3>
     <p>${task.description}</p>
-    <div class="task-status">
+    
     <div class="progress-container">
         <div class="progress-bar-container">
-            <div class="progress-bar" id="progress-bar"></div>
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="subtasks-div">
+          <span class="subtasks-amount" id="subtasksAmount">0/2 Subtasks</span>
         </div>
     </div>
         <div class="task-footer">    
@@ -123,17 +126,16 @@ function generateTaskCard(task) {
         <img src="/assets/icons/priom.png" alt="">
       </div>
     </div>
-    </div>
   `;
 
-let categoryElement = taskCard.querySelector(".task-card-category");
-if (categoryElement) {
-  if (task.category === "User story") {
-    categoryElement.style.backgroundColor = "#0038FF";
-  } else if (task.category === "Technical task") {
-    categoryElement.style.backgroundColor = "#1FD7C1";
+  let categoryElement = taskCard.querySelector(".task-card-category");
+  if (categoryElement) {
+    if (task.category === "User story") {
+      categoryElement.style.backgroundColor = "#0038FF";
+    } else if (task.category === "Technical task") {
+      categoryElement.style.backgroundColor = "#1FD7C1";
+    }
   }
-}
 
   return taskCard;
 }
@@ -175,16 +177,16 @@ function updateSteps() {
   const checkboxes = document.querySelectorAll('.step input[type="checkbox"]');
   let checkedCount = 0;
   checkboxes.forEach((checkbox, index) => {
-      const label = checkbox.nextElementSibling;
-      if (checkbox.checked) {
-          label.style.color = "green";
-          checkedCount++;
-      } else {
-          label.style.color = "black";
-      }
+    const label = checkbox.nextElementSibling;
+    if (checkbox.checked) {
+      label.style.color = "#4599FF";
+      checkedCount++;
+    } else {
+      label.style.color = "black";
+    }
   });
- 
-  const progressBar = document.getElementById("progress-bar");
+
+  const progressBar = document.getElementById("progressBar");
   const progressPercentage = (checkedCount / checkboxes.length) * 100;
   progressBar.style.width = progressPercentage + "%";
 }

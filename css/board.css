@@ -290,12 +290,6 @@
   padding-top: 16px;
 }
 
-.task-status {
-  padding-top: 16px;
-  display: flex;
-  flex-direction: column;
-}
-
 /*.progress {
   display: flex;
 }
@@ -307,7 +301,7 @@
   padding-top: 8px;
 }*/
 
-.progress {
+/*.progress {
   width: 100%;
   background-color: #e0e0e0;
   border-radius: 8px;
@@ -321,37 +315,59 @@
   height: 100%;
   background: linear-gradient(90deg, #4CAF50, #76c7c0);
   transition: width 0.5s ease-in-out;
-}
+}*/
 
 /*----- new progressbar -----*/
 .progress-container {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 300px;
+  gap: 8px;
+  width: 220px;
+  height: 16px;
 }
+
 .step {
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
 .step label {
   font-size: 16px;
 }
+
 .progress-bar-container {
-  width: 100%;
+  display: flex;
+  align-items: center;
+  width: 128px;
+  height: 8px;
   background-color: #ddd;
-  height: 20px;
   border-radius: 10px;
   overflow: hidden;
-  margin-top: 20px;
 }
+
 .progress-bar {
-  height: 100%;
-  width: 0%;
-  background-color: green;
+  width: 64px;
+  height: 8px;
+  border-radius: 16px;
+  background-color: #4599FF;
   transition: width 0.3s ease-in-out;
 }
+
+.subtasks-div {
+  display: flex;
+  align-items: center;
+  height: 14px;
+  left: 139px;
+}
+
+.subtasks-amount {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.4px;
+  letter-spacing: 0%;
+}
+
 /*-------end----------*/
 .tasks-user {
   color: white;
