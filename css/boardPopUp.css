@@ -223,7 +223,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   max-height: 140px;
   overflow: auto;
   position: absolute;
-  top: 753px;
+  top: 598px;
   width: inherit;
 }
 

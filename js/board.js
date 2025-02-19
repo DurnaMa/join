@@ -303,3 +303,13 @@ function createtTaskBtn() {
   renderTasks();
   //closeAddTaskPopUp();
 }
+
+function addSubTaskPopUp() {
+  if (subTaskPopUp.value != "") {
+    subTasks.push({
+      description: subTaskPopUp.value,
+    });
+    renderSubTaskList();
+    subTaskPopUp.value = "";
+  }
+}
