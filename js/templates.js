@@ -52,8 +52,8 @@ function renderAddTaskPoupBtn() {
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
-              <input id="subTask" class="addSubTask" placeholder="Add new subtask" type="text" />
-              <img onclick="addSubTask()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
+              <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
+              <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
             <ul id="subTaskList"></ul>
           </section>
@@ -77,7 +77,7 @@ function renderAddTaskPoupBtn() {
 }
 
 function renderTasksCardPopup() {
-  return /*html*/`
+  return /*html*/ `
     <div id="taskPopUp">
       <div class="shadow-div d-none"></div>
       <div class="taskCardPopup">
@@ -104,9 +104,16 @@ function renderTasksCardPopup() {
         </div>
         <label class="taskCardPopupLabel">Subtasks</label>
         <div class="taskCardPopupSubTasks">
-          <div><input type="checkbox" name="" id="">Find the board.</div>
-          <div><input type="checkbox" name="" id="">First read all tutorials.</div>
-          <div><input type="checkbox" name="" id="">Add a new task.</div>
+        <div class="progress-container">
+          <div class="step">
+            <input type="checkbox" id="step1" onchange="updateSteps()">
+            <label for="step1">Schritt 1</label>
+          </div>
+          <div class="step">
+            <input type="checkbox" id="step2" onchange="updateSteps()">
+            <label for="step2">Schritt 2</label>
+          </div>
+        </div>
 
         </div>
         <div class="taskCardPopupButtons">
@@ -116,7 +123,7 @@ function renderTasksCardPopup() {
         </div>
       </div>
     </div>
-  `
+  `;
 }
 
 function renderAddTaskPopupToDoPlus() {
@@ -305,4 +312,3 @@ function editContactPopup() {
   </div>
   `;
 }
-

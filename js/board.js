@@ -99,7 +99,7 @@ function generateTaskCard(task) {
   taskCard.ondragstart = (event) => startDragging(event, task.id);
 
   taskCard.innerHTML = /*html*/ `
-  <div onclick="editTaskPopup()">
+  <div class="task-card-div" onclick="editTaskPopup()">
     <div class="task-card-category-div">
       <div class="task-card-category">
         <h2 class="task-card-category-h2">${task.category}</h2>
@@ -108,10 +108,11 @@ function generateTaskCard(task) {
     <h3>${task.title}</h3>
     <p>${task.description}</p>
     <div class="task-status">
-      <div class="progress">
-        <div class="progress-bar" id="progressbar" style="width: 0%"></div>
-          <span>0/2 Subtasks</span>
+    <div class="progress-container">
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
         </div>
+    </div>
         <div class="task-footer">    
           <div class="task-users">
             <div class="tasks-user1 tasks-user">HA</div>
@@ -168,6 +169,24 @@ function drop(event, column) {
     task.columnTitles = column;
     renderTasks();
   }
+}
+
+function updateSteps() {
+  const checkboxes = document.querySelectorAll('.step input[type="checkbox"]');
+  let checkedCount = 0;
+  checkboxes.forEach((checkbox, index) => {
+      const label = checkbox.nextElementSibling;
+      if (checkbox.checked) {
+          label.style.color = "green";
+          checkedCount++;
+      } else {
+          label.style.color = "black";
+      }
+  });
+ 
+  const progressBar = document.getElementById("progress-bar");
+  const progressPercentage = (checkedCount / checkboxes.length) * 100;
+  progressBar.style.width = progressPercentage + "%";
 }
 
 function addTaskPopupPlusToDoBtn() {
