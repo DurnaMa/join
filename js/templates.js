@@ -4,6 +4,7 @@ function renderAddTaskPoupBtn() {
 <div class="shadow-div d-none"></div>
 <div class="add-edit-popup-task-div">
   <div class="addTaskContent">
+  <div class="addTaskClose"><img onclick="closeAddTaskPopUp()" src="/assets/icons/close.png" alt=""></div>
       <div class="headlineDiv"><h1>Add Task</h1></div>
       <form onsubmit="return false">
         <div class="formParts">
@@ -64,9 +65,6 @@ function renderAddTaskPoupBtn() {
           </p>
           <div class="btnSection">
             <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
-            <!-- <button onclick="createtTaskBtn()" class="button">
-              Create Task <img src="/assets/icons/check.png" alt="" />
-            </button> -->
             <button onclick="postAddTask()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>

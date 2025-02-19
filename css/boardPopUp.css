@@ -49,7 +49,7 @@ form {
 .formPartLeft {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
   width: 440px;
   height: 376px;
 }
@@ -61,7 +61,7 @@ form {
 textarea {
   resize: none;
   padding-top: 20px;
-  min-height: 120px;
+  min-height: 140px;
   max-height: 140px;
   max-width: 495px;
 }
@@ -73,7 +73,7 @@ textarea {
 .formPartRight {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   width: 440px;
   height: 416px;
 }
@@ -372,7 +372,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   max-height: 165px;
   overflow: auto;
   position: absolute;
-  top: 719px;
+  top: 565px;
   width: inherit;
 }
 
