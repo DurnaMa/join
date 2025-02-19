@@ -52,6 +52,7 @@ let todos = [
 ];
 
 let currentDraggedElement;
+let currentSelectedTask;
 
 async function initBoard() {
   await loadDataUsers();
@@ -150,10 +151,13 @@ function allowDrop(event) {
   event.preventDefault();
 }
 
-function editTaskPopup(task) {
+function editTaskPopup() {
+  let id = todos.findIndex((task) => task.id == currentDraggedElement);
+  let currentSelectedTask = todos[id];
+  
   let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
   editTaskPopupDiv.classList.remove("d-none");
-  editTaskPopupDiv.innerHTML = renderTasksCardPopup(task);
+  editTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
 }
 
 /*function highlight(task) {
