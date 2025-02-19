@@ -183,15 +183,23 @@ async function postAddTask() {
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
   let priority = document.getElementById("prio").value;
-  let assignedContacts = [].value;
+  let prioUrgentEdit = document.getElementById("prioUrgentEdit").value;
+  let prioMediumEdit = document.getElementById("prioMediumEdit").value;
+  let prioLowEdit = document.getElementById("prioLowEdit").value;
+  let category = document.getElementById("category").value;
+  let assignedContactContent = document.getElementById("assignedContactContent");
 
   let data = {
     title,
     description,
     dueDate,
     priority,
+    prioUrgentEdit,
+    prioMediumEdit,
+    prioLowEdit,
     subTasks,
-    assignedContacts,
+    category,
+    assignedContactContent
   };
 
   try {
