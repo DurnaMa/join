@@ -35,7 +35,6 @@ function addSubTask() {
   if (subTask.value != "") {
     subTasks.push({
       description: subTask.value,
-      completed: true,
     });
     renderSubTaskList();
     subTask.value = "";
@@ -140,34 +139,6 @@ function contactList() {
   contactList.classList.toggle("d-flex");
 }
 
-// window.onclick = function (event) {
-//   if (!event.target.matches(".assignedTo")) {
-//     let dropdowns = document.getElementsByClassName("selecassignedTot");
-//     let assignedTOUsserIndex;
-//     for (assignedTOUsserIndex = 0; assignedTOUsserIndex < dropdowns.length; assignedTOUsserIndex++) {
-//       let openDropdown = dropdowns[assignedTOUsserIndex];
-//       if (openDropdown.classList.contains("show")) {
-//         openDropdown.classList.remove("show");
-//       }
-//     }
-//   }
-// };
-
-// async function assignedTOUsser() {
-//   let user = await loadDataUsers();
-//   let assignedTo = document.getElementById("assignedContactsList").classList.toggle("show");
-//   assignedTo.value = user.name;
-//   assignedTo.disabled = true;
-// }
-
-// function goBack() {
-//   const referrer = document.referrer;
-//   if (referrer) {
-//     window.location.href = referrer;
-//   } else {
-//     window.location.href = "index.html";
-//   }
-// }
 function toggleCheckbox(event) {
   if (event.target.type !== "checkbox") {
     let checkbox = event.currentTarget.querySelector('input[type="checkbox"]');
