@@ -20,6 +20,16 @@
   gap: 10px;
 }
 
+.addTaskClose{
+  position: relative;
+  margin-left: auto;
+  top: 23px;
+}
+
+.addTaskClose img{
+  cursor: pointer;
+}
+
 .taskCardPopupCategory {
   display: flex;
   justify-content: space-between;
