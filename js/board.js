@@ -22,7 +22,7 @@ let todos = [
   {
     id: 3,
     columnTitles: "Await feedback",
-    category: "",
+    category: "Technical task",
     title: "Task 3",
     description: "Task 3 description",
     subTask: [],
@@ -32,7 +32,7 @@ let todos = [
   {
     id: 4,
     columnTitles: "Done",
-    category: "",
+    category: "Technical task",
     title: "Task 4",
     description: "Task 4 description",
     subTask: [],
@@ -53,7 +53,8 @@ let todos = [
 
 let currentDraggedElement;
 
-function initBoard() {
+async function initBoard() {
+  await loadDataUsers();
   renderTasks();
 }
 
@@ -118,7 +119,7 @@ function generateTaskCard(task) {
     </div>
         <div class="task-footer">    
           <div class="task-users">
-            <div class="tasks-user1 tasks-user">HA</div>
+            <div class="tasks-user1 tasks-user">${task.users}</div>
             <div class="tasks-user2 tasks-user">MD</div>
             <div class="tasks-user3 tasks-user">DL</div>
           </div>
@@ -149,10 +150,10 @@ function allowDrop(event) {
   event.preventDefault();
 }
 
-function editTaskPopup() {
+function editTaskPopup(task) {
   let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
   editTaskPopupDiv.classList.remove("d-none");
-  editTaskPopupDiv.innerHTML = renderTasksCardPopup();
+  editTaskPopupDiv.innerHTML = renderTasksCardPopup(task);
 }
 
 /*function highlight(task) {
@@ -176,7 +177,8 @@ function drop(event, column) {
 function updateSteps() {
   const checkboxes = document.querySelectorAll('.step input[type="checkbox"]');
   let checkedCount = 0;
-  checkboxes.forEach((checkbox, index) => {
+  for (let i = 0; i < checkboxes.length; i++) {
+    const checkbox = checkboxes[i];
     const label = checkbox.nextElementSibling;
     if (checkbox.checked) {
       label.style.color = "#4599FF";
@@ -184,7 +186,7 @@ function updateSteps() {
     } else {
       label.style.color = "black";
     }
-  });
+  };
 
   const progressBar = document.getElementById("progressBar");
   const progressPercentage = (checkedCount / checkboxes.length) * 100;
