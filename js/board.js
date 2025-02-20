@@ -120,7 +120,7 @@ function generateTaskCard(task) {
     </div>
         <div class="task-footer">    
           <div class="task-users">
-            <div class="tasks-user1 tasks-user">${task.users}</div>
+            <div class="tasks-user1 tasks-user">${contacts.users}</div>
             <div class="tasks-user2 tasks-user">MD</div>
             <div class="tasks-user3 tasks-user">DL</div>
           </div>
@@ -151,6 +151,30 @@ function allowDrop(event) {
   event.preventDefault();
 }
 
+/*function editTaskPopup() {
+  if (!currentDraggedElement) {
+    console.error("Fehler: currentDraggedElement ist nicht definiert.");
+    return;
+  }
+
+  let id = todos.findIndex((task) => task.id === currentDraggedElement);
+  if (id === -1) {
+    console.error("Fehler: Keine Aufgabe mit der angegebenen ID gefunden.");
+    return;
+  }
+
+  let currentSelectedTask = todos[id];
+  let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
+  
+  if (!editTaskPopupDiv) {
+    console.error("Fehler: Element mit ID 'editTaskPopupDiv' nicht gefunden.");
+    return;
+  }
+
+  editTaskPopupDiv.classList.remove("d-none");
+  editTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
+}*/
+
 function editTaskPopup() {
   let id = todos.findIndex((task) => task.id == currentDraggedElement);
   let currentSelectedTask = todos[id];
@@ -180,6 +204,36 @@ function drop(event, column) {
 
 function updateSteps() {
   const checkboxes = document.querySelectorAll('.step input[type="checkbox"]');
+ 
+  if (!checkboxes.length) {
+    console.error("Fehler: Keine Checkboxen gefunden.");
+    return;
+  }
+
+  let checkedCount = 0;
+ 
+  checkboxes.forEach((checkbox) => {
+    const label = checkbox.nextElementSibling;
+    if (label) {
+      label.style.color = checkbox.checked ? "#4599FF" : "black";
+    }
+    if (checkbox.checked) {
+      checkedCount++;
+    }
+  });
+
+  const progressBar = document.getElementById("progressBar");
+  if (!progressBar) {
+    console.error("Fehler: Fortschrittsbalken nicht gefunden.");
+    return;
+  }
+ 
+  const progressPercentage = (checkedCount / checkboxes.length) * 100;
+  progressBar.style.width = `${progressPercentage}%`;
+}
+
+/*function updateSteps() {
+  const checkboxes = document.querySelectorAll('.step input[type="checkbox"]');
   let checkedCount = 0;
   for (let i = 0; i < checkboxes.length; i++) {
     const checkbox = checkboxes[i];
@@ -195,7 +249,7 @@ function updateSteps() {
   const progressBar = document.getElementById("progressBar");
   const progressPercentage = (checkedCount / checkboxes.length) * 100;
   progressBar.style.width = progressPercentage + "%";
-}
+}*/
 
 function addTaskPopupPlusToDoBtn() {
   let addNewTaskDiv = document.getElementById("addNewTaskDiv");
