@@ -309,23 +309,31 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .subTask:hover {
-  background-color: #eeeeee;
+  background-color: white;
 }
 
-.subTask.editing {
-  background-color: white;
+.subTask:focus {
+  border-bottom: 2px solid #29abe2
 }
 
 .subTask-edit-input {
   flex-grow: 1;
   padding: 5px;
   font-size: 16px;
-  border: none !important;
+  border-bottom: 2px solid #29abe2;
+  border-top: none;
+  border-left: none;
+  border-right: none;
   outline: none;
   background: white;
   border-radius: 0;
   height: auto;
   appearance: none;
+}
+
+.subTask-edit-input:focus {
+  border: none;
+  border-bottom: 2px solid #29abe2;
 }
 
 .subTask span {

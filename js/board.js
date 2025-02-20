@@ -322,12 +322,19 @@ function addSubTaskPopUp() {
   }
 }
 
+// subTaskPopUp.addEventListener("keydown", function (event) {
+//   if (event.key === "Enter") {
+//     event.preventDefault();
+//     addSubTaskPopUp();
+//   }
+// });
+
 
 // Test 
 
 function contactListPopUp() {
   console.log("triger");
-  let contactList = document.getElementById("assignedContactsList");
+  let contactList = document.getElementById("assignedContactsListPopUp");
   contactList.innerHTML = "";
   contacts.forEach((contact) => {
     const initials = generateInitialsPopUp(contact.name);

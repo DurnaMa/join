@@ -1,6 +1,5 @@
 async function initAddTask() {
   await loadDataUsers();
-  contactList();
 }
 
 let subTask = document.getElementById("subTask");
