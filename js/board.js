@@ -321,3 +321,33 @@ function addSubTaskPopUp() {
     subTaskPopUp.value = "";
   }
 }
+
+
+// Test 
+
+function contactListPopUp() {
+  console.log("triger");
+  let contactList = document.getElementById("assignedContactsList");
+  contactList.innerHTML = "";
+  contacts.forEach((contact) => {
+    const initials = generateInitialsPopUp(contact.name);
+    contactList.innerHTML += /*html*/ `
+      <div class="assignedContactContent" onclick="toggleCheckbox(event)">
+        <div class="assignedContacts">
+          <span class="assignedShortcutName">${initials}</span>
+          <span class="assignedName">${contact.name}</span>
+        </div>
+        <input type="checkbox" name="contact-${contact.id}" id="contact-${contact.id}">
+      </div>
+    `;
+  });
+  contactList.classList.toggle("hidden");
+  contactList.classList.toggle("d-flex");
+}
+
+function generateInitialsPopUp(name) {
+  const nameParts = name.split(" ");
+  const firstInitial = nameParts[0]?.charAt(0) || "";
+  const lastInitial = nameParts[1]?.charAt(0) || "";
+  return `${firstInitial}${lastInitial}`.toUpperCase();
+}

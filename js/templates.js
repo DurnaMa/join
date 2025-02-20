@@ -16,14 +16,14 @@ function renderAddTaskPoupBtn() {
             <textarea id="descriptionTextarea" rows="5" placeholder="Enter a Description"></textarea>
             <br />
             <label for="contactSelection">Assigned to</label>
-            <div onclick="contactList()" class="assignedContainer">
+            <div onclick="contactListPopUp()" class="assignedContainer">
               <span>Select contacts to assign</span>
               <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
               <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
             </div>
             <div id="assignedContactsList" class="d-flex"></div>
           </section>
-          <hr />
+          <hr class="hrBoardPopUp" />
           <section class="formPartRight">
             <label for="dueDate">Due Date<span class="required">*</span> </label>
             <input type="date" id="date" />
@@ -118,7 +118,7 @@ function renderTasksCardPopup() {
         </div>
         <div class="taskCardPopupButtons">
           <div><img src="/assets/icons/deleteContact.png" alt="">Delete</div>
-          <hr>
+          <hr class="hrBoardTaskPopUp">
           <div><img src="/assets/icons/edit-pencil.png" alt="">Edit</div>
         </div>
       </div>
