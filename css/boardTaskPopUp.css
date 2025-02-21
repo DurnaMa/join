@@ -1,4 +1,5 @@
-.taskCardPopup {
+.taskCardPopup,
+.taskCardEditPopup {
   display: flex;
   flex-direction: column;
   overflow: auto;
@@ -145,4 +146,10 @@
 .taskCardPopupButtons div img:hover{
     color: #007CEE;
     filter: brightness(0) saturate(100%) invert(42%) sepia(94%) saturate(3361%) hue-rotate(190deg) brightness(100%) contrast(103%);
+}
+
+
+.taskCardEditClosePopup{
+  width: 15px;
+  height: 15px;
 }

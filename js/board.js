@@ -1,3 +1,55 @@
+// let todos = [
+//   {
+//     id: 1,
+//     columnTitles: "Await feedback",
+//     category: "User story",
+//     title: "Task 1",
+//     description: "Task 1 description",
+//     subTask: ["test1", "test2"],
+//     users: [],
+//     prio: [],
+//   },
+//   {
+//     id: 2,
+//     columnTitles: "In progress",
+//     category: "Technical task",
+//     title: "Task 2",
+//     description: "Task 2 description",
+//     subTask: ["test3", "test4"],
+//     users: [],
+//     prio: [],
+//   },
+//   {
+//     id: 3,
+//     columnTitles: "Await feedback",
+//     category: "Technical task",
+//     title: "Task 3",
+//     description: "Task 3 description",
+//     subTask: [],
+//     users: [],
+//     prio: [],
+//   },
+//   {
+//     id: 4,
+//     columnTitles: "Done",
+//     category: "Technical task",
+//     title: "Task 4",
+//     description: "Task 4 description",
+//     subTask: [],
+//     users: [],
+//     prio: [],
+//   },
+//   {
+//     id: 5,
+//     columnTitles: "In progress",
+//     category: "User story",
+//     title: "Task 5",
+//     description: "Task 5 description",
+//     subTask: [],
+//     users: [],
+//     prio: [],
+//   },
+// ];
 let todos = [
   {
     id: 1,
@@ -5,7 +57,7 @@ let todos = [
     category: "User story",
     title: "Task 1",
     description: "Task 1 description",
-    subTask: [],
+    subTask: [{ name: "test1", completed: false }, { name: "test2", completed: false }],
     users: [],
     prio: [],
   },
@@ -15,17 +67,17 @@ let todos = [
     category: "Technical task",
     title: "Task 2",
     description: "Task 2 description",
-    subTask: [],
+    subTask: [{ name: "test3", completed: false }, { name: "test4", completed: false }],
     users: [],
     prio: [],
   },
   {
     id: 3,
     columnTitles: "Await feedback",
-    category: "Technical task",
+    category: "User story",
     title: "Task 3",
     description: "Task 3 description",
-    subTask: [],
+    subTask: [{ name: "test5", completed: false }, { name: "test6", completed: false },{ name: "test6.3", completed: false },{ name: "test6.4", completed: false },{ name: "test6.5", completed: false }],
     users: [],
     prio: [],
   },
@@ -35,21 +87,21 @@ let todos = [
     category: "Technical task",
     title: "Task 4",
     description: "Task 4 description",
-    subTask: [],
+    subTask: [{ name: "test7", completed: false }, { name: "test8", completed: false }],
     users: [],
     prio: [],
-  },
-  {
+  },{
     id: 5,
-    columnTitles: "In progress",
+    columnTitles: "To Do",
     category: "User story",
     title: "Task 5",
     description: "Task 5 description",
-    subTask: [],
+    subTask: [{ name: "test9", completed: false }, { name: "test10", completed: false }],
     users: [],
     prio: [],
-  },
+  }
 ];
+
 
 let currentDraggedElement;
 let currentSelectedTask;
@@ -59,6 +111,20 @@ async function initBoard() {
   renderTasks();
 }
 
+// function renderTasks() {
+//   document.getElementById("todo").innerHTML = "";
+//   document.getElementById("inprogress").innerHTML = "";
+//   document.getElementById("awaitfeedback").innerHTML = "";
+//   document.getElementById("done").innerHTML = "";
+
+//   todos.forEach((task) => {
+//     let taskCard = generateTaskCard(task);
+//     let columnId = task.columnTitles.toLowerCase().replace(" ", "");
+//     document.getElementById(columnId).appendChild(taskCard);
+//   });
+
+//   checkEmptyColumns();
+// }
 function renderTasks() {
   document.getElementById("todo").innerHTML = "";
   document.getElementById("inprogress").innerHTML = "";
@@ -67,17 +133,27 @@ function renderTasks() {
 
   todos.forEach((task) => {
     let taskCard = generateTaskCard(task);
-    let columnId = task.columnTitles.toLowerCase().replace(" ", "");
+    let columnId = task.columnTitles ? task.columnTitles.toLowerCase().replace(" ", "") : "todo";
     document.getElementById(columnId).appendChild(taskCard);
   });
 
   checkEmptyColumns();
 }
 
+// function checkEmptyColumns() {
+//   document.querySelectorAll(".column").forEach((column) => {
+//     if (!column.hasChildNodes()) {
+//       column.innerHTML = generateEmptyColumn();
+//     } else {
+//       let noTasksElement = column.querySelector(".no-tasks");
+//       if (noTasksElement) noTasksElement.remove();
+//     }
+//   });
+// }
 function checkEmptyColumns() {
   document.querySelectorAll(".column").forEach((column) => {
-    if (!column.hasChildNodes()) {
-      column.innerHTML = generateEmptyColumn();
+    if (!column.hasChildNodes() || column.children.length === 0) {
+      column.innerHTML = generateEmptyColumn(column.id);
     } else {
       let noTasksElement = column.querySelector(".no-tasks");
       if (noTasksElement) noTasksElement.remove();
@@ -85,15 +161,89 @@ function checkEmptyColumns() {
   });
 }
 
-function generateEmptyColumn() {
+// function generateEmptyColumn() {
+//   return /*html*/ `
+//     <div class="empty-column">
+//       <p>No tasks</p>
+//     </div>
+//   `;
+// }
+function generateEmptyColumn(columnId) {
+  let text = "";
+  switch (columnId) {
+    case "todo":
+      text = "No tasks To Do";
+      break;
+    case "inprogress":
+      text = "No tasks In Progress";
+      break;
+    case "awaitfeedback":
+      text = "No tasks Await Feedback";
+      break;
+    case "done":
+      text = "No tasks Done";
+      break;
+  }
+
   return /*html*/ `
     <div class="empty-column">
-      <p>No tasks</p>
+      <p>${text}</p>
     </div>
   `;
 }
 
+// function generateTaskCard(task) {
+//   let taskCard = document.createElement("div");
+//   taskCard.classList.add("task-card");
+//   taskCard.id = `task-${task.id}`;
+//   taskCard.draggable = true;
+//   taskCard.ondragstart = (event) => startDragging(event, task.id);
+
+//   taskCard.innerHTML = /*html*/ `
+//   <div class="task-card-div" onclick="editTaskPopup()">
+//     <div class="task-card-category-div">
+//       <div class="task-card-category">
+//         <h2 class="task-card-category-h2">${task.category}</h2>
+//       </div>
+//     </div>
+//     <h3>${task.title}</h3>
+//     <p>${task.description}</p>
+    
+//     <div class="progress-container">
+//         <div class="progress-bar-container">
+//             <div class="progress-bar" id="progressBar"></div>
+//         </div>
+//         <div class="subtasks-div">
+//           <span class="subtasks-amount" id="subtasksAmount">0/2 Subtasks</span>
+//         </div>
+//     </div>
+//         <div class="task-footer">    
+//           <div class="task-users">
+//             <div class="tasks-user1 tasks-user">${contacts.users}</div>
+//             <div class="tasks-user2 tasks-user">MD</div>
+//             <div class="tasks-user3 tasks-user">DL</div>
+//           </div>
+//         <div>
+//         <img src="/assets/icons/priom.png" alt="">
+//       </div>
+//     </div>
+//   `;
+
+//   let categoryElement = taskCard.querySelector(".task-card-category");
+//   if (categoryElement) {
+//     if (task.category === "User story") {
+//       categoryElement.style.backgroundColor = "#0038FF";
+//     } else if (task.category === "Technical task") {
+//       categoryElement.style.backgroundColor = "#1FD7C1";
+//     }
+//   }
+
+//   return taskCard;
+// }
 function generateTaskCard(task) {
+  let completedSubtasks = task.subTask ? task.subTask.filter(st => st.completed).length : 0;
+  let totalSubtasks = task.subTask ? task.subTask.length : 0;
+  
   let taskCard = document.createElement("div");
   taskCard.classList.add("task-card");
   taskCard.id = `task-${task.id}`;
@@ -101,7 +251,7 @@ function generateTaskCard(task) {
   taskCard.ondragstart = (event) => startDragging(event, task.id);
 
   taskCard.innerHTML = /*html*/ `
-  <div class="task-card-div" onclick="editTaskPopup()">
+  <div class="task-card-div" onclick="editTaskPopup(${task.id})">
     <div class="task-card-category-div">
       <div class="task-card-category">
         <h2 class="task-card-category-h2">${task.category}</h2>
@@ -112,32 +262,32 @@ function generateTaskCard(task) {
     
     <div class="progress-container">
         <div class="progress-bar-container">
-            <div class="progress-bar" id="progressBar"></div>
+            <div class="progress-bar" id="progressBar-${task.id}" style="width: ${(completedSubtasks / totalSubtasks) * 100}%;"></div>
         </div>
         <div class="subtasks-div">
-          <span class="subtasks-amount" id="subtasksAmount">0/2 Subtasks</span>
+          <span class="subtasks-amount" id="subtasksAmount-${task.id}">${completedSubtasks}/${totalSubtasks} Subtasks</span>
         </div>
     </div>
-        <div class="task-footer">    
-          <div class="task-users">
-            <div class="tasks-user1 tasks-user">${contacts.users}</div>
-            <div class="tasks-user2 tasks-user">MD</div>
-            <div class="tasks-user3 tasks-user">DL</div>
-          </div>
+    <div class="task-footer">    
+      <div class="task-users">
+          <div class="tasks-user1 tasks-user">${contacts.users}</div>
+          <div class="tasks-user2 tasks-user">MD</div>
+          <div class="tasks-user3 tasks-user">DL</div>
+        </div>
         <div>
-        <img src="/assets/icons/priom.png" alt="">
-      </div>
-    </div>
+          <img src="/assets/icons/priom.png" alt="">
+        </div>
+  </div>
   `;
 
   let categoryElement = taskCard.querySelector(".task-card-category");
-  if (categoryElement) {
-    if (task.category === "User story") {
-      categoryElement.style.backgroundColor = "#0038FF";
-    } else if (task.category === "Technical task") {
-      categoryElement.style.backgroundColor = "#1FD7C1";
+    if (categoryElement) {
+      if (task.category === "User story") {
+        categoryElement.style.backgroundColor = "#0038FF";
+      } else if (task.category === "Technical task") {
+        categoryElement.style.backgroundColor = "#1FD7C1";
+      }
     }
-  }
 
   return taskCard;
 }
@@ -174,15 +324,23 @@ function allowDrop(event) {
   editTaskPopupDiv.classList.remove("d-none");
   editTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
 }*/
-
-function editTaskPopup() {
-  let id = todos.findIndex((task) => task.id == currentDraggedElement);
+function editTaskPopup(taskId) {
+  let id = todos.findIndex((task) => task.id == taskId);
   let currentSelectedTask = todos[id];
   
   let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
   editTaskPopupDiv.classList.remove("d-none");
   editTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
 }
+
+// function editTaskPopup() {
+//   let id = todos.findIndex((task) => task.id == currentDraggedElement);
+//   let currentSelectedTask = todos[id];
+  
+//   let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
+//   editTaskPopupDiv.classList.remove("d-none");
+//   editTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
+// }
 
 /*function highlight(task) {
   document.getElementById(task).classList.add("drag-area-highlight");
@@ -200,36 +358,6 @@ function drop(event, column) {
     task.columnTitles = column;
     renderTasks();
   }
-}
-
-function updateSteps() {
-  const checkboxes = document.querySelectorAll('.step input[type="checkbox"]');
- 
-  if (!checkboxes.length) {
-    console.error("Fehler: Keine Checkboxen gefunden.");
-    return;
-  }
-
-  let checkedCount = 0;
- 
-  checkboxes.forEach((checkbox) => {
-    const label = checkbox.nextElementSibling;
-    if (label) {
-      label.style.color = checkbox.checked ? "#4599FF" : "black";
-    }
-    if (checkbox.checked) {
-      checkedCount++;
-    }
-  });
-
-  const progressBar = document.getElementById("progressBar");
-  if (!progressBar) {
-    console.error("Fehler: Fortschrittsbalken nicht gefunden.");
-    return;
-  }
- 
-  const progressPercentage = (checkedCount / checkboxes.length) * 100;
-  progressBar.style.width = `${progressPercentage}%`;
 }
 
 /*function updateSteps() {
@@ -250,6 +378,31 @@ function updateSteps() {
   const progressPercentage = (checkedCount / checkboxes.length) * 100;
   progressBar.style.width = progressPercentage + "%";
 }*/
+function updateSteps(taskId) {
+  let task = todos.find(t => t.id === taskId);
+  if (!task || !task.subTask) return;
+
+  const checkboxes = document.querySelectorAll(`#taskPopUp[data-task-id='${taskId}'] .step input[type='checkbox']`);
+  let checkedCount = 0;
+ 
+  checkboxes.forEach((checkbox, index) => {
+    task.subTask[index].completed = checkbox.checked;
+    if (checkbox.checked) {
+      checkedCount++;
+    }
+  });
+
+  const progressBar = document.getElementById(`progressBar-${taskId}`);
+  if (progressBar) {
+    const progressPercentage = (checkedCount / checkboxes.length) * 100;
+    progressBar.style.width = `${progressPercentage}%`;
+  }
+
+  const subtasksAmount = document.getElementById(`subtasksAmount-${taskId}`);
+  if (subtasksAmount) {
+    subtasksAmount.textContent = `${checkedCount}/${checkboxes.length} Subtasks`;
+  }
+}
 
 function addTaskPopupPlusToDoBtn() {
   let addNewTaskDiv = document.getElementById("addNewTaskDiv");
@@ -412,3 +565,4 @@ function generateInitialsPopUp(name) {
   const lastInitial = nameParts[1]?.charAt(0) || "";
   return `${firstInitial}${lastInitial}`.toUpperCase();
 }
+

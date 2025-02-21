@@ -76,51 +76,90 @@ function renderAddTaskPoupBtn() {
     `;
 }
 
-function renderTasksCardPopup() {
-  return /*html*/ `
-    <div id="taskPopUp">
-      <div class="shadow-div d-none"></div>
-      <div class="taskCardPopup">
-        <div class="taskCardPopupCategory">
-          <div class="taskCardPopupCategoryColor">
-            <h2>Technical task</h2>
-          </div>
-          <img onclick="closeTaskCardPopUp()" src="/assets/icons/close.png" alt="" />
-        </div>
-        <div class="taskCardPopupTitle">Test Test Test Versuche</div>
-        <div class="taskCardPopupDescription">
-          Welcome to Join. Here you can find your default board. This board
-          represents your project and contains four default lists: "To do", "In
-          progress", "Await feedback" and "Done".
-        </div>
-        <div class="taskCardPopupDate">Due date: 2024-10-30</div>
-        <div class="taskCardPopupPrio">
-          Priority: medium <img src="/assets/icons/mediumYellow.png" alt=""></div>
-        <label class="taskCardPopupLabel">Assigned To:</label>
-        <div class="taskCardPopupContact">
-          <div class="taskCardPopupContactUsers tasks-user1">DL</div>
-          <div class="taskCardPopupContactUsers tasks-user2">HA</div>
-          <div class="taskCardPopupContactUsers tasks-user3">MD</div>
-        </div>
-        <label class="taskCardPopupLabel">Subtasks</label>
-        <div class="taskCardPopupSubTasks">
-        <div class="progress-container">
-          <div class="step">
-            <input type="checkbox" id="step1" onchange="updateSteps()">
-            <label for="step1">Schritt 1</label>
-          </div>
-          <div class="step">
-            <input type="checkbox" id="step2" onchange="updateSteps()">
-            <label for="step2">Schritt 2</label>
-          </div>
-        </div>
+// function renderTasksCardPopup() {
+//   return /*html*/ `
+//     <div id="taskPopUp">
+//       <div class="shadow-div d-none"></div>
+//       <div class="taskCardPopup">
+//         <div class="taskCardPopupCategory">
+//           <div class="taskCardPopupCategoryColor">
+//             <h2>Technical task</h2>
+//           </div>
+//           <img onclick="closeTaskCardPopUp()" src="/assets/icons/close.png" alt="" />
+//         </div>
+//         <div class="taskCardPopupTitle">Test Test Test Versuche</div>
+//         <div class="taskCardPopupDescription">
+//           Welcome to Join. Here you can find your default board. This board
+//           represents your project and contains four default lists: "To do", "In
+//           progress", "Await feedback" and "Done".
+//         </div>
+//         <div class="taskCardPopupDate">Due date: 2024-10-30</div>
+//         <div class="taskCardPopupPrio">
+//           Priority: medium <img src="/assets/icons/mediumYellow.png" alt=""></div>
+//         <label class="taskCardPopupLabel">Assigned To:</label>
+//         <div class="taskCardPopupContact">
+//           <div class="taskCardPopupContactUsers tasks-user1">DL</div>
+//           <div class="taskCardPopupContactUsers tasks-user2">HA</div>
+//           <div class="taskCardPopupContactUsers tasks-user3">MD</div>
+//         </div>
+//         <label class="taskCardPopupLabel">Subtasks</label>
+//         <div class="taskCardPopupSubTasks">
+//         <div class="progress-container">
+//           <div class="step">
+//             <input type="checkbox" id="step1" onchange="updateSteps()">
+//             <label for="step1">Schritt 1</label>
+//           </div>
+//           <div class="step">
+//             <input type="checkbox" id="step2" onchange="updateSteps()">
+//             <label for="step2">Schritt 2</label>
+//           </div>
+//         </div>
 
+//         </div>
+//         <div class="taskCardPopupButtons">
+//           <div><img src="/assets/icons/deleteContact.png" alt="">Delete</div>
+//           <hr class="hrBoardTaskPopUp">
+//           <div><img src="/assets/icons/edit-pencil.png" alt="">Edit</div>
+//         </div>
+//       </div>
+//     </div>
+//   `;
+// }
+function renderTasksCardPopup(task) {
+  let priority = task.priority ? task.priority.toLowerCase() : "medium";
+  return /*html*/ `
+    <div class="taskCardEditPopup" id="taskPopUp" data-task-id="${task.id}">
+      <div class="taskCardPopupCategory">
+        <div class="taskCardPopupCategoryColor">
+          <h2>${task.category}</h2>
         </div>
-        <div class="taskCardPopupButtons">
-          <div><img src="/assets/icons/deleteContact.png" alt="">Delete</div>
-          <hr class="hrBoardTaskPopUp">
-          <div><img src="/assets/icons/edit-pencil.png" alt="">Edit</div>
+        <img onclick="closeTaskCardPopUp()" src="/assets/icons/close.png" alt="" />
+      </div>
+      <div class="taskCardPopupTitle">${task.title}</div>
+      <div class="taskCardPopupDescription">${task.description}</div>
+      <div class="taskCardPopupDate">Due date: ${task.dueDate || "N/A"}</div>
+      <div class="taskCardPopupPrio">
+        Priority: ${task.priority || "Medium"} <img src="/assets/icons/${priority}Priority.png" alt="">
+      </div>
+      <label class="taskCardPopupLabel">Assigned To:</label>
+      <div class="taskCardPopupContact">
+        ${(task.assignedUsers || []).map(user => `<div class="taskCardPopupContactUsers">${user.initials}</div>`).join('')}
+      </div>
+      <label class="taskCardPopupLabel">Subtasks</label>
+      <div class="taskCardPopupSubTasks">
+        <div class="progress-container">
+          ${(task.subTask || []).map((subtask, index) => `
+            <div class="step">
+              <input type="checkbox" id="step${index}-${task.id}" onchange="updateSteps(${task.id})" ${subtask.completed ? 'checked' : ''}>
+              <label for="step${index}-${task.id}">${subtask.name}</label>
+            </div>
+          `).join('')}
         </div>
+      </div>
+      <div class="taskCardPopupButtons">
+        <div onclick="deleteTask(${task.id})"><img src="/assets/icons/deleteContact.png" alt="">Delete</div>
+        <hr class="hrBoardTaskPopUp">
+        <div onclick="editTask(${task.id})"><img src="/assets/icons/edit-pencil.png" alt="">Edit</div>
       </div>
     </div>
   `;
@@ -312,3 +351,6 @@ function editContactPopup() {
   </div>
   `;
 }
+
+
+
