@@ -210,6 +210,47 @@ function editTaskPopup(taskId) {
   editTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
 }
 
+function editTask(taskId) {
+  let id = todos.findIndex((task) => task.id == taskId);
+  let currentSelectedTask = todos[id];
+  let taskCard = document.getElementById(`task-${taskId}`);
+
+  let title = document.getElementById("titleInput").value;
+  let description = document.getElementById("descriptionTextarea").value;
+  let category = document.getElementById("category").value;
+  let dueDate = document.getElementById("date").value;
+  let priority = document.getElementById("prio").value;
+  let prioUrgentEdit = document.getElementById("prioUrgentEdit").value;
+  let prioMediumEdit = document.getElementById("prioMediumEdit").value;
+  let prioLowEdit = document.getElementById("prioLowEdit").value;
+  let subTasks = document.getElementById("subTask").value;
+
+  currentSelectedTask.title = title;
+  currentSelectedTask.description = description;
+  currentSelectedTask.category = category;
+  currentSelectedTask.dueDate = dueDate;
+  currentSelectedTask.priority = priority;
+  currentSelectedTask.prioUrgentEdit = prioUrgentEdit;
+  currentSelectedTask.prioMediumEdit = prioMediumEdit;
+  currentSelectedTask.prioLowEdit = prioLowEdit;
+  currentSelectedTask.subTasks = subTasks;
+
+  taskCard.innerHTML = renderTasksCardPopup(currentSelectedTask);
+
+  let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
+  editTaskPopupDiv.classList.add("d-none");
+
+  renderTasks();
+}
+
+function deleteTask(taskId) {
+  let id = todos.findIndex((task) => task.id == taskId);
+  let taskCard = document.getElementById(`task-${taskId}`);
+  taskCard.remove();
+  todos.splice(id, 1);
+  renderTasks();
+}
+
 function updateSteps(taskId) {
   let task = todos.find(t => t.id === taskId);
   if (!task || !task.subTask) return;
