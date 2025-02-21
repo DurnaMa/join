@@ -1,55 +1,3 @@
-// let todos = [
-//   {
-//     id: 1,
-//     columnTitles: "Await feedback",
-//     category: "User story",
-//     title: "Task 1",
-//     description: "Task 1 description",
-//     subTask: ["test1", "test2"],
-//     users: [],
-//     prio: [],
-//   },
-//   {
-//     id: 2,
-//     columnTitles: "In progress",
-//     category: "Technical task",
-//     title: "Task 2",
-//     description: "Task 2 description",
-//     subTask: ["test3", "test4"],
-//     users: [],
-//     prio: [],
-//   },
-//   {
-//     id: 3,
-//     columnTitles: "Await feedback",
-//     category: "Technical task",
-//     title: "Task 3",
-//     description: "Task 3 description",
-//     subTask: [],
-//     users: [],
-//     prio: [],
-//   },
-//   {
-//     id: 4,
-//     columnTitles: "Done",
-//     category: "Technical task",
-//     title: "Task 4",
-//     description: "Task 4 description",
-//     subTask: [],
-//     users: [],
-//     prio: [],
-//   },
-//   {
-//     id: 5,
-//     columnTitles: "In progress",
-//     category: "User story",
-//     title: "Task 5",
-//     description: "Task 5 description",
-//     subTask: [],
-//     users: [],
-//     prio: [],
-//   },
-// ];
 let todos = [
   {
     id: 1,
@@ -111,20 +59,6 @@ async function initBoard() {
   renderTasks();
 }
 
-// function renderTasks() {
-//   document.getElementById("todo").innerHTML = "";
-//   document.getElementById("inprogress").innerHTML = "";
-//   document.getElementById("awaitfeedback").innerHTML = "";
-//   document.getElementById("done").innerHTML = "";
-
-//   todos.forEach((task) => {
-//     let taskCard = generateTaskCard(task);
-//     let columnId = task.columnTitles.toLowerCase().replace(" ", "");
-//     document.getElementById(columnId).appendChild(taskCard);
-//   });
-
-//   checkEmptyColumns();
-// }
 function renderTasks() {
   document.getElementById("todo").innerHTML = "";
   document.getElementById("inprogress").innerHTML = "";
@@ -140,16 +74,6 @@ function renderTasks() {
   checkEmptyColumns();
 }
 
-// function checkEmptyColumns() {
-//   document.querySelectorAll(".column").forEach((column) => {
-//     if (!column.hasChildNodes()) {
-//       column.innerHTML = generateEmptyColumn();
-//     } else {
-//       let noTasksElement = column.querySelector(".no-tasks");
-//       if (noTasksElement) noTasksElement.remove();
-//     }
-//   });
-// }
 function checkEmptyColumns() {
   document.querySelectorAll(".column").forEach((column) => {
     if (!column.hasChildNodes() || column.children.length === 0) {
@@ -161,13 +85,6 @@ function checkEmptyColumns() {
   });
 }
 
-// function generateEmptyColumn() {
-//   return /*html*/ `
-//     <div class="empty-column">
-//       <p>No tasks</p>
-//     </div>
-//   `;
-// }
 function generateEmptyColumn(columnId) {
   let text = "";
   switch (columnId) {
@@ -192,54 +109,6 @@ function generateEmptyColumn(columnId) {
   `;
 }
 
-// function generateTaskCard(task) {
-//   let taskCard = document.createElement("div");
-//   taskCard.classList.add("task-card");
-//   taskCard.id = `task-${task.id}`;
-//   taskCard.draggable = true;
-//   taskCard.ondragstart = (event) => startDragging(event, task.id);
-
-//   taskCard.innerHTML = /*html*/ `
-//   <div class="task-card-div" onclick="editTaskPopup()">
-//     <div class="task-card-category-div">
-//       <div class="task-card-category">
-//         <h2 class="task-card-category-h2">${task.category}</h2>
-//       </div>
-//     </div>
-//     <h3>${task.title}</h3>
-//     <p>${task.description}</p>
-    
-//     <div class="progress-container">
-//         <div class="progress-bar-container">
-//             <div class="progress-bar" id="progressBar"></div>
-//         </div>
-//         <div class="subtasks-div">
-//           <span class="subtasks-amount" id="subtasksAmount">0/2 Subtasks</span>
-//         </div>
-//     </div>
-//         <div class="task-footer">    
-//           <div class="task-users">
-//             <div class="tasks-user1 tasks-user">${contacts.users}</div>
-//             <div class="tasks-user2 tasks-user">MD</div>
-//             <div class="tasks-user3 tasks-user">DL</div>
-//           </div>
-//         <div>
-//         <img src="/assets/icons/priom.png" alt="">
-//       </div>
-//     </div>
-//   `;
-
-//   let categoryElement = taskCard.querySelector(".task-card-category");
-//   if (categoryElement) {
-//     if (task.category === "User story") {
-//       categoryElement.style.backgroundColor = "#0038FF";
-//     } else if (task.category === "Technical task") {
-//       categoryElement.style.backgroundColor = "#1FD7C1";
-//     }
-//   }
-
-//   return taskCard;
-// }
 function generateTaskCard(task) {
   let completedSubtasks = task.subTask ? task.subTask.filter(st => st.completed).length : 0;
   let totalSubtasks = task.subTask ? task.subTask.length : 0;
@@ -292,6 +161,27 @@ function generateTaskCard(task) {
   return taskCard;
 }
 
+function searchTask() {
+  let searchTaskInput = document.getElementById("searchTask").value.toLowerCase();
+  let allTasks = document.querySelectorAll(".task-card");
+
+  allTasks.forEach(task => {
+      let title = task.querySelector("h3").innerText.toLowerCase();
+      let description = task.querySelector("p").innerText.toLowerCase();
+
+      if (title.includes(searchTaskInput) || description.includes(searchTaskInput)) {
+          task.style.display = "block";  
+      } else {
+          task.style.display = "none";   
+      }
+  });
+
+  searchTaskInput.innerHTML = "";
+  checkEmptyColumns();
+}
+
+document.getElementById("searchTask").addEventListener("keyup", searchTask);
+
 function startDragging(event, id) {
   currentDraggedElement = id;
   event.dataTransfer.setData("text", id);
@@ -300,55 +190,6 @@ function startDragging(event, id) {
 function allowDrop(event) {
   event.preventDefault();
 }
-
-/*function editTaskPopup() {
-  if (!currentDraggedElement) {
-    console.error("Fehler: currentDraggedElement ist nicht definiert.");
-    return;
-  }
-
-  let id = todos.findIndex((task) => task.id === currentDraggedElement);
-  if (id === -1) {
-    console.error("Fehler: Keine Aufgabe mit der angegebenen ID gefunden.");
-    return;
-  }
-
-  let currentSelectedTask = todos[id];
-  let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
-  
-  if (!editTaskPopupDiv) {
-    console.error("Fehler: Element mit ID 'editTaskPopupDiv' nicht gefunden.");
-    return;
-  }
-
-  editTaskPopupDiv.classList.remove("d-none");
-  editTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
-}*/
-function editTaskPopup(taskId) {
-  let id = todos.findIndex((task) => task.id == taskId);
-  let currentSelectedTask = todos[id];
-  
-  let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
-  editTaskPopupDiv.classList.remove("d-none");
-  editTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
-}
-
-// function editTaskPopup() {
-//   let id = todos.findIndex((task) => task.id == currentDraggedElement);
-//   let currentSelectedTask = todos[id];
-  
-//   let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
-//   editTaskPopupDiv.classList.remove("d-none");
-//   editTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
-// }
-
-/*function highlight(task) {
-  document.getElementById(task).classList.add("drag-area-highlight");
-}
-
-function removeHighlight(task) {
-  document.getElementById(task).classList.remove("drag-area-highlight");
-}*/
 
 function drop(event, column) {
   event.preventDefault();
@@ -360,24 +201,15 @@ function drop(event, column) {
   }
 }
 
-/*function updateSteps() {
-  const checkboxes = document.querySelectorAll('.step input[type="checkbox"]');
-  let checkedCount = 0;
-  for (let i = 0; i < checkboxes.length; i++) {
-    const checkbox = checkboxes[i];
-    const label = checkbox.nextElementSibling;
-    if (checkbox.checked) {
-      label.style.color = "#4599FF";
-      checkedCount++;
-    } else {
-      label.style.color = "black";
-    }
-  };
+function editTaskPopup(taskId) {
+  let id = todos.findIndex((task) => task.id == taskId);
+  let currentSelectedTask = todos[id];
+  
+  let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
+  editTaskPopupDiv.classList.remove("d-none");
+  editTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
+}
 
-  const progressBar = document.getElementById("progressBar");
-  const progressPercentage = (checkedCount / checkboxes.length) * 100;
-  progressBar.style.width = progressPercentage + "%";
-}*/
 function updateSteps(taskId) {
   let task = todos.find(t => t.id === taskId);
   if (!task || !task.subTask) return;
@@ -528,15 +360,6 @@ function addSubTaskPopUp() {
     subTaskPopUp.value = "";
   }
 }
-
-// subTaskPopUp.addEventListener("keydown", function (event) {
-//   if (event.key === "Enter") {
-//     event.preventDefault();
-//     addSubTaskPopUp();
-//   }
-// });
-
-
 // Test 
 
 function contactListPopUp() {
