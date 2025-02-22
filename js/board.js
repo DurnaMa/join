@@ -210,9 +210,10 @@ function editTaskPopup(taskId) {
   editTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
 }
 
-function editTask(taskId) {
+async function editTask(taskId) {
   let id = todos.findIndex((task) => task.id == taskId);
   let currentSelectedTask = todos[id];
+  let task = currentSelectedTask;
   let taskCard = document.getElementById(`task-${taskId}`);
 
   let title = document.getElementById("titleInput").value;
@@ -223,9 +224,33 @@ function editTask(taskId) {
   let prioUrgentEdit = document.getElementById("prioUrgentEdit").value;
   let prioMediumEdit = document.getElementById("prioMediumEdit").value;
   let prioLowEdit = document.getElementById("prioLowEdit").value;
-  let subTasks = document.getElementById("subTask").value;
+  let subTask = document.getElementById("subTask").value;
 
-  currentSelectedTask.title = title;
+  let taskCardContent = {
+    title: title,
+    description: description,
+    category: category,
+    dueDate: dueDate,
+    priority: priority,
+    prioUrgentEdit: prioUrgentEdit,
+    prioMediumEdit: prioMediumEdit,
+    prioLowEdit: prioLowEdit,
+    subTask: subTask
+  };
+
+try {
+  await postDataToFirebase(`tasks/${taskId}`, taskCardContent);
+} catch (error) {
+  console.error(error);
+}
+
+
+  /*for (let key in taskCardContent) {
+    if (taskCardContent[key] === "") {
+      taskCardContent[key] = currentSelectedTask[key];
+  }*/
+  
+  /*currentSelectedTask.title = title;
   currentSelectedTask.description = description;
   currentSelectedTask.category = category;
   currentSelectedTask.dueDate = dueDate;
@@ -233,12 +258,12 @@ function editTask(taskId) {
   currentSelectedTask.prioUrgentEdit = prioUrgentEdit;
   currentSelectedTask.prioMediumEdit = prioMediumEdit;
   currentSelectedTask.prioLowEdit = prioLowEdit;
-  currentSelectedTask.subTasks = subTasks;
+  currentSelectedTask.subTask = subTask;*/
 
-  taskCard.innerHTML = renderTasksCardPopup(currentSelectedTask);
+  taskCard.innerHTML = renderAddTaskPoupBtn(task);
 
-  let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
-  editTaskPopupDiv.classList.add("d-none");
+  //let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
+  //editTaskPopupDiv.classList.remove("d-none");
 
   renderTasks();
 }
