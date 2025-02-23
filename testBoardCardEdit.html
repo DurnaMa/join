@@ -1,104 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
 
-  <style>
-.taskCardEditPopup {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  padding: 20px;
-  width: 400px;
-  height: 600px;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  overflow-y: auto;
-}
+    <script src="/js/board.js"></script>
 
-.task-edit-close-popup {
-  width: 10px;
-  display: flex;
-  justify-content: flex-end;
-  cursor: pointer;
-}
+    <style>
+      .taskCardEditPopup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        width: 400px;
+        height: 600px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow-y: auto;
+      }
 
-.task-edit-close-popup::-webkit-scrollbar {
-  width: 5px;
-}
+      .task-edit-close-popup {
+        width: 10px;
+        display: flex;
+        justify-content: flex-end;
+        cursor: pointer;
+      }
 
-.task-edit-close-popup-div {
-  display: flex;
-  justify-content: flex-end;
-}
+      .task-edit-close-popup::-webkit-scrollbar {
+        width: 5px;
+      }
 
-    .task-edit-input-popup {
-      height: 48px;
-      border: 1px solid #d1d1d1;
-      line-height: 24px;
-      padding-left: 20px;
-      border-radius: 10px;
-    }
+      .task-edit-close-popup-div {
+        display: flex;
+        justify-content: flex-end;
+      }
 
-    .task-edit-prio-popup {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
+      .task-edit-input-popup {
+        height: 48px;
+        border: 1px solid #d1d1d1;
+        line-height: 24px;
+        padding-left: 20px;
+        border-radius: 10px;
+      }
 
-    .button-ok {
-      position: sticky;
-    }
+      .task-edit-prio-popup {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
 
+      .prioEditBtn {
+        width: 136px;
+        height: 56px;
+        border-radius: 10px;
+        background: white;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        gap: 8px;
+        box-shadow: 0px 0px 4px 0px #0000001a;
+      }
 
+      .button-ok-div {
+        display: flex;
+        justify-content: flex-end;
+      }
 
-      </style>
-</head>
-<body>
-  
+      .button-ok {
+        display: flex;
+        align-items: center;
+        padding: 8px 10px;
+        border-radius: 10px;
+        background-color: #2a3647;
+        cursor: pointer;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="editTaskPopupDiv" id="editTaskPopupDiv">
+      <div class="shadow-div d-none"></div>
+      <div class="taskCardEditPopup">
+        <div class="task-edit-close-popup-div">
+          <img
+            class="task-edit-close-popup"
+            src="/assets/icons/close.png"
+            alt=""
+          />
+        </div>
+        <label>Title</label>
+        <input class="task-edit-input-popup" type="text" />
+        <label>Description</label>
+        <textarea class="task-edit-input-popup" name="" id=""></textarea>
+        <label>Due Date</label>
+        <input class="task-edit-input-popup" type="date" />
+        <div>
+          <label>Priority</label>
+          <div class="task-edit-prio-popup">
+            <button class="prioEditBtn">
+              Urgent
+              <img src="/assets/icons/urgentRed.png" alt="" />
+            </button>
+            <button class="prioEditBtn">
+              Medium
+              <img src="/assets/icons/mediumYellow.png" alt="" />
+            </button>
+            <button class="prioEditBtn">
+              Low
+              <img src="/assets/icons/lowGreen.png" alt="" />
+            </button>
+          </div>
+        </div>
+        <label>Assigned to</label>
+        <div></div>
+        <div></div>
+        <label>Subtasks</label>
 
-
-
-<div class="editTaskPopupDiv" id="editTaskPopupDiv">
-  <div class="shadow-div d-none"></div>
-  <div class="taskCardEditPopup">
-    <div class="task-edit-close-popup-div">
-      <img class="task-edit-close-popup" src="/assets/icons/close.png" alt="">
-    </div>
-    <label>Title</label>
-    <input class="task-edit-input-popup" type="text">
-    <label>Description</label>
-    <textarea class="task-edit-input-popup" name="" id=""></textarea>
-    <label>Due Date</label>
-    <input class="task-edit-input-popup" type="date">
-    <div>
-      <label>Priority</label>
-      <div class="task-edit-prio-popup">
-        <button>Urgent</button>
-        <button>Medium</button>
-        <button>Low</button>
+        <ul></ul>
+        <div class="button-ok-div">
+          <button class="button-ok">
+            Ok <img src="/assets/icons/check.png" alt="" />
+          </button>
+        </div>
       </div>
     </div>
-    <div></div>
-    <label>Assigned to</label>
-    <div></div>
-    <div></div>
-    <label>Subtasks</label>
-    
-    <ul></ul>
-    <button class="button-ok">Ok <img src="/assets/icons/check.png" alt=""></button>
-  </div>
-</div>
-  </div>
-
-</body>
+  </body>
 </html>

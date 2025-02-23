@@ -120,7 +120,7 @@ function generateTaskCard(task) {
   taskCard.ondragstart = (event) => startDragging(event, task.id);
 
   taskCard.innerHTML = /*html*/ `
-  <div class="task-card-div" onclick="editTaskPopup(${task.id})">
+  <div class="task-card-div" onclick="openTaskPopup(${task.id})">
     <div class="task-card-category-div">
       <div class="task-card-category">
         <h2 class="task-card-category-h2">${task.category}</h2>
@@ -201,13 +201,24 @@ function drop(event, column) {
   }
 }
 
+function openTaskPopup(taskId) {
+  let id = todos.findIndex((task) => task.id == taskId);
+  let currentSelectedTask = todos[id];
+  
+  let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
+  openTaskPopupDiv.classList.remove("d-none");
+  openTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
+}
+
 function editTaskPopup(taskId) {
   let id = todos.findIndex((task) => task.id == taskId);
   let currentSelectedTask = todos[id];
   
   let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
+  let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
+  openTaskPopupDiv.classList.add("d-none");
   editTaskPopupDiv.classList.remove("d-none");
-  editTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
+  editTaskPopupDiv.innerHTML = renderEditTasksCardPopup(currentSelectedTask);
 }
 
 async function editTask(taskId) {
@@ -385,6 +396,10 @@ function closeAddTaskPopUp() {
 }
 
 function closeTaskCardPopUp() {
+  document.getElementById("openTaskPopupDiv").classList.add("d-none");
+}
+
+function closeEditTaskCardPopUp() {
   document.getElementById("editTaskPopupDiv").classList.add("d-none");
 }
 
