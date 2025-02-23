@@ -218,12 +218,21 @@ function renderEditTasksCardPopup(currentSelectedTask) {
             <img src="/assets/icons/lowGreen.png" alt="" />
           </button>
         </div>
+      <label for="contactSelection">Assigned to</label>
+        <div onclick="contactListPopUp()" class="assignedContainer">
+          <span>Select contacts to assign</span>
+          <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+          <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+        </div>
+        <div id="assignedContactsListPopUp" class="hidden"></div>
       </div>
-      <label>Assigned to</label>
       <div></div>
-      <div></div>
-      <label>Subtasks</label>
-
+      <label for="subtask">Subtasks</label>
+        <div id="addSubTask">
+          <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
+          <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
+        </div>
+        <ul id="subTaskList"></ul>
       <ul></ul>
       <div class="button-ok-div">
         <button class="button-ok">
