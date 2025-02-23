@@ -5,8 +5,9 @@ let todos = [
     category: "User story",
     title: "Task 1",
     description: "Task 1 description",
+    dueDate: "2024/10/10",
     subTask: [{ name: "test1", completed: false }, { name: "test2", completed: false }],
-    users: [],
+    users: [{ initial: "HA", completed: false }, { initial: "AL", completed: false }, { initial: "MD", completed: false }],
     prio: [],
   },
   {
@@ -15,8 +16,9 @@ let todos = [
     category: "Technical task",
     title: "Task 2",
     description: "Task 2 description",
+    dueDate: "2024/10/15",
     subTask: [{ name: "test3", completed: false }, { name: "test4", completed: false }],
-    users: [],
+    users: [{ initial: "FK", completed: false }, { initial: "DL", completed: false }, { initial: "MD", completed: false }],
     prio: [],
   },
   {
@@ -25,8 +27,9 @@ let todos = [
     category: "User story",
     title: "Task 3",
     description: "Task 3 description",
+    dueDate: "2024/10/20",
     subTask: [{ name: "test5", completed: false }, { name: "test6", completed: false },{ name: "test6.3", completed: false },{ name: "test6.4", completed: false },{ name: "test6.5", completed: false }],
-    users: [],
+    users: [{ initial: "HA", completed: false }, { initial: "DL", completed: false }, { initial: "RT", completed: false }],
     prio: [],
   },
   {
@@ -35,8 +38,9 @@ let todos = [
     category: "Technical task",
     title: "Task 4",
     description: "Task 4 description",
+    dueDate: "2024/10/25",
     subTask: [{ name: "test7", completed: false }, { name: "test8", completed: false }],
-    users: [],
+    users: [{ initial: "HA", completed: false }, { initial: "DL", completed: false }, { initial: "MD", completed: false }],
     prio: [],
   },{
     id: 5,
@@ -44,15 +48,18 @@ let todos = [
     category: "User story",
     title: "Task 5",
     description: "Task 5 description",
+    dueDate: "2024/10/30",
     subTask: [{ name: "test9", completed: false }, { name: "test10", completed: false }],
-    users: [],
-    prio: [],
+    users: [{ initial: "WE", completed: false }, { initial: "KS", completed: false }, { initial: "VB", completed: false }],
+    prio: [{ name: "urgent", completed: false }, { name: "medium", completed: false }, { name: "low", completed: false }],
   }
 ];
 
 
 let currentDraggedElement;
 let currentSelectedTask;
+let currentUsers = [];
+let currentPrio = [];
 
 async function initBoard() {
   await loadDataUsers();
@@ -139,9 +146,9 @@ function generateTaskCard(task) {
     </div>
     <div class="task-footer">    
       <div class="task-users">
-          <div class="tasks-user1 tasks-user">${contacts.users}</div>
-          <div class="tasks-user2 tasks-user">MD</div>
-          <div class="tasks-user3 tasks-user">DL</div>
+          <div class="tasks-user1 tasks-user">${task.users[0].initial}</div>
+          <div class="tasks-user2 tasks-user">${task.users[1].initial}</div>
+          <div class="tasks-user3 tasks-user">${task.users[2].initial}</div>
         </div>
         <div>
           <img src="/assets/icons/priom.png" alt="">
