@@ -123,25 +123,26 @@
 }
 
 .contact-right-area {
-  width: 569px;
-  height: 73px;
-  padding-top: 24px;
+  /* width: 569px; */
+  /* height: 73px; */
+  /* padding-top: 24px; */
   top: 206px;
   left: 743px;
   gap: 30px;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   flex-direction: column;
+  position: fixed;
 }
 
 .contact-right-area-header {
-  width: 569px;
-  height: 73px;
-  gap: 8px;
+  /* width: 569px; */
+  /* height: 73px; */
+  gap: 20px;
   display: flex;
   align-items: center;
-  flex-direction: row;
-  justify-content: space-evenly;
+
+  /* justify-content: space-between; */
 }
 
 .contact-right-area-header-dividing-line {
@@ -165,47 +166,71 @@
 
 /* -- contactDetailsDiv -- */
 .contact-details-div {
-  width: 461px;
-  height: 364px;
-  top: 311px;
-  left: 750px;
-  gap: 21px;
+  /* width: 461px; */
+  /* height: 364px; */
+  /* top: 311px; */
+  /* left: 750px; */
+  /* gap: 21px; */
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
 }
 
 .contact-details-div-header {
-  width: 461px;
-  height: 120px;
-  gap: 54px;
+  /* width: 461px; */
+  /* height: 120px; */
+  gap: 60px;
   display: flex;
   align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
+  /* flex-direction: row; */
+  /* justify-content: space-between; */
 }
 
-.contact-details-div-initials {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 120px;
-  height: 120px;
-  border-radius: 70px;
-  border: 3px;
-  gap: 10px;
-  color: white;
-}
+/* .contact-details-div-initials { */
+/* display: flex; */
+/* justify-content: center; */
+/* align-items: center; */
+/* width: 120px; */
+/* height: 120px; */
+/* border-radius: 70px; */
+/* border: 3px; */
+/* gap: 10px; */
+/* color: white; */
+/* } */
 
 .contacts-abbreviation-right-area {
   width: 120px;
   height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 60px;
+  border: 2px solid #ffffff;
+  background-color: #ff7a00;
+  /* gap: 10px; */
+  font-size: 47px;
+  font-weight: 500;
+  color: white;
 }
 
-.contact-details-div-name-icons {
-  width: 287px;
-  height: 88px;
-  gap: 8px;
+.contact-name {
   display: flex;
   flex-direction: column;
+  gap: 15px;
 }
+
+.contact-name-header {
+  font-weight: 500;
+  font-size: 47px;
+}
+
+/* .contact-details-div-name-icons { */
+/* width: 287px; */
+/* height: 88px; */
+/* gap: 8px; */
+/* display: flex; */
+/* flex-direction: column; */
+/* } */
 
 .contact-details-div-name {
   width: 287px;
@@ -214,16 +239,19 @@
 }
 
 .contact-details-div-icons {
-  width: 159px;
-  height: 24px;
-  gap: 10px;
+  /* width: 159px; */
+  /* height: 24px; */
+  gap: 20px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  /* flex-direction: row; */
+  /* justify-content: space-between; */
 }
 
 .contact-details-div-icon-edit {
   display: flex;
+  cursor: pointer;
+  align-items: center;
+  gap: 8px;
 }
 
 .contact-details-div-icon-delete {
@@ -255,7 +283,7 @@
   background-color: white;
 }
 
-.name{
+.name {
   padding-right: 30px;
   background: url(/assets/icons/person.png) no-repeat right 21px center;
   background-size: 20px 20px;
@@ -267,18 +295,55 @@
   background-size: 20px 20px;
 }
 
-.contact-details-div-icon-edit img{
+/* .contact-details-div-icon-edit img {
   cursor: pointer;
-}
+} */
 
-.contact-details-div-icon-edit img:hover{
+/* .contact-details-div-icon-edit img:hover {
   color: #29abe2;
-}
+} */
 
-.contact-details-div-icon-edit{
+/* .contact-details-div-icon-edit {
   cursor: pointer;
+} */
+
+/* .contact-details-div-icon-edit:hover {
+  color: #29abe2;
+} */
+
+.contact-details-div-icon-edit:hover,
+.contact-details-div-icon-edit img:hover {
+  color: #007cee;
+  filter: brightness(0) saturate(100%) invert(42%) sepia(94%) saturate(3361%)
+    hue-rotate(190deg) brightness(100%) contrast(103%);
 }
 
-.contact-details-div-icon-edit:hover{
-  color: #29abe2;
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+}
+
+.contact-info-header {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.contact-details-div-email-phone {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-details-div-email-phone label {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.contact-email-link{
+  color: #007cee;
+}
+
+.contact-phone-link{
+color: black;
 }

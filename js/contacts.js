@@ -20,32 +20,40 @@ function selectContact(index) {
   contactDetails.innerHTML = /*html*/ `
         <div class="contact-details-div-header">
           <div class="contact-details-div-initials">
-            <div class="contacts-abbreviation">${generateInitials(
+            <div class="contacts-abbreviation-right-area">${generateInitials(
               contact.name
             )}</div>
           </div>
-          <div class="contact-name">${contact.name}</div>
-          <div class="contact-details-div-name-icons">
-            <div class="contact-details-div-name"></div>
-            <div class="contact-details-div-icons">
-              <div class="contact-details-div-icon-edit">
-                <img src="/assets/icons/edit-icon.png" alt="" onclick="editContact(${currentSelectedContact})"/><h4>Edit</h4>
+          <div class="contact-name">
+          <div class="contact-name-header">${contact.name}</div>
+          
+            <div class="contact-details-div-name-icons">
+       
+              <div class="contact-details-div-icons">
+                <div onclick="editContact(${currentSelectedContact})" class="contact-details-div-icon-edit">
+                  <img src="/assets/icons/edit-pencil.png" alt="" />Edit
+                </div>
+                <div onclick="deleteContact(${currentSelectedContact})" class="contact-details-div-icon-edit img">
+                  <img  src="/assets/icons/deleteContact.png" alt="">Delete
+                </div>
               </div>
-              <div class="contact-details-div-icon-edit img">
-                <img  src="/assets/icons/deleteContactIcon.png" alt="" onclick="deleteContact(${currentSelectedContact})"><span>Delete</span>
-              </div>
+
             </div>
-
           </div>
+          
         </div>
-
-        <div>
-          <h3>Contact Information</h3>
-        </div>
-
-        <div class="contact-details-div-email-phone">
-        <div class="contact-details-div-email">${contact.email}</div>
-        <div class="contact-details-div-phone">${contact.phone}</div>
+        <div class="contact-info">    
+          <div class="contact-info-header">
+            Contact Information
+          </div>
+          <div class="contact-details-div-email-phone">
+            <label>Email</label>
+            
+              <a class="contact-email-link" href="mailto:${contact.email}">${contact.email}</a>
+            
+            <label>Phone</label>
+            <a class="contact-phone-link" href="tel:${contact.phone}">${contact.phone}</a>
+          </div>
         </div>
         `;
 }
