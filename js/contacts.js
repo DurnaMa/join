@@ -49,10 +49,14 @@ function selectContact(index) {
           <div class="contact-details-div-email-phone">
             <label>Email</label>
             
-              <a class="contact-email-link" href="mailto:${contact.email}">${contact.email}</a>
+              <a class="contact-email-link" href="mailto:${contact.email}">${
+    contact.email
+  }</a>
             
             <label>Phone</label>
-            <a class="contact-phone-link" href="tel:${contact.phone}">${contact.phone}</a>
+            <a class="contact-phone-link" href="tel:${contact.phone}">${
+    contact.phone
+  }</a>
           </div>
         </div>
         `;
@@ -70,10 +74,7 @@ function renderContactsList() {
   for (let i = 0; i < contacts.length; i++) {
     let firstLetter = contacts[i].name.charAt(0).toUpperCase();
     if (firstLetter !== lastLetter) {
-      if (lastLetter !== "") {
-        contactsList.innerHTML += `<div class="contacts-list-item-dividing"></div>`;
-      }
-      contactsList.innerHTML += `<div class="contacts-letter-header">${firstLetter}</div>`;
+      contactsList.innerHTML += `<div class="letterSection"><h3>${firstLetter}</h3><div class="hr-div"><hr /></div></div>`;
       lastLetter = firstLetter;
     }
     contactsList.innerHTML += generateContactsList(i);
@@ -83,15 +84,14 @@ function renderContactsList() {
 function generateContactsList(i) {
   const initials = generateInitials(contacts[i].name);
   return /*html*/ `
-          <div class="contacts-list">
-            <div class="contacts-list-item-h3-div" onclick="selectContact(${i})">
-              <div class="contacts-abbreviation-div">
-                <div class="contacts-abbreviation">${initials}</div>
-              </div>
-              <div class="contacts-list-item">
-                <h3>${contacts[i].name}</h3>
-                <p>${contacts[i].email}</p>
-              </div>
+          
+          <div id="" onclick="selectContact(${i})" class="contacts-list">
+            <div class="contacts-abbreviation-div contactShortcut">
+              <span class="contacts-abbreviation test12345">${initials}</span>
+            </div>
+            <div class="contacts-list-item contactInfo">
+              <h3>${contacts[i].name}</h3>
+              <p>${contacts[i].email}</p>
             </div>
           </div>
     `;
