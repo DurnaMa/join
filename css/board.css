@@ -457,6 +457,10 @@
   gap: 10px;
 }
 
+.subTask {
+  width: 90%;
+}
+
 .prioEditBtn {
   width: 136px;
   height: 56px;
