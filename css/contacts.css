@@ -121,7 +121,7 @@
   width: 42px;
   color: white;
   border-radius: 50%;
-  background-color: #ff7a00;
+  /* background-color: #ff7a00; */
   border: 2px solid #ffffff;
 }
 
@@ -201,7 +201,7 @@
   align-items: center;
   border-radius: 60px;
   border: 2px solid #ffffff;
-  background-color: #ff7a00;
+  /* background-color: #ff7a00; */
   font-size: 47px;
   font-weight: 500;
   color: white;
@@ -307,6 +307,10 @@
 
 .contact-phone-link {
   color: black;
+}
+
+.contacts-abbreviation-div{
+  border-radius: 30px;
 }
 
 @media screen and (max-width: 1400px) {
