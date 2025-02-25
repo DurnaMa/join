@@ -388,6 +388,18 @@
     width: 70px;
     height: 2px;
   }
+
+  .contact-details-div-header{
+    gap: 15px;
+  }
+
+  .contact-name-header{
+    font-size: 18px;
+  }
+
+  .contact-details-div-icons{
+    font-size: 14px;
+  }
 }
 
 @media screen and (max-width: 992px) {
@@ -398,5 +410,23 @@
 
   .contact-right-area {
     left: 480px;
+  }
+}
+
+@media screen and (max-width: 730px){
+  .contacts-list-div {
+    width: 100%;
+  }
+
+  .contacts-list {
+    width: 100%;
+  }
+
+  .scrollbar {
+    width: 100%;
+  }
+
+  .contact-right-area {
+    display: none;
   }
 }
