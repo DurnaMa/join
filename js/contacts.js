@@ -4,6 +4,7 @@ async function contactInit() {
 }
 
 let currentSelectedContact = 0;
+let contactColors = {};
 
 /**
  * Selects a contact by index, updates the current selected contact, and renders the contact details.
@@ -83,13 +84,20 @@ function renderContactsList() {
 
 function generateContactsList(i) {
   const initials = generateInitials(contacts[i].name);
+
+  contacts.forEach(user => {
+    contactColors[user] = getRandomColor();
+    let contactsAbbreviationDiv = document.getElementById('contactsAbbreviationDiv');
+    contactsAbbreviationDiv = user;
+    contactsAbbreviationDiv.style.backgroundColor${};
+  });
   return /*html*/ `
           
           <div id="" onclick="selectContact(${i})" class="contacts-list">
-            <div class="contacts-abbreviation-div contactShortcut">
-              <span class="contacts-abbreviation test12345">${initials}</span>
+            <div class="contacts-abbreviation-div" id="contactsAbbreviationDiv">
+              <span class="contacts-abbreviation">${initials}</span>
             </div>
-            <div class="contacts-list-item contactInfo">
+            <div class="contacts-list-item">
               <h3>${contacts[i].name}</h3>
               <p>${contacts[i].email}</p>
             </div>
@@ -229,4 +237,8 @@ async function deleteContact(id) {
   await loadDataUsers();
   renderContactsList();
   document.getElementById("contactDetailsDiv").innerHTML = "";
+}
+
+function getRandomColor() {
+  return '#' + Math.floor(Math.random()*16777215).toString(16);
 }
