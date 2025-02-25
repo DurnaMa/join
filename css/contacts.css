@@ -313,6 +313,13 @@
   border-radius: 30px;
 }
 
+.mobileAddButton{
+  position: fixed;
+  right: 6%;
+  bottom: 13%;
+  display: none;
+}
+
 @media screen and (max-width: 1400px) {
   .contacts-abbreviation-right-area {
     width: 100px;
@@ -418,6 +425,37 @@
 }
 
 @media screen and (max-width: 730px){
+  .contacts-list-div {
+    width: 100%;
+  }
+
+  .contacts-list {
+    width: 100%;
+  }
+
+  .scrollbar {
+    width: 100%;
+  }
+
+  .contact-right-area {
+    display: none;
+  }
+
+  .add-contact-btn-div{
+    display: none;
+  }
+
+  .scrollbar {
+    height: 90%;
+    padding: 35px;
+  }
+
+  .mobileAddButton{
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 500px){
   .contacts-list-div {
     width: 100%;
   }
