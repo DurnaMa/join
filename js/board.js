@@ -42,16 +42,6 @@ let todos = [
     subTask: [{ name: "test7", completed: false }, { name: "test8", completed: false }],
     users: [{ initial: "HA", completed: false }, { initial: "DL", completed: false }, { initial: "MD", completed: false }],
     prio: [],
-  },{
-    id: 5,
-    columnTitles: "To Do",
-    category: "User story",
-    title: "Task 5",
-    description: "Task 5 description",
-    dueDate: "2024/10/30",
-    subTask: [{ name: "test9", completed: false }, { name: "test10", completed: false }],
-    users: [{ initial: "WE", completed: false }, { initial: "KS", completed: false }, { initial: "VB", completed: false }],
-    prio: [{ name: "urgent", completed: false }, { name: "medium", completed: false }, { name: "low", completed: false }],
   }
 ];
 
