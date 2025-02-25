@@ -2,15 +2,6 @@ async function singUpInit() {
   await loadDataUsers();
 }
 
-const colorPalette = [
-  "#E63946", "#F4A261", "#2A9D8F", "#264653", "#D62828",
-  "#F77F00", "#3D348B", "#E76F51", "#8E44AD", "#16A085",
-  "#D7263D", "#1B998B", "#ECA400", "#3A86FF", "#8338EC",
-  "#06D6A0", "#EF476F", "#118AB2", "#073B4C", "#F25C54",
-  "#43AA8B", "#FF5A5F", "#5E548E", "#9B5DE5", "#00BBF9",
-  "#FF006E", "#8AC926", "#6A0572", "#A60303", "#FF9F1C"
-];
-
 function onloadFunc() {
   console.log("test");
 }

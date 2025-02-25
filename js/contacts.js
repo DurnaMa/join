@@ -163,6 +163,7 @@ async function saveContact() {
       name: name,
       email: email,
       phone: phone,
+      color: getRandomColorFromArray(),
     };
 
     try {
