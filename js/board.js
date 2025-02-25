@@ -321,21 +321,21 @@ function updateSteps(taskId) {
 }
 
 function addTaskPopupPlusToDoBtn() {
-  let addNewTaskDiv = document.getElementById("addNewTaskDiv");
-  addNewTaskDiv.classList.remove("d-none");
-  addNewTaskDiv.innerHTML = renderAddTaskPopupToDoPlus();
+  let openTaskPopupToDoDiv = document.getElementById("openTaskPopupToDoDiv");
+  openTaskPopupToDoDiv.classList.remove("d-none");
+  openTaskPopupToDoDiv.innerHTML = renderAddTaskPopupToDoPlus();
 }
 
 function addTaskPopupPlusInProgressBtn() {
-  let addNewTaskDiv = document.getElementById("addNewTaskDiv");
-  addNewTaskDiv.classList.remove("d-none");
-  addNewTaskDiv.innerHTML = renderAddTaskPopupInProgressPlus();
+  let openTaskPopupInProgressDiv = document.getElementById("openTaskPopupInProgressDiv");
+  openTaskPopupInProgressDiv.classList.remove("d-none");
+  openTaskPopupInProgressDiv.innerHTML = renderAddTaskPopupInProgressPlus();
 }
 
 function addTaskPopupPlusAwaitFeedbackBtn() {
-  let addNewTaskDiv = document.getElementById("addNewTaskDiv");
-  addNewTaskDiv.classList.remove("d-none");
-  addNewTaskDiv.innerHTML = renderAddTaskPopupAwaitFeedbackPlus();
+  let openTaskPopupAwaitFeedbackDiv = document.getElementById("openTaskPopupAwaitFeedbackDiv");
+  openTaskPopupAwaitFeedbackDiv.classList.remove("d-none");
+  openTaskPopupAwaitFeedbackDiv.innerHTML = renderAddTaskPopupAwaitFeedbackPlus();
 }
 
 function createTaskPlusToDoBtn() {
@@ -400,6 +400,20 @@ function createTaskPlusAwaitFeedbackBtn() {
 
 function closeAddTaskPopUp() {
   document.getElementById("addNewTaskBtnDiv").classList.add("d-none");
+  document.getElementById("addTaskPopupDiv").classList.add("d-none");
+  document.getElementById("openTaskPopupDiv").classList.add("d-none");
+}
+
+function closeAddTaskPopUpToDo() {
+  document.getElementById("openTaskPopupToDoDiv").classList.add("d-none");
+}
+
+function closeAddTaskPopUpInProgress() {
+  document.getElementById("openTaskPopupInProgressDiv").classList.add("d-none");
+}
+
+function closeAddTaskPopUpAwaitFeedback() {
+  document.getElementById("openTaskPopupAwaitFeedbackDiv").classList.add("d-none");
 }
 
 function closeTaskCardPopUp() {

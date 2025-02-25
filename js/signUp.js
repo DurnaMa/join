@@ -62,11 +62,21 @@ async function toTheRegistration() {
         errorDiv.textContent = "Email already exists";
         return false;
       }
+
+      /*function getRandomColor() {
+        return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+      }*/
+
+        function getRandomColorFromArray() {
+          return colorPalette[Math.floor(Math.random() * colorPalette.length)];
+        }
+
       // Neue Registrierung, wenn E-Mail nicht existiert
       let data = {
         name: nameInput.value,
         email: emailInput.value,
         password: passwordInput.value,
+        color: getRandomColorFromArray(),
       };
       let result = await postData("/contacts", data);
       // Falls der Server eine ID zurückgibt, speichern wir den User

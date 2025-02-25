@@ -18,16 +18,11 @@ function selectContact(index) {
   let contact = contacts[currentSelectedContact];
   let contactDetails = document.getElementById("contactDetailsDiv");
 
-  // Falls der Kontakt noch keine Farbe hat, eine zufällige Farbe aus dem Array zuweisen
-  // if (!contactColors[contact.name]) {
-  //   contactColors[contact.name] = getRandomColorFromArray();
-  // }
-
   contactDetails.innerHTML = /*html*/ `
     <div class="contact-details-div-header">
       <div class="contact-details-div-initials">
         <div id="contactsAbbreviationRightArea" class="contacts-abbreviation-right-area"
-             style="background-color: ${contactColors[contact.name]};">
+             style="background-color: ${contact.color};">
           ${generateInitials(contact.name)}
         </div>
       </div>
@@ -87,10 +82,11 @@ function generateContactsList(i) {
   //   contactColors[contacts[i].name] = getRandomColorFromArray(); 
   // }
 
+  let color = contacts[i].color ? contacts[i].color : "#000000";
+
   return /*html*/ `
     <div onclick="selectContact(${i})" class="contacts-list">
-      <div class="contacts-abbreviation-div" 
-           style="background-color: ${contactColors[contacts[i].name]};">
+      <div class="contacts-abbreviation-div" style="background-color: ${color};">
         <span id="contactsAbbreviation-${i}" class="contacts-abbreviation">${initials}</span>
       </div>
       <div class="contacts-list-item">

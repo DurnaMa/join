@@ -46,6 +46,7 @@ async function loadContacts() {
       email: SINGLE_CONTACT.email,
       password: SINGLE_CONTACT.password,
       phone: SINGLE_CONTACT.phone,
+      color: SINGLE_CONTACT.color,
     };
     contacts.push(contact);
   }
