@@ -36,7 +36,8 @@
               <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
               <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
             </div>
-            <div id="assignedContactsList" class="d-flex"></div>
+            <div id="assignedContactsList" class="hidden"></div>
+            <div id="selectedContactsDisplay" class="selectedContactsContainer"></div>
           </section>
           <hr />
           <section class="formPartRight">
@@ -80,9 +81,6 @@
           </p>
           <div class="btnSection">
             <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
-            <!-- <button onclick="createtTaskBtn()" class="button">
-              Create Task <img src="/assets/icons/check.png" alt="" />
-            </button> -->
             <button onclick="postAddTask()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>

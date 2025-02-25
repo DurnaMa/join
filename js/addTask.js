@@ -1,41 +1,56 @@
 async function initAddTask() {
   await loadDataUsers();
-  contactList();
 }
 
 let subTask = document.getElementById("subTask");
 let subTasks = [];
+let chooseContacts = [];
+
+let selectedContacts = new Set();
+
+function setPriority(priority) {
+  const prioUrgentEdit = document.getElementById("prioUrgentEdit");
+  const prioMediumEdit = document.getElementById("prioMediumEdit");
+  const prioLowEdit = document.getElementById("prioLowEdit");
+  const urgentImg = document.getElementById("urgentImg");
+  const mediumImg = document.getElementById("mediumImg");
+  const lowImg = document.getElementById("lowImg");
+
+  prioUrgentEdit.classList.remove("prioUrgentRed");
+  prioMediumEdit.classList.remove("prioMediumYellow");
+  prioLowEdit.classList.remove("prioLowGreen");
+  urgentImg.src = "/assets/icons/urgentRed.png";
+  mediumImg.src = "/assets/icons/mediumYellow.png";
+  lowImg.src = "/assets/icons/lowGreen.png";
+
+  if (priority === "urgent") {
+    prioUrgentEdit.classList.add("prioUrgentRed");
+    urgentImg.src = "/assets/icons/urgentWhite.png";
+  } else if (priority === "medium") {
+    prioMediumEdit.classList.add("prioMediumYellow");
+    mediumImg.src = "/assets/icons/mediumWhite.png";
+  } else if (priority === "low") {
+    prioLowEdit.classList.add("prioLowGreen");
+    lowImg.src = "/assets/icons/lowWhite.png";
+  }
+}
 
 function prioUrgent() {
-  document.getElementById("prioUrgentEdit").classList.add("prioUrgentRed");
-  document.getElementById("urgentImg").src = "/assets/icons/urgentWhite.png";
-  document.getElementById("prioMediumEdit").classList.remove("prioMediumYellow");
-  document.getElementById("prioLowEdit").classList.remove("prioLowGreen");
-  document.getElementById("mediumImg").src = "/assets/icons/mediumYellow.png";
-  document.getElementById("lowImg").src = "/assets/icons/lowGreen.png";
+  setPriority("urgent");
 }
+
 function prioMedium() {
-  document.getElementById("prioMediumEdit").classList.add("prioMediumYellow");
-  document.getElementById("mediumImg").src = "/assets/icons/mediumWhite.png";
-  document.getElementById("prioLowEdit").classList.remove("prioLowGreen");
-  document.getElementById("prioUrgentEdit").classList.remove("prioUrgentRed");
-  document.getElementById("lowImg").src = "/assets/icons/lowGreen.png";
-  document.getElementById("urgentImg").src = "/assets/icons/urgentRed.png";
+  setPriority("medium");
 }
+
 function prioLow() {
-  document.getElementById("prioLowEdit").classList.add("prioLowGreen");
-  document.getElementById("lowImg").src = "/assets/icons/lowWhite.png";
-  document.getElementById("prioMediumEdit").classList.remove("prioMediumYellow");
-  document.getElementById("prioUrgentEdit").classList.remove("prioUrgentRed");
-  document.getElementById("mediumImg").src = "/assets/icons/mediumYellow.png";
-  document.getElementById("urgentImg").src = "/assets/icons/urgentRed.png";
+  setPriority("low");
 }
 
 function addSubTask() {
   if (subTask.value != "") {
     subTasks.push({
       description: subTask.value,
-      completed: true,
     });
     renderSubTaskList();
     subTask.value = "";
@@ -121,60 +136,58 @@ function deleteSubTask(index) {
 }
 
 function contactList() {
-  console.log("triger");
+
   let contactList = document.getElementById("assignedContactsList");
   contactList.innerHTML = "";
+
   contacts.forEach((contact) => {
     const initials = generateInitials(contact.name);
+    const isChecked = selectedContacts.has(contact.name) ? "checked" : "";
+
     contactList.innerHTML += /*html*/ `
-      <div class="assignedContactContent" onclick="toggleCheckbox(event)">
+      <div class="assignedContactContent" onclick="toggleCheckbox(event, '${contact.name}')">
         <div class="assignedContacts">
           <span class="assignedShortcutName">${initials}</span>
           <span class="assignedName">${contact.name}</span>
         </div>
-        <input type="checkbox" name="contact-${contact.id}" id="contact-${contact.id}">
+        <input type="checkbox" name="contact-${contact.name}" id="contact-${contact.name}" ${isChecked} onclick="toggleCheckbox(event, '${contact.name}')">
       </div>
     `;
   });
+
   contactList.classList.toggle("hidden");
   contactList.classList.toggle("d-flex");
+
+  if (contactList.classList.contains("hidden")) {
+    updateSelectedContactsDisplay();
+  }
 }
 
-// window.onclick = function (event) {
-//   if (!event.target.matches(".assignedTo")) {
-//     let dropdowns = document.getElementsByClassName("selecassignedTot");
-//     let assignedTOUsserIndex;
-//     for (assignedTOUsserIndex = 0; assignedTOUsserIndex < dropdowns.length; assignedTOUsserIndex++) {
-//       let openDropdown = dropdowns[assignedTOUsserIndex];
-//       if (openDropdown.classList.contains("show")) {
-//         openDropdown.classList.remove("show");
-//       }
-//     }
-//   }
-// };
-
-// async function assignedTOUsser() {
-//   let user = await loadDataUsers();
-//   let assignedTo = document.getElementById("assignedContactsList").classList.toggle("show");
-//   assignedTo.value = user.name;
-//   assignedTo.disabled = true;
-// }
-
-// function goBack() {
-//   const referrer = document.referrer;
-//   if (referrer) {
-//     window.location.href = referrer;
-//   } else {
-//     window.location.href = "index.html";
-//   }
-// }
-function toggleCheckbox(event) {
-  if (event.target.type !== "checkbox") {
-    let checkbox = event.currentTarget.querySelector('input[type="checkbox"]');
-    if (checkbox) {
-      checkbox.checked = !checkbox.checked;
-      event.currentTarget.classList.toggle("selectedContact", checkbox.checked);
+function updateSelectedContactsDisplay() {
+  let selectedContainer = document.getElementById("selectedContactsDisplay");
+  selectedContainer.innerHTML = "";
+  selectedContacts.forEach((contactName) => {
+    let contact = contacts.find(c => c.name === contactName);
+    if (contact) {
+      selectedContainer.innerHTML += /*html*/ `
+        <span class="assignedShortcutName">${generateInitials(contact.name)}</span>
+      `;
     }
+  });
+}
+
+function toggleCheckbox(event, contactName) {
+  let checkbox = event.target.type === "checkbox" ? event.target : event.currentTarget.querySelector('input[type="checkbox"]');
+  if (checkbox) {
+    checkbox.checked = !checkbox.checked;
+    event.currentTarget.classList.toggle("selectedContact", checkbox.checked);
+    
+    if (checkbox.checked) {
+      selectedContacts.add(contactName);
+    } else {
+      selectedContacts.delete(contactName);
+    }
+    updateSelectedContactsDisplay();
   }
 }
 
@@ -182,8 +195,23 @@ async function postAddTask() {
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
-  let priority = document.getElementById("prio").value;
-  let assignedContacts = [].value;
+  let category = document.getElementById("category").value;
+  //let assignedContactContent = document.getElementById("selectedContactsDisplay");
+  selectedContacts = 
+
+  let prioUrgentEdit = document.getElementById("prioUrgentEdit");
+  let prioMediumEdit = document.getElementById("prioMediumEdit");
+  let prioLowEdit = document.getElementById("prioLowEdit");
+
+  let priority = "";
+
+  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
+    priority = "urgent";
+  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
+    priority = "medium";
+  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
+    priority = "low";
+  }
 
   let data = {
     title,
@@ -191,7 +219,8 @@ async function postAddTask() {
     dueDate,
     priority,
     subTasks,
-    assignedContacts,
+    category,
+    selectedContacts,
   };
 
   try {

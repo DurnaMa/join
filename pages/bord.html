@@ -3,34 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
+    <link
+      rel="shortcut icon"
+      href="/assets/img/logodunkel.png"
+      type="image/x-icon"
+    />
     <title>Board</title>
     <link rel="stylesheet" href="../css/board.css" />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="../css/fonts.css" />
-    <link rel="stylesheet" href="/css/boardPopUp.css">
+    <link rel="stylesheet" href="/css/boardPopUp.css" />
+    <link rel="stylesheet" href="/css/boardTaskPopUp.css" />
     <script defer src="../js/includeTemplates.js"></script>
     <script defer src="/script.js"></script>
     <script defer src="../js/board.js"></script>
     <script defer src="/js/header.js"></script>
-    <script defer src="/js/templates.js"></script>
     <script defer src="/js/addTask.js"></script>
+    <script defer src="/js/templates.js"></script>
+    
   </head>
 
   <body onload="initBoard()">
     <include-html src="../templates/header/header.html"></include-html>
     <include-html src="../templates/sidebar/sidebar.html"></include-html>
-    <include-html src="/mobileTemplates/header/headerMobile.html"></include-html>
-    <include-html src="/mobileTemplates/footer/footerMobile.html"></include-html>
+    <include-html
+      src="/mobileTemplates/header/headerMobile.html"
+    ></include-html>
+    <include-html
+      src="/mobileTemplates/footer/footerMobile.html"
+    ></include-html>
 
     <div class="board" id="board">
       <div class="boardHeader">
         <h1 class="board-title">Board</h1>
         <div class="boardHeaderRight">
           <div class="searchDiv">
-            <input class="search" type="text" placeholder="Find Task" id="search" />
+            <input
+              class="search"
+              type="text"
+              placeholder="Find Task"
+              id="searchTask"
+            />
             <div class="search-dividing-line"></div>
-            <img class="searchIcon" src="/assets/icons/search.png" alt="Search icon" />
+            <img
+              class="searchIcon"
+              src="/assets/icons/search.png"
+              alt="Search icon" 
+              onclick="searchTask()"
+            />
           </div>
           <button class="addTaskBtn" onclick="addTaskPopupBtn()">
             <p class="addTaskBtnText">Add task</p>
@@ -39,27 +59,76 @@
         </div>
       </div>
 
-      
-
       <div class="addNewTaskDiv d-none" id="addNewTaskDiv"></div>
 
       <div class="task-container" id="taskContainer">
         <div class="column-titles-plusBtn">
-          <h2 class="column-titles-h2">To Do<button class="add-column" id="toDoId" onclick="addTaskPopupPlusToDoBtn()"><img src="/assets/icons/plusblack.png" alt="Add icon"></button></h2>
-          <h2 class="column-titles-h2">In progress<button class="add-column" id="inProgressId" onclick="addTaskPopupPlusInProgressBtn()"><img src="/assets/icons/plusblack.png" alt="Add icon"></button></h2>
-          <h2 class="column-titles-h2">Await feedback<button class="add-column" id="awaitFeedbackId" onclick="addTaskPopupPlusAwaitFeedbackBtn()"><img src="/assets/icons/plusblack.png" alt="Add icon"></button></h2>
+          <h2 class="column-titles-h2">
+            To Do<button
+              class="add-column"
+              id="toDoId"
+              onclick="addTaskPopupPlusToDoBtn()"
+            >
+              <img src="/assets/icons/plusblack.png" alt="Add icon" />
+            </button>
+          </h2>
+          <h2 class="column-titles-h2">
+            In progress<button
+              class="add-column"
+              id="inProgressId"
+              onclick="addTaskPopupPlusInProgressBtn()"
+            >
+              <img src="/assets/icons/plusblack.png" alt="Add icon" />
+            </button>
+          </h2>
+          <h2 class="column-titles-h2">
+            Await feedback<button
+              class="add-column"
+              id="awaitFeedbackId"
+              onclick="addTaskPopupPlusAwaitFeedbackBtn()"
+            >
+              <img src="/assets/icons/plusblack.png" alt="Add icon" />
+            </button>
+          </h2>
           <h2 class="column-titles-h2">Done</h2>
         </div>
         <div class="column-container" id="columnContainer">
           <div class="columns" id="columns">
-            <div class="column" id="todo" ondrop="drop(event, 'todo'); checkEmptyColumns()" ondragover="allowDrop(event); highlight('todo')" ondragleave="removeHighlight('todo')"></div>
-            <div class="column" id="inprogress" ondrop="drop(event, 'inprogress'); checkEmptyColumns()" ondragover="allowDrop(event); highlight('inprogress')" ondragleave="removeHighlight('inprogress')"></div>
-            <div class="column" id="awaitfeedback" ondrop="drop(event, 'awaitfeedback'); checkEmptyColumns()" ondragover="allowDrop(event); highlight('awaitfeedback')" ondragleave="removeHighlight('awaitfeedback')"></div>
-            <div class="column" id="done" ondrop="drop(event, 'done'); checkEmptyColumns()" ondragover="allowDrop(event); highlight('done')" ondragleave="removeHighlight('done')"></div>
+            <div
+              class="column"
+              id="todo"
+              ondrop="drop(event, 'todo'); checkEmptyColumns()"
+              ondragover="allowDrop(event)"
+            ></div>
+            <div
+              class="column"
+              id="inprogress"
+              ondrop="drop(event, 'inprogress'); checkEmptyColumns()"
+              ondragover="allowDrop(event)"
+            ></div>
+            <div
+              class="column"
+              id="awaitfeedback"
+              ondrop="drop(event, 'awaitfeedback'); checkEmptyColumns()"
+              ondragover="allowDrop(event)"
+            ></div>
+            <div
+              class="column"
+              id="done"
+              ondrop="drop(event, 'done'); checkEmptyColumns()"
+              ondragover="allowDrop(event)"
+            ></div>
           </div>
         </div>
       </div>
     </div>
+
+
+    <!-- Muss noch in ein JS Template eingefügt werden -->
+    
     <div class="addNewTaskBtnDiv d-none" id="addNewTaskBtnDiv"></div>
+    <div class="editTaskPopupDiv" id="openTaskPopupDiv"></div>
+    <div class="editTaskPopupDiv" id="editTaskPopupDiv"></div>
+    
   </body>
 </html>
