@@ -170,7 +170,7 @@ function updateSelectedContactsDisplay() {
     let contact = contacts.find(c => c.name === contactName);
     if (contact) {
       selectedContainer.innerHTML += /*html*/ `
-        <span class="assignedShortcutName">${generateInitials(contact.name)}</span>
+        <span class="assignedShortcutName" style="background-color: ${contact.color};">${generateInitials(contact.name)}</span>
       `;
     }
   });
