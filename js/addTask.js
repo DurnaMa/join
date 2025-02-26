@@ -147,7 +147,7 @@ function contactList() {
     contactList.innerHTML += /*html*/ `
       <div class="assignedContactContent" onclick="toggleCheckbox(event, '${contact.name}')">
         <div class="assignedContacts">
-          <span class="assignedShortcutName">${initials}</span>
+          <span class="assignedShortcutName" style="background-color: ${contact.color};">${initials}</span>
           <span class="assignedName">${contact.name}</span>
         </div>
         <input type="checkbox" name="contact-${contact.name}" id="contact-${contact.name}" ${isChecked} onclick="toggleCheckbox(event, '${contact.name}')">
