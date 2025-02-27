@@ -136,8 +136,8 @@ function deleteSubTask(index) {
 }
 
 function contactList() {
-
   let contactList = document.getElementById("assignedContactsList");
+
   contactList.innerHTML = "";
 
   contacts.forEach((contact) => {
@@ -161,27 +161,36 @@ function contactList() {
   if (contactList.classList.contains("hidden")) {
     updateSelectedContactsDisplay();
   }
+  openclassList();
+}
+
+function openclassList() {
+  document.getElementById("assignedArrowUp").classList.toggle("d-none");
+  document.getElementById("assignedArrowDown").classList.toggle("d-none");
 }
 
 function updateSelectedContactsDisplay() {
   let selectedContainer = document.getElementById("selectedContactsDisplay");
   selectedContainer.innerHTML = "";
   selectedContacts.forEach((contactName) => {
-    let contact = contacts.find(c => c.name === contactName);
+    let contact = contacts.find((c) => c.name === contactName);
     if (contact) {
       selectedContainer.innerHTML += /*html*/ `
-        <span class="assignedShortcutName" style="background-color: ${contact.color};">${generateInitials(contact.name)}</span>
+        <span class="assignedShortcutName" style="background-color: ${contact.color};">${generateInitials(
+        contact.name
+      )}</span>
       `;
     }
   });
 }
 
 function toggleCheckbox(event, contactName) {
-  let checkbox = event.target.type === "checkbox" ? event.target : event.currentTarget.querySelector('input[type="checkbox"]');
+  let checkbox =
+    event.target.type === "checkbox" ? event.target : event.currentTarget.querySelector('input[type="checkbox"]');
   if (checkbox) {
     checkbox.checked = !checkbox.checked;
     event.currentTarget.classList.toggle("selectedContact", checkbox.checked);
-    
+
     if (checkbox.checked) {
       selectedContacts.add(contactName);
     } else {
