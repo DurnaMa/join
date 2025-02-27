@@ -288,3 +288,7 @@ async function deleteContact(id) {
 function getRandomColorFromArray() {
   return colorPalette[Math.floor(Math.random() * colorPalette.length)];
 }
+
+function mobileToggleOptions(){
+  document.getElementById("mobileToggleOptions").classList.toggle("hidden")
+}

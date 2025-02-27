@@ -256,8 +256,48 @@ input:focus {
   background-size: 20px 20px;
 }
 
-.mobile-popup-button{
+.mobile-popup-button {
   display: flex;
   justify-content: center;
   padding-top: 30px;
+}
+
+#mobileToggleOptions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px;
+  width: 116px;
+  /* list-style: none; */
+  position: absolute;
+  z-index: 999;
+  right: 6px;
+  bottom: 105px;
+  border-radius: 20px 20px 0px 20px;
+  background: grey;
+  padding: 10px;
+}
+
+@media screen and (max-width: 570px) {
+  .mobile-add-edit-popup-contact-div {
+    padding: 13px;
+  }
+
+  .mobile-popup-above h1 {
+    font-size: 40px;
+  }
+
+  .mobile-popup-above span {
+    font-size: 16px;
+  }
+
+  .mobile-popup-below {
+    padding-top: 51px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .mobile-add-edit-popup-contact-div {
+    width: 90%;
+  }
 }

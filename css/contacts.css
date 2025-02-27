@@ -201,7 +201,6 @@
   align-items: center;
   border-radius: 60px;
   border: 2px solid #ffffff;
-  /* background-color: #ff7a00; */
   font-size: 47px;
   font-weight: 500;
   color: white;
@@ -361,13 +360,13 @@
 }
 
 @media screen and (max-width: 1200px) {
-  .contact-right-area-header h1 {
+  /* .contact-right-area-header h1 {
     font-size: 36px;
   }
 
   .contact-right-area-header h2 {
     font-size: 15px;
-  }
+  } */
 
   .contact-name-header {
     font-size: 20px;
@@ -479,7 +478,7 @@
   .mobile-contact-right-area {
     display: flex;
     flex-direction: column;
-    gap: 17px;
+    gap: 59px;
   }
 
   .mobile-contact-right-area-header {
@@ -494,8 +493,42 @@
     gap: 10px;
   }
   .mobile-contact-right-area-header-dividing-line-content hr {
-    border: 2px solid #29abe2;
-    width: 23%;
+    border: 1px solid #29abe2;
+    width: 17%;
+  }
+
+  .contacts-abbreviation-right-area {
+    width: 105px;
+    height: 105px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 60px;
+    border: 2px solid #ffffff;
+    font-size: 37px;
+    font-weight: 500;
+    color: white;
+  }
+
+  .contact-name-header {
+    font-weight: 500;
+    font-size: 33px;
+  }
+  
+  .contact-details-div-name {
+    width: 287px;
+    height: 56px;
+    gap: 5px;
+  }
+  
+  .contact-details-div-icons{
+    font-size: 16px;
+  }
+
+  .mobile-contact-details-div {
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
   }
 
   .mobileOptionsButton {
@@ -534,16 +567,39 @@
     width: 100vw;
   }
 
+  .contacts-abbreviation-right-area {
+    width: 80px;
+    height: 80px;
+ 
+  }
+
+  .contact-name-header {
+    font-weight: 500;
+    font-size: 17px;
+  }
+
   .mobile-contact-right-area {
     display: flex;
     flex-direction: column;
-    gap: 17px;
+    gap: 41px;
   }
+
+  .contact-details-div-icons {
+    font-size: 14px;
+}
+
+.close-mobile-contact-area {
+  left: 85%;
+}
 
   .mobile-contact-right-area-header {
     display: flex;
     flex-direction: column;
     gap: 10px;
+  }
+  
+  .mobile-contact-right-area-header h1{
+font-size: 52px;
   }
 
   .mobile-contact-right-area-header-dividing-line-content {
@@ -552,8 +608,12 @@
     gap: 10px;
   }
   .mobile-contact-right-area-header-dividing-line-content hr {
-    border: 2px solid #29abe2;
+    border: 1px solid #29abe2;
     width: 23%;
+  }
+
+  .mobile-contact-right-area-header-dividing-line-content h2 {
+    font-size: 16px;
   }
 }
 
