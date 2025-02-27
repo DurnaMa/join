@@ -4,8 +4,8 @@
 
 
 function openTaskPopup(taskId) {
-  let id = todos.findIndex((task) => task.id == taskId);
-  let currentSelectedTask = todos[id];
+  let id = tasks.findIndex((task) => task.id == taskId);
+  let currentSelectedTask = tasks[id];
 
   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
   openTaskPopupDiv.classList.remove("d-none");
@@ -13,8 +13,8 @@ function openTaskPopup(taskId) {
 }
 
 function editTaskPopup(taskId) {
-  let id = todos.findIndex((task) => task.id == taskId);
-  let currentSelectedTask = todos[id];
+  let id = tasks.findIndex((task) => task.id == taskId);
+  let currentSelectedTask = tasks[id];
 
   let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
@@ -24,8 +24,8 @@ function editTaskPopup(taskId) {
 }
 
 async function editTask(taskId) {
-  let id = todos.findIndex((task) => task.id == taskId);
-  let currentSelectedTask = todos[id];
+  let id = tasks.findIndex((task) => task.id == taskId);
+  let currentSelectedTask = tasks[id];
   let task = currentSelectedTask;
   let taskCard = document.getElementById(`task-${taskId}`);
 

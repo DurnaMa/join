@@ -1,4 +1,4 @@
-let todos = [
+/*let todos = [
   {
     id: 1,
     columnTitles: "Await feedback",
@@ -74,12 +74,13 @@ let todos = [
     ],
     prio: [],
   },
-];
+];*/
 
 let currentDraggedElement;
 let currentSelectedTask;
 let currentUsers = [];
 let currentPrio = [];
+
 
 
 async function initBoard() {
@@ -94,7 +95,7 @@ function renderTasks() {
   document.getElementById("awaitfeedback").innerHTML = "";
   document.getElementById("done").innerHTML = "";
 
-  todos.forEach((task) => {
+  tasks.forEach((task) => {
     let taskCard = generateTaskCard(task);
     let columnId = task.columnTitles
       ? task.columnTitles.toLowerCase().replace(" ", "")
@@ -178,9 +179,8 @@ function generateTaskCard(task) {
     </div>
     <div class="task-footer">    
       <div class="task-users">
-          <div class="tasks-user1 tasks-user">${task.users[0].initial}</div>
-          <div class="tasks-user2 tasks-user">${task.users[1].initial}</div>
-          <div class="tasks-user3 tasks-user">${task.users[2].initial}</div>
+          <div class="tasks-user1 tasks-user">${task.users}</div>
+
         </div>
         <div>
           <img src="/assets/icons/priom.png" alt="">
@@ -238,7 +238,7 @@ function allowDrop(event) {
 function drop(event, column) {
   event.preventDefault();
   let taskId = event.dataTransfer.getData("text");
-  let task = todos.find((t) => t.id == taskId);
+  let task = tasks.find((t) => t.id == taskId);
   if (task) {
     task.columnTitles = column;
     renderTasks();
@@ -246,15 +246,15 @@ function drop(event, column) {
 }
 
 function deleteTask(taskId) {
-  let id = todos.findIndex((task) => task.id == taskId);
+  let id = tasks.findIndex((task) => task.id == taskId);
   let taskCard = document.getElementById(`task-${taskId}`);
   taskCard.remove();
-  todos.splice(id, 1);
+  tasks.splice(id, 1);
   renderTasks();
 }
 
 function updateSteps(taskId) {
-  let task = todos.find((t) => t.id === taskId);
+  let task = tasks.find((t) => t.id === taskId);
   if (!task || !task.subTask) return;
 
   const checkboxes = document.querySelectorAll(
