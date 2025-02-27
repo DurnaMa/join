@@ -81,6 +81,7 @@ let currentSelectedTask;
 let currentUsers = [];
 let currentPrio = [];
 
+
 async function initBoard() {
   await loadDataUsers();
   renderTasks();
@@ -279,24 +280,43 @@ function updateSteps(taskId) {
   }
 }
 
-function createTaskPlusToDoBtn() {
+async function createTaskPlusToDoBtn() {
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
+  let dueDate = document.getElementById("date").value;
+  let category = document.getElementById("category").value;
+  //let assignedContactContent = document.getElementById("selectedContactsDisplay").value;
+  selectedContacts = Array.from(selectedContacts);
 
-  let newTask = {
-    id: todos.length + 1,
-    columnTitles: "To do",
-    category: "",
-    title: title,
-    description: description,
-    subTask: [],
-    users: [],
-    prio: [],
+  let prioUrgentEdit = document.getElementById("prioUrgentEdit");
+  let prioMediumEdit = document.getElementById("prioMediumEdit");
+  let prioLowEdit = document.getElementById("prioLowEdit");
+
+  let priority = "";
+
+  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
+    priority = "urgent";
+  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
+    priority = "medium";
+  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
+    priority = "low";
+  }
+
+  let data = {
+    title,
+    description,
+    dueDate,
+    priority,
+    subTasks,
+    category,
+    selectedContacts,
   };
 
-  todos.push(newTask);
-  renderTasks();
-  closeAddTaskPopUp();
+  try {
+    await postDataToFirebase("tasks/", data);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 function createTaskPlusInProgressBtn() {

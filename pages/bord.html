@@ -21,7 +21,7 @@
     <script defer src="/js/header.js"></script>
     <script defer src="/js/addTask.js"></script>
     <script defer src="/js/templates.js"></script>
-    
+    <script defer src="/js/contacts.js"></script>
   </head>
 
   <body onload="initBoard()">
@@ -49,7 +49,7 @@
             <img
               class="searchIcon"
               src="/assets/icons/search.png"
-              alt="Search icon" 
+              alt="Search icon"
               onclick="searchTask()"
             />
           </div>
@@ -63,56 +63,74 @@
       <div class="addNewTaskDiv d-none" id="addNewTaskDiv"></div>
 
       <div class="task-container" id="taskContainer">
-        <div class="column-titles-plusBtn">
-          <h2 class="column-titles-h2">
-            To Do<button
+        <div class="column-container">
+          <div class="column-titles-plusBtn">
+            <h2 class="column-titles-h2">To Do</h2>
+            <button
               class="add-column"
               id="toDoId"
               onclick="addTaskPopupPlusToDoBtn()"
             >
               <img src="/assets/icons/plusblack.png" alt="Add icon" />
             </button>
-          </h2>
-          <h2 class="column-titles-h2">
-            In progress<button
-              class="add-column"
-              id="inProgressId"
-              onclick="addTaskPopupPlusInProgressBtn()"
-            >
-              <img src="/assets/icons/plusblack.png" alt="Add icon" />
-            </button>
-          </h2>
-          <h2 class="column-titles-h2">
-            Await feedback<button
-              class="add-column"
-              id="awaitFeedbackId"
-              onclick="addTaskPopupPlusAwaitFeedbackBtn()"
-            >
-              <img src="/assets/icons/plusblack.png" alt="Add icon" />
-            </button>
-          </h2>
-          <h2 class="column-titles-h2">Done</h2>
-        </div>
-        <div class="column-container" id="columnContainer">
-          <div class="columns" id="columns">
+          </div>
+          <div class="columns" id="columnsToDo">
             <div
               class="column"
               id="todo"
               ondrop="drop(event, 'todo'); checkEmptyColumns()"
               ondragover="allowDrop(event)"
             ></div>
+          </div>
+        </div>
+
+        <div class="column-container">
+          <div class="column-titles-plusBtn">
+            <h2 class="column-titles-h2">In progress</h2>
+            <button
+              class="add-column"
+              id="inProgressId"
+              onclick="addTaskPopupPlusInProgressBtn()"
+            >
+              <img src="/assets/icons/plusblack.png" alt="Add icon" />
+            </button>
+          </div>
+          <div class="columns" id="columnsInProgress">
             <div
               class="column"
               id="inprogress"
               ondrop="drop(event, 'inprogress'); checkEmptyColumns()"
               ondragover="allowDrop(event)"
             ></div>
+          </div>
+        </div>
+
+        <div class="column-container">
+          <div class="column-titles-plusBtn">
+            <h2 class="column-titles-h2">Await feedback</h2>
+            <button
+              class="add-column"
+              id="awaitFeedbackId"
+              onclick="addTaskPopupPlusAwaitFeedbackBtn()"
+            >
+              <img src="/assets/icons/plusblack.png" alt="Add icon" />
+            </button>
+          </div>
+          <div class="columns" id="columnsAwaitFeedback">
             <div
               class="column"
               id="awaitfeedback"
               ondrop="drop(event, 'awaitfeedback'); checkEmptyColumns()"
               ondragover="allowDrop(event)"
             ></div>
+          </div>
+        </div>
+
+        <div class="column-container">
+          <div class="column-titles-plusBtn">
+            <h2 class="column-titles-h2">Done</h2>
+          </div>
+          <div class="columns" id="columnsDone">
             <div
               class="column"
               id="done"
@@ -124,15 +142,17 @@
       </div>
     </div>
 
-
-    <!-- Muss noch in ein JS Template eingefügt werden -->
-    
     <div class="addNewTaskBtnDiv d-none" id="addNewTaskBtnDiv"></div>
     <div class="editTaskPopupDiv" id="openTaskPopupDiv"></div>
     <div class="editTaskPopupDiv" id="editTaskPopupDiv"></div>
     <div class="openTaskPopupToDoDiv d-none" id="openTaskPopupToDoDiv"></div>
-    <div class="openTaskPopupInProgressDiv d-none" id="openTaskPopupInProgressDiv"></div>
-    <div class="openTaskPopupAwaitFeedbackDiv d-none" id="openTaskPopupAwaitFeedbackDiv"></div>
-    
+    <div
+      class="openTaskPopupInProgressDiv d-none"
+      id="openTaskPopupInProgressDiv"
+    ></div>
+    <div
+      class="openTaskPopupAwaitFeedbackDiv d-none"
+      id="openTaskPopupAwaitFeedbackDiv"
+    ></div>
   </body>
 </html>

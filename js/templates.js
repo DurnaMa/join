@@ -22,6 +22,7 @@ function renderAddTaskPoupBtn() {
               <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
             </div>
             <div id="assignedContactsListPopUp" class="hidden"></div>
+            <div id="selectedContactsDisplay" class="selectedContactsContainer"></div>
           </section>
           <hr class="hrBoardPopUp" />
           <section class="formPartRight">
