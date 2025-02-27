@@ -285,7 +285,7 @@ async function createTaskPlusToDoBtn() {
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
   let category = document.getElementById("category").value;
-  //let assignedContactContent = document.getElementById("selectedContactsDisplay").value;
+  
   selectedContacts = Array.from(selectedContacts);
 
   let prioUrgentEdit = document.getElementById("prioUrgentEdit");
@@ -303,6 +303,8 @@ async function createTaskPlusToDoBtn() {
   }
 
   let data = {
+    //id: todos.length + 1,
+    columntitles: "ToDo",
     title,
     description,
     dueDate,

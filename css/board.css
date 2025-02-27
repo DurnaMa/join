@@ -202,6 +202,7 @@
 
 .task-container {
   display: flex;
+  flex-flow: wrap;
   width: 1200px;
   height: 688px;
   margin-top: 16px;
