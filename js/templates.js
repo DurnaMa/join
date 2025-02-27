@@ -76,55 +76,6 @@ function renderAddTaskPoupBtn() {
     `;
 }
 
-// function renderTasksCardPopup() {
-//   return /*html*/ `
-//     <div id="taskPopUp">
-//       <div class="shadow-div d-none"></div>
-//       <div class="taskCardPopup">
-//         <div class="taskCardPopupCategory">
-//           <div class="taskCardPopupCategoryColor">
-//             <h2>Technical task</h2>
-//           </div>
-//           <img onclick="closeTaskCardPopUp()" src="/assets/icons/close.png" alt="" />
-//         </div>
-//         <div class="taskCardPopupTitle">Test Test Test Versuche</div>
-//         <div class="taskCardPopupDescription">
-//           Welcome to Join. Here you can find your default board. This board
-//           represents your project and contains four default lists: "To do", "In
-//           progress", "Await feedback" and "Done".
-//         </div>
-//         <div class="taskCardPopupDate">Due date: 2024-10-30</div>
-//         <div class="taskCardPopupPrio">
-//           Priority: medium <img src="/assets/icons/mediumYellow.png" alt=""></div>
-//         <label class="taskCardPopupLabel">Assigned To:</label>
-//         <div class="taskCardPopupContact">
-//           <div class="taskCardPopupContactUsers tasks-user1">DL</div>
-//           <div class="taskCardPopupContactUsers tasks-user2">HA</div>
-//           <div class="taskCardPopupContactUsers tasks-user3">MD</div>
-//         </div>
-//         <label class="taskCardPopupLabel">Subtasks</label>
-//         <div class="taskCardPopupSubTasks">
-//         <div class="progress-container">
-//           <div class="step">
-//             <input type="checkbox" id="step1" onchange="updateSteps()">
-//             <label for="step1">Schritt 1</label>
-//           </div>
-//           <div class="step">
-//             <input type="checkbox" id="step2" onchange="updateSteps()">
-//             <label for="step2">Schritt 2</label>
-//           </div>
-//         </div>
-
-//         </div>
-//         <div class="taskCardPopupButtons">
-//           <div><img src="/assets/icons/deleteContact.png" alt="">Delete</div>
-//           <hr class="hrBoardTaskPopUp">
-//           <div><img src="/assets/icons/edit-pencil.png" alt="">Edit</div>
-//         </div>
-//       </div>
-//     </div>
-//   `;
-// }
 
 function renderAddTaskPopupToDoPlus() {
   return /*html*/ `
@@ -532,6 +483,61 @@ function addNewContactPopup() {
   </div>
   `;
 }
+
+function mobileAddNewContactPopup() {
+  return /*html*/ `
+  <div class="shadow-div d-none"></div>
+  <div class="mobile-add-edit-popup-contact-div">
+  <div>
+        <img
+          class="mobile-popup-close-img"
+          onclick="closePopUp()"
+          src="/assets/icons/close-white.png"
+          alt=""
+        />
+      </div>
+    <div class="mobile-popup-above">
+      <h1>Add contact</h1>
+      <span>Tasks are better with a team!</span>
+      <hr />
+    </div>
+    <div class="mobile-popup-below">
+      <div>
+        <img src="/assets/img/profileIMG.png" alt="" />
+      </div> 
+      <div>
+        <form class="mobile-form">
+          <input
+            class="mobile-name"
+            type="text"
+            id="newContactName"
+            placeholder="Name"
+          />
+          <input
+            class="mobile-email"
+            type="text"
+            id="newContactEmail"
+            placeholder="Email"
+          />
+          <input
+            class="mobile-phone"
+            type="text"
+            id="newContactPhone"
+            placeholder="Phone"
+          />
+        </form>
+        <div class="mobile-popup-button">
+          <button class="create-button" onclick="saveContact()">
+            Create contact <img src="/assets/icons/check.png" alt="" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  `;
+}
+
+
 
 function editContactPopup() {
   let contact = contacts[currentSelectedContact];
