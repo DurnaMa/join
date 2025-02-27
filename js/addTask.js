@@ -224,7 +224,7 @@ async function postAddTask() {
 
   let data = {
     //id: todos.length + 1,
-    columntitles: "ToDo",
+    columntitles: "To Do",
     title,
     description,
     dueDate,

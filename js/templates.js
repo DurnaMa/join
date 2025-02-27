@@ -16,12 +16,12 @@ function renderAddTaskPoupBtn() {
             <textarea id="descriptionTextarea" rows="5" placeholder="Enter a Description"></textarea>
             <br />
             <label for="contactSelection">Assigned to</label>
-            <div onclick="contactListPopUp()" class="assignedContainer">
+            <div onclick="contactList()" class="assignedContainer">
               <span>Select contacts to assign</span>
               <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
               <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
             </div>
-            <div id="assignedContactsListPopUp" class="hidden"></div>
+            <div id="assignedContactsList" class="hidden"></div>
             <div id="selectedContactsDisplay" class="selectedContactsContainer"></div>
           </section>
           <hr class="hrBoardPopUp" />
@@ -94,12 +94,13 @@ function renderAddTaskPopupToDoPlus() {
             <textarea id="descriptionTextarea" rows="5" placeholder="Enter a Description"></textarea>
             <br />
             <label for="contactSelection">Assigned to</label>
-            <div onclick="contactListPopUp()" class="assignedContainer">
+            <div onclick="contactList()" class="assignedContainer">
               <span>Select contacts to assign</span>
               <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
               <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
             </div>
-            <div id="assignedContactsListPopUp" class="hidden"></div>
+            <div id="assignedContactsList" class="hidden"></div>
+            <div id="selectedContactsDisplay" class="selectedContactsContainer"></div>
           </section>
           <hr class="hrBoardPopUp" />
           <section class="formPartRight">
@@ -143,7 +144,7 @@ function renderAddTaskPopupToDoPlus() {
           </p>
           <div class="btnSection">
             <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
-            <button onclick="postAddTask()" class="button">
+            <button onclick="createTaskPlusToDoBtn()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>
           </div>
@@ -171,12 +172,13 @@ function renderAddTaskPopupInProgressPlus() {
             <textarea id="descriptionTextarea" rows="5" placeholder="Enter a Description"></textarea>
             <br />
             <label for="contactSelection">Assigned to</label>
-            <div onclick="contactListPopUp()" class="assignedContainer">
+            <div onclick="contactList()" class="assignedContainer">
               <span>Select contacts to assign</span>
               <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
               <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
             </div>
-            <div id="assignedContactsListPopUp" class="hidden"></div>
+            <div id="assignedContactsList" class="hidden"></div>
+            <div id="selectedContactsDisplay" class="selectedContactsContainer"></div>
           </section>
           <hr class="hrBoardPopUp" />
           <section class="formPartRight">
@@ -220,7 +222,7 @@ function renderAddTaskPopupInProgressPlus() {
           </p>
           <div class="btnSection">
             <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
-            <button onclick="postAddTask()" class="button">
+            <button onclick="createTaskPlusInProgressBtn()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>
           </div>
@@ -248,12 +250,13 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
             <textarea id="descriptionTextarea" rows="5" placeholder="Enter a Description"></textarea>
             <br />
             <label for="contactSelection">Assigned to</label>
-            <div onclick="contactListPopUp()" class="assignedContainer">
+            <div onclick="contactList()" class="assignedContainer">
               <span>Select contacts to assign</span>
               <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
               <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
             </div>
-            <div id="assignedContactsListPopUp" class="hidden"></div>
+            <div id="assignedContactsList" class="hidden"></div>
+            <div id="selectedContactsDisplay" class="selectedContactsContainer"></div>
           </section>
           <hr class="hrBoardPopUp" />
           <section class="formPartRight">
@@ -297,7 +300,7 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
           </p>
           <div class="btnSection">
             <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
-            <button onclick="postAddTask()" class="button">
+            <button onclick="createTaskPlusAwaitFeedbackBtn()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>
           </div>

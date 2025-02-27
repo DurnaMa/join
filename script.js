@@ -1,6 +1,7 @@
 const BASE_URL = "https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let contacts = [];
+let tasks = [];
 
 function init() {
   
@@ -58,6 +59,28 @@ async function loadContacts() {
       color: SINGLE_CONTACT.color,
     };
     contacts.push(contact);
+  }
+}
+
+async function loadTasks() {
+  tasks = [];
+  let tasksData = await getDataFromFirebase("tasks");
+
+  for (const key in tasksData) {
+    const SINGLE_TASK = tasksData[key];
+    let task = {
+      id: key,
+      columntitle: SINGLE_TASK.columntitle,
+      title: SINGLE_TASK.title,
+      description: SINGLE_TASK.description,
+      dueDate: SINGLE_TASK.dueDate,
+      priority: SINGLE_TASK.priority,
+      subTasks: SINGLE_TASK.subTasks,
+      status: SINGLE_TASK.status,
+      category: SINGLE_TASK.category,
+      //users: SINGLE_TASK.users,
+    };
+    tasks.push(task);
   }
 }
 

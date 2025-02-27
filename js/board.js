@@ -84,6 +84,7 @@ let currentPrio = [];
 
 async function initBoard() {
   await loadDataUsers();
+  await loadTasks();
   renderTasks();
 }
 
@@ -304,7 +305,7 @@ async function createTaskPlusToDoBtn() {
 
   let data = {
     //id: todos.length + 1,
-    columntitles: "ToDo",
+    columntitles: "To Do",
     title,
     description,
     dueDate,
@@ -321,47 +322,89 @@ async function createTaskPlusToDoBtn() {
   }
 }
 
-function createTaskPlusInProgressBtn() {
+async function createTaskPlusInProgressBtn() {
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
+  let dueDate = document.getElementById("date").value;
+  let category = document.getElementById("category").value;
+  
+  selectedContacts = Array.from(selectedContacts);
 
-  let newTask = {
-    id: todos.length + 1,
-    columnTitles: "In progress",
-    category: "",
-    title: title,
-    description: description,
-    subTask: [],
-    users: [],
-    prio: [],
+  let prioUrgentEdit = document.getElementById("prioUrgentEdit");
+  let prioMediumEdit = document.getElementById("prioMediumEdit");
+  let prioLowEdit = document.getElementById("prioLowEdit");
+
+  let priority = "";
+
+  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
+    priority = "urgent";
+  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
+    priority = "medium";
+  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
+    priority = "low";
+  }
+
+  let data = {
+    //id: todos.length + 1,
+    columntitles: "In Progress",
+    title,
+    description,
+    dueDate,
+    priority,
+    subTasks,
+    category,
+    selectedContacts,
   };
 
-  todos.push(newTask);
-  renderTasks();
-  closeAddTaskPopUp();
+  try {
+    await postDataToFirebase("tasks/", data);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
-function createTaskPlusAwaitFeedbackBtn() {
+async function createTaskPlusAwaitFeedbackBtn() {
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
+  let dueDate = document.getElementById("date").value;
+  let category = document.getElementById("category").value;
+  
+  selectedContacts = Array.from(selectedContacts);
 
-  let newTask = {
-    id: todos.length + 1,
-    columnTitles: "Await feedback",
-    category: "",
-    title: title,
-    description: description,
-    subTask: [],
-    users: [],
-    prio: [],
+  let prioUrgentEdit = document.getElementById("prioUrgentEdit");
+  let prioMediumEdit = document.getElementById("prioMediumEdit");
+  let prioLowEdit = document.getElementById("prioLowEdit");
+
+  let priority = "";
+
+  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
+    priority = "urgent";
+  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
+    priority = "medium";
+  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
+    priority = "low";
+  }
+
+  let data = {
+    //id: todos.length + 1,
+    columntitles: "Await Feedback",
+    title,
+    description,
+    dueDate,
+    priority,
+    subTasks,
+    category,
+    selectedContacts,
   };
 
-  todos.push(newTask);
-  renderTasks();
-  closeAddTaskPopUp();
+  try {
+    await postDataToFirebase("tasks/", data);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
-function createtTaskBtn() {
+/*function createtTaskBtn() {
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
   let category = document.getElementById("category").value;
@@ -380,7 +423,7 @@ function createtTaskBtn() {
 
   todos.push(newTask);
   renderTasks();
-}
+}*/
 
 function addSubTaskPopUp() {
   if (subTaskPopUp.value != "") {
@@ -391,31 +434,5 @@ function addSubTaskPopUp() {
     subTaskPopUp.value = "";
   }
 }
-// Test
 
-function contactListPopUp() {
-  console.log("triger");
-  let contactList = document.getElementById("assignedContactsListPopUp");
-  contactList.innerHTML = "";
-  contacts.forEach((contact) => {
-    const initials = generateInitialsPopUp(contact.name);
-    contactList.innerHTML += /*html*/ `
-      <div class="assignedContactContent" onclick="toggleCheckbox(event)">
-        <div class="assignedContacts">
-          <span class="assignedShortcutName">${initials}</span>
-          <span class="assignedName">${contact.name}</span>
-        </div>
-        <input type="checkbox" name="contact-${contact.id}" id="contact-${contact.id}">
-      </div>
-    `;
-  });
-  contactList.classList.toggle("hidden");
-  contactList.classList.toggle("d-flex");
-}
 
-function generateInitialsPopUp(name) {
-  const nameParts = name.split(" ");
-  const firstInitial = nameParts[0]?.charAt(0) || "";
-  const lastInitial = nameParts[1]?.charAt(0) || "";
-  return `${firstInitial}${lastInitial}`.toUpperCase();
-}
