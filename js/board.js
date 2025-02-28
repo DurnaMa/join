@@ -212,14 +212,6 @@ function generateTaskCard(task) {
   taskCard.draggable = true;
   taskCard.ondragstart = (event) => startDragging(event, task.id);
 
-  /*let assignedUsers = task.assignedUsers
-    ? task.assignedUsers.map((user) => user.initials).join(", ")
-    : "";*/
-
-  /*let assignedUsers = task.users
-    ? task.users.map((user) => user.initials).join(", ")
-    : "";*/
-
   taskCard.innerHTML = /*html*/ `
     <div class="task-card-div">
       <div class="task-card-category-div">
@@ -250,16 +242,6 @@ function generateTaskCard(task) {
       </div>
     </div>
   `;
-
-  if (columntitles === "To Do") {
-    id = "todo";
-  } else if (columntitles === "In Progress") {
-    id = "inprogress";
-  } else if (columntitles === "Await Feedback") {
-    id = "awaitfeedback";
-  } else if (columntitles === "Done") {
-    id = "done";
-  }
 
   let categoryElement = taskCard.querySelector(".task-card-category");
   if (categoryElement) {
