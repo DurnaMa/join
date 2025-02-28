@@ -146,12 +146,21 @@ function generateTaskCard(task) {
     ? task.subTask.filter((st) => st.completed).length
     : 0;
   let totalSubtasks = task.subTask ? task.subTask.length : 0;
+  let columntitles = task.columnTitles ? task.columnTitles : "";
 
   let taskCard = document.createElement("div");
   taskCard.classList.add("task-card");
   taskCard.id = `task-${task.id}`;
   taskCard.draggable = true;
   taskCard.ondragstart = (event) => startDragging(event, task.id);
+
+  /*let assignedUsers = task.assignedUsers
+    ? task.assignedUsers.map((user) => user.initials).join(", ")
+    : "";*/
+
+  /*let assignedUsers = task.users
+    ? task.users.map((user) => user.initials).join(", ")
+    : "";*/
 
   taskCard.innerHTML = /*html*/ `
   <div class="task-card-div" onclick="openTaskPopup(${task.id})">
@@ -179,7 +188,7 @@ function generateTaskCard(task) {
     </div>
     <div class="task-footer">    
       <div class="task-users">
-          <div class="tasks-user1 tasks-user">${task.users}</div>
+          <div class="tasks-user1 tasks-user">${task.user}</div>
 
         </div>
         <div>
@@ -187,6 +196,16 @@ function generateTaskCard(task) {
         </div>
   </div>
   `;
+
+  if (columntitles === "To Do") {
+    id = "todo";
+  } else if (columntitles === "In Progress") {
+    id = "inprogress";
+  } else if (columntitles === "Await Feedback") {
+    id = "awaitfeedback";
+  } else if (columntitles === "Done") {
+    id = "done";
+  }
 
   let categoryElement = taskCard.querySelector(".task-card-category");
   if (categoryElement) {
