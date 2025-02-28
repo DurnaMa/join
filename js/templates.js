@@ -619,11 +619,10 @@ function mobileEditContactPopup() {
         />
       </div>
     <div class="mobile-popup-above">
-      <h1>Add contact</h1>
-      <span>Tasks are better with a team!</span>
+      <h1>Edit contact</h1>
       <hr />
     </div>
-    <div class="mobile-popup-below">
+    <div class="mobile-edit-popup-below">
       <div>
         <img src="/assets/img/profileIMG.png" alt="" />
       </div> 
@@ -633,21 +632,21 @@ function mobileEditContactPopup() {
             value="${name}"
             class="mobile-name"
             type="text"
-            id="newContactName"
+            id="editContactName"
             placeholder="Name"
           />
           <input
             value="${email}"
             class="mobile-email"
             type="text"
-            id="newContactEmail"
+            id="editContactEmail"
             placeholder="Email"
           />
           <input
             value="${phone}"
             class="mobile-phone"
             type="text"
-            id="newContactPhone"
+            id="editContactPhone"
             placeholder="Phone"
           />
         </form>

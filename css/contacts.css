@@ -302,10 +302,12 @@
 
 .contact-email-link {
   color: #007cee;
+  width: 0px;
 }
 
 .contact-phone-link {
   color: black;
+  width: 0px;
 }
 
 .contacts-abbreviation-div {
@@ -457,6 +459,10 @@
     display: flex;
   }
 
+  .mobileAddButton img {
+    cursor: pointer;
+  }
+
   .letterSection {
     width: 111%;
   }
@@ -473,6 +479,10 @@
     position: fixed;
     left: 90%;
     top: 14%;
+  }
+
+  .close-mobile-contact-area img{
+    cursor: pointer;
   }
 
   .mobile-contact-right-area {
@@ -523,6 +533,7 @@
   
   .contact-details-div-icons{
     font-size: 16px;
+    display: none;
   }
 
   .mobile-contact-details-div {
@@ -535,6 +546,10 @@
     position: fixed;
     right: 4%;
     bottom: 13%;
+  }
+
+  .mobileOptionsButton img {
+    cursor: pointer;
   }
 }
 

@@ -191,10 +191,18 @@ function editContact() {
   editContactDiv.innerHTML = editContactPopup();
 }
 
+function mobileEditContact() {
+  const editContactDiv = document.getElementById("popup");
+  editContactDiv.classList.remove("d-none");
+  editContactDiv.innerHTML = mobileEditContactPopup();
+}
+
 function closePopUp() {
   document.getElementById("popup").classList.add("d-none");
   document.getElementById("popup").classList.add("d-none");
   document.getElementById("mobileContactContainer").classList.add("d-none");
+  document.getElementById("mobileToggleOptions").classList.add("hidden");
+
 }
 
 /**
@@ -285,6 +293,24 @@ async function deleteContact(id) {
   closePopUp();
 }
 
+async function mobileDeleteContact() {
+  if (!contacts[currentSelectedContact]) {
+    console.error("Invalid contact ID:", currentSelectedContact);
+    return;
+  }
+
+  let contactId = contacts[currentSelectedContact].id; // Hole die Firebase ID
+  let path = `/contacts/${contactId}`;
+
+  await deleteDataFromFirebase(path);
+  await loadDataUsers();
+  renderContactsList();
+  
+  document.getElementById("mobileContactDetailsDiv").innerHTML = "";
+  closePopUp();
+}
+
+
 function getRandomColorFromArray() {
   return colorPalette[Math.floor(Math.random() * colorPalette.length)];
 }
@@ -292,3 +318,15 @@ function getRandomColorFromArray() {
 function mobileToggleOptions(){
   document.getElementById("mobileToggleOptions").classList.toggle("hidden")
 }
+
+document.addEventListener("click", function(event) {
+  const mobileOptions = document.getElementById("mobileToggleOptions");
+  const toggleButton = document.querySelector(".mobileOptionsButton img");
+
+  // Prüfen, ob mobileOptions sichtbar ist
+  if (!mobileOptions.classList.contains("hidden")) {
+      // Prüfen, ob der Klick außerhalb des Menüs und außerhalb des Buttons erfolgt ist
+      if (!mobileOptions.contains(event.target) && event.target !== toggleButton) {
+          mobileOptions.classList.add("hidden"); // Menü schließen
+      }
+  }});
