@@ -81,8 +81,6 @@ let currentSelectedTask;
 let currentUsers = [];
 let currentPrio = [];
 
-
-
 async function initBoard() {
   await loadDataUsers();
   await loadTasks();
@@ -141,65 +139,6 @@ function generateEmptyColumn(columnId) {
   `;
 }
 
-// function generateTaskCard(task) {
-//   let completedSubtasks = task.subTask
-//     ? task.subTask.filter((st) => st.completed).length
-//     : 0;
-//   let totalSubtasks = task.subTask ? task.subTask.length : 0;
-
-//   let taskCard = document.createElement("div");
-//   taskCard.classList.add("task-card");
-//   taskCard.id = `task-${task.id}`;
-//   taskCard.draggable = true;
-//   taskCard.ondragstart = (event) => startDragging(event, task.id);
-
-//   taskCard.innerHTML = /*html*/ `
-//   <div class="task-card-div" onclick="openTaskPopup(${task.id})">
-//     <div class="task-card-category-div">
-//       <div class="task-card-category">
-//         <h2 class="task-card-category-h2">${task.category}</h2>
-//       </div>
-//     </div>
-//     <h3>${task.title}</h3>
-//     <p>${task.description}</p>
-    
-//     <div class="progress-container">
-//         <div class="progress-bar-container">
-//             <div class="progress-bar" id="progressBar-${
-//               task.id
-//             }" style="width: ${
-//     (completedSubtasks / totalSubtasks) * 100
-//   }%;"></div>
-//         </div>
-//         <div class="subtasks-div">
-//           <span class="subtasks-amount" id="subtasksAmount-${
-//             task.id
-//           }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
-//         </div>
-//     </div>
-//     <div class="task-footer">    
-//       <div class="task-users">
-//           <div class="tasks-user1 tasks-user">${task.users}</div>
-
-//         </div>
-//         <div>
-//           <img src="/assets/icons/priom.png" alt="">
-//         </div>
-//   </div>
-//   `;
-
-//   let categoryElement = taskCard.querySelector(".task-card-category");
-//   if (categoryElement) {
-//     if (task.category === "User story") {
-//       categoryElement.style.backgroundColor = "#0038FF";
-//     } else if (task.category === "Technical task") {
-//       categoryElement.style.backgroundColor = "#1FD7C1";
-//     }
-//   }
-
-//   return taskCard;
-// }
-
 function generateTaskCard(task) {
   let completedSubtasks = task.subTasks
     ? task.subTasks.filter((st) => st.completed).length
@@ -225,11 +164,13 @@ function generateTaskCard(task) {
       <div class="progress-container">
         <div class="progress-bar-container">
           <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
-            (completedSubtasks / totalSubtasks) * 100
-          }%;"></div>
+    (completedSubtasks / totalSubtasks) * 100
+  }%;"></div>
         </div>
         <div class="subtasks-div">
-          <span class="subtasks-amount" id="subtasksAmount-${task.id}">${completedSubtasks}/${totalSubtasks} Subtasks</span>
+          <span class="subtasks-amount" id="subtasksAmount-${
+            task.id
+          }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
         </div>
       </div>
       <div class="task-footer">      
@@ -242,6 +183,29 @@ function generateTaskCard(task) {
       </div>
     </div>
   `;
+
+  if (task.columnTitles) {
+    let columnTitle = task.columnTitles.toLowerCase().trim();
+
+    if (columnTitle === "to do") {
+      task.columnTitles = "To Do";
+    } else if (columnTitle === "in progress") {
+      task.columnTitles = "In Progress";
+    } else if (columnTitle === "await feedback") {
+      task.columnTitles = "Await Feedback";
+    } else if (columnTitle === "done") {
+      task.columnTitles = "Done";
+    }
+  }
+
+  let progressBar = taskCard.querySelector(`#progressBar-${task.id}`);
+  let subtasksAmount = taskCard.querySelector(`#subtasksAmount-${task.id}`);
+  if (progressBar && subtasksAmount) {
+    let progressPercentage =
+      totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
+    progressBar.style.width = `${progressPercentage}%`;
+    subtasksAmount.textContent = `${completedSubtasks}/${totalSubtasks} Subtasks`;
+  }
 
   let categoryElement = taskCard.querySelector(".task-card-category");
   if (categoryElement) {
@@ -259,7 +223,6 @@ function generateTaskCard(task) {
 
   return taskCard;
 }
-
 
 function searchTask() {
   let searchTaskInput = document
@@ -347,7 +310,7 @@ async function createTaskPlusToDoBtn() {
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
   let category = document.getElementById("category").value;
-  
+
   selectedContacts = Array.from(selectedContacts);
 
   let prioUrgentEdit = document.getElementById("prioUrgentEdit");
@@ -388,7 +351,7 @@ async function createTaskPlusInProgressBtn() {
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
   let category = document.getElementById("category").value;
-  
+
   selectedContacts = Array.from(selectedContacts);
 
   let prioUrgentEdit = document.getElementById("prioUrgentEdit");
@@ -429,7 +392,7 @@ async function createTaskPlusAwaitFeedbackBtn() {
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
   let category = document.getElementById("category").value;
-  
+
   selectedContacts = Array.from(selectedContacts);
 
   let prioUrgentEdit = document.getElementById("prioUrgentEdit");
@@ -495,5 +458,3 @@ function addSubTaskPopUp() {
     subTaskPopUp.value = "";
   }
 }
-
-
