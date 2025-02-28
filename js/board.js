@@ -414,7 +414,7 @@ async function createTaskPlusInProgressBtn() {
     priority,
     subTasks,
     category,
-    selectedContacts,
+    [selectedContacts]: selectedContacts,
   };
 
   try {
