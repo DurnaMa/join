@@ -267,6 +267,7 @@ async function updateContact() {
     name: name,
     email: email,
     phone: phone,
+    color: getRandomColorFromArray(),
   };
 
   try {
