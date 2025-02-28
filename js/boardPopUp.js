@@ -3,6 +3,15 @@
 //importScripts("board.js");
 
 
+// function openTaskPopup(taskId) {
+//   let id = tasks.findIndex((task) => task.id == taskId);
+//   let currentSelectedTask = tasks[id];
+
+//   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
+//   openTaskPopupDiv.classList.remove("d-none");
+//   openTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
+// }
+
 function openTaskPopup(taskId) {
   let id = tasks.findIndex((task) => task.id == taskId);
   let currentSelectedTask = tasks[id];
