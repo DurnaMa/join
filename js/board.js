@@ -234,13 +234,45 @@ function taskGetFromLocalStorage() {
 //   }
 // }
 
-function deleteTask(taskId) {
+async function deleteTask(taskId) {
   let id = tasks.findIndex((task) => task.id == taskId);
-  let taskCard = document.getElementById(`task-${taskId}`);
-  taskCard.remove();
-  tasks.splice(id, 1);
+  let path = `/tasks/${tasks[id].id}`;
+  await deleteDataFromFirebase(path);
+  await loadTasks();
   renderTasks();
+  document.getElementById("openTaskPopupDiv").innerHTML = "";
+  closeTaskCardPopUp();
 }
+
+// function deleteTask(taskId) {
+//   let id = tasks.findIndex((task) => task.id == taskId);
+//   let taskCard = document.getElementById(`task-${taskId}`);
+//   taskCard.remove();
+//   tasks.splice(id, 1);
+//   renderTasks();
+//   firebase.firestore().collection('tasks').doc(taskId).delete().then(() => {
+//     console.log('Task gelöscht!');
+//   }).catch((error) => {
+//     console.error('Fehler beim Löschen des Tasks:', error);
+//   });
+// }
+
+// function deleteTask(taskId) {
+//   let id = tasks.findIndex((task) => task.id == taskId);
+//   let taskCard = document.getElementById(`task-${taskId}`);
+//   taskCard.remove();
+//   tasks.splice(id, 1);
+//   renderTasks();
+//   firebase.firestore().collection('tasks').doc(taskId).delete();
+// }
+
+// function deleteTask(taskId) {
+//   let id = tasks.findIndex((task) => task.id == taskId);
+//   let taskCard = document.getElementById(`task-${taskId}`);
+//   taskCard.remove();
+//   tasks.splice(id, 1);
+//   renderTasks();
+// }
 
 function updateSteps(taskId) {
   let task = tasks.find((t) => t.id === taskId);
