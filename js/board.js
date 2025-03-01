@@ -1,4 +1,3 @@
-
 let currentDraggedElement;
 let currentSelectedTask;
 let currentUsers = [];
@@ -99,6 +98,18 @@ function generateTaskCard(task) {
       <div class="task-footer">      
         <div class="task-users">
           <div class="tasks-user1 tasks-user">${task.users}</div>
+        <!-- ${task.users
+          .map((userId) => {
+          const contact = contacts.find((c) => c.id === userId);
+          if (contact) {
+          return `<div class="tasks-user1 tasks-user">${generateInitials(
+            contact.name
+          )}</div>`;
+          } else {
+            return "";
+          }
+        })  
+        .join("")} -->
         </div>
         <div>
           <img src="/assets/icons/priom.png" alt="">
@@ -240,6 +251,14 @@ async function createTaskPlusToDoBtn() {
     priority = "low";
   }
 
+  // let users = selectedContacts.map((contact) => {
+  //   return contact.id;
+  // });
+
+  // let initials = selectedContacts.map((contact) => {
+  //   return generateInitials(contact.name);
+  // });
+
   let data = {
     //id: todos.length + 1,
     columnTitles: "To Do",
@@ -250,6 +269,7 @@ async function createTaskPlusToDoBtn() {
     subTasks,
     category,
     users: selectedContacts,
+    //initials,
   };
 
   try {
