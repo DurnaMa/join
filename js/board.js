@@ -7,6 +7,8 @@ async function initBoard() {
   await loadDataUsers();
   await loadTasks();
   renderTasks();
+  //taskGetFromLocalStorage();
+  //taskGetFromFirebase();
 }
 
 function renderTasks() {
@@ -100,16 +102,16 @@ function generateTaskCard(task) {
           <div class="tasks-user1 tasks-user">${task.users}</div>
         <!-- ${task.users
           .map((userId) => {
-          const contact = contacts.find((c) => c.id === userId);
-          if (contact) {
-          return `<div class="tasks-user1 tasks-user">${generateInitials(
-            contact.name
-          )}</div>`;
-          } else {
-            return "";
-          }
-        })  
-        .join("")} -->
+            const contact = contacts.find((c) => c.id === userId);
+            if (contact) {
+              return `<div class="tasks-user1 tasks-user">${generateInitials(
+                contact.name
+              )}</div>`;
+            } else {
+              return "";
+            }
+          })
+          .join("")} -->
         </div>
         <div>
           <img src="/assets/icons/priom.png" alt="">
@@ -183,6 +185,24 @@ function allowDrop(event) {
   event.preventDefault();
 }
 
+// function drop(event, column) {
+//   event.preventDefault();
+//   let taskId = event.dataTransfer.getData("text");
+//   let task = tasks.find((t) => t.id == taskId);
+//   if (task) {
+//     task.columnTitles = column;
+//     renderTasks();
+//     firebase.firestore().collection('tasks').doc(taskId).set(task);
+//   }
+// }
+
+// function taskGetFromFirebase() {
+//   firebase.firestore().collection('tasks').get().then(querySnapshot => {
+//     tasks = querySnapshot.docs.map(doc => doc.data());
+//     renderTasks();
+//   });
+// }
+
 function drop(event, column) {
   event.preventDefault();
   let taskId = event.dataTransfer.getData("text");
@@ -190,8 +210,29 @@ function drop(event, column) {
   if (task) {
     task.columnTitles = column;
     renderTasks();
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 }
+
+function taskGetFromLocalStorage() {
+  let storedTasks = localStorage.getItem("tasks");
+  if (storedTasks) {
+    tasks = JSON.parse(storedTasks);
+  } else {
+    tasks = [];
+  }
+  renderTasks();
+}
+
+// function drop(event, column) {
+//   event.preventDefault();
+//   let taskId = event.dataTransfer.getData("text");
+//   let task = tasks.find((t) => t.id == taskId);
+//   if (task) {
+//     task.columnTitles = column;
+//     renderTasks();
+//   }
+// }
 
 function deleteTask(taskId) {
   let id = tasks.findIndex((task) => task.id == taskId);
