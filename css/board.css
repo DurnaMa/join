@@ -338,7 +338,7 @@
 
 /*-------end----------*/
 .tasks-user {
-  color: white;
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -348,7 +348,7 @@
   gap: 10px;
   padding: 5px;
 }
-
+/*
 .tasks-user1 {
   background-color: #0038ff;
 }
@@ -359,7 +359,7 @@
 
 .tasks-user3 {
   background-color: #9b7d2d;
-}
+}*/
 
 .task-users {
   display: flex;

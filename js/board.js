@@ -249,7 +249,7 @@ async function createTaskPlusToDoBtn() {
     priority,
     subTasks,
     category,
-    selectedContacts,
+    users: selectedContacts,
   };
 
   try {
@@ -331,7 +331,7 @@ async function createTaskPlusAwaitFeedbackBtn() {
     priority,
     subTasks,
     category,
-    selectedContacts,
+    users: selectedContacts,
   };
 
   try {

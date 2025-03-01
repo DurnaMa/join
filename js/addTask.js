@@ -224,14 +224,14 @@ async function postAddTask() {
 
   let data = {
     //id: todos.length + 1,
-    columntitles: "To Do",
+    columnTitles: "To Do",
     title,
     description,
     dueDate,
     priority,
     subTasks,
     category,
-    selectedContacts,
+    users: selectedContacts,
   };
 
   try {
