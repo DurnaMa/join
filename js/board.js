@@ -1,80 +1,3 @@
-/*let todos = [
-  {
-    id: 1,
-    columnTitles: "Await feedback",
-    category: "User story",
-    title: "Task 1",
-    description: "Task 1 description",
-    dueDate: "2024/10/10",
-    subTask: [
-      { name: "test1", completed: false },
-      { name: "test2", completed: false },
-    ],
-    users: [
-      { initial: "HA", completed: false },
-      { initial: "AL", completed: false },
-      { initial: "MD", completed: false },
-    ],
-    prio: [],
-  },
-  {
-    id: 2,
-    columnTitles: "In progress",
-    category: "Technical task",
-    title: "Task 2",
-    description: "Task 2 description",
-    dueDate: "2024/10/15",
-    subTask: [
-      { name: "test3", completed: false },
-      { name: "test4", completed: false },
-    ],
-    users: [
-      { initial: "FK", completed: false },
-      { initial: "DL", completed: false },
-      { initial: "MD", completed: false },
-    ],
-    prio: [],
-  },
-  {
-    id: 3,
-    columnTitles: "Await feedback",
-    category: "User story",
-    title: "Task 3",
-    description: "Task 3 description",
-    dueDate: "2024/10/20",
-    subTask: [
-      { name: "test5", completed: false },
-      { name: "test6", completed: false },
-      { name: "test6.3", completed: false },
-      { name: "test6.4", completed: false },
-      { name: "test6.5", completed: false },
-    ],
-    users: [
-      { initial: "HA", completed: false },
-      { initial: "DL", completed: false },
-      { initial: "RT", completed: false },
-    ],
-    prio: [],
-  },
-  {
-    id: 4,
-    columnTitles: "Done",
-    category: "Technical task",
-    title: "Task 4",
-    description: "Task 4 description",
-    dueDate: "2024/10/25",
-    subTask: [
-      { name: "test7", completed: false },
-      { name: "test8", completed: false },
-    ],
-    users: [
-      { initial: "HA", completed: false },
-      { initial: "DL", completed: false },
-      { initial: "MD", completed: false },
-    ],
-    prio: [],
-  },
-];*/
 
 let currentDraggedElement;
 let currentSelectedTask;
@@ -198,15 +121,6 @@ function generateTaskCard(task) {
     }
   }
 
-  let progressBar = taskCard.querySelector(`#progressBar-${task.id}`);
-  let subtasksAmount = taskCard.querySelector(`#subtasksAmount-${task.id}`);
-  if (progressBar && subtasksAmount) {
-    let progressPercentage =
-      totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
-    progressBar.style.width = `${progressPercentage}%`;
-    subtasksAmount.textContent = `${completedSubtasks}/${totalSubtasks} Subtasks`;
-  }
-
   let categoryElement = taskCard.querySelector(".task-card-category");
   if (categoryElement) {
     if (task.category === "User story") {
@@ -216,7 +130,6 @@ function generateTaskCard(task) {
     }
   }
 
-  // Event Listener hinzufügen
   taskCard.querySelector(".task-card-div").addEventListener("click", () => {
     openTaskPopup(task.id);
   });
@@ -329,7 +242,7 @@ async function createTaskPlusToDoBtn() {
 
   let data = {
     //id: todos.length + 1,
-    columntitles: "To Do",
+    columnTitles: "To Do",
     title,
     description,
     dueDate,
@@ -370,14 +283,14 @@ async function createTaskPlusInProgressBtn() {
 
   let data = {
     //id: todos.length + 1,
-    columntitles: "In Progress",
+    columnTitles: "In Progress",
     title,
     description,
     dueDate,
     priority,
     subTasks,
     category,
-    [selectedContacts]: selectedContacts,
+    users: selectedContacts,
   };
 
   try {
@@ -411,7 +324,7 @@ async function createTaskPlusAwaitFeedbackBtn() {
 
   let data = {
     //id: todos.length + 1,
-    columntitles: "Await Feedback",
+    columnTitles: "Await Feedback",
     title,
     description,
     dueDate,
@@ -427,27 +340,6 @@ async function createTaskPlusAwaitFeedbackBtn() {
     console.error(error);
   }
 }
-
-/*function createtTaskBtn() {
-  let title = document.getElementById("titleInput").value;
-  let description = document.getElementById("descriptionTextarea").value;
-  let category = document.getElementById("category").value;
-  let subTask = document.getElementById("subTask").value;
-
-  let newTask = {
-    id: todos.length + 1,
-    columnTitles: "To Do",
-    category: category,
-    title: title,
-    description: description,
-    subTask: subTask,
-    users: [],
-    prio: "",
-  };
-
-  todos.push(newTask);
-  renderTasks();
-}*/
 
 function addSubTaskPopUp() {
   if (subTaskPopUp.value != "") {

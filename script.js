@@ -62,28 +62,6 @@ async function loadContacts() {
   }
 }
 
-// async function loadTasks() {
-//   tasks = [];
-//   let tasksData = await getDataFromFirebase("tasks");
-
-//   for (const key in tasksData) {
-//     const SINGLE_TASK = tasksData[key];
-//     let task = {
-//       id: key,
-//       columntitle: SINGLE_TASK.columntitle,
-//       title: SINGLE_TASK.title,
-//       description: SINGLE_TASK.description,
-//       dueDate: SINGLE_TASK.dueDate,
-//       priority: SINGLE_TASK.priority,
-//       subTasks: SINGLE_TASK.subTasks,
-//       status: SINGLE_TASK.status,
-//       category: SINGLE_TASK.category,
-//       //users: SINGLE_TASK.users,
-//     };
-//     tasks.push(task);
-//   }
-// }
-
 async function loadTasks() {
   tasks = [];
   let tasksData = await getDataFromFirebase("tasks");
@@ -92,7 +70,7 @@ async function loadTasks() {
     const SINGLE_TASK = tasksData[key];
     let task = {
       id: key,
-      columntitle: SINGLE_TASK.columntitle,
+      columnTitles: SINGLE_TASK.columnTitles,
       title: SINGLE_TASK.title,
       description: SINGLE_TASK.description,
       dueDate: SINGLE_TASK.dueDate,
@@ -100,11 +78,11 @@ async function loadTasks() {
       subTasks: SINGLE_TASK.subTasks,
       status: SINGLE_TASK.status,
       category: SINGLE_TASK.category,
-      //users: SINGLE_TASK.users,
+      users: SINGLE_TASK.users ? SINGLE_TASK.users : [],
     };
     tasks.push(task);
   }
-  // Daten wurden geladen, jetzt Task-Karten erstellen
+  
   renderTasks();
 }
 
