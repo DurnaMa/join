@@ -724,81 +724,81 @@ function mobileEditContactPopup() {
 
 //--------- summary templates ---------
 
-/*function summaryTemplate() {
-  return /*html*/ /*`
-  <div class="summaryContainer">
-      <div class="summaryHeadline">
-        <h1>Join 407</h1>
-        <div class="mobileHeader">
-          <hr class="headlineHr" />
-          <h2>Key Metrics at a Glance</h2>
-        </div>
-      </div>
-      <div class="summaryOverview">
-        <div class="overviewContent">
-          <div class="summaryMediumContent">
-            <a class="mediumBox pencil" href="/pages/bord.html">
-              <img class="mediumBoxImg" src="/assets/icons/pencilBgDunkel.png" alt="" />
-              <img class="mediumBoxImgHover" src="/assets/icons/pencilBgWhite.png" alt="" />
-              <div class="boxInfo">
-                <span class="amount" id="toDoCount">2</span>
-                <span class="title">To-do</span>
-              </div>
-            </a>
-            <a class="mediumBox check" href="/pages/bord.html">
-              <img class="mediumBoxImg" src="/assets/icons/checkBgDunkel.png" alt="" />
-              <img class="mediumBoxImgHover" src="/assets/icons/checkBgWhite.png" alt="" />
-              <div class="boxInfo">
-                <span class="amount" id="doneCount">1</span>
-                <span class="title">Done</span>
-              </div>
-            </a>
-          </div>
-          <br />
-          <div class="summarysLargeContent">
-            <a class="largeBox" href="/pages/bord.html">
-              <div class="urgent">
-                <img class="largeBoxImg" src="/assets/icons/urgent.png" alt="" />
-                <div class="boxInfo">
-                  <span class="amount" id="urgentCount">3</span>
-                  <span class="title">Urgent</span>
-                </div>
-              </div>
-              <hr class="largeBoxHr" />
-              <div class="date">
-                <div id="date">October 16, 2022</div>
-                <span>Upcoming Deadline</span>
-              </div>
-            </a>
-          </div>
-          <br />
-          <div class="summarySmallContent">
-            <a class="smallBox" href="/pages/bord.html">
-              <div class="boxInfo">
-                <span class="amount" id="totalTaskCount">7</span>
-                <span class="title">Tasks in<br />Board</span>
-              </div>
-            </a>
-            <a class="smallBox" href="/pages/bord.html">
-              <div class="boxInfo">
-                <span class="amount" id="inProgressCount">3</span>
-                <span class="title">Tasks in<br />Progress</span>
-              </div>
-            </a>
-            <a class="smallBox" href="/pages/bord.html">
-              <div class="boxInfo">
-                <span class="amount" id="awaitFeedbackCount">1</span>
-                <span class="title">Awaiting<br />Feedback</span>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div id="greetings" class="greetings">
-          <span id="time"></span>
-          <h2>Guest</h2>
-        </div>
-      </div>
-    </div>
-  `;
-}*/
+// function summaryTemplate(tasks) {
+//   return /*html*/ `
+//   <div class="summaryContainer">
+//       <div class="summaryHeadline">
+//         <h1>Join 407</h1>
+//         <div class="mobileHeader">
+//           <hr class="headlineHr" />
+//           <h2>Key Metrics at a Glance</h2>
+//         </div>
+//       </div>
+//       <div class="summaryOverview">
+//         <div class="overviewContent">
+//           <div class="summaryMediumContent">
+//             <a class="mediumBox pencil" href="/pages/bord.html">
+//               <img class="mediumBoxImg" src="/assets/icons/pencilBgDunkel.png" alt="" />
+//               <img class="mediumBoxImgHover" src="/assets/icons/pencilBgWhite.png" alt="" />
+//               <div class="boxInfo">
+//                 <span class="amount" id="toDoCount">${tasks.length}</span>
+//                 <span class="title">${tasks.length} "To-do"</span>
+//               </div>
+//             </a>
+//             <a class="mediumBox check" href="/pages/bord.html">
+//               <img class="mediumBoxImg" src="/assets/icons/checkBgDunkel.png" alt="" />
+//               <img class="mediumBoxImgHover" src="/assets/icons/checkBgWhite.png" alt="" />
+//               <div class="boxInfo">
+//                 <span class="amount" id="doneCount">1</span>
+//                 <span class="title">${tasks.length} "Done"</span>
+//               </div>
+//             </a>
+//           </div>
+//           <br />
+//           <div class="summarysLargeContent">
+//             <a class="largeBox" href="/pages/bord.html">
+//               <div class="urgent">
+//                 <img class="largeBoxImg" src="/assets/icons/urgent.png" alt="" />
+//                 <div class="boxInfo">
+//                   <span class="amount" id="urgentCount">3</span>
+//                   <span class="title">${tasks.length} "Urgent"</span>
+//                 </div>
+//               </div>
+//               <hr class="largeBoxHr" />
+//               <div class="date">
+//                 <div id="date">October 16, 2022</div>
+//                 <span>Upcoming Deadline</span>
+//               </div>
+//             </a>
+//           </div>
+//           <br />
+//           <div class="summarySmallContent">
+//             <a class="smallBox" href="/pages/bord.html">
+//               <div class="boxInfo">
+//                 <span class="amount" id="totalTaskCount">7</span>
+//                 <span class="title">Tasks in<br />Board</span>
+//               </div>
+//             </a>
+//             <a class="smallBox" href="/pages/bord.html">
+//               <div class="boxInfo">
+//                 <span class="amount" id="inProgressCount">3</span>
+//                 <span class="title">Tasks in<br />Progress</span>
+//               </div>
+//             </a>
+//             <a class="smallBox" href="/pages/bord.html">
+//               <div class="boxInfo">
+//                 <span class="amount" id="awaitFeedbackCount">1</span>
+//                 <span class="title">Awaiting<br />Feedback</span>
+//               </div>
+//             </a>
+//           </div>
+//         </div>
+//         <div id="greetings" class="greetings">
+//           <span id="time"></span>
+//           <h2>Guest</h2>
+//         </div>
+//       </div>
+//     </div>
+//   `;
+// }
 

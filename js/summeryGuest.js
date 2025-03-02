@@ -1,10 +1,11 @@
-function initSummary() {
+async function initSummary() {
     daliyTime();
-    //loadTasks();
+    //await loadTasks();
+    //updateTaskSummary();
     //updateSummaryPage();
 }
 
-let tasks = loadTasks();
+//let tasks = loadTasks();
 
 function daliyTime() {
     let currentTime = new Date();
@@ -21,7 +22,6 @@ function daliyTime() {
             document.getElementById("time").innerHTML = "Good Evening";
             break;
     }
-    
 }
 
 
@@ -48,7 +48,7 @@ function daliyTime() {
 // function renderSummery() {
 //     let mainContentSummery = document.getElementById("mainContentSummery");
 //     mainContentSummery.innerHTML = "";
-//     mainContentSummery.innerHTML = summeryTemplate();
+//     mainContentSummery.innerHTML = summeryTemplate(tasks);
 // }
 
 // document.addEventListener("DOMContentLoaded", () => {
