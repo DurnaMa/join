@@ -612,7 +612,7 @@ function editContactPopup() {
       <hr />
     </div>
     <div class="popup-right">
-      <div>
+      <div class="popup-right-profile">
         <img src="/assets/img/profileIMG.png" alt="" />
       </div>
       <div>

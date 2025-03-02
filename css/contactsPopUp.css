@@ -292,6 +292,58 @@ input:focus {
   box-shadow: 0px 4px 4px 0px rgb(0, 0, 0, 0.25);
 }
 
+@media screen and (max-width: 1140px) {
+  .add-edit-popup-contact-div {
+    width: 900px;
+  }
+
+  form {
+    width: 100%;
+  }
+
+  .popup-left {
+    padding: 20px;
+  }
+
+  .popup-left h1 {
+    font-size: 47px;
+  }
+
+  .popup-left img {
+    width: 50.6px;
+    height: 61.48px;
+  }
+
+  .popup-right {
+    padding: 20px;
+  }
+}
+
+@media screen and (max-width: 940px){
+  .add-edit-popup-contact-div {
+    width: 700px;
+    height: 500px;
+  }
+
+  .popup-left h1 {
+    font-size: 40px;
+}
+
+  .popup-left img {
+    width: 45.6px;
+    height: 56.48px;
+  }
+
+  .popup-right {
+    padding: 10px;
+    gap: 5px;
+  }
+
+  .popup-right-profile img{
+    width: 100px;
+  }
+}
+
 @media screen and (max-width: 570px) {
   .mobile-add-edit-popup-contact-div {
     padding: 13px;
