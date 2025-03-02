@@ -60,11 +60,20 @@
             </section>
             <br />
             <label for="category">Category<span class="required">*</span> </label>
-            <select id="category">
+            <!-- mahir Start -->
+            <div onclick="categorytList()" class="categoryContainer">
+              <span class="">Select Task Category</span>
+              <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+              <img id="categoryArrowUp" src="/assets/icons/arrow_drop_up.png" alt="" />
+              <div id="categoryList" class="selectedContactsContainer"></div>
+            </div>
+
+            <!-- mahir Ende -->
+            <!-- <select id="category">
               <option value disabled selected hidden>Select Task Category</option>
               <option value="Technical Task">Technical Task</option>
               <option value="User Story">User Story</option>
-            </select>
+            </select> -->
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">

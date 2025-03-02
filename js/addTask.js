@@ -167,6 +167,8 @@ function contactList() {
 function openclassList() {
   document.getElementById("assignedArrowUp").classList.toggle("d-none");
   document.getElementById("assignedArrowDown").classList.toggle("d-none");
+  document.getElementById("categoryArrowDown").classList.toggle("d-none");
+  document.getElementById("categoryArrowUp").classList.toggle("d-none");
 }
 
 function updateSelectedContactsDisplay() {
@@ -205,7 +207,7 @@ async function postAddTask() {
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
   let category = document.getElementById("category").value;
-  
+
   selectedContacts = Array.from(selectedContacts);
 
   let prioUrgentEdit = document.getElementById("prioUrgentEdit");
@@ -239,4 +241,28 @@ async function postAddTask() {
   } catch (error) {
     console.error(error);
   }
+}
+
+function categorytList() {
+  let categoryList = document.getElementById("categoryList");
+
+  categoryList.innerHTML = "";
+
+  categoryList.innerHTML += /*html*/ `
+    <div class="custom-select">
+      <div class="select-items select-hide">
+        <div data-value="Technical Task">Technical Task</div>
+        <div data-value="User Story">User Story</div>
+      </div>
+    </div>
+    <input type="hidden" id="selectedCategory">
+    `;
+
+  categoryList.classList.toggle("hidden");
+  categoryList.classList.toggle("d-flex");
+
+  if (categoryList.classList.contains("hidden")) {
+    updateSelectedContactsDisplay();
+  }
+  openclassList();
 }
