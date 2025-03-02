@@ -71,6 +71,7 @@ label {
 input,
 textarea,
 .assignedContainer,
+.categoryContainer,
 select {
   height: 48px;
   border: 1px solid #d1d1d1;
@@ -84,6 +85,8 @@ input:focus,
 textarea:focus,
 .assignedContainer:focus,
 .assignedContainer:hover,
+.categoryContainer:focus,
+.categoryContainer:hover,
 select:focus {
   outline: none !important;
   border: 1px solid #29abe2;
@@ -94,6 +97,7 @@ input,
 textarea,
 button,
 .assignedContainer,
+.categoryContainer,
 select {
   font-size: 20px;
   cursor: pointer;
@@ -254,8 +258,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .clearBtn:hover img {
-  filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg)
-    brightness(100%) contrast(100%);
+  filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg) brightness(100%) contrast(100%);
 }
 
 .button {
@@ -314,7 +317,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-bottom: 2px solid #29abe2;
 }
 
-
 .subTask span {
   flex-grow: 1;
 }
@@ -349,7 +351,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: block;
 }
 
-.assignedContainer {
+.assignedContainer,
+.categoryContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -406,4 +409,14 @@ input[type="checkbox"] {
 
 .assignedContactContent:hover {
   background-color: #eeeeee;
+}
+
+.selectedContactsContainer {
+  display: flex;
+  padding: 5px;
+  gap: 1px;
+}
+
+#category {
+  background-color: white;
 }

@@ -136,8 +136,8 @@ function deleteSubTask(index) {
 }
 
 function contactList() {
-
   let contactList = document.getElementById("assignedContactsList");
+
   contactList.innerHTML = "";
 
   contacts.forEach((contact) => {
@@ -147,7 +147,7 @@ function contactList() {
     contactList.innerHTML += /*html*/ `
       <div class="assignedContactContent" onclick="toggleCheckbox(event, '${contact.name}')">
         <div class="assignedContacts">
-          <span class="assignedShortcutName">${initials}</span>
+          <span class="assignedShortcutName" style="background-color: ${contact.color};">${initials}</span>
           <span class="assignedName">${contact.name}</span>
         </div>
         <input type="checkbox" name="contact-${contact.name}" id="contact-${contact.name}" ${isChecked} onclick="toggleCheckbox(event, '${contact.name}')">
@@ -161,27 +161,38 @@ function contactList() {
   if (contactList.classList.contains("hidden")) {
     updateSelectedContactsDisplay();
   }
+  openclassList();
+}
+
+function openclassList() {
+  document.getElementById("assignedArrowUp").classList.toggle("d-none");
+  document.getElementById("assignedArrowDown").classList.toggle("d-none");
+  document.getElementById("categoryArrowDown").classList.toggle("d-none");
+  document.getElementById("categoryArrowUp").classList.toggle("d-none");
 }
 
 function updateSelectedContactsDisplay() {
   let selectedContainer = document.getElementById("selectedContactsDisplay");
   selectedContainer.innerHTML = "";
   selectedContacts.forEach((contactName) => {
-    let contact = contacts.find(c => c.name === contactName);
+    let contact = contacts.find((c) => c.name === contactName);
     if (contact) {
       selectedContainer.innerHTML += /*html*/ `
-        <span class="assignedShortcutName">${generateInitials(contact.name)}</span>
+        <span class="assignedShortcutName" style="background-color: ${contact.color};">${generateInitials(
+        contact.name
+      )}</span>
       `;
     }
   });
 }
 
 function toggleCheckbox(event, contactName) {
-  let checkbox = event.target.type === "checkbox" ? event.target : event.currentTarget.querySelector('input[type="checkbox"]');
+  let checkbox =
+    event.target.type === "checkbox" ? event.target : event.currentTarget.querySelector('input[type="checkbox"]');
   if (checkbox) {
     checkbox.checked = !checkbox.checked;
     event.currentTarget.classList.toggle("selectedContact", checkbox.checked);
-    
+
     if (checkbox.checked) {
       selectedContacts.add(contactName);
     } else {
@@ -196,8 +207,8 @@ async function postAddTask() {
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
   let category = document.getElementById("category").value;
-  //let assignedContactContent = document.getElementById("selectedContactsDisplay");
-  selectedContacts = 
+
+  selectedContacts = Array.from(selectedContacts);
 
   let prioUrgentEdit = document.getElementById("prioUrgentEdit");
   let prioMediumEdit = document.getElementById("prioMediumEdit");
@@ -214,13 +225,15 @@ async function postAddTask() {
   }
 
   let data = {
+    //id: todos.length + 1,
+    columnTitles: "To Do",
     title,
     description,
     dueDate,
     priority,
     subTasks,
     category,
-    selectedContacts,
+    users: selectedContacts,
   };
 
   try {
@@ -228,4 +241,28 @@ async function postAddTask() {
   } catch (error) {
     console.error(error);
   }
+}
+
+function categorytList() {
+  let categoryList = document.getElementById("categoryList");
+
+  categoryList.innerHTML = "";
+
+  categoryList.innerHTML += /*html*/ `
+    <div class="custom-select">
+      <div class="select-items select-hide">
+        <div data-value="Technical Task">Technical Task</div>
+        <div data-value="User Story">User Story</div>
+      </div>
+    </div>
+    <input type="hidden" id="selectedCategory">
+    `;
+
+  categoryList.classList.toggle("hidden");
+  categoryList.classList.toggle("d-flex");
+
+  if (categoryList.classList.contains("hidden")) {
+    updateSelectedContactsDisplay();
+  }
+  openclassList();
 }

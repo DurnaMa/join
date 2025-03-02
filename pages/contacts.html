@@ -47,7 +47,39 @@
     </div>
     <!-- muss ins JS gesetzt werden das Popup. Beachte das hier ein d-none vorhanden ist -->
     <div class="succesfull-popup d-none"><span>Contact succesfully created</span></div>
+    <div class="mobileAddButton">
+      <img onclick="mobileAddNewContact()" src="/assets/icons/add-button.png" alt="">
+    </div>
+    <div id="mobileContactContainer" class="mobileContactContainer d-none">
+      <div class="mobile-contact-right-area">
+        <div class="close-mobile-contact-area">
+          <img onclick="closePopUp()" src="/assets/icons/arrow-left-line.png" alt="">
+        </div>
+        <div class="mobile-contact-right-area-header">
+          <h1>Contacts</h1>
+          <div class="mobile-contact-right-area-header-dividing-line-content">
+            <hr>
+            <h2>Better with a team</h2>
+          </div>
+        </div>
 
+        <div class="mobile-contact-details-div" id="mobileContactDetailsDiv"></div>
+      
+      </div>
+      <div class="mobileOptionsButton">
+        <img onclick="mobileToggleOptions()" src="/assets/icons/options.png" alt="">
+      </div>
+    </div>
+    <div id="mobileToggleOptions" class="hidden">
+      <div onclick="mobileEditContact()" class="contact-details-div-icon-edit">
+        <img src="/assets/icons/edit-pencil.png" alt="">
+        Edit
+      </div>
+      <div onclick="mobileDeleteContact()" class="contact-details-div-icon-edit img">
+        <img src="/assets/icons/deleteContact.png" alt="">
+        Delete
+      </div>
+    </div>
     <div id="popup"></div>
   </body>
 </html>

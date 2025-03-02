@@ -11,12 +11,15 @@
 .add-edit-popup-contact-div {
   display: flex;
   position: fixed;
-  top: 16%;
-  left: 23%;
+  /* top: 16%;
+  left: 23%; */
+  top: 50%;
+  left: 50%;
   width: 1100px;
   height: 600px;
   border-radius: 30px;
   z-index: 5;
+  transform: translate(-50%, -50%);
 }
 
 .popup-left {
@@ -157,4 +160,215 @@ input:focus {
   color: white;
   font-size: 21px;
   width: 326px;
+}
+
+.mobile-add-edit-popup-contact-div {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  border-radius: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 13;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 60%;
+  height: 78%;
+  padding: 20px;
+  background: linear-gradient(180deg, #2a3647 45%, white 40%);
+}
+
+.mobile-popup-close-img {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  cursor: pointer;
+}
+
+.mobile-popup-above {
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+  color: white;
+  gap: 10px;
+}
+
+.mobile-popup-above h1 {
+  font-size: 47px;
+}
+
+.mobile-popup-above span {
+  font-size: 20px;
+}
+
+.mobile-popup-above hr {
+  border: 1px solid #29abe2;
+  width: 23%;
+}
+
+.mobile-popup-below {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 32px;
+}
+.mobile-edit-popup-below {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 65px;
+}
+
+.mobile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.mobile-name {
+  width: 100% !important;
+  height: 41px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  padding: 13px 21px;
+  font-size: 20px;
+  box-sizing: border-box;
+  padding-right: 30px;
+  background: url(/assets/icons/person.png) no-repeat right 21px center;
+  background-size: 20px 20px;
+}
+
+.mobile-email {
+  width: 100% !important;
+  height: 41px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  padding: 13px 21px;
+  font-size: 20px;
+  box-sizing: border-box;
+  padding-right: 30px;
+  background: url(/assets/icons/mail.png) no-repeat right 21px center;
+  background-size: 20px 20px;
+}
+
+.mobile-phone {
+  width: 100% !important;
+  height: 41px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  padding: 13px 21px;
+  font-size: 20px;
+  box-sizing: border-box;
+  padding-right: 30px;
+  background: url(/assets/icons/call.png) no-repeat right 21px center;
+  background-size: 20px 20px;
+}
+
+.mobile-popup-button {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  gap: 20px;
+}
+
+#mobileToggleOptions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px;
+  width: 116px;
+  position: absolute;
+  z-index: 4;
+  /* right: 6px;
+  bottom: 105px; */
+  right: 25px;
+  bottom: 121px;
+  border-radius: 20px 20px 0px 20px;
+  background: white;
+  padding: 15px;
+  gap: 10px;
+  box-shadow: 0px 4px 4px 0px rgb(0, 0, 0, 0.25);
+}
+
+@media screen and (max-width: 1140px) {
+  .add-edit-popup-contact-div {
+    width: 900px;
+  }
+
+  form {
+    width: 100%;
+  }
+
+  .popup-left {
+    padding: 20px;
+  }
+
+  .popup-left h1 {
+    font-size: 47px;
+  }
+
+  .popup-left img {
+    width: 50.6px;
+    height: 61.48px;
+  }
+
+  .popup-right {
+    padding: 20px;
+  }
+}
+
+@media screen and (max-width: 940px){
+  .add-edit-popup-contact-div {
+    width: 700px;
+    height: 500px;
+  }
+
+  .popup-left h1 {
+    font-size: 40px;
+}
+
+  .popup-left img {
+    width: 45.6px;
+    height: 56.48px;
+  }
+
+  .popup-right {
+    padding: 10px;
+    gap: 5px;
+  }
+
+  .popup-right-profile img{
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .mobile-add-edit-popup-contact-div {
+    padding: 13px;
+    width: 75%;
+  }
+
+  .mobile-popup-above h1 {
+    font-size: 40px;
+  }
+
+  .mobile-popup-above span {
+    font-size: 16px;
+  }
+
+  .mobile-popup-below {
+    padding-top: 51px;
+  }
+
+  .mobile-edit-popup-below {
+    padding-top: 80px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .mobile-add-edit-popup-contact-div {
+    width: 90%;
+  }
 }

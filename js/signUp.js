@@ -1,7 +1,4 @@
 async function singUpInit() {
-  // onloadFunc();
-  // loadData();
-  // postData("", {});
   await loadDataUsers();
 }
 
@@ -56,11 +53,21 @@ async function toTheRegistration() {
         errorDiv.textContent = "Email already exists";
         return false;
       }
+
+      /*function getRandomColor() {
+        return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+      }*/
+
+        function getRandomColorFromArray() {
+          return colorPalette[Math.floor(Math.random() * colorPalette.length)];
+        }
+
       // Neue Registrierung, wenn E-Mail nicht existiert
       let data = {
         name: nameInput.value,
         email: emailInput.value,
         password: passwordInput.value,
+        color: getRandomColorFromArray(),
       };
       let result = await postData("/contacts", data);
       // Falls der Server eine ID zurückgibt, speichern wir den User
@@ -82,42 +89,6 @@ async function toTheRegistration() {
   }
 }
 
-//Unser Code!!!!!!
-// async function toTheRegistration() {
-//   let nameInput = document.getElementById("name");
-//   let emailInput = document.getElementById("email");
-//   let passwordInput = document.getElementById("signupPassword");
-//   const checkbox = document.getElementById("checkboxSingUp");
-//   const errorDiv = document.getElementById("signUpError");
-
-//   if (!checkbox.checked) {
-//     errorDiv.textContent =
-//       "accept the Privacy policy";
-//     errorDiv.style.color = "red";
-//     return false;
-//   }
-
-//   if (nameInput.value && emailInput.value && passwordInput.value && emailInput.value != contacts) {
-//     let data = {
-//       name: nameInput.value,
-//       email: emailInput.value,
-//       password: passwordInput.value,
-//     };
-//     try {
-//       await postData("/contacts", data);
-//       nameInput.value = "";
-//       emailInput.value = "";
-//       passwordInput.value = "";
-//       console.log("Anmeldung erfolgreich");
-//       window.location.href = "/index.html";
-//     } catch (error) {
-//       console.error("Fehler bei der Anmeldung:", error);
-//     }
-//   } else {
-//     console.log("Fehler bei der Anmeldung:", error);
-//   }
-// }
-
 function emailValidation() {
   let emailInput = document.getElementById("email");
   let emailValue = emailInput.value;
@@ -130,42 +101,3 @@ function emailValidation() {
     emailInput.style.border = "1px solid blue";
   }
 }
-
-// async function emailCheck(data) {
-//   let userEmailAdress = contacts.find((contact) => contact.email === email);
-
-//   if (!userEmailAdress === data.email) {
-//     errorDiv.textContent = "die E-Mail ist ist vorhanden.";
-
-//     try {
-//       await postData("/contacts", data);
-//       nameInput.value = "";
-//       emailInput.value = "";
-//       passwordInput.value = "";
-//       console.log("Anmeldung erfolgreich");
-//       window.location.href = "/index.html";
-//     } catch (error) {
-//       console.error("Fehler bei der Anmeldung:", error);
-//     }
-//   } else {
-//     toTheRegistration();
-//   }
-// }
-
-// async function deleteData(path=""){
-//     let response = await fetch(BASE_URL + path +".json",{
-//         method: "DELETE",
-//     })
-//     return responseToJson = await response.json();
-// }
-
-// async function testPostData(path="", data={}){
-//     const response = await fetch(BASE_URL + path +".json",{
-//         method: "PUT",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(data)
-//     });
-//     return responseToJson = await response.json();
-// }

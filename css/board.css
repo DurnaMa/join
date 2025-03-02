@@ -103,12 +103,9 @@
 .column-titles-plusBtn {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
-  width: fixed 1208px;
+  width: fixed 244px;
   height: 24px;
-  padding-right: 64px;
-  padding-left: 40px;
-  gap: 32px;
+  margin-bottom: 16px;
 }
 
 .column-titles-h2 {
@@ -116,19 +113,9 @@
   justify-content: space-between;
   width: 244px;
   height: 24px;
-}
-
-.column-container {
-  display: flex;
-  flex-wrap: wrap;
-  width: 1200px;
-  height: 688px;
-  margin-top: 16px;
-  top: 336px;
-  left: 232px;
-  gap: 24px;
-  padding-right: 40px;
-  padding-left: 40px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
 }
 
 .columns {
@@ -193,6 +180,7 @@
   font-size: 16px;
   line-height: 19.2px;
   text-align: left;
+  color: black;
 }
 
 .column-todo {
@@ -215,7 +203,21 @@
 
 .task-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: wrap;
+  width: 1200px;
+  height: 688px;
+  margin-top: 16px;
+  top: 336px;
+  left: 232px;
+  gap: 24px;
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+.column-container {
+  width: 246px;
+  height: 688px;
+  gap: 24px;
 }
 
 .task-card-container {
@@ -336,7 +338,7 @@
 
 /*-------end----------*/
 .tasks-user {
-  color: white;
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -346,7 +348,7 @@
   gap: 10px;
   padding: 5px;
 }
-
+/*
 .tasks-user1 {
   background-color: #0038ff;
 }
@@ -357,7 +359,7 @@
 
 .tasks-user3 {
   background-color: #9b7d2d;
-}
+}*/
 
 .task-users {
   display: flex;
@@ -488,4 +490,34 @@
   background-color: #2a3647;
   cursor: pointer;
   color: white;
+}
+
+/* ----- Media Query -----*/
+
+@media screen and (max-width: 980px) {
+  .board {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 0;
+    padding-top: 96px;
+    background-color: #f6f7f8;
+  }
+
+  .boardHeader {
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .board {
+    flex-wrap: wrap;
+    padding-top: 96px;
+    background-color: #f6f7f8;
+  }
+  .addTaskBtn{
+    
+  }
+  .addTaskMobileBtn{
+  
+  }
 }

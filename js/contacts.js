@@ -3,15 +3,6 @@ async function contactInit() {
   renderContactsList();
 }
 
-const colorPalette = [
-  "#E63946", "#F4A261", "#2A9D8F", "#264653", "#D62828",
-  "#F77F00", "#3D348B", "#E76F51", "#8E44AD", "#16A085",
-  "#D7263D", "#1B998B", "#ECA400", "#3A86FF", "#8338EC",
-  "#06D6A0", "#EF476F", "#118AB2", "#073B4C", "#F25C54",
-  "#43AA8B", "#FF5A5F", "#5E548E", "#9B5DE5", "#00BBF9",
-  "#FF006E", "#8AC926", "#6A0572", "#A60303", "#FF9F1C"
-];
-
 let currentSelectedContact = 0;
 let contactColors = {};
 
@@ -20,23 +11,59 @@ let contactColors = {};
  * @function selectContact
  * @param {number} index - The index of the contact to select.
  */
+// function selectContact(index) { 
+//   currentSelectedContact = index;
+//   renderContactsList();
+
+//   let contact = contacts[currentSelectedContact];
+//   let contactDetails = document.getElementById("contactDetailsDiv");
+//   let mobileContactDetails = document.getElementById("mobileContactDetailsDiv");
+
+//   contactDetails.innerHTML = /*html*/ `
+//     <div class="contact-details-div-header">
+//       <div class="contact-details-div-initials">
+//         <div id="contactsAbbreviationRightArea" class="contacts-abbreviation-right-area"
+//              style="background-color: ${contact.color};">
+//           ${generateInitials(contact.name)}
+//         </div>
+//       </div>
+//       <div class="contact-name">
+//         <div class="contact-name-header">${contact.name}</div>
+//         <div class="contact-details-div-name-icons">
+//           <div class="contact-details-div-icons">
+//             <div onclick="editContact(${currentSelectedContact})" class="contact-details-div-icon-edit">
+//               <img src="/assets/icons/edit-pencil.png" alt="" />Edit
+//             </div>
+//             <div onclick="deleteContact(${currentSelectedContact})" class="contact-details-div-icon-edit img">
+//               <img src="/assets/icons/deleteContact.png" alt="">Delete
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//     <div class="contact-info">    
+//       <div class="contact-info-header">
+//         Contact Information
+//       </div>
+//       <div class="contact-details-div-email-phone">
+//         <label>Email</label>
+//         <a class="contact-email-link" href="mailto:${contact.email}">${contact.email}</a>
+//         <label>Phone</label>
+//         <a class="contact-phone-link" href="tel:${contact.phone}">${contact.phone}</a>
+//       </div>
+//     </div>
+//   `;
+// }
 function selectContact(index) { 
   currentSelectedContact = index;
   renderContactsList();
 
   let contact = contacts[currentSelectedContact];
-  let contactDetails = document.getElementById("contactDetailsDiv");
-
-  // Falls der Kontakt noch keine Farbe hat, eine zufällige Farbe aus dem Array zuweisen
-  if (!contactColors[contact.name]) {
-    contactColors[contact.name] = getRandomColorFromArray();
-  }
-
-  contactDetails.innerHTML = /*html*/ `
+  let contactDetailsHTML = /*html*/ `
     <div class="contact-details-div-header">
       <div class="contact-details-div-initials">
         <div id="contactsAbbreviationRightArea" class="contacts-abbreviation-right-area"
-             style="background-color: ${contactColors[contact.name]};">
+             style="background-color: ${contact.color};">
           ${generateInitials(contact.name)}
         </div>
       </div>
@@ -66,8 +93,12 @@ function selectContact(index) {
       </div>
     </div>
   `;
-}
 
+  document.getElementById("contactDetailsDiv").innerHTML = contactDetailsHTML;
+  document.getElementById("mobileContactDetailsDiv").innerHTML = contactDetailsHTML;
+  document.getElementById("mobileContactContainer").classList.remove("d-none");
+
+}
 
 
 function renderContactsList() {
@@ -92,14 +123,15 @@ function renderContactsList() {
 function generateContactsList(i) {
   const initials = generateInitials(contacts[i].name);
 
-  if (!contactColors[contacts[i].name]) { 
-    contactColors[contacts[i].name] = getRandomColorFromArray(); 
-  }
+  // if (!contactColors[contacts[i].name]) { 
+  //   contactColors[contacts[i].name] = getRandomColorFromArray(); 
+  // }
+
+  let color = contacts[i].color ? contacts[i].color : "#000000";
 
   return /*html*/ `
     <div onclick="selectContact(${i})" class="contacts-list">
-      <div class="contacts-abbreviation-div" 
-           style="background-color: ${contactColors[contacts[i].name]};">
+      <div class="contacts-abbreviation-div" style="background-color: ${color};">
         <span id="contactsAbbreviation-${i}" class="contacts-abbreviation">${initials}</span>
       </div>
       <div class="contacts-list-item">
@@ -136,6 +168,12 @@ function addNewContact() {
   addNewContactDiv.innerHTML = addNewContactPopup();
 }
 
+function mobileAddNewContact(){
+  const mobileAddNewContactDiv = document.getElementById("popup");
+  mobileAddNewContactDiv.classList.remove("d-none");
+  mobileAddNewContactDiv.innerHTML = mobileAddNewContactPopup();
+}
+
 /**
  * Displays the edit contact form with the current contact's details.
  *
@@ -153,9 +191,18 @@ function editContact() {
   editContactDiv.innerHTML = editContactPopup();
 }
 
+function mobileEditContact() {
+  const editContactDiv = document.getElementById("popup");
+  editContactDiv.classList.remove("d-none");
+  editContactDiv.innerHTML = mobileEditContactPopup();
+}
+
 function closePopUp() {
   document.getElementById("popup").classList.add("d-none");
   document.getElementById("popup").classList.add("d-none");
+  document.getElementById("mobileContactContainer").classList.add("d-none");
+  document.getElementById("mobileToggleOptions").classList.add("hidden");
+
 }
 
 /**
@@ -176,6 +223,7 @@ async function saveContact() {
       name: name,
       email: email,
       phone: phone,
+      color: getRandomColorFromArray(),
     };
 
     try {
@@ -219,6 +267,7 @@ async function updateContact() {
     name: name,
     email: email,
     phone: phone,
+    color: getRandomColorFromArray(),
   };
 
   try {
@@ -242,8 +291,43 @@ async function deleteContact(id) {
   await loadDataUsers();
   renderContactsList();
   document.getElementById("contactDetailsDiv").innerHTML = "";
+  closePopUp();
 }
+
+async function mobileDeleteContact() {
+  if (!contacts[currentSelectedContact]) {
+    console.error("Invalid contact ID:", currentSelectedContact);
+    return;
+  }
+
+  let contactId = contacts[currentSelectedContact].id; // Hole die Firebase ID
+  let path = `/contacts/${contactId}`;
+
+  await deleteDataFromFirebase(path);
+  await loadDataUsers();
+  renderContactsList();
+  
+  document.getElementById("mobileContactDetailsDiv").innerHTML = "";
+  closePopUp();
+}
+
 
 function getRandomColorFromArray() {
   return colorPalette[Math.floor(Math.random() * colorPalette.length)];
 }
+
+function mobileToggleOptions(){
+  document.getElementById("mobileToggleOptions").classList.toggle("hidden")
+}
+
+document.addEventListener("click", function(event) {
+  const mobileOptions = document.getElementById("mobileToggleOptions");
+  const toggleButton = document.querySelector(".mobileOptionsButton img");
+
+  // Prüfen, ob mobileOptions sichtbar ist
+  if (!mobileOptions.classList.contains("hidden")) {
+      // Prüfen, ob der Klick außerhalb des Menüs und außerhalb des Buttons erfolgt ist
+      if (!mobileOptions.contains(event.target) && event.target !== toggleButton) {
+          mobileOptions.classList.add("hidden"); // Menü schließen
+      }
+  }});
