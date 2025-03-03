@@ -167,8 +167,6 @@ function contactList() {
 function openclassList() {
   document.getElementById("assignedArrowUp").classList.toggle("d-none");
   document.getElementById("assignedArrowDown").classList.toggle("d-none");
-  document.getElementById("categoryArrowDown").classList.toggle("d-none");
-  document.getElementById("categoryArrowUp").classList.toggle("d-none");
 }
 
 function updateSelectedContactsDisplay() {
@@ -261,8 +259,10 @@ function categorytList() {
   categoryList.classList.toggle("hidden");
   categoryList.classList.toggle("d-flex");
 
-  if (categoryList.classList.contains("hidden")) {
-    updateSelectedContactsDisplay();
-  }
-  openclassList();
+  openCategoryList();
+}
+
+function openCategoryList() {
+  document.getElementById("categoryArrowUp").classList.toggle("d-none");
+  document.getElementById("categoryArrowDown").classList.toggle("d-none");
 }
