@@ -314,7 +314,8 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
 function renderTasksCardPopup(task) {
   let priority = task.priority ? task.priority.toLowerCase() : "medium";
   return /*html*/ `
-    <div class="taskCardEditPopup" id="taskPopUp" data-task-id="${task.id}">
+  <div class="shadow-div"></div>
+    <div class="taskCardPopup" id="taskPopUp" data-task-id="${task.id}">
       <div class="taskCardPopupCategory">
         <div class="taskCardPopupCategoryColor">
           <h2>${task.category}</h2>
