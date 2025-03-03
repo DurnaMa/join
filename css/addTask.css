@@ -417,6 +417,31 @@ input[type="checkbox"] {
   gap: 1px;
 }
 
-#category {
+#categoryList{
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
   background-color: white;
+  max-height: 165px;
+  overflow: auto;
+  position: absolute;
+  top: 635px;
+  width: inherit;
+}
+
+.categoryTechnicalTask{
+  font-size: 20px;
+  padding: 10px 22px 10px 22px;
+  cursor: pointer;
+}
+
+.categoryUserStory{
+  font-size: 20px;
+  padding: 10px 22px 10px 22px;
+  cursor: pointer;
+}
+
+.categoryTechnicalTask:hover,
+.categoryUserStory:hover{
+background-color: #eeeeee;
 }

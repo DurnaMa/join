@@ -247,13 +247,11 @@ function categorytList() {
   categoryList.innerHTML = "";
 
   categoryList.innerHTML += /*html*/ `
-    <div class="custom-select">
-      <div class="select-items select-hide">
-        <div data-value="Technical Task">Technical Task</div>
-        <div data-value="User Story">User Story</div>
-      </div>
-    </div>
-    <input type="hidden" id="selectedCategory">
+    
+
+        <div id="" class="categoryTechnicalTask">Technical Task</div>
+        <div id="" class="categoryUserStory">User Story</div>
+
     `;
 
   categoryList.classList.toggle("hidden");
