@@ -109,4 +109,43 @@
     flex-direction: column;
     align-items: center;
   }
+
+  .formPartRight {
+    width: 440px;
+  }
+
+  .taskFormButtons {
+    gap: 193px;
+  }
+}
+
+@media screen and (max-width: 610px) {
+  .formPartLeft {
+    width: 100%;
+  }
+
+  .formPartRight {
+    width: 100%;
+  }
+
+  .taskFormButtons {
+    gap: 50px;
+  }
+}
+
+@media screen and (max-width: 469px) {
+  .formPartLeft {
+    width: 100%;
+  }
+
+  .formPartRight {
+    width: 100%;
+  }
+  .taskFormButtons {
+    gap: 40px;
+  }
+
+  span {
+    font-size: 14px;
+  }
 }
