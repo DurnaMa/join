@@ -3,9 +3,9 @@ body {
 }
 
 .addTaskContent {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  /* display: flex; */
+  /* align-items: center;
+  flex-direction: column; */
   width: 100%;
   height: 100vh;
   background-color: #f6f7f8;
@@ -397,26 +397,4 @@ input[type="checkbox"] {
   align-items: center;
   color: white;
   background-color: #ff7a00;
-}
-
-.assignedContactContent {
-  display: flex;
-  justify-content: space-between;
-  padding: 0px 20px 0px 20px;
-  width: 100%;
-  cursor: pointer;
-}
-
-.assignedContactContent:hover {
-  background-color: #eeeeee;
-}
-
-.selectedContactsContainer {
-  display: flex;
-  padding: 5px;
-  gap: 1px;
-}
-
-#category {
-  background-color: white;
 }

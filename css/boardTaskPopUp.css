@@ -1,15 +1,24 @@
+.shadow-div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000060;
+  z-index: 4;
+}
+
 .taskCardPopup {
   display: flex;
   flex-direction: column;
-  overflow: auto;
   scroll-behavior: smooth;
-  max-width: 500px;
-  max-height: 80vh;
+  width: 525px;
+  height: 90vh;
   background-color: white;
   padding: 40px 35px 30px 35px;
   border-radius: 30px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -17,12 +26,12 @@
   scrollbar-width: none;
   min-width: 400px;
   min-height: 475px;
-  gap: 10px;
+  gap: 23px;
 }
+
 .taskCardEditPopup {
   display: flex;
   flex-direction: column;
-  
   scroll-behavior: smooth;
   max-width: 500px;
   max-height: 80vh;
@@ -72,16 +81,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 144px;
-  height: 27px;
+  width: 208px;
+  height: 36px;
   color: white;
   border-radius: 8px;
   background-color: rgb(0, 56, 255);
 }
 
+.taskCardPopupCategoryColor h2{
+  font-size: 23px;
+}
+
 .taskCardPopupTitle {
   font-weight: 700;
-  font-size: 48px;
+  font-size: 61px;
 }
 
 .taskCardPopupLabel,

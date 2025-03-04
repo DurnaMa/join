@@ -1,0 +1,112 @@
+.assignedContactContent {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px 0px 20px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.assignedContactContent:hover {
+  background-color: #eeeeee;
+}
+
+.selectedContactsContainer {
+  display: flex;
+  padding: 5px;
+  gap: 1px;
+}
+
+#categoryList {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: white;
+  max-height: 165px;
+  overflow: auto;
+  position: absolute;
+  top: 635px;
+  width: inherit;
+}
+
+.categoryTechnicalTask {
+  font-size: 20px;
+  padding: 10px 22px 10px 22px;
+  cursor: pointer;
+}
+
+.categoryUserStory {
+  font-size: 20px;
+  padding: 10px 22px 10px 22px;
+  cursor: pointer;
+}
+
+.categoryTechnicalTask:hover,
+.categoryUserStory:hover {
+  background-color: #eeeeee;
+}
+
+@media screen and (max-width: 1200px) {
+  .taskFormButtons {
+    padding: 75px 0 0 0;
+    gap: 450px;
+  }
+
+  .formParts {
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width: 1140px) {
+  .formPartRight {
+    width: 330px;
+  }
+}
+
+@media screen and (max-width: 1112px) {
+  .formPartRight {
+    width: 330px;
+  }
+
+  .taskFormButtons {
+    gap: 230px;
+  }
+}
+
+@media screen and (max-width: 1030px) {
+  .formPartRight {
+    width: 300px;
+  }
+
+  .prioBtn {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .addTaskContent {
+    padding: 140px 114px 96px 200px;
+  }
+
+  .taskFormButtons {
+    gap: 350px;
+  }
+
+  .headlineDiv {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .addTaskContent {
+    padding: 140px 114px 96px 80px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .formParts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

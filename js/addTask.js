@@ -5,6 +5,8 @@ async function initAddTask() {
 let subTask = document.getElementById("subTask");
 let subTasks = [];
 let chooseContacts = [];
+let category = ["Technical Task", "User Story"];
+let selectedCategory = "";
 
 let selectedContacts = new Set();
 
@@ -167,8 +169,6 @@ function contactList() {
 function openclassList() {
   document.getElementById("assignedArrowUp").classList.toggle("d-none");
   document.getElementById("assignedArrowDown").classList.toggle("d-none");
-  document.getElementById("categoryArrowDown").classList.toggle("d-none");
-  document.getElementById("categoryArrowUp").classList.toggle("d-none");
 }
 
 function updateSelectedContactsDisplay() {
@@ -206,7 +206,7 @@ async function postAddTask() {
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
-  let category = document.getElementById("category").value;
+  // let category = document.getElementById("categoryList").value;
 
   selectedContacts = Array.from(selectedContacts);
 
@@ -232,7 +232,7 @@ async function postAddTask() {
     dueDate,
     priority,
     subTasks,
-    category,
+    category: selectedCategory,
     users: selectedContacts,
   };
 
@@ -249,20 +249,35 @@ function categorytList() {
   categoryList.innerHTML = "";
 
   categoryList.innerHTML += /*html*/ `
-    <div class="custom-select">
-      <div class="select-items select-hide">
-        <div data-value="Technical Task">Technical Task</div>
-        <div data-value="User Story">User Story</div>
-      </div>
-    </div>
-    <input type="hidden" id="selectedCategory">
+    <div id="technicalTask" onclick="chooseCategory(0)" class="categoryTechnicalTask">Technical Task</div>
+    <div id="userStory" onclick="chooseCategory(1)" class="categoryUserStory">User Story</div>
     `;
 
   categoryList.classList.toggle("hidden");
   categoryList.classList.toggle("d-flex");
 
-  if (categoryList.classList.contains("hidden")) {
-    updateSelectedContactsDisplay();
+  openCategoryList();
+}
+
+function chooseCategory(categoryIndex) {
+  const categoryList = document.getElementById("categoryList");
+  const dropdownCategory = document.getElementById("dropdownCategory");
+
+  if (!categoryList || !dropdownCategory) {
+    console.error("categoryList oder dropdownCategory ist nicht definiert.");
+    return;
   }
-  openclassList();
+
+  selectedCategory = category[categoryIndex];
+  dropdownCategory.innerHTML = selectedCategory;
+
+  categoryList.classList.toggle("hidden");
+  dropdownCategory.classList.remove("invalid");
+  document.getElementById("categoryArrowUp").classList.add("d-none");
+  document.getElementById("categoryArrowDown").classList.remove("d-none");
+}
+
+function openCategoryList() {
+  document.getElementById("categoryArrowUp").classList.toggle("d-none");
+  document.getElementById("categoryArrowDown").classList.toggle("d-none");
 }
