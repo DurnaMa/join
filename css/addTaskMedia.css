@@ -45,6 +45,16 @@
   background-color: #eeeeee;
 }
 
+@media screen and (max-width: 1270px) {
+  .formParts {
+    display: flex;
+    width: clamp(300px, 100%, 500px);
+  }
+
+  .taskFormButtons{
+    width: 86%;
+  }
+}
 @media screen and (max-width: 1200px) {
   .taskFormButtons {
     padding: 75px 0 0 0;
@@ -53,10 +63,6 @@
 
   .formParts {
     gap: 30px;
-  }
-
-  #assignedContactsList {
-    width: 310px;
   }
 }
 

@@ -370,7 +370,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: white;
   max-height: 165px;
   overflow: auto;
-  position: absolute;
   top: 719px;
   width: inherit;
 }
