@@ -54,6 +54,10 @@
   .formParts {
     gap: 30px;
   }
+
+  #assignedContactsList {
+    width: 310px;
+  }
 }
 
 @media screen and (max-width: 1140px) {
