@@ -1,7 +1,7 @@
 //--------- Board page add task templates ---------
 function renderAddTaskPoupBtn() {
   return /*html*/ `
-<div class="shadow-div d-none"></div>
+<div class="shadow-div"></div>
 <div class="add-edit-popup-task-div">
   <div class="addTaskContent">
   <div class="addTaskClose"><img onclick="closeAddTaskPopUp()" src="/assets/icons/close.png" alt=""></div>
@@ -79,7 +79,7 @@ function renderAddTaskPoupBtn() {
 
 function renderAddTaskPopupToDoPlus() {
   return /*html*/ `
-
+<div class="shadow-div"></div>
 <div class="add-edit-popup-task-div">
   <div class="addTaskContent">
   <div class="addTaskClose"><img onclick="closeAddTaskPopUpToDo()" src="/assets/icons/close.png" alt=""></div>
@@ -157,7 +157,7 @@ function renderAddTaskPopupToDoPlus() {
 
 function renderAddTaskPopupInProgressPlus() {
   return /*html*/ `
-
+<div class="shadow-div"></div>
 <div class="add-edit-popup-task-div">
   <div class="addTaskContent">
   <div class="addTaskClose"><img onclick="closeAddTaskPopUpInProgress()" src="/assets/icons/close.png" alt=""></div>
@@ -235,7 +235,7 @@ function renderAddTaskPopupInProgressPlus() {
 
 function renderAddTaskPopupAwaitFeedbackPlus() {
   return /*html*/ `
-
+<div class="shadow-div"></div>
 <div class="add-edit-popup-task-div">
   <div class="addTaskContent">
   <div class="addTaskClose"><img onclick="closeAddTaskPopUpAwaitFeedback()" src="/assets/icons/close.png" alt=""></div>
