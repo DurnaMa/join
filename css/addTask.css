@@ -371,7 +371,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   max-height: 165px;
   overflow: auto;
   top: 719px;
-  width: inherit;
 }
 
 .assignedContacts {

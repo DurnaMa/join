@@ -51,7 +51,7 @@
     width: clamp(300px, 100%, 500px);
   }
 
-  .taskFormButtons{
+  .taskFormButtons {
     width: 86%;
   }
 }
@@ -82,6 +82,12 @@
   }
 }
 
+@media screen and (max-width: 1040px) {
+  .prioBtn {
+    flex-direction: column;
+  }
+}
+
 @media screen and (max-width: 1030px) {
   .formPartRight {
     width: 300px;
@@ -90,8 +96,17 @@
   .prioBtn {
     flex-direction: column;
   }
+
+  .formPartRight {
+    width: 280px;
+  }
 }
 
+@media screen and (max-width: 1000px) {
+  #categoryList {
+    top: 582px;
+  }
+}
 @media screen and (max-width: 992px) {
   .addTaskContent {
     padding: 140px 114px 96px 200px;
@@ -127,6 +142,10 @@
   .taskFormButtons {
     gap: 193px;
   }
+
+  #categoryList {
+    top: 1058px;
+  }
 }
 
 @media screen and (max-width: 610px) {
@@ -156,6 +175,19 @@
   }
 
   span {
+    font-size: 14px;
+  }
+
+  #categoryList {
+    top: 1132px;
+    width: 2998px;
+  }
+
+  .categoryTechnicalTask{
+    font-size: 14px;
+  }
+
+  .categoryUserStory{
     font-size: 14px;
   }
 }
