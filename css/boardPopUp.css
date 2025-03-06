@@ -12,8 +12,9 @@
   position: absolute;
   padding: 40px;
   margin: 16px;
-  top: 96px;
-  left: 235px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .addTaskContent {

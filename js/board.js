@@ -100,7 +100,7 @@ function generateTaskCard(task) {
       <div class="task-footer">      
         <div class="task-users">
           <div class="tasks-user1 tasks-user">${task.users}</div>
-        <!-- ${task.users
+        ${task.users
           .map((userId) => {
             const contact = contacts.find((c) => c.id === userId);
             if (contact) {
@@ -111,7 +111,7 @@ function generateTaskCard(task) {
               return "";
             }
           })
-          .join("")} -->
+          .join("")}
         </div>
         <div>
           <img src="/assets/icons/priom.png" alt="">
@@ -324,16 +324,7 @@ async function createTaskPlusToDoBtn() {
     priority = "low";
   }
 
-  // let users = selectedContacts.map((contact) => {
-  //   return contact.id;
-  // });
-
-  // let initials = selectedContacts.map((contact) => {
-  //   return generateInitials(contact.name);
-  // });
-
   let data = {
-    //id: todos.length + 1,
     columnTitles: "To Do",
     title,
     description,
@@ -342,7 +333,6 @@ async function createTaskPlusToDoBtn() {
     subTasks,
     category,
     users: selectedContacts,
-    //initials,
   };
 
   try {

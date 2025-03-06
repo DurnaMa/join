@@ -362,15 +362,17 @@ function renderTasksCardPopup(task) {
         <div onclick="deleteTask('${task.id}')">
         <img src="/assets/icons/deleteContact.png" alt="">Delete</div>
         <hr class="hrBoardTaskPopUp">
-        <div onclick="editTaskPopup(${
-          task.id
-        })"><img src="/assets/icons/edit-pencil.png" alt="">Edit</div>
+        <div onclick="editTaskPopup('${task.id}')"><img src="/assets/icons/edit-pencil.png" alt="">Edit</div>
       </div>
     </div>
   `;
 }
 
-function renderEditTasksCardPopup(currentSelectedTask) {
+
+function renderEditTasksCardPopup(currentSelectedTask) { 
+  let assignedUsers = currentSelectedTask.users || []; // Falls undefined, setzen wir ein leeres Array
+  let subTasks = currentSelectedTask.subTasks || []; 
+
   return /*html*/ `
     <div class="shadow-div d-none"></div>
     <div class="taskCardEditPopup">
@@ -385,7 +387,7 @@ function renderEditTasksCardPopup(currentSelectedTask) {
       <label>Title</label>
       <input class="task-edit-input-popup" type="text" value="${currentSelectedTask.title}" />
       <label>Description</label>
-      <textarea class="task-edit-input-popup" name="" id="">${currentSelectedTask.description}</textarea>
+      <textarea class="task-edit-input-popup">${currentSelectedTask.description}</textarea>
       <label>Due Date</label>
       <input class="task-edit-input-popup" type="date" value="${currentSelectedTask.dueDate}" />
       <div>
@@ -404,22 +406,22 @@ function renderEditTasksCardPopup(currentSelectedTask) {
             <img src="/assets/icons/lowGreen.png" alt="" />
           </button>
         </div>
-      <label for="contactSelection">Assigned to</label>
+        <label for="contactSelection">Assigned to</label>
         <div onclick="contactListPopUp()" class="assignedContainer">
-          <span>${currentSelectedTask.assignedUsers.map(user => user.initials).join(', ')}</span>
+          <span>${assignedUsers.map(user => user.initials).join(', ')}</span>
           <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
           <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
         </div>
         <div id="assignedContactsListPopUp" class="hidden"></div>
       </div>
-      <div></div>
       <label for="subtask">Subtasks</label>
-        <div id="addSubTask">
-          <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
-          <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
-        </div>
-        <ul id="subTaskList">${currentSelectedTask.subTask.map(subtask => `<li>${subtask.name}</li>`).join('')}</ul>
-      <ul></ul>
+      <div id="addSubTask">
+        <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
+        <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
+      </div>
+      <ul id="subTaskList">
+        ${subTasks.map(subtask => `<li>${subtask.name}</li>`).join('')}
+      </ul>
       <div class="button-ok-div">
         <button class="button-ok">
           Ok <img src="/assets/icons/check.png" alt="" />

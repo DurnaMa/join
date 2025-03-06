@@ -154,6 +154,19 @@ function generateInitials(name) {
   const lastInitial = nameParts[1]?.charAt(0) || "";
   return `${firstInitial}${lastInitial}`.toUpperCase();
 }
+// function generateInitials(name) {
+//   if (!name) return "";
+//   const nameParts = name.trim().split(" ");
+//   const firstInitial = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : "";
+//   const lastInitial = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : "";
+//   return `${firstInitial}${lastInitial}`;
+// }
+
+
+
+
+
+
 
 /**
  * Renders the "Add New Contact" form by making the corresponding div visible

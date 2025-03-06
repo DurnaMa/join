@@ -68,6 +68,7 @@ async function loadTasks() {
 
   for (const key in tasksData) {
     const SINGLE_TASK = tasksData[key];
+
     let task = {
       id: key,
       columnTitles: SINGLE_TASK.columnTitles,
@@ -78,13 +79,50 @@ async function loadTasks() {
       subTasks: SINGLE_TASK.subTasks,
       status: SINGLE_TASK.status,
       category: SINGLE_TASK.category,
-      users: SINGLE_TASK.users ? SINGLE_TASK.users : [],
-    };
+      users: SINGLE_TASK.users 
+        ? SINGLE_TASK.users.map(name => generateInitials(name)) // Umwandlung in Initialen
+        : [],
+    };    
+
     tasks.push(task);
   }
   
   renderTasks();
 }
+// async function loadTasks() {
+//   tasks = [];
+//   let tasksData = await getDataFromFirebase("tasks");
+
+//   for (const key in tasksData) {
+//     const SINGLE_TASK = tasksData[key];
+
+//     let task = {
+//       id: key,
+//       columnTitles: SINGLE_TASK.columnTitles,
+//       title: SINGLE_TASK.title,
+//       description: SINGLE_TASK.description,
+//       dueDate: SINGLE_TASK.dueDate,
+//       priority: SINGLE_TASK.priority,
+//       subTasks: SINGLE_TASK.subTasks || [], // Falls undefined, setzen wir ein leeres Array
+//       status: SINGLE_TASK.status,
+//       category: SINGLE_TASK.category,
+//       users: SINGLE_TASK.users 
+//         ? SINGLE_TASK.users.map(name => generateInitials(name)) 
+//         : [], // Falls undefined, setzen wir ein leeres Array
+//     };    
+
+//     tasks.push(task);
+//   }
+  
+//   renderTasks();
+// }
+
+
+
+
+
+
+
 
 // Code ende von Oliver(Mentor)
 
