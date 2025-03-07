@@ -45,14 +45,24 @@
   background-color: #eeeeee;
 }
 
+@media screen and (max-width: 1330px) and (min-width: 1270px) {
+  .formParts {
+    width: 85%;
+  }
+}
+
 @media screen and (max-width: 1270px) {
   .formParts {
-    display: flex;
     width: clamp(300px, 100%, 500px);
   }
 
   .taskFormButtons {
     width: 86%;
+  }
+
+  #assignedContactsList {
+    width: 310px;
+    width: inherit;
   }
 }
 @media screen and (max-width: 1200px) {
@@ -183,11 +193,11 @@
     width: 2998px;
   }
 
-  .categoryTechnicalTask{
+  .categoryTechnicalTask {
     font-size: 14px;
   }
 
-  .categoryUserStory{
+  .categoryUserStory {
     font-size: 14px;
   }
 }
