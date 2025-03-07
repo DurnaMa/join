@@ -448,38 +448,38 @@ function renderEditTasksCardPopup(currentSelectedTask) {
       <textarea class="task-edit-input-popup" placeholder="Enter a description" name="" id=""></textarea>
       <label>Due Date</label>
       <input class="task-edit-input-popup" type="date" />
-      <div>
-        <label>Priority</label>
-        <div class="task-edit-prio-popup">
-          <button class="prioEditBtn">
-            Urgent
-            <img src="/assets/icons/urgentRed.png" alt="" />
-          </button>
-          <button class="prioEditBtn">
-            Medium
-            <img src="/assets/icons/mediumYellow.png" alt="" />
-          </button>
-          <button class="prioEditBtn">
-            Low
-            <img src="/assets/icons/lowGreen.png" alt="" />
-          </button>
-        </div>
-      <label for="contactSelection">Assigned to</label>
+        
+          <label>Priority</label>
+          <div class="task-edit-prio-popup">
+            <button class="prioEditBtn">
+              Urgent
+              <img src="/assets/icons/urgentRed.png" alt="" />
+            </button>
+            <button class="prioEditBtn">
+              Medium
+              <img src="/assets/icons/mediumYellow.png" alt="" />
+            </button>
+            <button class="prioEditBtn">
+              Low
+              <img src="/assets/icons/lowGreen.png" alt="" />
+            </button>
+          </div>
+          <label for="contactSelection">Assigned to</label>
         <div onclick="contactListPopUp()" class="assignedContainer">
           <span>Select contacts to assign</span>
           <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
           <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
         </div>
         <div id="assignedContactsListPopUp" class="hidden"></div>
-      </div>
-      <div></div>
+    
+    
       <label for="subtask">Subtasks</label>
         <div id="addSubTask">
           <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
           <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
         </div>
         <ul id="subTaskList"></ul>
-      <ul></ul>
+    
       <div class="button-ok-div">
         <div class="buttontest987">
           <button class="button-ok">Ok<img src="/assets/icons/check.png" alt="" /></button>

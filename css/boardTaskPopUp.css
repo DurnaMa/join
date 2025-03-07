@@ -67,9 +67,9 @@
   transform: translate(-50%, -50%);
   z-index: 11;
   scrollbar-width: none;
-  min-width: 400px;
-  min-height: 475px;
-  gap: 23px;
+  /* min-width: 400px; */
+  /* min-height: 475px; */
+  /* gap: 23px; */
   overflow-y: auto;
 }
 

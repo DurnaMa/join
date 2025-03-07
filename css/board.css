@@ -463,9 +463,9 @@
   gap: 10px;
 }
 
-.subTask {
+/* .subTask {
   width: 90%;
-}
+} */
 
 .prioEditBtn {
   width: 136px;
@@ -487,6 +487,7 @@
   position: sticky;
   bottom: 0;
   background-color: white;
+  z-index: 2;
 }
 
 .button-ok {
