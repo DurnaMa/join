@@ -88,7 +88,7 @@ function generateTaskCard(task) {
       <div class="progress-container">
         <div class="progress-bar-container">
           <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
-    (completedSubtasks / totalSubtasks) * 100
+    totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0
   }%;"></div>
         </div>
         <div class="subtasks-div">
@@ -98,22 +98,7 @@ function generateTaskCard(task) {
         </div>
       </div>
       <div class="task-footer">      
-        <div class="task-users">
-        <!-- <div class="tasks-user1 tasks-user">${task.users}</div> -->
-          <div class="tasks-user1 tasks-user">${generateInitials(task.users[0])}</div>
-        ${task.users
-          .map((userId) => {
-            const contact = contacts.find((c) => c.id === userId);
-            if (contact) {
-              return `<div class="tasks-user1 tasks-user">${generateInitials(
-                contact.name
-              )}</div>`;
-            } else {
-              return "";
-            }
-          })
-          .join("")}
-        </div>
+        <div class="task-users" id="taskUsers-${task.id}"></div>
         <div>
           <img src="/assets/icons/priom.png" alt="">
         </div>
@@ -121,27 +106,42 @@ function generateTaskCard(task) {
     </div>
   `;
 
-  if (task.columnTitles) {
-    let columnTitle = task.columnTitles.toLowerCase().trim();
-
-    if (columnTitle === "to do") {
-      task.columnTitles = "To Do";
-    } else if (columnTitle === "in progress") {
-      task.columnTitles = "In Progress";
-    } else if (columnTitle === "await feedback") {
-      task.columnTitles = "Await Feedback";
-    } else if (columnTitle === "done") {
-      task.columnTitles = "Done";
-    }
+  // Benutzerelemente separat hinzufügen
+  let usersContainer = taskCard.querySelector(`#taskUsers-${task.id}`);
+  if (Array.isArray(task.users)) {
+    task.users.forEach((user) => {
+      let userDiv = document.createElement("div");
+      userDiv.classList.add("tasks-user");
+      userDiv.textContent = user; // Hier wird der Name oder die Initialen des Benutzers gesetzt
+      usersContainer.appendChild(userDiv);
+    });
+  } else if (typeof task.users === "string") {
+    let userDiv = document.createElement("div");
+    userDiv.classList.add("tasks-user");
+    userDiv.textContent = task.users;
+    usersContainer.appendChild(userDiv);
   }
 
+  // Spaltennamen formatieren
+  if (task.columnTitles) {
+    let columnTitle = task.columnTitles.toLowerCase().trim();
+    const columnMappings = {
+      "to do": "To Do",
+      "in progress": "In Progress",
+      "await feedback": "Await Feedback",
+      "done": "Done",
+    };
+    task.columnTitles = columnMappings[columnTitle] || task.columnTitles;
+  }
+
+  // Kategorie-Farbe setzen
   let categoryElement = taskCard.querySelector(".task-card-category");
   if (categoryElement) {
-    if (task.category === "User story") {
-      categoryElement.style.backgroundColor = "#0038FF";
-    } else if (task.category === "Technical task") {
-      categoryElement.style.backgroundColor = "#1FD7C1";
-    }
+    const categoryColors = {
+      "User story": "#0038FF",
+      "Technical task": "#1FD7C1",
+    };
+    categoryElement.style.backgroundColor = categoryColors[task.category] || "#000";
   }
 
   taskCard.querySelector(".task-card-div").addEventListener("click", () => {
@@ -150,6 +150,85 @@ function generateTaskCard(task) {
 
   return taskCard;
 }
+
+
+
+
+// function generateTaskCard(task) {
+//   let completedSubtasks = task.subTasks
+//     ? task.subTasks.filter((st) => st.completed).length
+//     : 0;
+//   let totalSubtasks = task.subTasks ? task.subTasks.length : 0;
+
+//   let taskCard = document.createElement("div");
+//   taskCard.classList.add("task-card");
+//   taskCard.id = `task-${task.id}`;
+//   taskCard.draggable = true;
+//   taskCard.ondragstart = (event) => startDragging(event, task.id);
+
+//   taskCard.innerHTML = /*html*/ `
+//     <div class="task-card-div">
+//       <div class="task-card-category-div">
+//         <div class="task-card-category">
+//           <h2 class="task-card-category-h2">${task.category}</h2>
+//         </div>
+//       </div>
+//       <h3>${task.title}</h3>
+//       <p>${task.description}</p>
+      
+//       <div class="progress-container">
+//         <div class="progress-bar-container">
+//           <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
+//     (completedSubtasks / totalSubtasks) * 100
+//   }%;"></div>
+//         </div>
+//         <div class="subtasks-div">
+//           <span class="subtasks-amount" id="subtasksAmount-${
+//             task.id
+//           }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
+//         </div>
+//       </div>
+//       <div class="task-footer">      
+//         <div class="task-users">
+//         <div class="tasks-user1 tasks-user">${task.users}</div>
+
+//         </div>
+//         <div>
+//           <img src="/assets/icons/priom.png" alt="">
+//         </div>
+//       </div>
+//     </div>
+//   `;
+
+//   if (task.columnTitles) {
+//     let columnTitle = task.columnTitles.toLowerCase().trim();
+
+//     if (columnTitle === "to do") {
+//       task.columnTitles = "To Do";
+//     } else if (columnTitle === "in progress") {
+//       task.columnTitles = "In Progress";
+//     } else if (columnTitle === "await feedback") {
+//       task.columnTitles = "Await Feedback";
+//     } else if (columnTitle === "done") {
+//       task.columnTitles = "Done";
+//     }
+//   }
+
+//   let categoryElement = taskCard.querySelector(".task-card-category");
+//   if (categoryElement) {
+//     if (task.category === "User story") {
+//       categoryElement.style.backgroundColor = "#0038FF";
+//     } else if (task.category === "Technical task") {
+//       categoryElement.style.backgroundColor = "#1FD7C1";
+//     }
+//   }
+
+//   taskCard.querySelector(".task-card-div").addEventListener("click", () => {
+//     openTaskPopup(task.id);
+//   });
+
+//   return taskCard;
+// }
 
 function searchTask() {
   let searchTaskInput = document
