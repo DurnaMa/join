@@ -78,8 +78,8 @@ function generateTaskCard(task) {
   taskCard.innerHTML = /*html*/ `
     <div class="task-card-div">
       <div class="task-card-category-div">
-        <div class="task-card-category">
-          <h2 class="task-card-category-h2">${task.category}</h2>
+        <div class="task-card-category" id="taskCategory-${task.id}">
+          <h2 class="task-card-category-h2" id="taskCategoryH2">${task.category}</h2>
         </div>
       </div>
       <h3>${task.title}</h3>
@@ -106,23 +106,33 @@ function generateTaskCard(task) {
     </div>
   `;
 
-  // Benutzerelemente separat hinzufügen
-  let usersContainer = taskCard.querySelector(`#taskUsers-${task.id}`);
-  if (Array.isArray(task.users)) {
-    task.users.forEach((user) => {
-      let userDiv = document.createElement("div");
-      userDiv.classList.add("tasks-user");
-      userDiv.textContent = user; // Hier wird der Name oder die Initialen des Benutzers gesetzt
-      usersContainer.appendChild(userDiv);
-    });
-  } else if (typeof task.users === "string") {
+let usersContainer = taskCard.querySelector(`#taskUsers-${task.id}`);
+if (Array.isArray(task.users)) {
+  task.users.forEach((user) => {
     let userDiv = document.createElement("div");
     userDiv.classList.add("tasks-user");
-    userDiv.textContent = task.users;
+    const contact = contacts.find((c) => c.name === user);
+    if (contact) {
+      userDiv.style.backgroundColor = contact.color;
+    } else {
+      userDiv.style.backgroundColor = "#000";
+    }
+    userDiv.textContent = user; 
     usersContainer.appendChild(userDiv);
+  });
+} else if (typeof task.users === "string") {
+  let userDiv = document.createElement("div");
+  userDiv.classList.add("tasks-user");
+  const contact = contacts.find((c) => c.name === task.users);
+  if (contact) {
+    userDiv.style.backgroundColor = contact.color;
+  } else {
+    userDiv.style.backgroundColor = "#000";
   }
+  userDiv.textContent = task.users;
+  usersContainer.appendChild(userDiv);
+}
 
-  // Spaltennamen formatieren
   if (task.columnTitles) {
     let columnTitle = task.columnTitles.toLowerCase().trim();
     const columnMappings = {
@@ -134,12 +144,11 @@ function generateTaskCard(task) {
     task.columnTitles = columnMappings[columnTitle] || task.columnTitles;
   }
 
-  // Kategorie-Farbe setzen
   let categoryElement = taskCard.querySelector(".task-card-category");
   if (categoryElement) {
     const categoryColors = {
-      "User story": "#0038FF",
-      "Technical task": "#1FD7C1",
+      "User Story": "#0038FF",
+      "Technical Task": "#1FD7C1",
     };
     categoryElement.style.backgroundColor = categoryColors[task.category] || "#000";
   }
