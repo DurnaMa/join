@@ -84,7 +84,7 @@ function generateEmptyColumn(columnId) {
 //       </div>
 //       <h3>${task.title}</h3>
 //       <p>${task.description}</p>
-      
+
 //       <div class="progress-container">
 //         <div class="progress-bar-container">
 //           <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
@@ -97,7 +97,7 @@ function generateEmptyColumn(columnId) {
 //           }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
 //         </div>
 //       </div>
-//       <div class="task-footer">      
+//       <div class="task-footer">
 //         <div class="task-users" id="taskUsers-${task.id}"></div>
 //         <div>
 //           <img src="/assets/icons/priom.png" alt="">
@@ -118,7 +118,7 @@ function generateEmptyColumn(columnId) {
 //     } else {
 //       userDiv.style.backgroundColor = "#FF0000";
 //     }
-//     userDiv.textContent = user; 
+//     userDiv.textContent = user;
 //     usersContainer.appendChild(userDiv);
 //   });
 // } else if (typeof task.users === "string") {
@@ -161,7 +161,9 @@ function generateEmptyColumn(columnId) {
 //   return taskCard;
 // }
 function generateTaskCard(task) {
-  let completedSubtasks = task.subTasks ? task.subTasks.filter((st) => st.completed).length : 0;
+  let completedSubtasks = task.subTasks
+    ? task.subTasks.filter((st) => st.completed).length
+    : 0;
   let totalSubtasks = task.subTasks ? task.subTasks.length : 0;
 
   let taskCard = document.createElement("div");
@@ -174,7 +176,9 @@ function generateTaskCard(task) {
     <div class="task-card-div">
       <div class="task-card-category-div">
         <div class="task-card-category" id="taskCategory-${task.id}">
-          <h2 class="task-card-category-h2" id="taskCategoryH2">${task.category}</h2>
+          <h2 class="task-card-category-h2" id="taskCategoryH2">${
+            task.category
+          }</h2>
         </div>
       </div>
       <h3>${task.title}</h3>
@@ -182,12 +186,12 @@ function generateTaskCard(task) {
       
       <div class="progress-container">
         <div class="progress-bar-container">
-          <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
-    totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0
-  }%;"></div>
+          <div class="progress-bar" id="progressBar-${task.id}" style="width: ${totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0}%;"></div>
         </div>
         <div class="subtasks-div">
-          <span class="subtasks-amount" id="subtasksAmount-${task.id}">${completedSubtasks}/${totalSubtasks} Subtasks</span>
+          <span class="subtasks-amount" id="subtasksAmount-${
+            task.id
+          }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
         </div>
       </div>
       <div class="task-footer">      
@@ -222,7 +226,7 @@ function generateTaskCard(task) {
       "to do": "To Do",
       "in progress": "In Progress",
       "await feedback": "Await Feedback",
-      "done": "Done",
+      done: "Done",
     };
     task.columnTitles = columnMappings[columnTitle] || task.columnTitles;
   }
@@ -233,7 +237,8 @@ function generateTaskCard(task) {
       "User Story": "#0038FF",
       "Technical Task": "#1FD7C1",
     };
-    categoryElement.style.backgroundColor = categoryColors[task.category] || "#000";
+    categoryElement.style.backgroundColor =
+      categoryColors[task.category] || "#000";
   }
 
   chooseImgPriority(taskCard, task);
@@ -249,32 +254,18 @@ function chooseImgPriority(taskCard, task) {
   let priorityElement = taskCard.querySelector(`#taskPriority-${task.id}`);
   if (priorityElement) {
     const priorityImages = {
-      "urgent": "urgentRed.png",
-      "medium": "mediumYellow.png",
-      "low": "lowGreen.png",
+      urgent: "urgentRed.png",
+      medium: "mediumYellow.png",
+      low: "lowGreen.png",
     };
     let priorityImage = document.createElement("img");
-    priorityImage.src = `/assets/icons/${priorityImages[task.priority] || "default.png"}`;
+    priorityImage.src = `/assets/icons/${
+      priorityImages[task.priority] || "default.png"
+    }`;
     priorityImage.alt = task.priority;
     priorityElement.appendChild(priorityImage);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // function generateTaskCard(task) {
 //   let completedSubtasks = task.subTasks
@@ -297,7 +288,7 @@ function chooseImgPriority(taskCard, task) {
 //       </div>
 //       <h3>${task.title}</h3>
 //       <p>${task.description}</p>
-      
+
 //       <div class="progress-container">
 //         <div class="progress-bar-container">
 //           <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
@@ -310,7 +301,7 @@ function chooseImgPriority(taskCard, task) {
 //           }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
 //         </div>
 //       </div>
-//       <div class="task-footer">      
+//       <div class="task-footer">
 //         <div class="task-users">
 //         <div class="tasks-user1 tasks-user">${task.users}</div>
 
@@ -476,33 +467,82 @@ async function deleteTask(taskId) {
 //   renderTasks();
 // }
 
+// function updateSteps(taskId) {
+//   let task = tasks.find((t) => t.id === taskId);
+//   if (!task || !task.subTask) return;
+
+//   const checkboxes = document.querySelectorAll(
+//     `#taskPopUp[data-task-id='${taskId}'] .step input[type='checkbox']`
+//   );
+//   let checkedCount = 0;
+
+//   checkboxes.forEach((checkbox, index) => {
+//     task.subTask[index].completed = checkbox.checked;
+//     if (checkbox.checked) {
+//       checkedCount++;
+//     }
+//   });
+
+//   const progressBar = document.getElementById(`progressBar-${taskId}`);
+//   if (progressBar) {
+//     const progressPercentage = (checkedCount / checkboxes.length) * 100;
+//     progressBar.style.width = `${progressPercentage}%`;
+//   }
+
+//   const subtasksAmount = document.getElementById(`subtasksAmount-${taskId}`);
+//   if (subtasksAmount) {
+//     subtasksAmount.textContent = `${checkedCount}/${checkboxes.length} Subtasks`;
+//   }
+// }
 function updateSteps(taskId) {
   let task = tasks.find((t) => t.id === taskId);
-  if (!task || !task.subTask) return;
+  if (!task || !task.subTasks) return;
 
   const checkboxes = document.querySelectorAll(
     `#taskPopUp[data-task-id='${taskId}'] .step input[type='checkbox']`
   );
+
+  if (!checkboxes.length) return; // Falls keine Checkboxen existieren, abbrechen
+
   let checkedCount = 0;
 
   checkboxes.forEach((checkbox, index) => {
-    task.subTask[index].completed = checkbox.checked;
-    if (checkbox.checked) {
-      checkedCount++;
+    if (task.subTasks[index]) {
+      task.subTasks[index].completed = checkbox.checked;
+      if (checkbox.checked) {
+        checkedCount++;
+      }
     }
   });
 
+  // Fortschrittsbalken aktualisieren
   const progressBar = document.getElementById(`progressBar-${taskId}`);
   if (progressBar) {
-    const progressPercentage = (checkedCount / checkboxes.length) * 100;
+    const progressPercentage = (checkedCount / task.subTasks.length) * 100;
     progressBar.style.width = `${progressPercentage}%`;
   }
 
+  // Subtasks-Anzeige aktualisieren
   const subtasksAmount = document.getElementById(`subtasksAmount-${taskId}`);
   if (subtasksAmount) {
-    subtasksAmount.textContent = `${checkedCount}/${checkboxes.length} Subtasks`;
+    subtasksAmount.textContent = `${checkedCount}/${task.subTasks.length} Subtasks`;
+  }
+
+  // Aktualisiere das globale tasks-Array
+  const taskIndex = tasks.findIndex((t) => t.id === taskId);
+  if (taskIndex !== -1) {
+    tasks[taskIndex] = task;
   }
 }
+
+
+
+
+
+
+
+
+
 
 async function createTaskPlusToDoBtn() {
   let title = document.getElementById("titleInput").value;

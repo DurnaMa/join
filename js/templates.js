@@ -312,11 +312,43 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
 }
 
 function renderTasksCardPopup(task) {
+  // if (!task) {
+  //   return `<p>Fehler: Keine Daten für diese Aufgabe gefunden.</p>`;
+  // }
+
+  // let priority = task.priority ? task.priority.toLowerCase() : "medium";
+
+  // return /*html*/ `
+  // <div class="shadow-div"></div>
+  //   <div class="taskCardPopup" id="taskPopUp" data-task-id="${task.id}">
+  //     <div class="taskCardPopupCategory">
+  //       <div class="taskCardPopupCategoryColor">
+  //         <h2>${task.category || "No Category"}</h2>
+  //       </div>
+  //       <img onclick="closeTaskCardPopUp()" src="/assets/icons/close.png" alt="" />
+  //     </div>
+  //     <div class="taskCardPopupTitle">${task.title || "No Title"}</div>
+  //     <div class="taskCardPopupDescription">${task.description || "No Description"}</div>
+  //     <div class="taskCardPopupDate">
+  //       <label>Due date:</label>
+  //       <span>${task.dueDate || "N/A"}</span> 
+  //     </div>
+  //     <div class="taskCardPopupPrio">
+  //       <label>Priority:</label>
+  //       <span>${task.priority || "Medium"} 
+  //         <img src="/assets/icons/${priority}Priority.png" alt="">
+  //       </span> 
+  //     </div>
   if (!task) {
     return `<p>Fehler: Keine Daten für diese Aufgabe gefunden.</p>`;
   }
 
-  let priority = task.priority ? task.priority.toLowerCase() : "medium";
+  let priorityImages = {
+    "urgent": "urgentRed.png",
+    "medium": "mediumYellow.png",
+    "low": "lowGreen.png",
+  };
+  let priorityImageSrc = `/assets/icons/${priorityImages[task.priority] || "default.png"}`;
 
   return /*html*/ `
   <div class="shadow-div"></div>
@@ -336,10 +368,9 @@ function renderTasksCardPopup(task) {
       <div class="taskCardPopupPrio">
         <label>Priority:</label>
         <span>${task.priority || "Medium"} 
-          <img src="/assets/icons/${priority}Priority.png" alt="">
+          <img src="${priorityImageSrc}" alt="${task.priority}">
         </span> 
       </div>
-
       
       <label class="taskCardPopupLabel">Assigned To:</label>
       <div class="taskCardPopupContact">
@@ -365,7 +396,7 @@ function renderTasksCardPopup(task) {
                   (subtasks, index) => `
                     <div class="step">
                       <input type="checkbox" id="step${index}-${task.id}"
-                        onchange="updateSteps(${task.id})" 
+                        onchange="updateSteps('${task.id}')" 
                         ${subtasks.completed ? "checked" : ""}>
                       <label for="step${index}-${task.id}">${subtasks.description || "Unnamed Subtask"}</label>
                     </div>
