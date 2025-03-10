@@ -107,6 +107,7 @@ function generateTaskCard(task) {
   `;
 
 let usersContainer = taskCard.querySelector(`#taskUsers-${task.id}`);
+
 if (Array.isArray(task.users)) {
   task.users.forEach((user) => {
     let userDiv = document.createElement("div");
@@ -115,7 +116,7 @@ if (Array.isArray(task.users)) {
     if (contact) {
       userDiv.style.backgroundColor = contact.color;
     } else {
-      userDiv.style.backgroundColor = "#000";
+      userDiv.style.backgroundColor = "#FF0000";
     }
     userDiv.textContent = user; 
     usersContainer.appendChild(userDiv);
@@ -292,14 +293,14 @@ function allowDrop(event) {
 //   });
 // }
 
-function drop(event, column) {
+async function drop(event, column) {
   event.preventDefault();
   let taskId = event.dataTransfer.getData("text");
   let task = tasks.find((t) => t.id == taskId);
   if (task) {
     task.columnTitles = column;
     renderTasks();
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    await patchDataToFirebase(`tasks/${task.id}`, { columnTitles: column });
   }
 }
 

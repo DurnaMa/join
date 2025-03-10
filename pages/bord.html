@@ -36,7 +36,16 @@
 
     <div class="board" id="board">
       <div class="boardHeader">
+        <div class="board-title-plusbtn">
         <h1 class="board-title">Board</h1>
+        <button class="addTaskMobileBtn2" onclick="addTaskPopupBtn()">
+          <img
+            class="addTaskBtnIcon2"
+            src="/assets/icons/plusAddTaskMobile.png"
+            alt="Add task icon"
+          />
+        </button>
+      </div>
         <div class="boardHeaderRight">
           <div class="searchDiv">
             <input
@@ -53,6 +62,7 @@
               onclick="searchTask()"
             />
           </div>
+
           <button class="addTaskBtn" onclick="addTaskPopupBtn()">
             <p class="addTaskBtnText">Add task</p>
             <img
@@ -61,6 +71,7 @@
               alt="Add task icon"
             />
           </button>
+
           <button class="addTaskMobileBtn" onclick="addTaskPopupBtn()">
             <img
               class="addTaskBtnIcon"
@@ -68,6 +79,22 @@
               alt="Add task icon"
             />
           </button>
+          
+          <div class="searchMobileDiv">
+            <input
+              class="search"
+              type="text"
+              placeholder="Find Task"
+              id="searchTask"
+            />
+            <div class="search-dividing-line"></div>
+            <img
+              class="searchIcon"
+              src="/assets/icons/search.png"
+              alt="Search icon"
+              onclick="searchTask()"
+            />
+          </div>
         </div>
       </div>
 

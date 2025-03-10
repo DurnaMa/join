@@ -312,63 +312,143 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
 }
 
 function renderTasksCardPopup(task) {
+  if (!task) {
+    return `<p>Fehler: Keine Daten für diese Aufgabe gefunden.</p>`;
+  }
+
   let priority = task.priority ? task.priority.toLowerCase() : "medium";
+
   return /*html*/ `
   <div class="shadow-div"></div>
     <div class="taskCardPopup" id="taskPopUp" data-task-id="${task.id}">
       <div class="taskCardPopupCategory">
         <div class="taskCardPopupCategoryColor">
-          <h2>${task.category}</h2>
+          <h2>${task.category || "No Category"}</h2>
         </div>
         <img onclick="closeTaskCardPopUp()" src="/assets/icons/close.png" alt="" />
       </div>
-      <div class="taskCardPopupTitle">${task.title}</div>
-      <div class="taskCardPopupDescription">${task.description}</div>
+      <div class="taskCardPopupTitle">${task.title || "No Title"}</div>
+      <div class="taskCardPopupDescription">${task.description || "No Description"}</div>
       <div class="taskCardPopupDate">
         <label>Due date:</label>
         <span>${task.dueDate || "N/A"}</span> 
       </div>
       <div class="taskCardPopupPrio">
         <label>Priority:</label>
-        <span>${task.priority || "Medium"} <img src="/assets/icons/${priority}Priority.png" alt=""></span> 
+        <span>${task.priority || "Medium"} 
+          <img src="/assets/icons/${priority}Priority.png" alt="">
+        </span> 
       </div>
+
+      
       <label class="taskCardPopupLabel">Assigned To:</label>
       <div class="taskCardPopupContact">
-        ${(task.assignedUsers || [])
-          .map(
-            (user) =>
-              `<div class="taskCardPopupContactUsers">${user.initials}</div>`
-          )
-          .join("")}
+        ${Array.isArray(task.assignedUsers) && task.assignedUsers.length > 0
+          ? task.assignedUsers
+              .map(
+                (user) =>
+                  `<div class="taskCardPopupContactUsers">
+                    ${user.initials || "??"} 
+                  </div>`
+              )
+              .join("")
+          : "<p>Kein Benutzer zugewiesen</p>"}
       </div>
+
+    
       <label class="taskCardPopupLabel">Subtasks</label>
       <div class="taskCardPopupSubTasks">
         <div class="progress-container">
-          ${(task.subTask || [])
-            .map(
-              (subtask, index) => `
-            <div class="step">
-              <input type="checkbox" id="step${index}-${
-                task.id
-              }" onchange="updateSteps(${task.id})" ${
-                subtask.completed ? "checked" : ""
-              }>
-              <label for="step${index}-${task.id}">${subtask.name}</label>
-            </div>
-          `
-            )
-            .join("")}
+          ${Array.isArray(task.subTask) && task.subTask.length > 0
+            ? task.subTask
+                .map(
+                  (subtask, index) => `
+                    <div class="step">
+                      <input type="checkbox" id="step${index}-${task.id}"
+                        onchange="updateSteps(${task.id})" 
+                        ${subtask.completed ? "checked" : ""}>
+                      <label for="step${index}-${task.id}">${subtask.name || "Unnamed Subtask"}</label>
+                    </div>
+                  `
+                )
+                .join("")
+            : "<p>Keine Subtasks vorhanden</p>"}
         </div>
       </div>
+
       <div class="taskCardPopupButtons">
         <div onclick="deleteTask('${task.id}')">
-        <img src="/assets/icons/deleteContact.png" alt="">Delete</div>
+          <img src="/assets/icons/deleteContact.png" alt="">Delete
+        </div>
         <hr class="hrBoardTaskPopUp">
-        <div onclick="editTaskPopup('${task.id}')"><img src="/assets/icons/edit-pencil.png" alt="">Edit</div>
+        <div onclick="editTaskPopup('${task.id}')">
+          <img src="/assets/icons/edit-pencil.png" alt="">Edit
+        </div>
       </div>
     </div>
   `;
 }
+
+
+
+// function renderTasksCardPopup(task) {
+//   let priority = task.priority ? task.priority.toLowerCase() : "medium";
+//   return /*html*/ `
+//   <div class="shadow-div"></div>
+//     <div class="taskCardPopup" id="taskPopUp" data-task-id="${task.id}">
+//       <div class="taskCardPopupCategory">
+//         <div class="taskCardPopupCategoryColor">
+//           <h2>${task.category}</h2>
+//         </div>
+//         <img onclick="closeTaskCardPopUp()" src="/assets/icons/close.png" alt="" />
+//       </div>
+//       <div class="taskCardPopupTitle">${task.title}</div>
+//       <div class="taskCardPopupDescription">${task.description}</div>
+//       <div class="taskCardPopupDate">
+//         <label>Due date:</label>
+//         <span>${task.dueDate || "N/A"}</span> 
+//       </div>
+//       <div class="taskCardPopupPrio">
+//         <label>Priority:</label>
+//         <span>${task.priority || "Medium"} <img src="/assets/icons/${priority}Priority.png" alt=""></span> 
+//       </div>
+//       <label class="taskCardPopupLabel">Assigned To:</label>
+//       <div class="taskCardPopupContact">
+//         ${(task.assignedUsers || [])
+//           .map(
+//             (user) =>
+//               `<div class="taskCardPopupContactUsers">${user.initials}</div>`
+//           )
+//           .join("")}
+//       </div>
+//       <label class="taskCardPopupLabel">Subtasks</label>
+//       <div class="taskCardPopupSubTasks">
+//         <div class="progress-container">
+//           ${(task.subTask || [])
+//             .map(
+//               (subtask, index) => `
+//             <div class="step">
+//               <input type="checkbox" id="step${index}-${
+//                 task.id
+//               }" onchange="updateSteps(${task.id})" ${
+//                 subtask.completed ? "checked" : ""
+//               }>
+//               <label for="step${index}-${task.id}">${subtask.name}</label>
+//             </div>
+//           `
+//             )
+//             .join("")}
+//         </div>
+//       </div>
+//       <div class="taskCardPopupButtons">
+//         <div onclick="deleteTask('${task.id}')">
+//         <img src="/assets/icons/deleteContact.png" alt="">Delete</div>
+//         <hr class="hrBoardTaskPopUp">
+//         <div onclick="editTaskPopup('${task.id}')"><img src="/assets/icons/edit-pencil.png" alt="">Edit</div>
+//       </div>
+//     </div>
+//   `;
+// }
 
 
 // function renderEditTasksCardPopup(currentSelectedTask) { 

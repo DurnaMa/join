@@ -44,6 +44,17 @@ async function deleteDataFromFirebase(path = "") {
   });
 }
 
+async function patchDataToFirebase(path = "", data = {}) {
+  await fetch(BASE_URL + path + ".json", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+}
+
+
 async function loadContacts() {
   contacts = [];
   let contactsData = await getDataFromFirebase("contacts");
@@ -89,38 +100,59 @@ async function loadTasks() {
   
   renderTasks();
 }
-// async function loadTasks() {
-//   tasks = [];
-//   let tasksData = await getDataFromFirebase("tasks");
 
-//   for (const key in tasksData) {
-//     const SINGLE_TASK = tasksData[key];
+async function loadTasksFromFirebase() {
+  try {
+    let response = await fetch("https://your-firebase-url/tasks.json");
+    let data = await response.json();
+    tasks = Object.values(data) || [];
 
-//     let task = {
-//       id: key,
-//       columnTitles: SINGLE_TASK.columnTitles,
-//       title: SINGLE_TASK.title,
-//       description: SINGLE_TASK.description,
-//       dueDate: SINGLE_TASK.dueDate,
-//       priority: SINGLE_TASK.priority,
-//       subTasks: SINGLE_TASK.subTasks || [], // Falls undefined, setzen wir ein leeres Array
-//       status: SINGLE_TASK.status,
-//       category: SINGLE_TASK.category,
-//       users: SINGLE_TASK.users 
-//         ? SINGLE_TASK.users.map(name => generateInitials(name)) 
-//         : [], // Falls undefined, setzen wir ein leeres Array
-//     };    
+    tasks = tasks.map(task => ({
+      ...task,
+      assignedUsers: task.assignedUsers || [],
+      subTask: task.subTask || []
+    }));
 
-//     tasks.push(task);
-//   }
-  
-//   renderTasks();
-// }
+  } catch (error) {
+    console.error("fehler", error);
+  }
+}
 
 
+async function loadSummaryData() {
+  let tasksData = await getDataFromFirebase("tasks");
 
+  if (!tasksData) {
+    console.error("Keine Daten gefunden!");
+    return;
+  }
 
+  let tasks = Object.values(tasksData);
 
+  let totalTasks = tasks.length;
+  let toDoCount = tasks.filter((task) => task.columnTitles === "To Do").length;
+  let inProgressCount = tasks.filter((task) => task.columnTitles === "In Progress").length;
+  let awaitFeedbackCount = tasks.filter((task) => task.columnTitles === "Await Feedback").length;
+  let doneCount = tasks.filter((task) => task.columnTitles === "Done").length;
+
+  let urgentTasks = tasks.filter((task) => task.priority === "urgent");
+  let urgentCount = urgentTasks.length;
+
+  let upcomingDeadline = urgentTasks
+    .map((task) => new Date(task.dueDate))
+    .sort((a, b) => a - b)[0];
+
+  document.getElementById("totalTaskCount").innerText = totalTasks;
+  document.getElementById("toDoCount").innerText = toDoCount;
+  document.getElementById("inProgressCount").innerText = inProgressCount;
+  document.getElementById("awaitFeedbackCount").innerText = awaitFeedbackCount;
+  document.getElementById("doneCount").innerText = doneCount;
+  document.getElementById("urgentCount").innerText = urgentCount;
+
+  if (upcomingDeadline) {
+    document.getElementById("date").innerText = upcomingDeadline.toDateString();
+  }
+}
 
 
 

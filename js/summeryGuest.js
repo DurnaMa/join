@@ -3,6 +3,7 @@ async function initSummary() {
     //await loadTasks();
     //updateTaskSummary();
     //updateSummaryPage();
+    await loadSummaryData();
 }
 
 //let tasks = loadTasks();
@@ -24,6 +25,11 @@ function daliyTime() {
     }
 }
 
+async function getDataFromFirebase(path = "") {
+    let response = await fetch(BASE_URL + path + ".json");
+    return await response.json();
+  }
+  
 
 // habe bisschen vorprogrammiert und in template ist auch HTML Code und
 // unten werden die benötigten infos gefiltert dann darauf zugegrifen dann
