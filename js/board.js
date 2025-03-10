@@ -494,7 +494,7 @@ async function deleteTask(taskId) {
 //     subtasksAmount.textContent = `${checkedCount}/${checkboxes.length} Subtasks`;
 //   }
 // }
-function updateSteps(taskId) {
+async function updateSteps(taskId) {
   let task = tasks.find((t) => t.id === taskId);
   if (!task || !task.subTasks) return;
 
@@ -533,9 +533,27 @@ function updateSteps(taskId) {
   if (taskIndex !== -1) {
     tasks[taskIndex] = task;
   }
+
+  await saveTaskToFirebase(task);
 }
 
+async function saveTaskToFirebase(task) {
+  try {
+    let response = await fetch(`https://your-firebase-url/tasks/${task.id}.json`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(task),
+    });
 
+    if (!response.ok) {
+      throw new Error("Fehler");
+    }
+  } catch (error) {
+    console.error("Fehler:", error);
+  }
+}
 
 
 
