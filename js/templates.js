@@ -343,11 +343,11 @@ function renderTasksCardPopup(task) {
       
       <label class="taskCardPopupLabel">Assigned To:</label>
       <div class="taskCardPopupContact">
-        ${Array.isArray(task.assignedUsers) && task.assignedUsers.length > 0
-          ? task.assignedUsers
+        ${Array.isArray(task.users) && task.users.length > 0
+          ? task.users
               .map(
                 (user) =>
-                  `<div class="taskCardPopupContactUsers">
+                  `<div class="taskCardPopupContactUsers" style="background-color: ${user.color}">
                     ${user.initials || "??"} 
                   </div>`
               )
@@ -359,15 +359,15 @@ function renderTasksCardPopup(task) {
       <label class="taskCardPopupLabel">Subtasks</label>
       <div class="taskCardPopupSubTasks">
         <div class="progress-container">
-          ${Array.isArray(task.subTask) && task.subTask.length > 0
-            ? task.subTask
+          ${Array.isArray(task.subTasks) && task.subTasks.length > 0
+            ? task.subTasks
                 .map(
-                  (subtask, index) => `
+                  (subtasks, index) => `
                     <div class="step">
                       <input type="checkbox" id="step${index}-${task.id}"
                         onchange="updateSteps(${task.id})" 
-                        ${subtask.completed ? "checked" : ""}>
-                      <label for="step${index}-${task.id}">${subtask.name || "Unnamed Subtask"}</label>
+                        ${subtasks.completed ? "checked" : ""}>
+                      <label for="step${index}-${task.id}">${subtasks.description || "Unnamed Subtask"}</label>
                     </div>
                   `
                 )

@@ -31,8 +31,8 @@ function openTaskPopup(taskId) {
 
   let currentSelectedTask = tasks[id];
   console.log("Gewählte Aufgabe:", currentSelectedTask);
-  console.log("Assigned Users:", currentSelectedTask.assignedUsers);
-  console.log("Subtasks:", currentSelectedTask.subTask);
+  console.log("Assigned Users:", currentSelectedTask.users);
+  console.log("Subtasks:", currentSelectedTask.subTasks);
 
   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
   openTaskPopupDiv.classList.remove("d-none");
