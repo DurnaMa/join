@@ -83,6 +83,10 @@
   cursor: pointer;
 }
 
+.addTaskMobileBtn {
+  display: none;
+}
+
 .addTaskBtnText {
   width: 92px;
   height: 24px;
@@ -103,7 +107,7 @@
 .column-titles-plusBtn {
   display: flex;
   justify-content: space-between;
-  width: fixed 244px;
+  width: 244px;
   height: 24px;
   margin-bottom: 16px;
 }
@@ -144,10 +148,9 @@
   border: 1px;
   gap: 10px;
   background-color: #e7e7e7;
-  border: 1px solid #A8A8A8;
+  border: 1px solid #a8a8a8;
   border-style: dashed;
 }
-
 
 .task {
   width: fill 220px;
@@ -180,7 +183,6 @@
   font-size: 16px;
   line-height: 19.2px;
   text-align: left;
-  color: black;
 }
 
 .column-todo {
@@ -283,7 +285,6 @@
   padding-top: 16px;
 }
 
-
 /*----- new progressbar -----*/
 .progress-container {
   display: flex;
@@ -317,7 +318,7 @@
   width: 64px;
   height: 8px;
   border-radius: 16px;
-  background-color: #4599FF;
+  background-color: #4599ff;
   transition: width 0.3s ease-in-out;
 }
 
@@ -338,7 +339,6 @@
 
 /*-------end----------*/
 .tasks-user {
-  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -348,6 +348,7 @@
   gap: 10px;
   padding: 5px;
 }
+
 /*
 .tasks-user1 {
   background-color: #0038ff;
@@ -365,6 +366,7 @@
   display: flex;
   align-items: center;
   gap: 2px;
+  color: white;
 }
 
 .task-footer {
@@ -410,7 +412,7 @@
 }
 
 /*----- taskEdit -----*/
-.taskCardEditPopup {
+/* .taskCardEditPopup {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -426,12 +428,12 @@
   flex-direction: column;
   gap: 10px;
   overflow-y: auto;
-}
+} */
 
 .task-edit-close-popup {
   width: 10px;
-  display: flex;
-  justify-content: flex-end;
+  /* display: flex;
+  justify-content: flex-end; */
   cursor: pointer;
 }
 
@@ -440,6 +442,9 @@
 }
 
 .task-edit-close-popup-div {
+  position: sticky;
+  top: 0;
+  background-color: white;
   display: flex;
   justify-content: flex-end;
 }
@@ -459,9 +464,9 @@
   gap: 10px;
 }
 
-.subTask {
+/* .subTask {
   width: 90%;
-}
+} */
 
 .prioEditBtn {
   width: 136px;
@@ -480,19 +485,69 @@
 .button-ok-div {
   display: flex;
   justify-content: flex-end;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  z-index: 2;
 }
 
 .button-ok {
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 8px 10px;
-  border-radius: 10px;
-  background-color: #2a3647;
-  cursor: pointer;
   color: white;
+  background-color: #2a3647;
+  height: 48px;
+  border-radius: 10px;
+  border: none;
+  padding-top: 8px;
+  padding-right: 16px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.button-ok:hover {
+  background-color: #29abe2;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.searchMobileDiv {
+  display: none;
+}
+
+.addTaskMobileBtn2 {
+  display: none;
 }
 
 /* ----- Media Query -----*/
+
+@media screen and (max-width: 1160px) {
+  .addTaskBtn {
+    display: none;
+  }
+
+  .addTaskMobileBtn {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .boardHeaderRight {
+    display: flex;
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .board {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+}
 
 @media screen and (max-width: 980px) {
   .board {
@@ -508,11 +563,100 @@
   }
 }
 
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 655px) {
   .board {
     flex-wrap: wrap;
     padding-top: 96px;
     background-color: #f6f7f8;
   }
 
+  .searchDiv {
+    display: none;
+  }
+
+  .addTaskMobileBtn {
+    display: none;
+  }
+
+  .addTaskMobileBtn2 {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+
+    border: none;
+    cursor: pointer;
+  }
+
+  .board-title-plusbtn {
+    width: 396px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .searchMobileDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 396px;
+    height: 48px;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid #a8a8a8;
+  }
+
+  .board-title {
+    width: 136px;
+    height: 56px;
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 47px;
+    line-height: 120%;
+    letter-spacing: 0%;
+
+  }
+
+  .column-titles-plusBtn {
+    width: 396px;
+    height: 32px;
+    gap: 16px;
+  }
+
+  .empty-column {
+    width: 392px;
+    height: 48px;
+    gap: 10px;
+    border-radius: 10px;
+    border-width: 1px;
+
+  }
+
+  .columns {
+    display: flex;
+
+  }
+
+  .column {
+    display: flex;
+  }
+
+  .task-card {
+    display: flex;
+  }
+
+  .column-container {
+    display: flex;
+    width: 688px;
+    height: 246px;
+  }
+
+  .column-titles-h2 {
+    width: 73;
+    height: 32;
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 27px;
+    line-height: 120%;
+    letter-spacing: 0%;
+  }
 }

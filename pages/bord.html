@@ -36,7 +36,16 @@
 
     <div class="board" id="board">
       <div class="boardHeader">
+        <div class="board-title-plusbtn">
         <h1 class="board-title">Board</h1>
+        <button class="addTaskMobileBtn2" onclick="addTaskPopupBtn()">
+          <img
+            class="addTaskBtnIcon2"
+            src="/assets/icons/plusAddTaskMobile.png"
+            alt="Add task icon"
+          />
+        </button>
+      </div>
         <div class="boardHeaderRight">
           <div class="searchDiv">
             <input
@@ -53,17 +62,43 @@
               onclick="searchTask()"
             />
           </div>
+
           <button class="addTaskBtn" onclick="addTaskPopupBtn()">
             <p class="addTaskBtnText">Add task</p>
-            <img class="addTaskBtnIcon" src="/assets/icons/addTaskBtn.png" alt="Add task icon" />
+            <img
+              class="addTaskBtnIcon"
+              src="/assets/icons/addTaskBtn.png"
+              alt="Add task icon"
+            />
           </button>
-          <button class="addTaskMobileBtn d-none" onclick="addTaskPopupBtn()">
-            <img class="addTaskBtnIcon" src="/assets/icons/plusAddTaskMobile.png" alt="Add task icon" />
+
+          <button class="addTaskMobileBtn" onclick="addTaskPopupBtn()">
+            <img
+              class="addTaskBtnIcon"
+              src="/assets/icons/plusAddTaskMobile.png"
+              alt="Add task icon"
+            />
           </button>
+          
+          <div class="searchMobileDiv">
+            <input
+              class="search"
+              type="text"
+              placeholder="Find Task"
+              id="searchTask"
+            />
+            <div class="search-dividing-line"></div>
+            <img
+              class="searchIcon"
+              src="/assets/icons/search.png"
+              alt="Search icon"
+              onclick="searchTask()"
+            />
+          </div>
         </div>
       </div>
 
-      <div class="addNewTaskDiv d-none" id="addNewTaskDiv"></div>
+      <!-- <div class="addNewTaskDiv d-none" id="addNewTaskDiv"></div> -->
 
       <div class="task-container" id="taskContainer">
         <div class="column-container">
@@ -149,6 +184,14 @@
     <div class="editTaskPopupDiv" id="openTaskPopupDiv"></div>
     <div class="editTaskPopupDiv" id="editTaskPopupDiv"></div>
     <div class="openTaskPopupToDoDiv d-none" id="openTaskPopupToDoDiv"></div>
+    <!-- muss ins JS gesetzt werden das Popup. Beachte das hier ein d-none vorhanden ist -->
+    <div class=" d-none">
+      <div class="shadow-div-added"></div>
+      <div class="task-added-popup">
+        <span>Task added to board</span
+        ><img src="/assets/img/board-icon.png" alt="" />
+      </div>
+    </div>
     <div
       class="openTaskPopupInProgressDiv d-none"
       id="openTaskPopupInProgressDiv"

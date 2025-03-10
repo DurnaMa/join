@@ -3,8 +3,8 @@ body {
 }
 
 .addTaskContent {
-  /* display: flex; */
-  /* align-items: center;
+  /* display: flex;
+  align-items: center;
   flex-direction: column; */
   width: 100%;
   height: 100vh;
@@ -25,6 +25,7 @@ h1 {
 
 form {
   margin-right: auto;
+  padding-bottom: 96px;
 }
 
 .formParts {
@@ -50,7 +51,7 @@ textarea {
   padding-top: 20px;
   min-height: 140px;
   max-height: 140px;
-  max-width: 495px;
+  /* max-width: 495px; */
 }
 
 .formParts hr {
@@ -132,7 +133,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .prioBtn {
-  width: 136px;
+  width: 110%;
   height: 56px;
   border-radius: 10px;
   background: white;
@@ -219,7 +220,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .taskFormButtons {
   padding: 75px 0 0 0;
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -229,6 +229,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .btnSection {
   display: flex;
   gap: 16px;
+  
 }
 
 .clearBtn {
@@ -274,6 +275,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 20px;
   cursor: pointer;
   height: 45px;
+  text-wrap: nowrap;
+
 }
 
 .button:hover {
@@ -360,6 +363,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   background-color: white;
   margin-bottom: -8px;
+  position: relative;
 }
 
 #assignedContactsList {
@@ -369,9 +373,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: white;
   max-height: 165px;
   overflow: auto;
-  position: absolute;
-  top: 719px;
   width: inherit;
+  top: 719px;
 }
 
 .assignedContacts {

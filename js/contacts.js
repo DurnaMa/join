@@ -154,6 +154,19 @@ function generateInitials(name) {
   const lastInitial = nameParts[1]?.charAt(0) || "";
   return `${firstInitial}${lastInitial}`.toUpperCase();
 }
+// function generateInitials(name) {
+//   if (!name) return "";
+//   const nameParts = name.trim().split(" ");
+//   const firstInitial = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : "";
+//   const lastInitial = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : "";
+//   return `${firstInitial}${lastInitial}`;
+// }
+
+
+
+
+
+
 
 /**
  * Renders the "Add New Contact" form by making the corresponding div visible
@@ -320,14 +333,3 @@ function mobileToggleOptions(){
   document.getElementById("mobileToggleOptions").classList.toggle("hidden")
 }
 
-document.addEventListener("click", function(event) {
-  const mobileOptions = document.getElementById("mobileToggleOptions");
-  const toggleButton = document.querySelector(".mobileOptionsButton img");
-
-  // Prüfen, ob mobileOptions sichtbar ist
-  if (!mobileOptions.classList.contains("hidden")) {
-      // Prüfen, ob der Klick außerhalb des Menüs und außerhalb des Buttons erfolgt ist
-      if (!mobileOptions.contains(event.target) && event.target !== toggleButton) {
-          mobileOptions.classList.add("hidden"); // Menü schließen
-      }
-  }});

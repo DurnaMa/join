@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/css/addTask.css" />
-    <link rel="stylesheet" href="/css/addTask1.css">
+    <link rel="stylesheet" href="/css/addTaskMedia.css">
     <link rel="stylesheet" href="/css/addTaskPopUp.css" />
     <script defer src="/js/includeTemplates.js"></script>
     <script defer src="/script.js"></script>
@@ -22,7 +22,7 @@
     <include-html src="/mobileTemplates/footer/footerMobile.html"></include-html>
     <div class="addTaskContent">
       <div class="headlineDiv"><h1>Add Task</h1></div>
-      <form class="form-add-task">
+      <form>
         <div class="formParts">
           <section class="formPartLeft">
             <label for="title">Title<span class="required">*</span> </label>
@@ -65,8 +65,9 @@
               <span id="dropdownCategory" class="">Select Task Category</span>
               <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
               <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+              <div id="categoryList" class="hidden"></div>
             </div>
-            <div id="categoryList" class="hidden"></div>
+            
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">

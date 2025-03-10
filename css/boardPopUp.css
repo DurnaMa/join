@@ -8,12 +8,13 @@
   border-radius: 30px;
   background-color: white;
   box-shadow: 0px 0px 14px 3px #0000000a;
-  z-index: 1;
+  z-index: 5;
   position: absolute;
   padding: 40px;
   margin: 16px;
-  top: 96px;
-  left: 235px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .addTaskContent {
@@ -79,7 +80,7 @@ textarea {
 }
 
 label {
-  cursor: pointer;
+  cursor: context-menu !important;
 }
 
 input,
@@ -111,6 +112,16 @@ button,
 select {
   font-size: 20px;
   cursor: pointer;
+  /* padding: 25px 0 25px 0; */
+}
+
+.taskCardEditPopup label,
+.taskCardEditPopup input,
+.taskCardEditPopup textarea,
+.taskCardEditPopup select{
+  font-size: 20px;
+  cursor: pointer;
+  padding: 25px 0 25px 0;
 }
 
 ::placeholder {
@@ -225,15 +236,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border: 1px solid #29abe2;
 }
 
-#subTaskList {
-  border-radius: 10px;
-  background-color: white;
-  max-height: 140px;
-  overflow: auto;
-  position: absolute;
-  top: 598px;
-  width: inherit;
-}
+/* #subTaskList { */
+  /* border-radius: 10px; */
+  /* background-color: white; */
+  /* max-height: 140px; */
+  /* overflow: auto; */
+  /* position: absolute; */
+  /* top: 598px; */
+  /* padding-bottom: 96px; */
+  /* width: inherit; */
+/* } */
 
 .taskFormButtons {
   padding: 75px 0;
@@ -306,6 +318,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 8px;
   border-radius: 10px;
   position: relative;
+}
+
+.subTask input{
+  padding: 0;
 }
 
 .subTask:hover {
@@ -427,4 +443,23 @@ input[type="checkbox"] {
 
 .assignedContactContent:hover {
   background-color: #eeeeee;
+}
+
+.task-added-popup {
+  display: flex;
+  position: absolute;
+  gap: 32px;
+  top: 50%;
+  left: 50%;
+  background-color: #2a3647;
+  height: 74px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  font-size: 21px;
+  width: 326px;
+  transform: translate(-50%, -50%);
+  z-index: 6;
 }

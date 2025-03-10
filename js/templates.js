@@ -1,7 +1,7 @@
 //--------- Board page add task templates ---------
 function renderAddTaskPoupBtn() {
   return /*html*/ `
-<div class="shadow-div d-none"></div>
+<div class="shadow-div"></div>
 <div class="add-edit-popup-task-div">
   <div class="addTaskContent">
   <div class="addTaskClose"><img onclick="closeAddTaskPopUp()" src="/assets/icons/close.png" alt=""></div>
@@ -79,7 +79,7 @@ function renderAddTaskPoupBtn() {
 
 function renderAddTaskPopupToDoPlus() {
   return /*html*/ `
-
+<div class="shadow-div"></div>
 <div class="add-edit-popup-task-div">
   <div class="addTaskContent">
   <div class="addTaskClose"><img onclick="closeAddTaskPopUpToDo()" src="/assets/icons/close.png" alt=""></div>
@@ -157,7 +157,7 @@ function renderAddTaskPopupToDoPlus() {
 
 function renderAddTaskPopupInProgressPlus() {
   return /*html*/ `
-
+<div class="shadow-div"></div>
 <div class="add-edit-popup-task-div">
   <div class="addTaskContent">
   <div class="addTaskClose"><img onclick="closeAddTaskPopUpInProgress()" src="/assets/icons/close.png" alt=""></div>
@@ -235,7 +235,7 @@ function renderAddTaskPopupInProgressPlus() {
 
 function renderAddTaskPopupAwaitFeedbackPlus() {
   return /*html*/ `
-
+<div class="shadow-div"></div>
 <div class="add-edit-popup-task-div">
   <div class="addTaskContent">
   <div class="addTaskClose"><img onclick="closeAddTaskPopUpAwaitFeedback()" src="/assets/icons/close.png" alt=""></div>
@@ -312,126 +312,182 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
 }
 
 function renderTasksCardPopup(task) {
-  let priority = task.priority ? task.priority.toLowerCase() : "medium";
+  // if (!task) {
+  //   return `<p>Fehler: Keine Daten für diese Aufgabe gefunden.</p>`;
+  // }
+
+  // let priority = task.priority ? task.priority.toLowerCase() : "medium";
+
+  // return /*html*/ `
+  // <div class="shadow-div"></div>
+  //   <div class="taskCardPopup" id="taskPopUp" data-task-id="${task.id}">
+  //     <div class="taskCardPopupCategory">
+  //       <div class="taskCardPopupCategoryColor">
+  //         <h2>${task.category || "No Category"}</h2>
+  //       </div>
+  //       <img onclick="closeTaskCardPopUp()" src="/assets/icons/close.png" alt="" />
+  //     </div>
+  //     <div class="taskCardPopupTitle">${task.title || "No Title"}</div>
+  //     <div class="taskCardPopupDescription">${task.description || "No Description"}</div>
+  //     <div class="taskCardPopupDate">
+  //       <label>Due date:</label>
+  //       <span>${task.dueDate || "N/A"}</span> 
+  //     </div>
+  //     <div class="taskCardPopupPrio">
+  //       <label>Priority:</label>
+  //       <span>${task.priority || "Medium"} 
+  //         <img src="/assets/icons/${priority}Priority.png" alt="">
+  //       </span> 
+  //     </div>
+  if (!task) {
+    return `<p>Fehler: Keine Daten für diese Aufgabe gefunden.</p>`;
+  }
+
+  let priorityImages = {
+    "urgent": "urgentRed.png",
+    "medium": "mediumYellow.png",
+    "low": "lowGreen.png",
+  };
+  let priorityImageSrc = `/assets/icons/${priorityImages[task.priority] || "default.png"}`;
+
   return /*html*/ `
   <div class="shadow-div"></div>
     <div class="taskCardPopup" id="taskPopUp" data-task-id="${task.id}">
       <div class="taskCardPopupCategory">
         <div class="taskCardPopupCategoryColor">
-          <h2>${task.category}</h2>
+          <h2>${task.category || "No Category"}</h2>
         </div>
         <img onclick="closeTaskCardPopUp()" src="/assets/icons/close.png" alt="" />
       </div>
-      <div class="taskCardPopupTitle">${task.title}</div>
-      <div class="taskCardPopupDescription">${task.description}</div>
-      <div class="taskCardPopupDate">Due date: ${task.dueDate || "N/A"}</div>
-      <div class="taskCardPopupPrio">
-        Priority: ${
-          task.priority || "Medium"
-        } <img src="/assets/icons/${priority}Priority.png" alt="">
+      <div class="taskCardPopupTitle">${task.title || "No Title"}</div>
+      <div class="taskCardPopupDescription">${task.description || "No Description"}</div>
+      <div class="taskCardPopupDate">
+        <label>Due date:</label>
+        <span>${task.dueDate || "N/A"}</span> 
       </div>
+      <div class="taskCardPopupPrio">
+        <label>Priority:</label>
+        <span>${task.priority || "Medium"} 
+          <img src="${priorityImageSrc}" alt="${task.priority}">
+        </span> 
+      </div>
+      
       <label class="taskCardPopupLabel">Assigned To:</label>
       <div class="taskCardPopupContact">
-        ${(task.assignedUsers || [])
-          .map(
-            (user) =>
-              `<div class="taskCardPopupContactUsers">${user.initials}</div>`
-          )
-          .join("")}
+        ${Array.isArray(task.users) && task.users.length > 0
+          ? task.users
+              .map(
+                (user) =>
+                  `<div class="taskCardPopupContactUsers" style="background-color: ${user.color}">
+                    ${user.initials || "??"} 
+                  </div>`
+              )
+              .join("")
+          : "<p>Kein Benutzer zugewiesen</p>"}
       </div>
+
+    
       <label class="taskCardPopupLabel">Subtasks</label>
       <div class="taskCardPopupSubTasks">
         <div class="progress-container">
-          ${(task.subTask || [])
-            .map(
-              (subtask, index) => `
-            <div class="step">
-              <input type="checkbox" id="step${index}-${
-                task.id
-              }" onchange="updateSteps(${task.id})" ${
-                subtask.completed ? "checked" : ""
-              }>
-              <label for="step${index}-${task.id}">${subtask.name}</label>
-            </div>
-          `
-            )
-            .join("")}
+          ${Array.isArray(task.subTasks) && task.subTasks.length > 0
+            ? task.subTasks
+                .map(
+                  (subtasks, index) => `
+                    <div class="step">
+                      <input type="checkbox" id="step${index}-${task.id}"
+                        onchange="updateSteps('${task.id}')" 
+                        ${subtasks.completed ? "checked" : ""}>
+                      <label for="step${index}-${task.id}">${subtasks.description || "Unnamed Subtask"}</label>
+                    </div>
+                  `
+                )
+                .join("")
+            : "<p>Keine Subtasks vorhanden</p>"}
         </div>
       </div>
+
       <div class="taskCardPopupButtons">
         <div onclick="deleteTask('${task.id}')">
-        <img src="/assets/icons/deleteContact.png" alt="">Delete</div>
+          <img src="/assets/icons/deleteContact.png" alt="">Delete
+        </div>
         <hr class="hrBoardTaskPopUp">
-        <div onclick="editTaskPopup(${
-          task.id
-        })"><img src="/assets/icons/edit-pencil.png" alt="">Edit</div>
+        <div onclick="editTaskPopup('${task.id}')">
+          <img src="/assets/icons/edit-pencil.png" alt="">Edit
+        </div>
       </div>
     </div>
   `;
 }
 
-function renderEditTasksCardPopup(currentSelectedTask) {
-  return /*html*/ `
-    <div class="shadow-div d-none"></div>
-    <div class="taskCardEditPopup">
-      <div class="task-edit-close-popup-div">
-        <img
-          onclick="closeEditTaskCardPopUp()"
-          class="task-edit-close-popup"
-          src="/assets/icons/close.png"
-          alt=""
-        />
-      </div>
-      <label>Title</label>
-      <input class="task-edit-input-popup" type="text" value="${currentSelectedTask.title}" />
-      <label>Description</label>
-      <textarea class="task-edit-input-popup" name="" id="">${currentSelectedTask.description}</textarea>
-      <label>Due Date</label>
-      <input class="task-edit-input-popup" type="date" value="${currentSelectedTask.dueDate}" />
-      <div>
-        <label>Priority</label>
-        <div class="task-edit-prio-popup">
-          <button class="prioEditBtn" ${currentSelectedTask.priority === 'Urgent' ? 'selected' : ''}>
-            Urgent
-            <img src="/assets/icons/urgentRed.png" alt="" />
-          </button>
-          <button class="prioEditBtn" ${currentSelectedTask.priority === 'Medium' ? 'selected' : ''}>
-            Medium
-            <img src="/assets/icons/mediumYellow.png" alt="" />
-          </button>
-          <button class="prioEditBtn" ${currentSelectedTask.priority === 'Low' ? 'selected' : ''}>
-            Low
-            <img src="/assets/icons/lowGreen.png" alt="" />
-          </button>
-        </div>
-      <label for="contactSelection">Assigned to</label>
-        <div onclick="contactListPopUp()" class="assignedContainer">
-          <span>${currentSelectedTask.assignedUsers.map(user => user.initials).join(', ')}</span>
-          <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
-          <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
-        </div>
-        <div id="assignedContactsListPopUp" class="hidden"></div>
-      </div>
-      <div></div>
-      <label for="subtask">Subtasks</label>
-        <div id="addSubTask">
-          <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
-          <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
-        </div>
-        <ul id="subTaskList">${currentSelectedTask.subTask.map(subtask => `<li>${subtask.name}</li>`).join('')}</ul>
-      <ul></ul>
-      <div class="button-ok-div">
-        <button class="button-ok">
-          Ok <img src="/assets/icons/check.png" alt="" />
-        </button>
-      </div>
-    </div>
-  `;
-}
 
-// function renderEditTasksCardPopup(currentSelectedTask) {
+
+// function renderTasksCardPopup(task) {
+//   let priority = task.priority ? task.priority.toLowerCase() : "medium";
 //   return /*html*/ `
-//     <div class="shadow-div d-none"></div>
+//   <div class="shadow-div"></div>
+//     <div class="taskCardPopup" id="taskPopUp" data-task-id="${task.id}">
+//       <div class="taskCardPopupCategory">
+//         <div class="taskCardPopupCategoryColor">
+//           <h2>${task.category}</h2>
+//         </div>
+//         <img onclick="closeTaskCardPopUp()" src="/assets/icons/close.png" alt="" />
+//       </div>
+//       <div class="taskCardPopupTitle">${task.title}</div>
+//       <div class="taskCardPopupDescription">${task.description}</div>
+//       <div class="taskCardPopupDate">
+//         <label>Due date:</label>
+//         <span>${task.dueDate || "N/A"}</span> 
+//       </div>
+//       <div class="taskCardPopupPrio">
+//         <label>Priority:</label>
+//         <span>${task.priority || "Medium"} <img src="/assets/icons/${priority}Priority.png" alt=""></span> 
+//       </div>
+//       <label class="taskCardPopupLabel">Assigned To:</label>
+//       <div class="taskCardPopupContact">
+//         ${(task.assignedUsers || [])
+//           .map(
+//             (user) =>
+//               `<div class="taskCardPopupContactUsers">${user.initials}</div>`
+//           )
+//           .join("")}
+//       </div>
+//       <label class="taskCardPopupLabel">Subtasks</label>
+//       <div class="taskCardPopupSubTasks">
+//         <div class="progress-container">
+//           ${(task.subTask || [])
+//             .map(
+//               (subtask, index) => `
+//             <div class="step">
+//               <input type="checkbox" id="step${index}-${
+//                 task.id
+//               }" onchange="updateSteps(${task.id})" ${
+//                 subtask.completed ? "checked" : ""
+//               }>
+//               <label for="step${index}-${task.id}">${subtask.name}</label>
+//             </div>
+//           `
+//             )
+//             .join("")}
+//         </div>
+//       </div>
+//       <div class="taskCardPopupButtons">
+//         <div onclick="deleteTask('${task.id}')">
+//         <img src="/assets/icons/deleteContact.png" alt="">Delete</div>
+//         <hr class="hrBoardTaskPopUp">
+//         <div onclick="editTaskPopup('${task.id}')"><img src="/assets/icons/edit-pencil.png" alt="">Edit</div>
+//       </div>
+//     </div>
+//   `;
+// }
+
+
+// function renderEditTasksCardPopup(currentSelectedTask) { 
+//   let assignedUsers = currentSelectedTask.users || []; // Falls undefined, setzen wir ein leeres Array
+//   let subTasks = currentSelectedTask.subTasks || []; 
+
+//   return /*html*/ `
+//     <div class="shadow-div"></div>
 //     <div class="taskCardEditPopup">
 //       <div class="task-edit-close-popup-div">
 //         <img
@@ -442,43 +498,43 @@ function renderEditTasksCardPopup(currentSelectedTask) {
 //         />
 //       </div>
 //       <label>Title</label>
-//       <input class="task-edit-input-popup" type="text" />
+//       <input class="task-edit-input-popup" type="text" value="${currentSelectedTask.title}" />
 //       <label>Description</label>
-//       <textarea class="task-edit-input-popup" name="" id=""></textarea>
+//       <textarea class="task-edit-input-popup">${currentSelectedTask.description}</textarea>
 //       <label>Due Date</label>
-//       <input class="task-edit-input-popup" type="date" />
+//       <input class="task-edit-input-popup" type="date" value="${currentSelectedTask.dueDate}" />
 //       <div>
 //         <label>Priority</label>
 //         <div class="task-edit-prio-popup">
-//           <button class="prioEditBtn">
+//           <button class="prioEditBtn" ${currentSelectedTask.priority === 'Urgent' ? 'selected' : ''}>
 //             Urgent
 //             <img src="/assets/icons/urgentRed.png" alt="" />
 //           </button>
-//           <button class="prioEditBtn">
+//           <button class="prioEditBtn" ${currentSelectedTask.priority === 'Medium' ? 'selected' : ''}>
 //             Medium
 //             <img src="/assets/icons/mediumYellow.png" alt="" />
 //           </button>
-//           <button class="prioEditBtn">
+//           <button class="prioEditBtn" ${currentSelectedTask.priority === 'Low' ? 'selected' : ''}>
 //             Low
 //             <img src="/assets/icons/lowGreen.png" alt="" />
 //           </button>
 //         </div>
-//       <label for="contactSelection">Assigned to</label>
+//         <label for="contactSelection">Assigned to</label>
 //         <div onclick="contactListPopUp()" class="assignedContainer">
-//           <span>Select contacts to assign</span>
+//           <span>${assignedUsers.map(user => user.initials).join(', ')}</span>
 //           <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
 //           <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
 //         </div>
 //         <div id="assignedContactsListPopUp" class="hidden"></div>
 //       </div>
-//       <div></div>
 //       <label for="subtask">Subtasks</label>
-//         <div id="addSubTask">
-//           <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
-//           <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
-//         </div>
-//         <ul id="subTaskList"></ul>
-//       <ul></ul>
+//       <div id="addSubTask">
+//         <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
+//         <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
+//       </div>
+//       <ul id="subTaskList">
+//         ${subTasks.map(subtask => `<li>${subtask.name}</li>`).join('')}
+//       </ul>
 //       <div class="button-ok-div">
 //         <button class="button-ok">
 //           Ok <img src="/assets/icons/check.png" alt="" />
@@ -487,6 +543,62 @@ function renderEditTasksCardPopup(currentSelectedTask) {
 //     </div>
 //   `;
 // }
+
+function renderEditTasksCardPopup(currentSelectedTask) {
+  return /*html*/ `
+    <div class="shadow-div"></div>
+    <div class="taskCardEditPopup">
+      <div class="task-edit-close-popup-div">
+        <div class="test987">
+          <img onclick="closeEditTaskCardPopUp()" class="task-edit-close-popup" src="/assets/icons/close.png" alt=""/>
+        </div>
+      </div>
+      <label>Title</label>
+      <input class="task-edit-input-popup" placeholder="Enter a title" type="text" />
+      <label>Description</label>
+      <textarea class="task-edit-input-popup" placeholder="Enter a description" name="" id=""></textarea>
+      <label>Due Date</label>
+      <input class="task-edit-input-popup" type="date" />
+        
+          <label>Priority</label>
+          <div class="task-edit-prio-popup">
+            <button class="prioEditBtn">
+              Urgent
+              <img src="/assets/icons/urgentRed.png" alt="" />
+            </button>
+            <button class="prioEditBtn">
+              Medium
+              <img src="/assets/icons/mediumYellow.png" alt="" />
+            </button>
+            <button class="prioEditBtn">
+              Low
+              <img src="/assets/icons/lowGreen.png" alt="" />
+            </button>
+          </div>
+          <label for="contactSelection">Assigned to</label>
+        <div onclick="contactListPopUp()" class="assignedContainer">
+          <span>Select contacts to assign</span>
+          <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+          <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+        </div>
+        <div id="assignedContactsListPopUp" class="hidden"></div>
+    
+    
+      <label for="subtask">Subtasks</label>
+        <div id="addSubTask">
+          <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
+          <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
+        </div>
+        <ul id="subTaskList"></ul>
+    
+      <div class="button-ok-div">
+        <div class="buttontest987">
+          <button class="button-ok">Ok<img src="/assets/icons/check.png" alt="" /></button>
+        </div>
+      </div>
+    </div>
+  `;
+}
 
 //--------- contact templates ---------
 function addNewContactPopup() {

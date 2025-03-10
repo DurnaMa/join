@@ -12,14 +12,33 @@
 //   openTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
 // }
 
+// function openTaskPopup(taskId) {
+//   let id = tasks.findIndex((task) => task.id == taskId);
+//   let currentSelectedTask = tasks[id];
+
+//   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
+//   openTaskPopupDiv.classList.remove("d-none");
+//   openTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
+// }
+
 function openTaskPopup(taskId) {
+  console.log("Task ID:", taskId);
   let id = tasks.findIndex((task) => task.id == taskId);
+  if (id === -1) {
+    console.error("Task nicht gefunden:", taskId);
+    return;
+  }
+
   let currentSelectedTask = tasks[id];
+  console.log("Gewählte Aufgabe:", currentSelectedTask);
+  console.log("Assigned Users:", currentSelectedTask.users);
+  console.log("Subtasks:", currentSelectedTask.subTasks);
 
   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
   openTaskPopupDiv.classList.remove("d-none");
   openTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
 }
+
 
 function editTaskPopup(taskId) {
   let id = tasks.findIndex((task) => task.id == taskId);
@@ -35,7 +54,12 @@ function editTaskPopup(taskId) {
 async function editTask(taskId) {
   let id = tasks.findIndex((task) => task.id == taskId);
   let currentSelectedTask = tasks[id];
-  let task = currentSelectedTask;
+
+  if (!currentSelectedTask) {
+    console.error("Task nicht gefunden");
+    return;
+  }
+
   let taskCard = document.getElementById(`task-${taskId}`);
 
   let title = document.getElementById("titleInput").value;
@@ -43,32 +67,68 @@ async function editTask(taskId) {
   let category = document.getElementById("category").value;
   let dueDate = document.getElementById("date").value;
   let priority = document.getElementById("prio").value;
-  let prioUrgentEdit = document.getElementById("prioUrgentEdit").value;
-  let prioMediumEdit = document.getElementById("prioMediumEdit").value;
-  let prioLowEdit = document.getElementById("prioLowEdit").value;
-  let subTask = document.getElementById("subTask").value;
+  
+  let subTasksInput = document.getElementById("subTask").value;
+  let subTasks = subTasksInput ? subTasksInput.split(",").map(task => task.trim()) : [];
 
-  let taskCardContent = {
+  let updatedTask = {
     title: title,
     description: description,
     category: category,
     dueDate: dueDate,
     priority: priority,
-    prioUrgentEdit: prioUrgentEdit,
-    prioMediumEdit: prioMediumEdit,
-    prioLowEdit: prioLowEdit,
-    subTask: subTask,
+    subTasks: subTasks,
   };
 
   try {
-    await postDataToFirebase(`tasks/${taskId}`, taskCardContent);
+    await patchDataToFirebase(`tasks/${taskId}`, updatedTask);
+    tasks[id] = { ...currentSelectedTask, ...updatedTask }; 
+    renderTasks(); 
   } catch (error) {
-    console.error(error);
+    console.error("Fehler beim Speichern der Änderungen:", error);
   }
 
-  taskCard.innerHTML = renderAddTaskPoupBtn(task);
-  renderTasks();
+  document.getElementById("editTaskPopupDiv").classList.add("d-none");
 }
+
+
+// async function editTask(taskId) {
+//   let id = tasks.findIndex((task) => task.id == taskId);
+//   let currentSelectedTask = tasks[id];
+//   let task = currentSelectedTask;
+//   let taskCard = document.getElementById(`task-${taskId}`);
+
+//   let title = document.getElementById("titleInput").value;
+//   let description = document.getElementById("descriptionTextarea").value;
+//   let category = document.getElementById("category").value;
+//   let dueDate = document.getElementById("date").value;
+//   let priority = document.getElementById("prio").value;
+//   let prioUrgentEdit = document.getElementById("prioUrgentEdit").value;
+//   let prioMediumEdit = document.getElementById("prioMediumEdit").value;
+//   let prioLowEdit = document.getElementById("prioLowEdit").value;
+//   let subTask = document.getElementById("subTask").value;
+
+//   let taskCardContent = {
+//     title: title,
+//     description: description,
+//     category: category,
+//     dueDate: dueDate,
+//     priority: priority,
+//     prioUrgentEdit: prioUrgentEdit,
+//     prioMediumEdit: prioMediumEdit,
+//     prioLowEdit: prioLowEdit,
+//     subTask: subTask,
+//   };
+
+//   try {
+//     await postDataToFirebase(`tasks/${taskId}`, taskCardContent);
+//   } catch (error) {
+//     console.error(error);
+//   }
+
+//   taskCard.innerHTML = renderAddTaskPoupBtn(task);
+//   renderTasks();
+// }
 
 function addTaskPopupBtn() {
   let addNewTaskBtnDiv = document.getElementById("addNewTaskBtnDiv");
