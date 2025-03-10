@@ -24,8 +24,9 @@
   max-height: 165px;
   overflow: auto;
   position: absolute;
-  top: 635px;
-  width: inherit;
+  top: 100%;
+  width: 100%;
+  margin-left: -20px;
 }
 
 .categoryTechnicalTask {
@@ -45,96 +46,51 @@
   background-color: #eeeeee;
 }
 
-@media screen and (max-width: 1330px) and (min-width: 1270px) {
-  .formParts {
-    width: 85%;
-  }
-}
-
-@media screen and (max-width: 1270px) {
-  .formParts {
-    width: clamp(300px, 100%, 500px);
-  }
-
-  .taskFormButtons {
-    width: 86%;
-  }
-
-  #assignedContactsList {
-    width: 310px;
-    width: inherit;
-  }
-}
-@media screen and (max-width: 1200px) {
-  .taskFormButtons {
-    padding: 75px 0 0 0;
-    gap: 450px;
-  }
-
-  .formParts {
-    gap: 30px;
-  }
-}
-
-@media screen and (max-width: 1140px) {
-  .formPartRight {
-    width: 330px;
-  }
-}
-
-@media screen and (max-width: 1112px) {
-  .formPartRight {
-    width: 330px;
-  }
-
-  .taskFormButtons {
-    gap: 230px;
-  }
-}
-
-@media screen and (max-width: 1040px) {
+@media screen and (min-width: 1340px) {
   .prioBtn {
+    width: 100%;
+    /* flex-direction: column; */
+    gap: 15px;
+  }
+}
+
+@media screen and (max-width: 1220px) {
+  .formParts {
     flex-direction: column;
-  }
-}
-
-@media screen and (max-width: 1030px) {
-  .formPartRight {
-    width: 300px;
-  }
-
-  .prioBtn {
-    flex-direction: column;
+    align-items: center;
   }
 
   .formPartRight {
-    width: 280px;
+    width: 100%;
+  }
+
+  .formPartLeft {
+    width: 100%;
+  }
+
+  hr {
+    display: none;
+  }
+
+  .taskFormButtons {
+    padding: 40px 0 40px 0;
   }
 }
 
-@media screen and (max-width: 1000px) {
-  #categoryList {
-    top: 582px;
-  }
-}
 @media screen and (max-width: 992px) {
   .addTaskContent {
     padding: 140px 114px 96px 200px;
-  }
-
-  .taskFormButtons {
-    gap: 350px;
   }
 
   .headlineDiv {
     display: flex;
     justify-content: center;
   }
-}
 
-@media screen and (max-width: 880px) {
   .addTaskContent {
-    padding: 140px 114px 96px 80px;
+    padding: 96px 0 96px 0;
+    width: 90vw;
+    margin: 0 auto;
   }
 }
 
@@ -143,18 +99,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .formPartRight {
-    width: 440px;
-  }
-
-  .taskFormButtons {
-    gap: 193px;
-  }
-
-  #categoryList {
-    top: 1058px;
   }
 }
 
@@ -166,38 +110,52 @@
   .formPartRight {
     width: 100%;
   }
+}
 
+@media screen and (max-width: 570px) {
   .taskFormButtons {
-    gap: 50px;
+    flex-direction: column-reverse;
+    align-items: center;
+    text-wrap: nowrap;
+    gap: 10px;
   }
 }
 
 @media screen and (max-width: 469px) {
-  .formPartLeft {
-    width: 100%;
-  }
-
+  .formPartLeft,
   .formPartRight {
     width: 100%;
   }
-  .taskFormButtons {
-    gap: 40px;
-  }
 
-  span {
+  .categoryUserStory,
+  .categoryTechnicalTask,
+  .assignedContacts span {
     font-size: 14px;
   }
 
-  #categoryList {
-    top: 1132px;
-    width: 2998px;
+  .assignedShortcutName {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .btnSection {
+    flex-direction: column-reverse;
+    align-items: center;
   }
 
-  .categoryTechnicalTask {
+  .prioBtn {
     font-size: 14px;
   }
 
-  .categoryUserStory {
+  .prioContent {
+    gap: 6px;
     font-size: 14px;
+  }
+
+  .assignedContainer,
+  .categoryContainer {
+    font-size: 16px;
   }
 }
