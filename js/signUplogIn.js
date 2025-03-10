@@ -101,3 +101,40 @@ function emailValidation() {
     emailInput.style.border = "1px solid blue";
   }
 }
+
+/**
+ * Handles the login process by validating the user's email, password, and acceptance of terms.
+ * Displays appropriate error messages if validation fails.
+ * Redirects to the summary page if login is successful.
+ *
+ * @returns {boolean} - Returns true if login is successful, otherwise false.
+ */
+function logIn() {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+  const checkbox = document.getElementById("checkboxLogin");
+  const errorDiv = document.getElementById("loginError");
+  if (!checkbox.checked) {
+    errorDiv.textContent =
+      "Bitte akzeptieren Sie die Bedingungen (Remember me).";
+    errorDiv.style.color = "red";
+    return false;
+  }
+  const user = contacts.find(
+    (contact) => contact.email === email && contact.password === password
+  );
+  if (user) {
+    errorDiv.textContent = "Login erfolgreich!";
+    errorDiv.style.color = "green";
+    window.location.href = "./pages/summary.html";
+    return true;
+  } else {
+    errorDiv.textContent = "Das Passwort oder die E-Mail ist falsch.";
+    return false;
+  }
+}
+
+function guestLogin() {
+  sessionStorage.setItem("username", "Guest");
+  window.location.href = "../pages/summary.html";
+}
