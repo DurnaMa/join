@@ -25,6 +25,7 @@ h1 {
 
 form {
   margin-right: auto;
+  padding-bottom: 96px;
 }
 
 .formParts {
@@ -50,7 +51,7 @@ textarea {
   padding-top: 20px;
   min-height: 140px;
   max-height: 140px;
-  max-width: 495px;
+  /* max-width: 495px; */
 }
 
 .formParts hr {
@@ -132,7 +133,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .prioBtn {
-  width: 136px;
+  width: 110%;
   height: 56px;
   border-radius: 10px;
   background: white;
@@ -228,6 +229,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .btnSection {
   display: flex;
   gap: 16px;
+  
 }
 
 .clearBtn {
@@ -273,6 +275,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 20px;
   cursor: pointer;
   height: 45px;
+  text-wrap: nowrap;
+
 }
 
 .button:hover {
@@ -359,6 +363,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   background-color: white;
   margin-bottom: -8px;
+  position: relative;
 }
 
 #assignedContactsList {
