@@ -539,7 +539,7 @@ async function updateSteps(taskId) {
 
 async function saveTaskToFirebase(task) {
   try {
-    let response = await fetch(`https://your-firebase-url/tasks/${task.id}.json`, {
+    let response = await fetch(`https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/tasks/${task.id}.json`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
