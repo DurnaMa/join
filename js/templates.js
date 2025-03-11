@@ -378,9 +378,12 @@ function renderTasksCardPopup(task) {
           ? task.users
               .map(
                 (user) =>
-                  `<div class="taskCardPopupContactUsers" style="background-color: ${user.color}">
+                  `<div class="taskCardPopupContactName"><div class="taskCardPopupContactInitials" style="background-color: ${user.color}">
                     ${user.initials || "??"} 
-                  </div>`
+                  </div>
+                  <div>${user.name || "No Name"}</div>
+                  </div>
+                  `
               )
               .join("")
           : "<p>Kein Benutzer zugewiesen</p>"}

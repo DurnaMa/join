@@ -73,7 +73,7 @@ async function loadContacts() {
   }
 }
 
-// async function loadTasks() {
+// async function loadTasks() { 
 //   tasks = [];
 //   let tasksData = await getDataFromFirebase("tasks");
 
@@ -91,7 +91,13 @@ async function loadContacts() {
 //       status: SINGLE_TASK.status,
 //       category: SINGLE_TASK.category,
 //       users: SINGLE_TASK.users 
-//         ? SINGLE_TASK.users.map(name => generateInitials(name)) // Umwandlung in Initialen
+//         ? SINGLE_TASK.users.map(name => {
+//             let contact = contacts.find(c => c.name === tasksData.users);
+//             return {
+//               initials: generateInitials(name),
+//               color: contact ? contact.color : "#FF0000" // Fallback-Farbe rot
+//             };
+//           })
 //         : [],
 //     };    
 
@@ -99,7 +105,8 @@ async function loadContacts() {
 //   }
   
 //   renderTasks();
-// }
+// }  
+
 async function loadTasks() { 
   tasks = [];
   let tasksData = await getDataFromFirebase("tasks");
@@ -121,7 +128,8 @@ async function loadTasks() {
         ? SINGLE_TASK.users.map(name => {
             let contact = contacts.find(c => c.name === name);
             return {
-              initials: generateInitials(name),
+              name: name, // Vollständiger Name
+              initials: generateInitials(name), // Initialen
               color: contact ? contact.color : "#FF0000" // Fallback-Farbe rot
             };
           })
@@ -132,7 +140,7 @@ async function loadTasks() {
   }
   
   renderTasks();
-}  
+}
 
 
 

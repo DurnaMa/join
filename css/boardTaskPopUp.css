@@ -145,11 +145,18 @@
 
 .taskCardPopupContact {
   display: flex;
-  align-items: center;
-  gap: 2px;
+  flex-direction: column;
+  /* align-items: center; */
+  gap: 10px;
 }
 
-.taskCardPopupContactUsers {
+.taskCardPopupContactName {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.taskCardPopupContactInitials {
   color: white;
   display: flex;
   align-items: center;
@@ -181,17 +188,20 @@
   height: 35px;
 }
 
-.taskCardPopupSubTasks div:hover {
+/* .taskCardPopupSubTasks div:hover {
   background-color: rgb(238, 238, 238);
   border-radius: 8px;
-}
+} */
 
 .taskCardPopupButtons {
   display: flex;
   gap: 10px;
   justify-content: end;
   align-items: center;
-  margin-top: 115px;
+  /* margin-top: 115px; */
+  position: fixed;
+  bottom: 40px;
+  right: 34px;
 }
 
 .taskCardPopupButtons div {
