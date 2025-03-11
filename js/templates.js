@@ -66,7 +66,7 @@ function renderAddTaskPoupBtn() {
           </p>
           <div class="btnSection">
             <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
-            <button onclick="postAddTask()" class="button">
+            <button onclick="createTaskBtn()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>
           </div>

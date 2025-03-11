@@ -179,10 +179,10 @@ async function loadSummaryData() {
   let tasks = Object.values(tasksData);
 
   let totalTasks = tasks.length;
-  let toDoCount = tasks.filter((task) => task.columnTitles === "To Do").length;
-  let inProgressCount = tasks.filter((task) => task.columnTitles === "In Progress").length;
-  let awaitFeedbackCount = tasks.filter((task) => task.columnTitles === "Await Feedback").length;
-  let doneCount = tasks.filter((task) => task.columnTitles === "Done").length;
+  let toDoCount = tasks.filter((task) => task.columnTitles === "To Do" || task.columnTitles === "todo").length;
+  let inProgressCount = tasks.filter((task) => task.columnTitles === "In Progress" || task.columnTitles === "inprogress").length;
+  let awaitFeedbackCount = tasks.filter((task) => task.columnTitles === "Await Feedback" || task.columnTitles === "awaitfeedback").length;
+  let doneCount = tasks.filter((task) => task.columnTitles === "Done" || task.columnTitles === "done").length;
 
   let urgentTasks = tasks.filter((task) => task.priority === "urgent");
   let urgentCount = urgentTasks.length;

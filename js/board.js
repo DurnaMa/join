@@ -296,6 +296,49 @@ async function updateSteps(taskId) {
 //   }
 // }
 
+async function createTaskBtn() {
+  let title = document.getElementById("titleInput").value;
+  let description = document.getElementById("descriptionTextarea").value;
+  let dueDate = document.getElementById("date").value;
+  let category = document.getElementById("category").value;
+
+  selectedContacts = Array.from(selectedContacts);
+
+  let prioUrgentEdit = document.getElementById("prioUrgentEdit");
+  let prioMediumEdit = document.getElementById("prioMediumEdit");
+  let prioLowEdit = document.getElementById("prioLowEdit");
+
+  let priority = "";
+
+  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
+    priority = "urgent";
+  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
+    priority = "medium";
+  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
+    priority = "low";
+  }
+
+  let data = {
+    columnTitles: "To Do",
+    title,
+    description,
+    dueDate,
+    priority,
+    subTasks,
+    category,
+    users: selectedContacts,
+  };
+
+  try {
+    await postDataToFirebase("tasks/", data);
+  } catch (error) {
+    console.error(error);
+  }
+
+  await loadTasks();
+  closeAddTaskPopUp();
+}
+
 async function createTaskPlusToDoBtn() {
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
@@ -334,6 +377,9 @@ async function createTaskPlusToDoBtn() {
   } catch (error) {
     console.error(error);
   }
+
+  await loadTasks();
+  closeAddTaskPopUpToDo();
 }
 
 async function createTaskPlusInProgressBtn() {
@@ -374,6 +420,9 @@ async function createTaskPlusInProgressBtn() {
   } catch (error) {
     console.error(error);
   }
+
+  await loadTasks();
+  closeAddTaskPopUpInProgress();
 }
 
 async function createTaskPlusAwaitFeedbackBtn() {
@@ -414,6 +463,9 @@ async function createTaskPlusAwaitFeedbackBtn() {
   } catch (error) {
     console.error(error);
   }
+
+  await loadTasks();
+  closeAddTaskPopUpAwaitFeedback();
 }
 
 function addSubTaskPopUp() {
