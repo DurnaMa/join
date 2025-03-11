@@ -534,26 +534,26 @@ async function updateSteps(taskId) {
     tasks[taskIndex] = task;
   }
 
-  await saveTaskToFirebase(task);
+  // await saveTaskToFirebase(task);
 }
 
-async function saveTaskToFirebase(task) {
-  try {
-    let response = await fetch(`https://your-firebase-url/tasks/${task.id}.json`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(task),
-    });
+// async function saveTaskToFirebase(task) {
+//   try {
+//     let response = await fetch(`BASE_URL/tasks/${task.id}.json`, {
+//       method: "PUT",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(task),
+//     });
 
-    if (!response.ok) {
-      throw new Error("Fehler");
-    }
-  } catch (error) {
-    console.error("Fehler:", error);
-  }
-}
+//     if (!response.ok) {
+//       throw new Error("Fehler");
+//     }
+//   } catch (error) {
+//     console.error("Fehler:", error);
+//   }
+// }
 
 
 
