@@ -1,26 +1,3 @@
-//importScripts("firebase.js");
-//importScripts("addTask.js");
-//importScripts("board.js");
-
-
-// function openTaskPopup(taskId) {
-//   let id = tasks.findIndex((task) => task.id == taskId);
-//   let currentSelectedTask = tasks[id];
-
-//   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
-//   openTaskPopupDiv.classList.remove("d-none");
-//   openTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
-// }
-
-// function openTaskPopup(taskId) {
-//   let id = tasks.findIndex((task) => task.id == taskId);
-//   let currentSelectedTask = tasks[id];
-
-//   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
-//   openTaskPopupDiv.classList.remove("d-none");
-//   openTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
-// }
-
 function openTaskPopup(taskId) {
   console.log("Task ID:", taskId);
   let id = tasks.findIndex((task) => task.id == taskId);
@@ -38,7 +15,6 @@ function openTaskPopup(taskId) {
   openTaskPopupDiv.classList.remove("d-none");
   openTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
 }
-
 
 function editTaskPopup(taskId) {
   let id = tasks.findIndex((task) => task.id == taskId);
@@ -90,7 +66,6 @@ async function editTask(taskId) {
 
   document.getElementById("editTaskPopupDiv").classList.add("d-none");
 }
-
 
 // async function editTask(taskId) {
 //   let id = tasks.findIndex((task) => task.id == taskId);
