@@ -146,7 +146,7 @@
 .taskCardPopupContact {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+  padding: 0 0 0 20px;
   gap: 10px;
 }
 
@@ -180,18 +180,12 @@
   background-color: #9b7d2d;
 }
 
-.taskCardPopupSubTasks div {
-  padding: 10px;
+.progress-container-popup {
   display: flex;
-  align-items: center;
-  gap: 15px;
-  height: 35px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 0 0 20px;
 }
-
-/* .taskCardPopupSubTasks div:hover {
-  background-color: rgb(238, 238, 238);
-  border-radius: 8px;
-} */
 
 .taskCardPopupButtons {
   display: flex;

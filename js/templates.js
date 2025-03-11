@@ -392,7 +392,7 @@ function renderTasksCardPopup(task) {
     
       <label class="taskCardPopupLabel">Subtasks</label>
       <div class="taskCardPopupSubTasks">
-        <div class="progress-container">
+        <div class="progress-container-popup">
           ${Array.isArray(task.subTasks) && task.subTasks.length > 0
             ? task.subTasks
                 .map(
@@ -548,6 +548,10 @@ function renderTasksCardPopup(task) {
 // }
 
 function renderEditTasksCardPopup(currentSelectedTask) {
+  let title = currentSelectedTask.title;
+  let description = currentSelectedTask.description;
+  let dueDate = currentSelectedTask.dueDate;
+
   return /*html*/ `
     <div class="shadow-div"></div>
     <div class="taskCardEditPopup">
@@ -557,11 +561,11 @@ function renderEditTasksCardPopup(currentSelectedTask) {
         </div>
       </div>
       <label>Title</label>
-      <input class="task-edit-input-popup" placeholder="Enter a title" type="text" />
+      <input value="${title}" class="task-edit-input-popup" placeholder="Enter a title" type="text" />
       <label>Description</label>
-      <textarea class="task-edit-input-popup" placeholder="Enter a description" name="" id=""></textarea>
+      <textarea class="task-edit-input-popup" placeholder="Enter a description" id="">${description}</textarea>
       <label>Due Date</label>
-      <input class="task-edit-input-popup" type="date" />
+      <input value="${dueDate}" class="task-edit-input-popup" type="date" />
         
           <label>Priority</label>
           <div class="task-edit-prio-popup">
@@ -578,7 +582,7 @@ function renderEditTasksCardPopup(currentSelectedTask) {
               <img src="/assets/icons/lowGreen.png" alt="" />
             </button>
           </div>
-          <label for="contactSelection">Assigned to</label>
+          <label class="TESTAssignedTEST" for="contactSelection">Assigned to</label>
         <div onclick="contactListPopUp()" class="assignedContainer">
           <span>Select contacts to assign</span>
           <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
@@ -587,7 +591,7 @@ function renderEditTasksCardPopup(currentSelectedTask) {
         <div id="assignedContactsListPopUp" class="hidden"></div>
     
     
-      <label for="subtask">Subtasks</label>
+      <label class="TESTSubtasksTEST" for="subtask">Subtasks</label>
         <div id="addSubTask">
           <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
           <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />

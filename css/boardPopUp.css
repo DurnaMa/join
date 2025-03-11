@@ -115,13 +115,19 @@ select {
   /* padding: 25px 0 25px 0; */
 }
 
+.taskCardEditPopup input,.taskCardEditPopup textarea{
+  font-size: 20px;
+  cursor: pointer;
+  padding: 25px 0 25px 25px;
+}
+
 .taskCardEditPopup label,
-.taskCardEditPopup input,
-.taskCardEditPopup textarea,
+/* .taskCardEditPopup input, */
+/* .taskCardEditPopup textarea, */
 .taskCardEditPopup select{
   font-size: 20px;
   cursor: pointer;
-  padding: 25px 0 25px 0;
+  padding: 20px 0 20px 0;
 }
 
 ::placeholder {
@@ -390,7 +396,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 25px 20px;
   cursor: pointer;
   background-color: white;
   margin-bottom: -8px;
