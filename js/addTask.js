@@ -206,7 +206,7 @@ async function postAddTask() {
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
-  // let category = document.getElementById("categoryList").value;
+  let category = document.getElementById("category").value;
 
   selectedContacts = Array.from(selectedContacts);
 
@@ -225,14 +225,13 @@ async function postAddTask() {
   }
 
   let data = {
-    //id: todos.length + 1,
     columnTitles: "To Do",
     title,
     description,
     dueDate,
     priority,
     subTasks,
-    category: selectedCategory,
+    category,
     users: selectedContacts,
   };
 

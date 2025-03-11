@@ -126,10 +126,10 @@ function generateTaskCard(task) {
   if (task.columnTitles) {
     let columnTitle = task.columnTitles.toLowerCase().trim();
     const columnMappings = {
-      "to do": "To Do",
-      "in progress": "In Progress",
-      "await feedback": "Await Feedback",
-      done: "Done",
+      "To Do": "To Do",
+      "In Progress": "In Progress",
+      "Await Feedback": "Await Feedback",
+      "Done": "Done",
     };
     task.columnTitles = columnMappings[columnTitle] || task.columnTitles;
   }
