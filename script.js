@@ -105,7 +105,7 @@ async function loadTasks() {
   }
   
   renderTasks();
-  loadTasksFromLocalStorage();
+  //loadTasksFromLocalStorage();
 }
 
 async function loadTasksFromFirebase() {
