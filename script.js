@@ -54,7 +54,6 @@ async function patchDataToFirebase(path = "", data = {}) {
   });
 }
 
-
 async function loadContacts() {
   contacts = [];
   let contactsData = await getDataFromFirebase("contacts");
@@ -72,40 +71,6 @@ async function loadContacts() {
     contacts.push(contact);
   }
 }
-
-// async function loadTasks() { 
-//   tasks = [];
-//   let tasksData = await getDataFromFirebase("tasks");
-
-//   for (const key in tasksData) {
-//     const SINGLE_TASK = tasksData[key];
-
-//     let task = {
-//       id: key,
-//       columnTitles: SINGLE_TASK.columnTitles,
-//       title: SINGLE_TASK.title,
-//       description: SINGLE_TASK.description,
-//       dueDate: SINGLE_TASK.dueDate,
-//       priority: SINGLE_TASK.priority,
-//       subTasks: SINGLE_TASK.subTasks,
-//       status: SINGLE_TASK.status,
-//       category: SINGLE_TASK.category,
-//       users: SINGLE_TASK.users 
-//         ? SINGLE_TASK.users.map(name => {
-//             let contact = contacts.find(c => c.name === tasksData.users);
-//             return {
-//               initials: generateInitials(name),
-//               color: contact ? contact.color : "#FF0000" // Fallback-Farbe rot
-//             };
-//           })
-//         : [],
-//     };    
-
-//     tasks.push(task);
-//   }
-  
-//   renderTasks();
-// }  
 
 async function loadTasks() { 
   tasks = [];
@@ -140,15 +105,8 @@ async function loadTasks() {
   }
   
   renderTasks();
+  loadTasksFromLocalStorage();
 }
-
-
-
-
-
-
-
-
 
 async function loadTasksFromFirebase() {
   try {
@@ -166,7 +124,6 @@ async function loadTasksFromFirebase() {
     console.error("fehler", error);
   }
 }
-
 
 async function loadSummaryData() {
   let tasksData = await getDataFromFirebase("tasks");
@@ -202,7 +159,6 @@ async function loadSummaryData() {
     document.getElementById("date").innerText = upcomingDeadline.toDateString();
   }
 }
-
 
 
 // Code ende von Oliver(Mentor)
