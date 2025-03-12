@@ -639,11 +639,15 @@
 
   .columns {
     display: flex;
+    width: 688px;
+    height: 246px;
 
   }
 
   .column {
     display: flex;
+    width: 688px;
+    height: 246px;
   }
 
   .task-card {
@@ -651,9 +655,8 @@
   }
 
   .column-container {
-    display: flex;
-    width: 688px;
     height: 246px;
+    margin-bottom: 24px;
   }
 
   .column-titles-h2 {
