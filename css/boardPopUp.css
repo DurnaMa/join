@@ -414,6 +414,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: inherit;
 }
 
+#assignedContactsListPopUp {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* border-radius: 10px; */
+  background-color: white;
+  max-height: 165px;
+  overflow: auto;
+  position: fixed;
+  top: 766px;
+  width: 87%;
+}
+
 .assignedContacts {
   display: flex;
   align-items: center;
@@ -424,11 +437,33 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 20px;
 }
 
+.assignedContactsPopUp {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.assignedContactsPopUp span {
+  font-size: 20px;
+}
+
+
+
 input[type="checkbox"] {
   width: 17px;
 }
 
 .assignedShortcutName {
+  display: flex;
+  width: 42px;
+  height: 42px;
+  border-radius: 45px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #ff7a00;
+}
+.assignedShortcutNamePopUp {
   display: flex;
   width: 42px;
   height: 42px;
@@ -451,6 +486,14 @@ input[type="checkbox"] {
   background-color: #eeeeee;
 }
 
+.assignedContactContentPopUp{
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px 0px 20px;
+  width: 100%;
+  cursor: pointer;
+}
+
 .task-added-popup {
   display: flex;
   position: absolute;
@@ -468,4 +511,11 @@ input[type="checkbox"] {
   width: 326px;
   transform: translate(-50%, -50%);
   z-index: 6;
+}
+
+
+.selectedContactsContainerPopUp {
+  display: flex;
+  padding: 5px;
+  gap: 1px;
 }

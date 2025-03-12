@@ -405,7 +405,7 @@
   padding: 20px;
 }
 
-#assignedContactsListPopUp {
+/* #assignedContactsListPopUp {
   flex-direction: column;
   gap: 8px;
   border-radius: 10px;
@@ -415,7 +415,7 @@
   position: absolute;
   top: 565px;
   width: inherit;
-}
+} */
 
 /*----- taskEdit -----*/
 /* .taskCardEditPopup {

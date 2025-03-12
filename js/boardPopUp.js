@@ -16,7 +16,7 @@ function openTaskPopup(taskId) {
   openTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
 }
 
-function editTaskPopup(taskId) {
+function openEditTaskPopup(taskId) {
   let id = tasks.findIndex((task) => task.id == taskId);
   let currentSelectedTask = tasks[id];
 
@@ -24,53 +24,18 @@ function editTaskPopup(taskId) {
   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
   openTaskPopupDiv.classList.add("d-none");
   editTaskPopupDiv.classList.remove("d-none");
-  editTaskPopupDiv.innerHTML = renderEditTasksCardPopup(currentSelectedTask);
-}
-
-async function editTask(taskId) {
-  let id = tasks.findIndex((task) => task.id == taskId);
-  let currentSelectedTask = tasks[id];
-
-  if (!currentSelectedTask) {
-    console.error("Task nicht gefunden");
-    return;
-  }
-
-  let taskCard = document.getElementById(`task-${taskId}`);
-
-  let title = document.getElementById("titleInput").value;
-  let description = document.getElementById("descriptionTextarea").value;
-  let category = document.getElementById("category").value;
-  let dueDate = document.getElementById("date").value;
-  let priority = document.getElementById("prio").value;
-  
-  let subTasksInput = document.getElementById("subTask").value;
-  let subTasks = subTasksInput ? subTasksInput.split(",").map(task => task.trim()) : [];
-
-  let updatedTask = {
-    title: title,
-    description: description,
-    category: category,
-    dueDate: dueDate,
-    priority: priority,
-    subTasks: subTasks,
-  };
-
-  try {
-    await patchDataToFirebase(`tasks/${taskId}`, updatedTask);
-    tasks[id] = { ...currentSelectedTask, ...updatedTask }; 
-    renderTasks(); 
-  } catch (error) {
-    console.error("Fehler beim Speichern der Änderungen:", error);
-  }
-
-  document.getElementById("editTaskPopupDiv").classList.add("d-none");
+  editTaskPopupDiv.innerHTML = renderEditTasksCardPopup(currentSelectedTask, taskId);
 }
 
 // async function editTask(taskId) {
 //   let id = tasks.findIndex((task) => task.id == taskId);
 //   let currentSelectedTask = tasks[id];
-//   let task = currentSelectedTask;
+
+//   if (!currentSelectedTask) {
+//     console.error("Task nicht gefunden");
+//     return;
+//   }
+
 //   let taskCard = document.getElementById(`task-${taskId}`);
 
 //   let title = document.getElementById("titleInput").value;
@@ -78,32 +43,69 @@ async function editTask(taskId) {
 //   let category = document.getElementById("category").value;
 //   let dueDate = document.getElementById("date").value;
 //   let priority = document.getElementById("prio").value;
-//   let prioUrgentEdit = document.getElementById("prioUrgentEdit").value;
-//   let prioMediumEdit = document.getElementById("prioMediumEdit").value;
-//   let prioLowEdit = document.getElementById("prioLowEdit").value;
-//   let subTask = document.getElementById("subTask").value;
+  
+//   let subTasksInput = document.getElementById("subTask").value;
+//   let subTasks = subTasksInput ? subTasksInput.split(",").map(task => task.trim()) : [];
 
-//   let taskCardContent = {
+//   let updatedTask = {
 //     title: title,
 //     description: description,
 //     category: category,
 //     dueDate: dueDate,
 //     priority: priority,
-//     prioUrgentEdit: prioUrgentEdit,
-//     prioMediumEdit: prioMediumEdit,
-//     prioLowEdit: prioLowEdit,
-//     subTask: subTask,
+//     subTasks: subTasks,
 //   };
 
 //   try {
-//     await postDataToFirebase(`tasks/${taskId}`, taskCardContent);
+//     await patchDataToFirebase(`tasks/${taskId}`, updatedTask);
+//     tasks[id] = { ...currentSelectedTask, ...updatedTask }; 
+//     renderTasks(); 
 //   } catch (error) {
-//     console.error(error);
+//     console.error("Fehler beim Speichern der Änderungen:", error);
 //   }
 
-//   taskCard.innerHTML = renderAddTaskPoupBtn(task);
-//   renderTasks();
+//   document.getElementById("editTaskPopupDiv").classList.add("d-none");
 // }
+
+async function updateEditTask(taskId) {
+  let id = tasks.findIndex((task) => task.id == taskId);
+  // let currentSelectedTasks = currentSelectedTask.id;
+  let task = id;
+  let taskCard = document.getElementById(`task-${taskId}`);
+
+  let title = document.getElementById("titleInput").value;
+  let description = document.getElementById("descriptionTextarea").value;
+  let category = document.getElementById("category").value;
+  let dueDate = document.getElementById("date").value;
+  let priority = document.getElementById("prio").value;
+  let prioUrgentEdit = document.getElementById("prioUrgentEdit").value;
+  let prioMediumEdit = document.getElementById("prioMediumEdit").value;
+  let prioLowEdit = document.getElementById("prioLowEdit").value;
+  let subTask = document.getElementById("subTask").value;
+
+  let taskCardContent = {
+    title: title,
+    description: description,
+    category: category,
+    dueDate: dueDate,
+    priority: priority,
+    prioUrgentEdit: prioUrgentEdit,
+    prioMediumEdit: prioMediumEdit,
+    prioLowEdit: prioLowEdit,
+    subTask: subTask,
+  };
+
+
+  
+  try {
+    await postDataToFirebase(`tasks/${taskId}`, taskCardContent);
+  } catch (error) {
+    console.error(error);
+  }
+
+  taskCard.innerHTML = renderAddTaskPoupBtn(task);
+  renderTasks();
+}
 
 function addTaskPopupBtn() {
   let addNewTaskBtnDiv = document.getElementById("addNewTaskBtnDiv");
@@ -160,4 +162,31 @@ function closeTaskCardPopUp() {
 
 function closeEditTaskCardPopUp() {
   document.getElementById("editTaskPopupDiv").classList.add("d-none");
+}
+
+function contactListPopUp() {
+  let contactList = document.getElementById("assignedContactsListPopUp");
+
+  contactList.innerHTML = contacts
+    .map((contact) => {
+      const initials = generateInitials(contact.name);
+      const isChecked = selectedContacts.has(contact.name) ? "checked" : "";
+      return `
+        <div class="assignedContactContentPopUp" onclick="toggleCheckbox(event, '${contact.name}')">
+          <div class="assignedContactsPopUp">
+            <span class="assignedShortcutNamePopUp" style="background-color: ${contact.color};">${initials}</span>
+            <span class="assignedNamePopUp">${contact.name}</span>
+          </div>
+          <input type="checkbox" id="contact-${contact.name}" ${isChecked} onclick="toggleCheckbox(event, '${contact.name}')">
+        </div>
+      `;
+    })
+    .join("");
+
+  contactList.classList.toggle("hidden");
+
+  if (contactList.classList.contains("hidden")) {
+    updateSelectedContactsDisplay();
+  }
+  openclassList();
 }
