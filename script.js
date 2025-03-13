@@ -228,7 +228,7 @@ function highlightNavItem() {
 function getCurrentPage() {
   let path = window.location.pathname;
   let fileName = path.substring(path.lastIndexOf("/") + 1);
-  return fileName.replace(".html", ""); // Entfernt .html, um die Seitennamen zu vergleichen
+  return fileName.replace(".html", "");
 }
 
 document.addEventListener("DOMContentLoaded", highlightNavItem);
