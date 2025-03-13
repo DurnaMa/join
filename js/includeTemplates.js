@@ -9,7 +9,7 @@ class IncludeHTML extends HTMLElement {
         this.innerHTML = await response.text();
       }
 
-      if (file.includes('sidebar')) {
+      if (file.includes('sidebar') || file.includes('footerMobile')) {
         highlightNavItem();
       }
     } catch (error) {

@@ -212,9 +212,8 @@ function showConfirmPassword() {
 
 function highlightNavItem() {
   let currentPage = getCurrentPage();
-  console.log("Aktuelle Seite:", currentPage);
 
-  let navItems = document.querySelectorAll(".sideBarList a");
+  let navItems = document.querySelectorAll(".sideBarList a, .policyAndNotice a, .mobileSideBar a");
   navItems.forEach((item) => {
     let page = item.getAttribute("data-page");
     if (page === currentPage) {
