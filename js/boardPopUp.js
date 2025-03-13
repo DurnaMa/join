@@ -426,15 +426,15 @@ function openEditTaskPopup(taskId) {
 //     updatedContacts[index] = name;
 //   });
   
-//   let updatedSubtasks = {};
-//   Array.from(subTasks).forEach((description, index) => {
-//     updatedSubtasks[index] = description;
+//   let updatedSubtaskstest = {};
+//   Array.from(document.querySelectorAll("#subTaskList li")).forEach((name, index) => {
+//     updatedContacts[index] = name;
 //   });
 
 //   // Subtasks abrufen und Format anpassen
-//   // let updatedSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
-//   //   description: li.innerText
-//   // }));
+//   let updatedSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
+//     description: li.innerText
+//   }));
   
 //   // Sicherstellen, dass alle Felder ausgefüllt sind
 //   if (!updatedTitle || !updatedDueDate) {
@@ -457,136 +457,6 @@ function openEditTaskPopup(taskId) {
 //     category: existingTask.category || "" // Falls keine Kategorie existiert, leer lassen
 //   };
   
-//   try {
-//     await putDataToFirebase("tasks/", updatedTask, taskId);
-//     console.log(taskId);
-//     console.log("editTask erfolgreich");
-//     closeEditTaskCardPopUp(); // Popup schließen
-//     renderTasks(); // Tasks neu rendern
-//   } catch (error) {
-//     console.error("Fehler beim Bearbeiten der Aufgabe:", error);
-//   }
-//   await loadTasks();
-// }
-// async function updateEditTask(event) {
-//   event.preventDefault(); // Verhindert das Neuladen der Seite
-  
-//   let taskId = event.target.getAttribute("data-task-id");
-//   if (!taskId) {
-//     console.error("Task ID fehlt");
-//     return;
-//   }
-
-//   // Werte aus den Eingabefeldern abrufen
-//   let updatedTitle = document.getElementById("titleInput").value.trim();
-//   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
-//   let updatedDueDate = document.getElementById("dueDateInput").value;
-  
-//   // Priorität bestimmen
-//   let priority = document.querySelector(".prioEditBtn.active");
-//   let updatedPriority = priority ? priority.getAttribute("data-priority") : "Medium";
-  
-//   // Nur die Namen der ausgewählten Kontakte extrahieren
-//   let updatedContacts = {};
-//   Array.from(selectedContacts).forEach((name, index) => {
-//     updatedContacts[index] = name;
-//   });
-  
-//   // Bestehende Daten aus Firebase abrufen
-//   let taskRef = await getDataFromFirebase(`tasks/${taskId}`);
-//   let existingTask = taskRef || {};
-
-//   // Bestehende Subtasks behalten und neue hinzufügen
-//   let existingSubtasks = existingTask.subtasks || [];
-//   let newSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
-//     description: li.innerText,
-//   }));
-
-//   let updatedSubtasks = [...existingSubtasks, ...newSubtasks]; // Zusammenführen der alten und neuen Subtasks
-
-//   // Sicherstellen, dass alle Felder ausgefüllt sind
-//   if (!updatedTitle || !updatedDueDate) {
-//     alert("Bitte fülle alle Pflichtfelder aus.");
-//     return;
-//   }
-
-//   let updatedTask = {
-//     ...existingTask, // Bestehende Daten beibehalten
-//     title: updatedTitle,
-//     description: updatedDescription,
-//     dueDate: updatedDueDate,
-//     priority: updatedPriority,
-//     users: updatedContacts,
-//     subTasks: updatedSubtasks, // Aktualisierte Subtasks
-//     category: existingTask.category || "" // Falls keine Kategorie existiert, leer lassen
-//   };
-  
-//   try {
-//     await putDataToFirebase("tasks/", updatedTask, taskId);
-//     console.log(taskId);
-//     console.log("editTask erfolgreich");
-//     closeEditTaskCardPopUp(); // Popup schließen
-//     renderTasks(); // Tasks neu rendern
-//   } catch (error) {
-//     console.error("Fehler beim Bearbeiten der Aufgabe:", error);
-//   }
-// }
-// async function updateEditTask(event) {
-//   event.preventDefault(); // Verhindert das Neuladen der Seite
-  
-//   let taskId = event.target.getAttribute("data-task-id");
-//   if (!taskId) {
-//     console.error("Task ID fehlt");
-//     return;
-//   }
-
-//   // Werte aus den Eingabefeldern abrufen
-//   let updatedTitle = document.getElementById("titleInput").value.trim();
-//   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
-//   let updatedDueDate = document.getElementById("dueDateInput").value;
-  
-//   // Priorität bestimmen
-//   let priority = document.querySelector(".prioEditBtn.active");
-//   let updatedPriority = priority ? priority.getAttribute("data-priority") : "";
-  
-//   // Nur die Namen der ausgewählten Kontakte extrahieren
-//   let updatedContacts = {};
-//   Array.from(selectedContacts).forEach((name, index) => {
-//     updatedContacts[index] = name;
-//   });
-
-//   // Bestehende Daten aus Firebase abrufen
-//   let taskRef = await getDataFromFirebase(`tasks/${taskId}`);
-//   let existingTask = taskRef || {};
-
-//   // Vorhandene subTasks aus Firebase abrufen (falls vorhanden)
-//   let existingSubtasks = existingTask.subTasks || [];
-
-//   // Neue subTasks aus dem DOM abrufen und korrekt formatieren
-//   let newSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
-//     description: li.innerText,
-//   }));
-
-//   // Vorhandene und neue subTasks zusammenführen
-//   let updatedSubtasks = [...existingSubtasks, ...newSubtasks];
-
-//   // Sicherstellen, dass alle Felder ausgefüllt sind
-//   if (!updatedTitle || !updatedDueDate) {
-//     alert("Bitte fülle alle Pflichtfelder aus.");
-//     return;
-//   }
-
-//   let updatedTask = {
-//     ...existingTask, // Bestehende Daten beibehalten
-//     title: updatedTitle,
-//     description: updatedDescription,
-//     dueDate: updatedDueDate,
-//     priority: updatedPriority,
-//     users: updatedContacts,
-//     subTasks: updatedSubtasks, // subTasks statt subtasks (richtige Struktur)
-//     category: existingTask.category || "" // Falls keine Kategorie existiert, leer lassen
-//   };
-
 //   try {
 //     await putDataToFirebase("tasks/", updatedTask, taskId);
 //     console.log(taskId);
@@ -659,6 +529,7 @@ async function updateEditTask(event) {
   }
   await loadTasks();
 }
+
 
 
 
