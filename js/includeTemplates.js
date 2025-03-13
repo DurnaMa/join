@@ -8,6 +8,10 @@ class IncludeHTML extends HTMLElement {
       if (this.isConnected) {
         this.innerHTML = await response.text();
       }
+
+      if (file.includes('sidebar')) {
+        highlightNavItem();
+      }
     } catch (error) {
       if (this.isConnected) {
         this.innerHTML = 'Page not found';

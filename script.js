@@ -209,3 +209,26 @@ function showConfirmPassword() {
     change.type = "password";
   }
 }
+
+function highlightNavItem() {
+  let currentPage = getCurrentPage();
+  console.log("Aktuelle Seite:", currentPage);
+
+  let navItems = document.querySelectorAll(".sideBarList a");
+  navItems.forEach((item) => {
+    let page = item.getAttribute("data-page");
+    if (page === currentPage) {
+      item.classList.add("active");
+    } else {
+      item.classList.remove("active");
+    }
+  });
+}
+
+function getCurrentPage() {
+  let path = window.location.pathname;
+  let fileName = path.substring(path.lastIndexOf("/") + 1);
+  return fileName.replace(".html", ""); // Entfernt .html, um die Seitennamen zu vergleichen
+}
+
+document.addEventListener("DOMContentLoaded", highlightNavItem);
