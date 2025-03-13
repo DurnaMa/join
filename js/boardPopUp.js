@@ -67,45 +67,126 @@ function openEditTaskPopup(taskId) {
 //   document.getElementById("editTaskPopupDiv").classList.add("d-none");
 // }
 
-async function updateEditTask(taskId) {
-  let id = tasks.findIndex((task) => task.id == taskId);
-  // let currentSelectedTasks = currentSelectedTask.id;
-  let task = id;
-  let taskCard = document.getElementById(`task-${taskId}`);
+// async function updateEditTask(taskId) {
+//   let id = tasks.findIndex((task) => task.id == taskId);
+//   // let currentSelectedTasks = currentSelectedTask.id;
+//   let task = id;
+//   let taskCard = document.getElementById(`task-${taskId}`);
 
-  let title = document.getElementById("titleInput").value;
-  let description = document.getElementById("descriptionTextarea").value;
-  let category = document.getElementById("category").value;
-  let dueDate = document.getElementById("date").value;
-  let priority = document.getElementById("prio").value;
-  let prioUrgentEdit = document.getElementById("prioUrgentEdit").value;
-  let prioMediumEdit = document.getElementById("prioMediumEdit").value;
-  let prioLowEdit = document.getElementById("prioLowEdit").value;
-  let subTask = document.getElementById("subTask").value;
+//   let title = document.getElementById("titleInput").value;
+//   let description = document.getElementById("descriptionTextarea").value;
+//   let category = document.getElementById("category").value;
+//   let dueDate = document.getElementById("date").value;
+//   let priority = document.getElementById("prio").value;
+//   let prioUrgentEdit = document.getElementById("prioUrgentEdit").value;
+//   let prioMediumEdit = document.getElementById("prioMediumEdit").value;
+//   let prioLowEdit = document.getElementById("prioLowEdit").value;
+//   let subTask = document.getElementById("subTask").value;
 
-  let taskCardContent = {
-    title: title,
-    description: description,
-    category: category,
-    dueDate: dueDate,
-    priority: priority,
-    prioUrgentEdit: prioUrgentEdit,
-    prioMediumEdit: prioMediumEdit,
-    prioLowEdit: prioLowEdit,
-    subTask: subTask,
-  };
+//   let taskCardContent = {
+//     title: title,
+//     description: description,
+//     category: category,
+//     dueDate: dueDate,
+//     priority: priority,
+//     prioUrgentEdit: prioUrgentEdit,
+//     prioMediumEdit: prioMediumEdit,
+//     prioLowEdit: prioLowEdit,
+//     subTask: subTask,
+//   };
 
 
   
+//   try {
+//     await postDataToFirebase(`tasks/${taskId}`, taskCardContent);
+//   } catch (error) {
+//     console.error(error);
+//   }
+
+//   taskCard.innerHTML = renderAddTaskPoupBtn(task);
+//   renderTasks();
+// }
+async function updateEditTask() { 
+  let id = tasks.findIndex((task) => task.id);
+  if (id === -1) {
+    console.error("Fehler: Task-ID nicht gefunden!");
+    return;
+  }
+
+  let task = tasks[id]; // Die aktuelle Task aus dem Array holen
+  let taskCard = document.getElementById(`task-${task.id}`);
+
+  let title = document.getElementById("titleInput").value;
+  let description = document.getElementById("descriptionTextarea").value;
+  let dueDate = document.getElementById("dueDateInput").value;
+  let assignedContactstest = document.getElementById("selectedContactsDisplay").value;
+
+  // Gewählte Priorität aus den Buttons holen
+  // let priority;
+  // document.querySelectorAll(".prioEditBtn").forEach(button => {
+  //   if (button.classList.contains("active")) {
+  //     priority = button.textContent.trim();
+  //   }
+  // });
+  let prioUrgentEditPopUp = document.getElementById("prioUrgentEditPopUp");
+  let prioMediumEditPopUp = document.getElementById("prioMediumEditPopUp");
+  let prioLowEditPopUp = document.getElementById("prioLowEditPopUp");
+
+  let priority = "";
+
+  if (prioUrgentEditPopUp.classList.contains("prioUrgentRed")) {
+    priority = "urgent";
+  } else if (prioMediumEditPopUp.classList.contains("prioMediumYellow")) {
+    priority = "medium";
+  } else if (prioLowEditPopUp.classList.contains("prioLowGreen")) {
+    priority = "low";
+  }
+
+
+  // Alle gewählten Kontakte sammeln
+  let assignedContacts = [];
+  document.querySelectorAll("#selectedContactsDisplay .assignedShortcutName").forEach(contactEl => {
+    assignedContacts.push({
+      initials: contactEl.textContent.trim(),
+      color: contactEl.style.backgroundColor
+    });
+  });
+
+  // Alle Subtasks sammeln
+  let subTasks = [];
+  document.querySelectorAll("#subTaskList li").forEach(subTaskEl => {
+    subTasks.push(subTaskEl.textContent.trim());
+  });
+
+  // Aktualisiertes Task-Objekt für Firebase
+  let updatedTask = {
+    title: title,
+    description: description,
+    dueDate: dueDate,
+    priority: priority,
+    assignedContacts: assignedContactstest,
+    subTasks: subTasks,
+    users: selectedContacts
+  };
+
   try {
-    await postDataToFirebase(`tasks/${taskId}`, taskCardContent);
+    await putDataToFirebase((path = "tasks/"), updatedTask, task.id);
+    console.log(task.id);
+    console.log("editTaskCard erfolgreich");
   } catch (error) {
-    console.error(error);
+    console.error("Fehler bei der editTaskCard:", error);
   }
 
   taskCard.innerHTML = renderAddTaskPoupBtn(task);
   renderTasks();
 }
+
+
+
+
+
+
+
 
 function addTaskPopupBtn() {
   let addNewTaskBtnDiv = document.getElementById("addNewTaskBtnDiv");
