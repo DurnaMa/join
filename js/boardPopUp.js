@@ -106,80 +106,563 @@ function openEditTaskPopup(taskId) {
 //   taskCard.innerHTML = renderAddTaskPoupBtn(task);
 //   renderTasks();
 // }
-async function updateEditTask() { 
-  let id = tasks.findIndex((task) => task.id);
-  if (id === -1) {
-    console.error("Fehler: Task-ID nicht gefunden!");
+// async function updateEditTask(taskId) { 
+//   let task = tasks.find(task => task.id === taskId);
+  
+//   if (!task) {
+//     console.error(`Fehler: Task mit ID ${taskId} nicht gefunden!`);
+//     return;
+//   }
+
+//   let taskCard = document.getElementById(`task-${task.id}`);
+
+//   let title = document.getElementById("titleInput").value;
+//   let description = document.getElementById("descriptionTextarea").value;
+//   let dueDate = document.getElementById("dueDateInput").value;
+
+//   // Priorität ermitteln
+//   let priority = "";
+//   if (document.getElementById("prioUrgentEditPopUp").classList.contains("prioUrgentRed")) {
+//     priority = "urgent";
+//   } else if (document.getElementById("prioMediumEditPopUp").classList.contains("prioMediumYellow")) {
+//     priority = "medium";
+//   } else if (document.getElementById("prioLowEditPopUp").classList.contains("prioLowGreen")) {
+//     priority = "low";
+//   }
+
+//   // Alle gewählten Kontakte sammeln
+//   let assignedContacts = [];
+//   document.querySelectorAll("#selectedContactsDisplay .assignedShortcutName").forEach(contactEl => {
+//     assignedContacts.push({
+//       initials: contactEl.textContent.trim(),
+//       color: contactEl.style.backgroundColor
+//     });
+//   });
+
+//   // Alle Subtasks sammeln
+//   let subTasks = [];
+//   document.querySelectorAll("#subTaskList li").forEach(subTaskEl => {
+//     subTasks.push(subTaskEl.textContent.trim());
+//   });
+
+//   // Aktualisiertes Task-Objekt für Firebase
+//   let updatedTask = {
+//     title: title,
+//     description: description,
+//     dueDate: dueDate,
+//     priority: priority,
+//     assignedContacts: assignedContacts,
+//     subTasks: subTasks,
+//     users: Array.from(selectedContacts) // falls selectedContacts ein Set ist
+//   };
+
+//   try {
+//     await putDataToFirebase(`tasks/${taskId}`, updatedTask);
+//     console.log(`Task ${taskId} erfolgreich aktualisiert`, updatedTask);
+//   } catch (error) {
+//     console.error("Fehler beim Aktualisieren der Task:", error);
+//   }
+
+//   taskCard.innerHTML = renderAddTaskPoupBtn(task);
+//   renderTasks();
+// }
+// async function updateEditTask(taskId) { 
+//   let tasktest1 = tasks.findIndex((task) => task.id == taskId);
+//   let tasktest2 = tasks[taskId];
+//   // Debugging: Überprüfen, ob taskId existiert
+//   console.log("Aufruf von updateEditTask mit taskId:", taskId);
+
+//   // Falls taskId nicht übergeben wurde, versuche es aus dem Popup zu holen
+//   if (!taskId) {
+//     let taskCard = document.querySelector(".taskCardEditPopup");
+//     if (taskCard) {
+//       taskId = taskCard.getAttribute("data-task-id");
+//     }
+//   }
+
+//   // Falls immer noch keine taskId vorhanden ist, abbrechen
+//   if (!taskId) {
+//     console.error("Fehler: Keine gültige Task-ID gefunden!");
+//     return;
+//   }
+
+//   // Die richtige Task aus dem Array holen
+//   let task = tasks.find(task => task.id === taskId);
+//   if (!task) {
+//     console.error(`Fehler: Task mit ID ${taskId} nicht gefunden!`);
+//     return;
+//   }
+
+//   let taskCard = document.getElementById(`task-${task.id}`);
+
+//   let title = document.getElementById("titleInput").value;
+//   let description = document.getElementById("descriptionTextarea").value;
+//   let dueDate = document.getElementById("dueDateInput").value;
+
+//   // Priorität ermitteln
+//   let priority = "";
+//   if (document.getElementById("prioUrgentEditPopUp").classList.contains("prioUrgentRed")) {
+//     priority = "urgent";
+//   } else if (document.getElementById("prioMediumEditPopUp").classList.contains("prioMediumYellow")) {
+//     priority = "medium";
+//   } else if (document.getElementById("prioLowEditPopUp").classList.contains("prioLowGreen")) {
+//     priority = "low";
+//   }
+
+//   // Alle gewählten Kontakte sammeln
+//   let assignedContacts = [];
+//   document.querySelectorAll("#selectedContactsDisplay .assignedShortcutName").forEach(contactEl => {
+//     assignedContacts.push({
+//       initials: contactEl.textContent.trim(),
+//       color: contactEl.style.backgroundColor
+//     });
+//   });
+
+//   // Alle Subtasks sammeln
+//   let subTasks = [];
+//   document.querySelectorAll("#subTaskList li").forEach(subTaskEl => {
+//     subTasks.push(subTaskEl.textContent.trim());
+//   });
+
+//   // Aktualisiertes Task-Objekt für Firebase
+//   let updatedTask = {
+//     title: title,
+//     description: description,
+//     dueDate: dueDate,
+//     priority: priority,
+//     assignedContacts: assignedContacts,
+//     subTasks: subTasks,
+//     users: Array.from(selectedContacts) // falls selectedContacts ein Set ist
+//   };
+
+//   try {
+//     await putDataToFirebase(`tasks/${taskId}`, updatedTask);
+//     console.log(`Task ${taskId} erfolgreich aktualisiert`, updatedTask);
+//   } catch (error) {
+//     console.error("Fehler beim Aktualisieren der Task:", error);
+//   }
+
+//   renderTasks();
+// }
+// async function updateEditTask(taskId) {
+//   // Werte aus den Eingabefeldern abrufen
+//   let updatedTitle = document.getElementById("titleInput").value.trim();
+//   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
+//   let updatedDueDate = document.getElementById("dueDateInput").value;
+  
+//   // Priorität bestimmen
+//   let priority = document.querySelector(".prioEditBtn.active");
+//   let updatedPriority = priority ? priority.getAttribute("data-priority") : "Medium";
+  
+//   // Ausgewählte Kontakte abrufen
+//   let updatedContacts = Array.from(selectedContacts).map(name => {
+//     return allContacts.find(contact => contact.name === name);
+//   }).filter(contact => contact);
+  
+//   // Subtasks abrufen
+//   let updatedSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
+//     text: li.innerText,
+//     completed: li.classList.contains("completed")
+//   }));
+  
+//   // Sicherstellen, dass alle Felder ausgefüllt sind
+//   if (!updatedTitle || !updatedDueDate) {
+//     alert("Bitte fülle alle Pflichtfelder aus.");
+//     return;
+//   }
+  
+//   // Das Task-Objekt aktualisieren
+//   let updatedTask = {
+//     title: updatedTitle,
+//     description: updatedDescription,
+//     dueDate: updatedDueDate,
+//     priority: updatedPriority,
+//     users: updatedContacts,
+//     subtasks: updatedSubtasks
+//   };
+  
+//   try {
+//     await putDataToFirebase("tasks/", updatedTask, taskId);
+//     console.log(taskId);
+//     console.log("editTask erfolgreich");
+//     closeEditTaskCardPopUp(); // Popup schließen
+//     renderTasks(); // Tasks neu rendern
+//   } catch (error) {
+//     console.error("Fehler beim Bearbeiten der Aufgabe:", error);
+//   }
+// }
+// async function updateEditTask(event) {
+//   event.preventDefault(); // Verhindert das Neuladen der Seite
+  
+//   let taskId = event.target.getAttribute("data-task-id");
+//   if (!taskId) {
+//     console.error("Task ID fehlt");
+//     return;
+//   }
+
+//   // Werte aus den Eingabefeldern abrufen
+//   let updatedTitle = document.getElementById("titleInput").value.trim();
+//   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
+//   let updatedDueDate = document.getElementById("dueDateInput").value;
+  
+//   // Priorität bestimmen
+//   let priority = document.querySelector(".prioEditBtn.active");
+//   let updatedPriority = priority ? priority.getAttribute("data-priority") : "Medium";
+  
+//   // Ausgewählte Kontakte abrufen
+//   let updatedContacts = Array.from(selectedContacts).map(name => {
+//     return contacts.find(users => users.name === name);
+//   }).filter(name => name);
+  
+//   // Subtasks abrufen
+//   let updatedSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
+//     text: li.innerText,
+//     completed: li.classList.contains("completed")
+//   }));
+  
+//   // Sicherstellen, dass alle Felder ausgefüllt sind
+//   if (!updatedTitle || !updatedDueDate) {
+//     alert("Bitte fülle alle Pflichtfelder aus.");
+//     return;
+//   }
+
+//   // Das Task-Objekt aktualisieren
+//   let updatedTask = {
+//     title: updatedTitle,
+//     description: updatedDescription,
+//     dueDate: updatedDueDate,
+//     priority: updatedPriority,
+//     users: updatedContacts,
+//     subtasks: updatedSubtasks
+//   };
+  
+//   try {
+//     await putDataToFirebase("tasks/", updatedTask, taskId);
+//     console.log(taskId);
+//     console.log("editTask erfolgreich");
+//     closeEditTaskCardPopUp(); // Popup schließen
+//     renderTasks(); // Tasks neu rendern
+//   } catch (error) {
+//     console.error("Fehler beim Bearbeiten der Aufgabe:", error);
+//   }
+// }
+// async function updateEditTask(event) {
+//   event.preventDefault(); // Verhindert das Neuladen der Seite
+  
+//   let taskId = event.target.getAttribute("data-task-id");
+//   if (!taskId) {
+//     console.error("Task ID fehlt");
+//     return;
+//   }
+
+//   // Werte aus den Eingabefeldern abrufen
+//   let updatedTitle = document.getElementById("titleInput").value.trim();
+//   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
+//   let updatedDueDate = document.getElementById("dueDateInput").value;
+  
+//   // Priorität bestimmen
+//   let priority = document.querySelector(".prioEditBtn.active");
+//   let updatedPriority = priority ? priority.getAttribute("data-priority") : "Medium";
+  
+//   // Nur die Namen der ausgewählten Kontakte extrahieren
+//   let updatedContacts = {};
+//   Array.from(selectedContacts).forEach((name, index) => {
+//     updatedContacts[index] = name;
+//   });
+  
+//   // Subtasks abrufen
+//   let updatedSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
+//     text: li.innerText,
+//     completed: li.classList.contains("completed")
+//   }));
+  
+//   // Sicherstellen, dass alle Felder ausgefüllt sind
+//   if (!updatedTitle || !updatedDueDate) {
+//     alert("Bitte fülle alle Pflichtfelder aus.");
+//     return;
+//   }
+  
+//   // Das Task-Objekt aktualisieren
+//   let updatedTask = {
+//     title: updatedTitle,
+//     description: updatedDescription,
+//     dueDate: updatedDueDate,
+//     priority: updatedPriority,
+//     users: updatedContacts,
+//     subtasks: updatedSubtasks
+//   };
+  
+//   try {
+//     await putDataToFirebase("tasks/", updatedTask, taskId);
+//     console.log(taskId);
+//     console.log("editTask erfolgreich");
+//     closeEditTaskCardPopUp(); // Popup schließen
+//     renderTasks(); // Tasks neu rendern
+//   } catch (error) {
+//     console.error("Fehler beim Bearbeiten der Aufgabe:", error);
+//   }
+// }
+// async function updateEditTask(event) {
+//   event.preventDefault(); // Verhindert das Neuladen der Seite
+  
+//   let taskId = event.target.getAttribute("data-task-id");
+//   if (!taskId) {
+//     console.error("Task ID fehlt");
+//     return;
+//   }
+
+//   // Werte aus den Eingabefeldern abrufen
+//   let updatedTitle = document.getElementById("titleInput").value.trim();
+//   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
+//   let updatedDueDate = document.getElementById("dueDateInput").value;
+  
+//   // Priorität bestimmen
+//   let priority = document.querySelector(".prioEditBtn.active");
+//   let updatedPriority = priority ? priority.getAttribute("data-priority") : "Medium";
+  
+//   // Nur die Namen der ausgewählten Kontakte extrahieren
+//   let updatedContacts = {};
+//   Array.from(selectedContacts).forEach((name, index) => {
+//     updatedContacts[index] = name;
+//   });
+  
+//   let updatedSubtasks = {};
+//   Array.from(subTasks).forEach((description, index) => {
+//     updatedSubtasks[index] = description;
+//   });
+
+//   // Subtasks abrufen und Format anpassen
+//   // let updatedSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
+//   //   description: li.innerText
+//   // }));
+  
+//   // Sicherstellen, dass alle Felder ausgefüllt sind
+//   if (!updatedTitle || !updatedDueDate) {
+//     alert("Bitte fülle alle Pflichtfelder aus.");
+//     return;
+//   }
+  
+//   // Bestehende Daten aus Firebase abrufen und nur geänderte Werte aktualisieren
+//   let taskRef = await getDataFromFirebase(`tasks/${taskId}`);
+//   let existingTask = taskRef || {};
+
+//   let updatedTask = {
+//     ...existingTask, // Bestehende Daten beibehalten
+//     title: updatedTitle,
+//     description: updatedDescription,
+//     dueDate: updatedDueDate,
+//     priority: updatedPriority,
+//     users: updatedContacts,
+//     subTasks: updatedSubtasks,
+//     category: existingTask.category || "" // Falls keine Kategorie existiert, leer lassen
+//   };
+  
+//   try {
+//     await putDataToFirebase("tasks/", updatedTask, taskId);
+//     console.log(taskId);
+//     console.log("editTask erfolgreich");
+//     closeEditTaskCardPopUp(); // Popup schließen
+//     renderTasks(); // Tasks neu rendern
+//   } catch (error) {
+//     console.error("Fehler beim Bearbeiten der Aufgabe:", error);
+//   }
+//   await loadTasks();
+// }
+// async function updateEditTask(event) {
+//   event.preventDefault(); // Verhindert das Neuladen der Seite
+  
+//   let taskId = event.target.getAttribute("data-task-id");
+//   if (!taskId) {
+//     console.error("Task ID fehlt");
+//     return;
+//   }
+
+//   // Werte aus den Eingabefeldern abrufen
+//   let updatedTitle = document.getElementById("titleInput").value.trim();
+//   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
+//   let updatedDueDate = document.getElementById("dueDateInput").value;
+  
+//   // Priorität bestimmen
+//   let priority = document.querySelector(".prioEditBtn.active");
+//   let updatedPriority = priority ? priority.getAttribute("data-priority") : "Medium";
+  
+//   // Nur die Namen der ausgewählten Kontakte extrahieren
+//   let updatedContacts = {};
+//   Array.from(selectedContacts).forEach((name, index) => {
+//     updatedContacts[index] = name;
+//   });
+  
+//   // Bestehende Daten aus Firebase abrufen
+//   let taskRef = await getDataFromFirebase(`tasks/${taskId}`);
+//   let existingTask = taskRef || {};
+
+//   // Bestehende Subtasks behalten und neue hinzufügen
+//   let existingSubtasks = existingTask.subtasks || [];
+//   let newSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
+//     description: li.innerText,
+//   }));
+
+//   let updatedSubtasks = [...existingSubtasks, ...newSubtasks]; // Zusammenführen der alten und neuen Subtasks
+
+//   // Sicherstellen, dass alle Felder ausgefüllt sind
+//   if (!updatedTitle || !updatedDueDate) {
+//     alert("Bitte fülle alle Pflichtfelder aus.");
+//     return;
+//   }
+
+//   let updatedTask = {
+//     ...existingTask, // Bestehende Daten beibehalten
+//     title: updatedTitle,
+//     description: updatedDescription,
+//     dueDate: updatedDueDate,
+//     priority: updatedPriority,
+//     users: updatedContacts,
+//     subTasks: updatedSubtasks, // Aktualisierte Subtasks
+//     category: existingTask.category || "" // Falls keine Kategorie existiert, leer lassen
+//   };
+  
+//   try {
+//     await putDataToFirebase("tasks/", updatedTask, taskId);
+//     console.log(taskId);
+//     console.log("editTask erfolgreich");
+//     closeEditTaskCardPopUp(); // Popup schließen
+//     renderTasks(); // Tasks neu rendern
+//   } catch (error) {
+//     console.error("Fehler beim Bearbeiten der Aufgabe:", error);
+//   }
+// }
+// async function updateEditTask(event) {
+//   event.preventDefault(); // Verhindert das Neuladen der Seite
+  
+//   let taskId = event.target.getAttribute("data-task-id");
+//   if (!taskId) {
+//     console.error("Task ID fehlt");
+//     return;
+//   }
+
+//   // Werte aus den Eingabefeldern abrufen
+//   let updatedTitle = document.getElementById("titleInput").value.trim();
+//   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
+//   let updatedDueDate = document.getElementById("dueDateInput").value;
+  
+//   // Priorität bestimmen
+//   let priority = document.querySelector(".prioEditBtn.active");
+//   let updatedPriority = priority ? priority.getAttribute("data-priority") : "";
+  
+//   // Nur die Namen der ausgewählten Kontakte extrahieren
+//   let updatedContacts = {};
+//   Array.from(selectedContacts).forEach((name, index) => {
+//     updatedContacts[index] = name;
+//   });
+
+//   // Bestehende Daten aus Firebase abrufen
+//   let taskRef = await getDataFromFirebase(`tasks/${taskId}`);
+//   let existingTask = taskRef || {};
+
+//   // Vorhandene subTasks aus Firebase abrufen (falls vorhanden)
+//   let existingSubtasks = existingTask.subTasks || [];
+
+//   // Neue subTasks aus dem DOM abrufen und korrekt formatieren
+//   let newSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
+//     description: li.innerText,
+//   }));
+
+//   // Vorhandene und neue subTasks zusammenführen
+//   let updatedSubtasks = [...existingSubtasks, ...newSubtasks];
+
+//   // Sicherstellen, dass alle Felder ausgefüllt sind
+//   if (!updatedTitle || !updatedDueDate) {
+//     alert("Bitte fülle alle Pflichtfelder aus.");
+//     return;
+//   }
+
+//   let updatedTask = {
+//     ...existingTask, // Bestehende Daten beibehalten
+//     title: updatedTitle,
+//     description: updatedDescription,
+//     dueDate: updatedDueDate,
+//     priority: updatedPriority,
+//     users: updatedContacts,
+//     subTasks: updatedSubtasks, // subTasks statt subtasks (richtige Struktur)
+//     category: existingTask.category || "" // Falls keine Kategorie existiert, leer lassen
+//   };
+
+//   try {
+//     await putDataToFirebase("tasks/", updatedTask, taskId);
+//     console.log(taskId);
+//     console.log("editTask erfolgreich");
+//     closeEditTaskCardPopUp(); // Popup schließen
+//     renderTasks(); // Tasks neu rendern
+//   } catch (error) {
+//     console.error("Fehler beim Bearbeiten der Aufgabe:", error);
+//   }
+//   await loadTasks();
+// }
+async function updateEditTask(event) {
+  event.preventDefault(); // Verhindert das Neuladen der Seite
+
+  let taskId = event.target.getAttribute("data-task-id");
+  if (!taskId) {
+    console.error("Task ID fehlt");
     return;
   }
 
-  let task = tasks[id]; // Die aktuelle Task aus dem Array holen
-  let taskCard = document.getElementById(`task-${task.id}`);
+  // Bestehende Daten aus Firebase abrufen
+  let taskRef = await getDataFromFirebase(`tasks/${taskId}`);
+  let existingTask = taskRef || {};
 
-  let title = document.getElementById("titleInput").value;
-  let description = document.getElementById("descriptionTextarea").value;
-  let dueDate = document.getElementById("dueDateInput").value;
-  let assignedContactstest = document.getElementById("selectedContactsDisplay").value;
+  // Werte aus den Eingabefeldern abrufen
+  let updatedTitle = document.getElementById("titleInput").value.trim();
+  let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
+  let updatedDueDate = document.getElementById("dueDateInput").value;
 
-  // Gewählte Priorität aus den Buttons holen
-  // let priority;
-  // document.querySelectorAll(".prioEditBtn").forEach(button => {
-  //   if (button.classList.contains("active")) {
-  //     priority = button.textContent.trim();
-  //   }
-  // });
-  let prioUrgentEditPopUp = document.getElementById("prioUrgentEditPopUp");
-  let prioMediumEditPopUp = document.getElementById("prioMediumEditPopUp");
-  let prioLowEditPopUp = document.getElementById("prioLowEditPopUp");
+  // Priority bestimmen: Wenn keine neue Auswahl, dann alte beibehalten
+  let priority = document.querySelector(".prioEditBtn.active");
+  let updatedPriority = priority ? priority.getAttribute("data-priority") : existingTask.priority || "";
 
-  let priority = "";
+  // Nur die Namen der ausgewählten Kontakte extrahieren
+  let updatedContacts = {};
+  Array.from(selectedContacts).forEach((name, index) => {
+    updatedContacts[index] = name;
+  });
 
-  if (prioUrgentEditPopUp.classList.contains("prioUrgentRed")) {
-    priority = "urgent";
-  } else if (prioMediumEditPopUp.classList.contains("prioMediumYellow")) {
-    priority = "medium";
-  } else if (prioLowEditPopUp.classList.contains("prioLowGreen")) {
-    priority = "low";
+  // Subtasks abrufen und Format anpassen
+  let updatedSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
+    description: li.innerText,
+  }));
+
+  // Sicherstellen, dass alle Pflichtfelder ausgefüllt sind
+  if (!updatedTitle || !updatedDueDate) {
+    alert("Bitte fülle alle Pflichtfelder aus.");
+    return;
   }
 
-
-  // Alle gewählten Kontakte sammeln
-  let assignedContacts = [];
-  document.querySelectorAll("#selectedContactsDisplay .assignedShortcutName").forEach(contactEl => {
-    assignedContacts.push({
-      initials: contactEl.textContent.trim(),
-      color: contactEl.style.backgroundColor
-    });
-  });
-
-  // Alle Subtasks sammeln
-  let subTasks = [];
-  document.querySelectorAll("#subTaskList li").forEach(subTaskEl => {
-    subTasks.push(subTaskEl.textContent.trim());
-  });
-
-  // Aktualisiertes Task-Objekt für Firebase
   let updatedTask = {
-    title: title,
-    description: description,
-    dueDate: dueDate,
-    priority: priority,
-    assignedContacts: assignedContactstest,
-    subTasks: subTasks,
-    users: selectedContacts
+    ...existingTask, // Bestehende Daten beibehalten
+    title: updatedTitle,
+    description: updatedDescription,
+    dueDate: updatedDueDate,
+    priority: updatedPriority, // Falls keine neue Auswahl, bleibt die alte
+    users: updatedContacts,
+    subTasks: updatedSubtasks,
+    category: existingTask.category || "" // Falls keine Kategorie existiert, leer lassen
   };
 
   try {
-    await putDataToFirebase((path = "tasks/"), updatedTask, task.id);
-    console.log(task.id);
-    console.log("editTaskCard erfolgreich");
+    await putDataToFirebase("tasks/", updatedTask, taskId);
+    console.log(taskId);
+    console.log("editTask erfolgreich");
+    closeEditTaskCardPopUp(); // Popup schließen
+    renderTasks(); // Tasks neu rendern
   } catch (error) {
-    console.error("Fehler bei der editTaskCard:", error);
+    console.error("Fehler beim Bearbeiten der Aufgabe:", error);
   }
-
-  taskCard.innerHTML = renderAddTaskPoupBtn(task);
-  renderTasks();
+  await loadTasks();
 }
+
+
+
+
 
 
 

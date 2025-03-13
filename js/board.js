@@ -157,9 +157,9 @@ function chooseImgPriority(taskCard, task) {
   let priorityElement = taskCard.querySelector(`#taskPriority-${task.id}`);
   if (priorityElement) {
     const priorityImages = {
-      urgent: "urgentRed.png",
-      medium: "mediumYellow.png",
-      low: "lowGreen.png",
+      Urgent: "urgentRed.png",
+      Medium: "mediumYellow.png",
+      Low: "lowGreen.png",
     };
     let priorityImage = document.createElement("img");
     priorityImage.src = `/assets/icons/${
@@ -323,11 +323,11 @@ async function createTaskBtn() {
   let priority = "";
 
   if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
-    priority = "urgent";
+    priority = "Urgent";
   } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
-    priority = "medium";
+    priority = "Medium";
   } else if (prioLowEdit.classList.contains("prioLowGreen")) {
-    priority = "low";
+    priority = "Low";
   }
 
   let data = {
@@ -366,11 +366,11 @@ async function createTaskPlusToDoBtn() {
   let priority = "";
 
   if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
-    priority = "urgent";
+    priority = "Urgent";
   } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
-    priority = "medium";
+    priority = "Medium";
   } else if (prioLowEdit.classList.contains("prioLowGreen")) {
-    priority = "low";
+    priority = "Low";
   }
 
   let data = {
@@ -409,11 +409,11 @@ async function createTaskPlusInProgressBtn() {
   let priority = "";
 
   if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
-    priority = "urgent";
+    priority = "Urgent";
   } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
-    priority = "medium";
+    priority = "Medium";
   } else if (prioLowEdit.classList.contains("prioLowGreen")) {
-    priority = "low";
+    priority = "Low";
   }
 
   let data = {
@@ -452,11 +452,11 @@ async function createTaskPlusAwaitFeedbackBtn() {
   let priority = "";
 
   if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
-    priority = "urgent";
+    priority = "Urgent";
   } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
-    priority = "medium";
+    priority = "Medium";
   } else if (prioLowEdit.classList.contains("prioLowGreen")) {
-    priority = "low";
+    priority = "Low";
   }
 
   let data = {

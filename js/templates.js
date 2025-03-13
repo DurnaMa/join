@@ -317,11 +317,13 @@ function renderTasksCardPopup(task) {
   }
 
   let priorityImages = {
-    "urgent": "urgentRed.png",
-    "medium": "mediumYellow.png",
-    "low": "lowGreen.png",
+    Urgent: "urgentRed.png",
+    Medium: "mediumYellow.png",
+    Low: "lowGreen.png",
   };
-  let priorityImageSrc = `/assets/icons/${priorityImages[task.priority] || "default.png"}`;
+  let priorityImageSrc = `/assets/icons/${
+    priorityImages[task.priority] || "default.png"
+  }`;
 
   return /*html*/ `
   <div class="shadow-div"></div>
@@ -333,7 +335,9 @@ function renderTasksCardPopup(task) {
         <img onclick="closeTaskCardPopUp()" src="/assets/icons/close.png" alt="" />
       </div>
       <div class="taskCardPopupTitle">${task.title || "No Title"}</div>
-      <div class="taskCardPopupDescription">${task.description || "No Description"}</div>
+      <div class="taskCardPopupDescription">${
+        task.description || "No Description"
+      }</div>
       <div class="taskCardPopupDate">
         <label>Due date:</label>
         <span>${task.dueDate || "N/A"}</span> 
@@ -347,39 +351,47 @@ function renderTasksCardPopup(task) {
       
       <label class="taskCardPopupLabel">Assigned To:</label>
       <div class="taskCardPopupContact">
-        ${Array.isArray(task.users) && task.users.length > 0
-          ? task.users
-              .map(
-                (user) =>
-                  `<div class="taskCardPopupContactName"><div class="taskCardPopupContactInitials" style="background-color: ${user.color}">
+        ${
+          Array.isArray(task.users) && task.users.length > 0
+            ? task.users
+                .map(
+                  (user) =>
+                    `<div class="taskCardPopupContactName"><div class="taskCardPopupContactInitials" style="background-color: ${
+                      user.color
+                    }">
                     ${user.initials || "??"} 
                   </div>
                   <div>${user.name || "No Name"}</div>
                   </div>
                   `
-              )
-              .join("")
-          : "<p>Kein Benutzer zugewiesen</p>"}
+                )
+                .join("")
+            : "<p>Kein Benutzer zugewiesen</p>"
+        }
       </div>
 
     
       <label class="taskCardPopupLabel">Subtasks</label>
       <div class="taskCardPopupSubTasks">
         <div class="progress-container-popup">
-          ${Array.isArray(task.subTasks) && task.subTasks.length > 0
-            ? task.subTasks
-                .map(
-                  (subtasks, index) => `
+          ${
+            Array.isArray(task.subTasks) && task.subTasks.length > 0
+              ? task.subTasks
+                  .map(
+                    (subtasks, index) => `
                     <div class="step">
                       <input type="checkbox" id="step${index}-${task.id}"
                         onchange="updateSteps('${task.id}')" 
                         ${subtasks.completed ? "checked" : ""}>
-                      <label for="step${index}-${task.id}">${subtasks.description || "Unnamed Subtask"}</label>
+                      <label for="step${index}-${task.id}">${
+                      subtasks.description || "Unnamed Subtask"
+                    }</label>
                     </div>
                   `
-                )
-                .join("")
-            : "<p>Keine Subtasks vorhanden</p>"}
+                  )
+                  .join("")
+              : "<p>Keine Subtasks vorhanden</p>"
+          }
         </div>
       </div>
 
@@ -403,7 +415,7 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
   let dueDate = currentSelectedTask.dueDate;
 
   // 🛠 Sicherstellen, dass die vorhandenen Nutzer in selectedContacts gespeichert werden
-  selectedContacts = new Set(assignedContacts.map(user => user.name));
+  selectedContacts = new Set(assignedContacts.map((user) => user.name));
 
   return /*html*/ `
     <div class="shadow-div"></div>
@@ -422,15 +434,15 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
         
       <label>Priority</label>
       <div class="task-edit-prio-popup">
-        <button id="prioUrgentEditPopUp" class="prioEditBtn">
+        <button onclick="prioUrgent()" id="prioUrgentEdit" class="prioBtn">
           Urgent
           <img src="/assets/icons/urgentRed.png" alt="" />
         </button>
-        <button id="prioMediumEditPopUp" class="prioEditBtn">
+        <button onclick="prioMedium()" id="prioMediumEdit" class="prioBtn">
           Medium
           <img src="/assets/icons/mediumYellow.png" alt="" />
         </button>
-        <button id="prioLowEditPopUp" class="prioEditBtn">
+        <button onclick="prioLow()" id="prioLowEdit" class="prioBtn">
           Low
           <img src="/assets/icons/lowGreen.png" alt="" />
         </button>
@@ -444,19 +456,26 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
       </div>
       <div id="assignedContactsListPopUp" class="hidden"></div>
       <div id="selectedContactsDisplay" class="selectedContactsContainerPopUp">
-        ${assignedContacts.map(contact => `<span class="assignedShortcutName" style="background-color: ${contact.color}">${contact.initials}</span>`).join("")}
+        ${assignedContacts
+          .map(
+            (contact) =>
+              `<span class="assignedShortcutName" style="background-color: ${contact.color}">${contact.initials}</span>`
+          )
+          .join("")}
       </div>
     
       <label class="TESTSubtasksTEST" for="subtask">Subtasks</label>
       <div id="addSubTask">
         <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
-        <img onclick="addSubTaskPopUp(taskId)" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
+        <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
       </div>
       <ul id="subTaskList"></ul>
     
       <div class="button-ok-div">
         <div class="buttontest987">
-          <button onclick="updateEditTask()" class="button-ok">Ok<img src="/assets/icons/check.png" alt="" /></button>
+        <button onclick="updateEditTask(event)" data-task-id="${taskId}" class="button-ok">Ok <img src="/assets/icons/check.png" alt="" /></button>
+
+          <!-- <button onclick="updateEditTask()" class="button-ok">Ok<img src="/assets/icons/check.png" alt="" /></button> -->
         </div>
       </div>
     </div>
@@ -697,5 +716,3 @@ function mobileEditContactPopup() {
   </div>
   `;
 }
-
-

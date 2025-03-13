@@ -141,7 +141,7 @@ async function loadSummaryData() {
   let awaitFeedbackCount = tasks.filter((task) => task.columnTitles === "Await Feedback" || task.columnTitles === "awaitfeedback").length;
   let doneCount = tasks.filter((task) => task.columnTitles === "Done" || task.columnTitles === "done").length;
 
-  let urgentTasks = tasks.filter((task) => task.priority === "urgent");
+  let urgentTasks = tasks.filter((task) => task.priority === "Urgent");
   let urgentCount = urgentTasks.length;
 
   let upcomingDeadline = urgentTasks
