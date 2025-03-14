@@ -89,7 +89,9 @@ function generateTaskCard(task) {
       
       <div class="progress-container">
         <div class="progress-bar-container">
-          <div class="progress-bar" id="progressBar-${task.id}" style="width: ${totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0}%;"></div>
+          <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
+    totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0
+  }%;"></div>
         </div>
         <div class="subtasks-div">
           <span class="subtasks-amount" id="subtasksAmount-${
@@ -129,7 +131,7 @@ function generateTaskCard(task) {
       "To Do": "To Do",
       "In Progress": "In Progress",
       "Await Feedback": "Await Feedback",
-      "Done": "Done",
+      Done: "Done",
     };
     task.columnTitles = columnMappings[columnTitle] || task.columnTitles;
   }
@@ -169,8 +171,6 @@ function chooseImgPriority(taskCard, task) {
     priorityElement.appendChild(priorityImage);
   }
 }
-
-
 
 function searchTask() {
   let searchTaskInput = document
@@ -218,16 +218,6 @@ async function drop(event, column) {
   }
 }
 
-function taskGetFromLocalStorage() {
-  let storedTasks = localStorage.getItem("tasks");
-  if (storedTasks) {
-    tasks = JSON.parse(storedTasks);
-  } else {
-    tasks = [];
-  }
-  renderTasks();
-}
-
 async function deleteTask(taskId) {
   let id = tasks.findIndex((task) => task.id == taskId);
   let path = `/tasks/${tasks[id].id}`;
@@ -246,7 +236,7 @@ async function updateSteps(taskId) {
     `#taskPopUp[data-task-id='${taskId}'] .step input[type='checkbox']`
   );
 
-  if (!checkboxes.length) return; 
+  if (!checkboxes.length) return;
 
   let checkedCount = 0;
 
@@ -275,9 +265,82 @@ async function updateSteps(taskId) {
     tasks[taskIndex] = task;
   }
 
-  //await saveTaskToFirebase(task);
+  await saveTaskToFirebase(task);
   //saveTasksToLocalStorage();
 }
+//-------------- new version ----------------
+// async function updateSteps(taskId) {
+//   console.log(`🔄 updateSteps() aufgerufen für Task: ${taskId}`);
+
+//   let task = tasks.find((t) => t.id === taskId);
+//   if (!task || !task.subTasks) {
+//     console.warn("⚠️ Kein gültiger Task gefunden.");
+//     return;
+//   }
+
+//   const checkboxes = document.querySelectorAll(
+//     `#taskPopUp[data-task-id='${taskId}'] .step input[type='checkbox']`
+//   );
+
+//   if (!checkboxes.length) {
+//     console.warn("⚠️ Keine Checkboxen gefunden.");
+//     return;
+//   }
+
+//   let checkedCount = 0;
+
+//   checkboxes.forEach((checkbox, index) => {
+//     if (task.subTasks[index]) {
+//       task.subTasks[index].completed = checkbox.checked;
+//       if (checkbox.checked) {
+//         checkedCount++;
+//       }
+//     }
+//   });
+
+//   const progressBar = document.getElementById(`progressBar-${taskId}`);
+//   if (progressBar) {
+//     const progressPercentage = (checkedCount / task.subTasks.length) * 100;
+//     progressBar.style.width = `${progressPercentage}%`;
+//   }
+
+//   const subtasksAmount = document.getElementById(`subtasksAmount-${taskId}`);
+//   if (subtasksAmount) {
+//     subtasksAmount.textContent = `${checkedCount}/${task.subTasks.length} Subtasks`;
+//   }
+
+//   console.log("✅ Subtask-Fortschritt aktualisiert:", task.subTasks);
+
+
+//   await saveTaskToFirebase(task);
+// }
+
+// async function saveTaskToFirebase(task) {
+//   try {
+//     console.log("📤 Speichere Task in Firebase...", task);
+
+//     const response = await fetch(
+//       `https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/tasks/${task.id}.json`,
+//       {
+//         method: "PUT", // Nutze PUT, um das gesamte Task-Objekt zu überschreiben
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(task),
+//       }
+//     );
+
+//     if (!response.ok) throw new Error("Fehler beim Speichern in Firebase!");
+
+//     console.log(`✅ Task ${task.id} erfolgreich gespeichert.`);
+//   } catch (error) {
+//     console.error("❌ Fehler beim Speichern in Firebase:", error);
+//   }
+// }
+//-------------- end ----------------
+
+
+
 
 // function saveTasksToLocalStorage() {
 //   localStorage.setItem("tasks", JSON.stringify(tasks));
