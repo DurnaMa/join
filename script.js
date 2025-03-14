@@ -72,7 +72,43 @@ async function loadContacts() {
   }
 }
 
-async function loadTasks() { 
+// async function loadTasks() { 
+//   tasks = [];
+//   let tasksData = await getDataFromFirebase("tasks");
+
+//   for (const key in tasksData) {
+//     const SINGLE_TASK = tasksData[key];
+
+//     let task = {
+//       id: key,
+//       columnTitles: SINGLE_TASK.columnTitles,
+//       title: SINGLE_TASK.title,
+//       description: SINGLE_TASK.description,
+//       dueDate: SINGLE_TASK.dueDate,
+//       priority: SINGLE_TASK.priority,
+//       subTasks: SINGLE_TASK.subTasks,
+//       status: SINGLE_TASK.status,
+//       category: SINGLE_TASK.category,
+//       users: SINGLE_TASK.users 
+//         ? SINGLE_TASK.users.map(name => {
+//             let contact = contacts.find(c => c.name === name);
+//             return {
+//               name: name, // Vollständiger Name
+//               initials: generateInitials(name), // Initialen
+//               color: contact ? contact.color : "#FF0000" // Fallback-Farbe rot
+//             };
+//           })
+//         : [],
+//     };    
+
+//     tasks.push(task);
+//   }
+  
+//   renderTasks();
+//   //loadTasksFromFirebase();
+// }
+
+async function loadTasks() {
   tasks = [];
   let tasksData = await getDataFromFirebase("tasks");
 
@@ -87,23 +123,30 @@ async function loadTasks() {
       dueDate: SINGLE_TASK.dueDate,
       priority: SINGLE_TASK.priority,
       subTasks: SINGLE_TASK.subTasks,
+      //completed: SINGLE_TASK.completed,
       status: SINGLE_TASK.status,
       category: SINGLE_TASK.category,
-      users: SINGLE_TASK.users 
-        ? SINGLE_TASK.users.map(name => {
-            let contact = contacts.find(c => c.name === name);
+      users: SINGLE_TASK.users
+        ? SINGLE_TASK.users.map((name) => {
+            let contact = contacts.find((c) => c.name === name);
             return {
               name: name, // Vollständiger Name
               initials: generateInitials(name), // Initialen
-              color: contact ? contact.color : "#FF0000" // Fallback-Farbe rot
+              color: contact ? contact.color : "#FF0000", // Fallback-Farbe rot
             };
           })
         : [],
-    };    
+      subTasks: SINGLE_TASK.subTasks
+        ? SINGLE_TASK.subTasks.map((subTask) => ({
+            description: subTask.description,
+            completed: subTask.completed ?? false,
+          }))
+        : [],
+    };
 
     tasks.push(task);
   }
-  
+
   renderTasks();
   //loadTasksFromFirebase();
 }
@@ -112,7 +155,6 @@ async function loadTasks() {
 //   tasks = [];
 
 //   try {
-//     console.log("📥 Lade Tasks aus Firebase...");
 
 //     let tasksData = await getDataFromFirebase("tasks");
 
@@ -132,7 +174,6 @@ async function loadTasks() {
 //         users: Array.isArray(SINGLE_TASK.users)
 //         ? SINGLE_TASK.users.map((name) => {
 //             if (typeof name !== "string") {
-//               console.warn("⚠️ Unerwarteter Wert in users:", name);
 //               return {
 //                 name: "Unbekannt",
 //                 initials: "??",
@@ -159,10 +200,10 @@ async function loadTasks() {
 //       tasks.push(task);
 //     }
 
-//     console.log("✅ Tasks erfolgreich geladen:", tasks);
+//     console.log("erfolgreich:", tasks);
 //     renderTasks();
 //   } catch (error) {
-//     console.error("❌ Fehler beim Laden der Tasks:", error);
+//     console.error("Fehler:", error);
 //   }
 //   renderTasks();
 // }
@@ -171,7 +212,6 @@ async function loadTasks() {
 //   tasks = [];
 
 //   try {
-//     console.log("📥 Lade Tasks aus Firebase...");
 
 //     let tasksData = await getDataFromFirebase("tasks");
 
@@ -199,8 +239,8 @@ async function loadTasks() {
 //           : [],
 //         subTasks: SINGLE_TASK.subTasks
 //           ? SINGLE_TASK.subTasks.map((subTask) => ({
-//               description: subTask.description || "Kein Name",
-//               completed: subTask.completed ?? false, // Falls `completed` fehlt, auf false setzen
+//               description: subTask.description,
+//               completed: subTask.completed ?? false,
 //             }))
 //           : [],
 //       };
@@ -208,30 +248,26 @@ async function loadTasks() {
 //       tasks.push(task);
 //     }
 
-//     console.log("✅ Tasks erfolgreich geladen:", tasks);
+//     console.log("erfolgreich:", tasks);
 //     renderTasks();
 //   } catch (error) {
-//     console.error("❌ Fehler beim Laden der Tasks:", error);
+//     console.error("Fehler:", error);
 //   }
 //   renderTasks();
 // }
 
 // async function loadTasksFromFirebase() {
 //   try {
-//     console.log("📥 Lade Tasks aus Firebase...");
-    
 //     let response = await fetch("https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/tasks.json");
 //     let data = await response.json();
-
 //     if (data) {
 //       tasks = Object.keys(data).map((key) => {
 //         let task = data[key];
 
-//         // Falls Subtasks existieren, sicherstellen, dass sie ein `completed`-Flag haben
 //         if (task.subTasks && Array.isArray(task.subTasks)) {
 //           task.subTasks = task.subTasks.map((subTask) => ({
 //             ...subTask,
-//             completed: subTask.completed || false, // Falls `completed` fehlt, auf false setzen
+//             completed: subTask.completed || false,
 //           }));
 //         } else {
 //           task.subTasks = [];
@@ -241,13 +277,11 @@ async function loadTasks() {
 //       });
 //     } else {
 //       tasks = [];
-//     }
+//     };
 
-//     console.log("✅ Tasks erfolgreich aus Firebase geladen:", tasks);
-
-//     renderTasks(); // Zeigt die Tasks mit korrektem Fortschritt an
+//     renderTasks(); 
 //   } catch (error) {
-//     console.error("❌ Fehler beim Laden aus Firebase:", error);
+//     console.error("Fehler:", error);
 //   }
 // }
 

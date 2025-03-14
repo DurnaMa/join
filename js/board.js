@@ -155,6 +155,26 @@ function generateTaskCard(task) {
   return taskCard;
 }
 
+function startDragging(event, id) {
+  currentDraggedElement = id;
+  event.dataTransfer.setData("text", id);
+}
+
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+async function drop(event, column) {
+  event.preventDefault();
+  let taskId = event.dataTransfer.getData("text");
+  let task = tasks.find((t) => t.id == taskId);
+  if (task) {
+    task.columnTitles = column;
+    renderTasks();
+    await patchDataToFirebase(`tasks/${task.id}`, { columnTitles: column });
+  }
+}
+
 function chooseImgPriority(taskCard, task) {
   let priorityElement = taskCard.querySelector(`#taskPriority-${task.id}`);
   if (priorityElement) {
@@ -198,25 +218,6 @@ function searchTask() {
 
 document.getElementById("searchTask").addEventListener("keyup", searchTask);
 
-function startDragging(event, id) {
-  currentDraggedElement = id;
-  event.dataTransfer.setData("text", id);
-}
-
-function allowDrop(event) {
-  event.preventDefault();
-}
-
-async function drop(event, column) {
-  event.preventDefault();
-  let taskId = event.dataTransfer.getData("text");
-  let task = tasks.find((t) => t.id == taskId);
-  if (task) {
-    task.columnTitles = column;
-    renderTasks();
-    await patchDataToFirebase(`tasks/${task.id}`, { columnTitles: column });
-  }
-}
 
 async function deleteTask(taskId) {
   let id = tasks.findIndex((task) => task.id == taskId);
@@ -228,64 +229,15 @@ async function deleteTask(taskId) {
   closeTaskCardPopUp();
 }
 
-async function updateSteps(taskId) {
-  let task = tasks.find((t) => t.id === taskId);
-  if (!task || !task.subTasks) return;
-
-  const checkboxes = document.querySelectorAll(
-    `#taskPopUp[data-task-id='${taskId}'] .step input[type='checkbox']`
-  );
-
-  if (!checkboxes.length) return;
-
-  let checkedCount = 0;
-
-  checkboxes.forEach((checkbox, index) => {
-    if (task.subTasks[index]) {
-      task.subTasks[index].completed = checkbox.checked;
-      if (checkbox.checked) {
-        checkedCount++;
-      }
-    }
-  });
-
-  const progressBar = document.getElementById(`progressBar-${taskId}`);
-  if (progressBar) {
-    const progressPercentage = (checkedCount / task.subTasks.length) * 100;
-    progressBar.style.width = `${progressPercentage}%`;
-  }
-
-  const subtasksAmount = document.getElementById(`subtasksAmount-${taskId}`);
-  if (subtasksAmount) {
-    subtasksAmount.textContent = `${checkedCount}/${task.subTasks.length} Subtasks`;
-  }
-
-  const taskIndex = tasks.findIndex((t) => t.id === taskId);
-  if (taskIndex !== -1) {
-    tasks[taskIndex] = task;
-  }
-
-  await saveTaskToFirebase(task);
-  //saveTasksToLocalStorage();
-}
-//-------------- new version ----------------
 // async function updateSteps(taskId) {
-//   console.log(`🔄 updateSteps() aufgerufen für Task: ${taskId}`);
-
 //   let task = tasks.find((t) => t.id === taskId);
-//   if (!task || !task.subTasks) {
-//     console.warn("⚠️ Kein gültiger Task gefunden.");
-//     return;
-//   }
+//   if (!task || !task.subTasks) return;
 
 //   const checkboxes = document.querySelectorAll(
 //     `#taskPopUp[data-task-id='${taskId}'] .step input[type='checkbox']`
 //   );
 
-//   if (!checkboxes.length) {
-//     console.warn("⚠️ Keine Checkboxen gefunden.");
-//     return;
-//   }
+//   if (!checkboxes.length) return;
 
 //   let checkedCount = 0;
 
@@ -309,67 +261,80 @@ async function updateSteps(taskId) {
 //     subtasksAmount.textContent = `${checkedCount}/${task.subTasks.length} Subtasks`;
 //   }
 
-//   console.log("✅ Subtask-Fortschritt aktualisiert:", task.subTasks);
-
+//   const taskIndex = tasks.findIndex((t) => t.id === taskId);
+//   if (taskIndex !== -1) {
+//     tasks[taskIndex] = task;
+//   }
 
 //   await saveTaskToFirebase(task);
+
+//   renderTasks();
 // }
+//-------------- new version ----------------
+async function updateSteps(taskId) {
 
-// async function saveTaskToFirebase(task) {
-//   try {
-//     console.log("📤 Speichere Task in Firebase...", task);
+  let task = tasks.find((t) => t.id === taskId);
+  if (!task || !task.subTasks) {
+    return;
+  }
 
-//     const response = await fetch(
-//       `https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/tasks/${task.id}.json`,
-//       {
-//         method: "PUT", // Nutze PUT, um das gesamte Task-Objekt zu überschreiben
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(task),
-//       }
-//     );
+  const checkboxes = document.querySelectorAll(
+    `#taskPopUp[data-task-id='${taskId}'] .step input[type='checkbox']`
+  );
 
-//     if (!response.ok) throw new Error("Fehler beim Speichern in Firebase!");
+  if (!checkboxes.length) {
+    return;
+  }
 
-//     console.log(`✅ Task ${task.id} erfolgreich gespeichert.`);
-//   } catch (error) {
-//     console.error("❌ Fehler beim Speichern in Firebase:", error);
-//   }
-// }
+  let checkedCount = 0;
+
+  checkboxes.forEach((checkbox, index) => {
+    if (task.subTasks[index]) {
+      task.subTasks[index].completed = checkbox.checked;
+      if (checkbox.checked) {
+        checkedCount++;
+      }
+    }
+  });
+
+  const progressBar = document.getElementById(`progressBar-${taskId}`);
+  if (progressBar) {
+    const progressPercentage = (checkedCount / task.subTasks.length) * 100;
+    progressBar.style.width = `${progressPercentage}%`;
+  }
+
+  const subtasksAmount = document.getElementById(`subtasksAmount-${taskId}`);
+  if (subtasksAmount) {
+    subtasksAmount.textContent = `${checkedCount}/${task.subTasks.length} Subtasks`;
+  }
+
+  await saveTaskToFirebase(task);
+
+  renderTasks();
+}
+
+async function saveTaskToFirebase(task) {
+  try {
+
+    const response = await fetch(
+      `https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/tasks/${task.id}.json`,
+      {
+        method: "PUT", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(task),
+      }
+    );
+
+    if (!response.ok) throw new Error("Fehler beim Speichern in Firebase!");
+
+    console.log(`erfolgreich.`);
+  } catch (error) {
+    console.error("Fehler:", error);
+  }
+}
 //-------------- end ----------------
-
-
-
-
-// function saveTasksToLocalStorage() {
-//   localStorage.setItem("tasks", JSON.stringify(tasks));
-// }
-
-// function loadTasksFromLocalStorage() {
-//   const savedTasks = localStorage.getItem("tasks");
-//   if (savedTasks) {
-//     tasks = JSON.parse(savedTasks);
-//   }
-// }
-
-// async function saveTaskToFirebase(task) {
-//   try {
-//     let response = await fetch(`BASE_URL/tasks/${task.id}.json`, {
-//       method: "PUT",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(task),
-//     });
-
-//     if (!response.ok) {
-//       throw new Error("Fehler");
-//     }
-//   } catch (error) {
-//     console.error("Fehler:", error);
-//   }
-// }
 
 async function createTaskBtn() {
   let title = document.getElementById("titleInput").value;
@@ -400,6 +365,10 @@ async function createTaskBtn() {
     dueDate,
     priority,
     subTasks,
+    subTasks: subTasks.map((subTask) => ({
+      description: subTask.description,
+      completed: subTask.completed ?? false,
+    })),
     category,
     users: selectedContacts,
   };
@@ -443,6 +412,10 @@ async function createTaskPlusToDoBtn() {
     dueDate,
     priority,
     subTasks,
+    subTasks: subTasks.map((subTask) => ({
+      description: subTask.description,
+      completed: subTask.completed ?? false,
+    })),
     category,
     users: selectedContacts,
   };
@@ -486,6 +459,12 @@ async function createTaskPlusInProgressBtn() {
     dueDate,
     priority,
     subTasks,
+    subTasks: subTasks.map((subTask) => ({
+      description: subTask.description,
+      completed: subTask.completed ?? false,
+    })),
+    //subTasks: subTasks.map((subTask) => (subTask.completed = false)),
+    //completed: subTask.completed ?? false,
     category,
     users: selectedContacts,
   };
@@ -529,6 +508,10 @@ async function createTaskPlusAwaitFeedbackBtn() {
     dueDate,
     priority,
     subTasks,
+    subTasks: subTasks.map((subTask) => ({
+      description: subTask.description,
+      completed: subTask.completed ?? false,
+    })),
     category,
     users: selectedContacts,
   };

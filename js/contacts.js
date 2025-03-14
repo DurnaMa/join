@@ -148,12 +148,25 @@ function generateContactsList(i) {
  * @param {string} name - The full name of the contact.
  * @returns {string} The initials of the contact's name.
  */
+// function generateInitials(name) {
+//   const nameParts = name.split(" ");
+//   const firstInitial = nameParts[0]?.charAt(0) || "";
+//   const lastInitial = nameParts[1]?.charAt(0) || "";
+//   return `${firstInitial}${lastInitial}`.toUpperCase();
+// }
+
 function generateInitials(name) {
-  const nameParts = name.split(" ");
-  const firstInitial = nameParts[0]?.charAt(0) || "";
-  const lastInitial = nameParts[1]?.charAt(0) || "";
-  return `${firstInitial}${lastInitial}`.toUpperCase();
+  if (typeof name !== "string" || name.trim() === "") return "??";
+
+  let parts = name.trim().split(" ");
+  if (parts.length === 1) return parts[0][0].toUpperCase(); 
+
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase(); 
 }
+
+
+
+
 // function generateInitials(name) {
 //   if (!name) return "";
 //   const nameParts = name.trim().split(" ");
