@@ -231,6 +231,10 @@ async function postAddTask() {
     dueDate,
     priority,
     subTasks,
+    subTasks: subTasks.map((subTask) => ({
+      description: subTask.description,
+      completed: subTask.completed ?? false,
+    })),
     category,
     users: selectedContacts,
   };

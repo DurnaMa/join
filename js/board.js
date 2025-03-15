@@ -7,8 +7,6 @@ async function initBoard() {
   await loadDataUsers();
   await loadTasks();
   renderTasks();
-  //taskGetFromLocalStorage();
-  //taskGetFromFirebase();
 }
 
 function renderTasks() {
@@ -229,48 +227,6 @@ async function deleteTask(taskId) {
   closeTaskCardPopUp();
 }
 
-// async function updateSteps(taskId) {
-//   let task = tasks.find((t) => t.id === taskId);
-//   if (!task || !task.subTasks) return;
-
-//   const checkboxes = document.querySelectorAll(
-//     `#taskPopUp[data-task-id='${taskId}'] .step input[type='checkbox']`
-//   );
-
-//   if (!checkboxes.length) return;
-
-//   let checkedCount = 0;
-
-//   checkboxes.forEach((checkbox, index) => {
-//     if (task.subTasks[index]) {
-//       task.subTasks[index].completed = checkbox.checked;
-//       if (checkbox.checked) {
-//         checkedCount++;
-//       }
-//     }
-//   });
-
-//   const progressBar = document.getElementById(`progressBar-${taskId}`);
-//   if (progressBar) {
-//     const progressPercentage = (checkedCount / task.subTasks.length) * 100;
-//     progressBar.style.width = `${progressPercentage}%`;
-//   }
-
-//   const subtasksAmount = document.getElementById(`subtasksAmount-${taskId}`);
-//   if (subtasksAmount) {
-//     subtasksAmount.textContent = `${checkedCount}/${task.subTasks.length} Subtasks`;
-//   }
-
-//   const taskIndex = tasks.findIndex((t) => t.id === taskId);
-//   if (taskIndex !== -1) {
-//     tasks[taskIndex] = task;
-//   }
-
-//   await saveTaskToFirebase(task);
-
-//   renderTasks();
-// }
-//-------------- new version ----------------
 async function updateSteps(taskId) {
 
   let task = tasks.find((t) => t.id === taskId);
@@ -302,14 +258,12 @@ async function updateSteps(taskId) {
     const progressPercentage = (checkedCount / task.subTasks.length) * 100;
     progressBar.style.width = `${progressPercentage}%`;
   }
-
   const subtasksAmount = document.getElementById(`subtasksAmount-${taskId}`);
   if (subtasksAmount) {
     subtasksAmount.textContent = `${checkedCount}/${task.subTasks.length} Subtasks`;
   }
 
   await saveTaskToFirebase(task);
-
   renderTasks();
 }
 
@@ -334,7 +288,6 @@ async function saveTaskToFirebase(task) {
     console.error("Fehler:", error);
   }
 }
-//-------------- end ----------------
 
 async function createTaskBtn() {
   let title = document.getElementById("titleInput").value;
@@ -463,8 +416,6 @@ async function createTaskPlusInProgressBtn() {
       description: subTask.description,
       completed: subTask.completed ?? false,
     })),
-    //subTasks: subTasks.map((subTask) => (subTask.completed = false)),
-    //completed: subTask.completed ?? false,
     category,
     users: selectedContacts,
   };

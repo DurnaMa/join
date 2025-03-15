@@ -530,18 +530,6 @@ async function updateEditTask(event) {
   await loadTasks();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 function addTaskPopupBtn() {
   let addNewTaskBtnDiv = document.getElementById("addNewTaskBtnDiv");
   addNewTaskBtnDiv.classList.remove("d-none");
