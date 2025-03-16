@@ -477,12 +477,44 @@ async function createTaskPlusAwaitFeedbackBtn() {
   closeAddTaskPopUpAwaitFeedback();
 }
 
+// function addSubTaskPopUp() {
+//   if (subTaskPopUp.value != "") {
+//     subTasks.push({
+//       description: subTaskPopUp.value,
+//     });
+//     renderSubTaskList();
+//     subTaskPopUp.value = "";
+//   }
+// }
+
 function addSubTaskPopUp() {
-  if (subTaskPopUp.value != "") {
+  let subTaskInput = document.getElementById("subTaskPopUp");
+
+  if (subTaskInput.value.trim() !== "") {
     subTasks.push({
-      description: subTaskPopUp.value,
+      id: crypto.randomUUID(),
+      description: subTaskInput.value.trim(),
     });
+
     renderSubTaskList();
-    subTaskPopUp.value = "";
+    subTaskInput.value = "";
   }
 }
+
+// function addSubTaskPopUp() {
+//   let subTaskPopUp = document.getElementById("subTaskPopUp");
+//   if (subTaskPopUp.value.trim() !== "") {
+//     let newSubtask = {
+//       id: crypto.randomUUID(),
+//       description: subTaskPopUp.value.trim(),
+//     };
+
+//     if (!subTasks.some(sub => sub.description === newSubtask.description)) {
+//       subTasks.push(newSubtask);
+//     }
+
+//     renderSubTaskList();
+//     subTaskPopUp.value = "";
+//   }
+// }
+

@@ -137,6 +137,12 @@ function deleteSubTask(index) {
   renderSubTaskList();
 }
 
+// function deleteSubTask(subTaskId) {
+//   subTasks = subTasks.filter(sub => sub.id !== subTaskId);
+//   renderSubTaskList();
+// }
+
+
 function contactList() {
   let contactList = document.getElementById("assignedContactsList");
 
