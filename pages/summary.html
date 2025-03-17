@@ -14,7 +14,7 @@
     <script defer src="/js/includeTemplates.js"></script>
     <script defer src="/js/header.js"></script>
   </head>
-  <body onload="initSummary()">
+  <body onload="fullNameSummary()">
     <include-html src="/templates/header/header.html"></include-html>
     <include-html src="/templates/sidebar/sidebar.html"></include-html>
     <include-html src="/mobileTemplates/header/headerMobile.html"></include-html>
@@ -90,7 +90,7 @@
         </div>
         <div id="greetings" class="greetings">
           <span id="time"></span>
-          <h2>Guest</h2>
+          <h2 id="fullName"></h2>
         </div>
       </div>
     </div>

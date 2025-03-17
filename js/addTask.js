@@ -137,6 +137,12 @@ function deleteSubTask(index) {
   renderSubTaskList();
 }
 
+// function deleteSubTask(subTaskId) {
+//   subTasks = subTasks.filter(sub => sub.id !== subTaskId);
+//   renderSubTaskList();
+// }
+
+
 function contactList() {
   let contactList = document.getElementById("assignedContactsList");
 
@@ -206,7 +212,7 @@ async function postAddTask() {
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
-  // let category = document.getElementById("categoryList").value;
+  let category = document.getElementById("category").value;
 
   selectedContacts = Array.from(selectedContacts);
 
@@ -225,14 +231,17 @@ async function postAddTask() {
   }
 
   let data = {
-    //id: todos.length + 1,
     columnTitles: "To Do",
     title,
     description,
     dueDate,
     priority,
     subTasks,
-    category: selectedCategory,
+    subTasks: subTasks.map((subTask) => ({
+      description: subTask.description,
+      completed: subTask.completed ?? false,
+    })),
+    category,
     users: selectedContacts,
   };
 

@@ -38,3 +38,8 @@
     font-size: 12px;
   }
 }
+
+.mobileSideBar a.active {
+  background-color: #091931;
+  color: white !important;
+}

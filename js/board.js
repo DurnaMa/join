@@ -7,8 +7,6 @@ async function initBoard() {
   await loadDataUsers();
   await loadTasks();
   renderTasks();
-  //taskGetFromLocalStorage();
-  //taskGetFromFirebase();
 }
 
 function renderTasks() {
@@ -63,103 +61,6 @@ function generateEmptyColumn(columnId) {
   `;
 }
 
-// function generateTaskCard(task) {
-//   let completedSubtasks = task.subTasks
-//     ? task.subTasks.filter((st) => st.completed).length
-//     : 0;
-//   let totalSubtasks = task.subTasks ? task.subTasks.length : 0;
-
-//   let taskCard = document.createElement("div");
-//   taskCard.classList.add("task-card");
-//   taskCard.id = `task-${task.id}`;
-//   taskCard.draggable = true;
-//   taskCard.ondragstart = (event) => startDragging(event, task.id);
-
-//   taskCard.innerHTML = /*html*/ `
-//     <div class="task-card-div">
-//       <div class="task-card-category-div">
-//         <div class="task-card-category" id="taskCategory-${task.id}">
-//           <h2 class="task-card-category-h2" id="taskCategoryH2">${task.category}</h2>
-//         </div>
-//       </div>
-//       <h3>${task.title}</h3>
-//       <p>${task.description}</p>
-
-//       <div class="progress-container">
-//         <div class="progress-bar-container">
-//           <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
-//     totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0
-//   }%;"></div>
-//         </div>
-//         <div class="subtasks-div">
-//           <span class="subtasks-amount" id="subtasksAmount-${
-//             task.id
-//           }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
-//         </div>
-//       </div>
-//       <div class="task-footer">
-//         <div class="task-users" id="taskUsers-${task.id}"></div>
-//         <div>
-//           <img src="/assets/icons/priom.png" alt="">
-//         </div>
-//       </div>
-//     </div>
-//   `;
-
-// let usersContainer = taskCard.querySelector(`#taskUsers-${task.id}`);
-
-// if (Array.isArray(task.users)) {
-//   task.users.forEach((user) => {
-//     let userDiv = document.createElement("div");
-//     userDiv.classList.add("tasks-user");
-//     const contact = contacts.find((c) => c.name === user);
-//     if (contact) {
-//       userDiv.style.backgroundColor = contact.color;
-//     } else {
-//       userDiv.style.backgroundColor = "#FF0000";
-//     }
-//     userDiv.textContent = user;
-//     usersContainer.appendChild(userDiv);
-//   });
-// } else if (typeof task.users === "string") {
-//   let userDiv = document.createElement("div");
-//   userDiv.classList.add("tasks-user");
-//   const contact = contacts.find((c) => c.name === task.users);
-//   if (contact) {
-//     userDiv.style.backgroundColor = contact.color;
-//   } else {
-//     userDiv.style.backgroundColor = "#000";
-//   }
-//   userDiv.textContent = task.users;
-//   usersContainer.appendChild(userDiv);
-// }
-
-//   if (task.columnTitles) {
-//     let columnTitle = task.columnTitles.toLowerCase().trim();
-//     const columnMappings = {
-//       "to do": "To Do",
-//       "in progress": "In Progress",
-//       "await feedback": "Await Feedback",
-//       "done": "Done",
-//     };
-//     task.columnTitles = columnMappings[columnTitle] || task.columnTitles;
-//   }
-
-//   let categoryElement = taskCard.querySelector(".task-card-category");
-//   if (categoryElement) {
-//     const categoryColors = {
-//       "User Story": "#0038FF",
-//       "Technical Task": "#1FD7C1",
-//     };
-//     categoryElement.style.backgroundColor = categoryColors[task.category] || "#000";
-//   }
-
-//   taskCard.querySelector(".task-card-div").addEventListener("click", () => {
-//     openTaskPopup(task.id);
-//   });
-
-//   return taskCard;
-// }
 function generateTaskCard(task) {
   let completedSubtasks = task.subTasks
     ? task.subTasks.filter((st) => st.completed).length
@@ -186,7 +87,9 @@ function generateTaskCard(task) {
       
       <div class="progress-container">
         <div class="progress-bar-container">
-          <div class="progress-bar" id="progressBar-${task.id}" style="width: ${totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0}%;"></div>
+          <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
+    totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0
+  }%;"></div>
         </div>
         <div class="subtasks-div">
           <span class="subtasks-amount" id="subtasksAmount-${
@@ -223,10 +126,10 @@ function generateTaskCard(task) {
   if (task.columnTitles) {
     let columnTitle = task.columnTitles.toLowerCase().trim();
     const columnMappings = {
-      "to do": "To Do",
-      "in progress": "In Progress",
-      "await feedback": "Await Feedback",
-      done: "Done",
+      "To Do": "To Do",
+      "In Progress": "In Progress",
+      "Await Feedback": "Await Feedback",
+      Done: "Done",
     };
     task.columnTitles = columnMappings[columnTitle] || task.columnTitles;
   }
@@ -250,13 +153,33 @@ function generateTaskCard(task) {
   return taskCard;
 }
 
+function startDragging(event, id) {
+  currentDraggedElement = id;
+  event.dataTransfer.setData("text", id);
+}
+
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+async function drop(event, column) {
+  event.preventDefault();
+  let taskId = event.dataTransfer.getData("text");
+  let task = tasks.find((t) => t.id == taskId);
+  if (task) {
+    task.columnTitles = column;
+    renderTasks();
+    await patchDataToFirebase(`tasks/${task.id}`, { columnTitles: column });
+  }
+}
+
 function chooseImgPriority(taskCard, task) {
   let priorityElement = taskCard.querySelector(`#taskPriority-${task.id}`);
   if (priorityElement) {
     const priorityImages = {
-      urgent: "urgentRed.png",
-      medium: "mediumYellow.png",
-      low: "lowGreen.png",
+      Urgent: "urgentRed.png",
+      Medium: "mediumYellow.png",
+      Low: "lowGreen.png",
     };
     let priorityImage = document.createElement("img");
     priorityImage.src = `/assets/icons/${
@@ -266,82 +189,6 @@ function chooseImgPriority(taskCard, task) {
     priorityElement.appendChild(priorityImage);
   }
 }
-
-// function generateTaskCard(task) {
-//   let completedSubtasks = task.subTasks
-//     ? task.subTasks.filter((st) => st.completed).length
-//     : 0;
-//   let totalSubtasks = task.subTasks ? task.subTasks.length : 0;
-
-//   let taskCard = document.createElement("div");
-//   taskCard.classList.add("task-card");
-//   taskCard.id = `task-${task.id}`;
-//   taskCard.draggable = true;
-//   taskCard.ondragstart = (event) => startDragging(event, task.id);
-
-//   taskCard.innerHTML = /*html*/ `
-//     <div class="task-card-div">
-//       <div class="task-card-category-div">
-//         <div class="task-card-category">
-//           <h2 class="task-card-category-h2">${task.category}</h2>
-//         </div>
-//       </div>
-//       <h3>${task.title}</h3>
-//       <p>${task.description}</p>
-
-//       <div class="progress-container">
-//         <div class="progress-bar-container">
-//           <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
-//     (completedSubtasks / totalSubtasks) * 100
-//   }%;"></div>
-//         </div>
-//         <div class="subtasks-div">
-//           <span class="subtasks-amount" id="subtasksAmount-${
-//             task.id
-//           }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
-//         </div>
-//       </div>
-//       <div class="task-footer">
-//         <div class="task-users">
-//         <div class="tasks-user1 tasks-user">${task.users}</div>
-
-//         </div>
-//         <div>
-//           <img src="/assets/icons/priom.png" alt="">
-//         </div>
-//       </div>
-//     </div>
-//   `;
-
-//   if (task.columnTitles) {
-//     let columnTitle = task.columnTitles.toLowerCase().trim();
-
-//     if (columnTitle === "to do") {
-//       task.columnTitles = "To Do";
-//     } else if (columnTitle === "in progress") {
-//       task.columnTitles = "In Progress";
-//     } else if (columnTitle === "await feedback") {
-//       task.columnTitles = "Await Feedback";
-//     } else if (columnTitle === "done") {
-//       task.columnTitles = "Done";
-//     }
-//   }
-
-//   let categoryElement = taskCard.querySelector(".task-card-category");
-//   if (categoryElement) {
-//     if (task.category === "User story") {
-//       categoryElement.style.backgroundColor = "#0038FF";
-//     } else if (task.category === "Technical task") {
-//       categoryElement.style.backgroundColor = "#1FD7C1";
-//     }
-//   }
-
-//   taskCard.querySelector(".task-card-div").addEventListener("click", () => {
-//     openTaskPopup(task.id);
-//   });
-
-//   return taskCard;
-// }
 
 function searchTask() {
   let searchTaskInput = document
@@ -369,63 +216,6 @@ function searchTask() {
 
 document.getElementById("searchTask").addEventListener("keyup", searchTask);
 
-function startDragging(event, id) {
-  currentDraggedElement = id;
-  event.dataTransfer.setData("text", id);
-}
-
-function allowDrop(event) {
-  event.preventDefault();
-}
-
-// function drop(event, column) {
-//   event.preventDefault();
-//   let taskId = event.dataTransfer.getData("text");
-//   let task = tasks.find((t) => t.id == taskId);
-//   if (task) {
-//     task.columnTitles = column;
-//     renderTasks();
-//     firebase.firestore().collection('tasks').doc(taskId).set(task);
-//   }
-// }
-
-// function taskGetFromFirebase() {
-//   firebase.firestore().collection('tasks').get().then(querySnapshot => {
-//     tasks = querySnapshot.docs.map(doc => doc.data());
-//     renderTasks();
-//   });
-// }
-
-async function drop(event, column) {
-  event.preventDefault();
-  let taskId = event.dataTransfer.getData("text");
-  let task = tasks.find((t) => t.id == taskId);
-  if (task) {
-    task.columnTitles = column;
-    renderTasks();
-    await patchDataToFirebase(`tasks/${task.id}`, { columnTitles: column });
-  }
-}
-
-function taskGetFromLocalStorage() {
-  let storedTasks = localStorage.getItem("tasks");
-  if (storedTasks) {
-    tasks = JSON.parse(storedTasks);
-  } else {
-    tasks = [];
-  }
-  renderTasks();
-}
-
-// function drop(event, column) {
-//   event.preventDefault();
-//   let taskId = event.dataTransfer.getData("text");
-//   let task = tasks.find((t) => t.id == taskId);
-//   if (task) {
-//     task.columnTitles = column;
-//     renderTasks();
-//   }
-// }
 
 async function deleteTask(taskId) {
   let id = tasks.findIndex((task) => task.id == taskId);
@@ -437,72 +227,20 @@ async function deleteTask(taskId) {
   closeTaskCardPopUp();
 }
 
-// function deleteTask(taskId) {
-//   let id = tasks.findIndex((task) => task.id == taskId);
-//   let taskCard = document.getElementById(`task-${taskId}`);
-//   taskCard.remove();
-//   tasks.splice(id, 1);
-//   renderTasks();
-//   firebase.firestore().collection('tasks').doc(taskId).delete().then(() => {
-//     console.log('Task gelöscht!');
-//   }).catch((error) => {
-//     console.error('Fehler beim Löschen des Tasks:', error);
-//   });
-// }
-
-// function deleteTask(taskId) {
-//   let id = tasks.findIndex((task) => task.id == taskId);
-//   let taskCard = document.getElementById(`task-${taskId}`);
-//   taskCard.remove();
-//   tasks.splice(id, 1);
-//   renderTasks();
-//   firebase.firestore().collection('tasks').doc(taskId).delete();
-// }
-
-// function deleteTask(taskId) {
-//   let id = tasks.findIndex((task) => task.id == taskId);
-//   let taskCard = document.getElementById(`task-${taskId}`);
-//   taskCard.remove();
-//   tasks.splice(id, 1);
-//   renderTasks();
-// }
-
-// function updateSteps(taskId) {
-//   let task = tasks.find((t) => t.id === taskId);
-//   if (!task || !task.subTask) return;
-
-//   const checkboxes = document.querySelectorAll(
-//     `#taskPopUp[data-task-id='${taskId}'] .step input[type='checkbox']`
-//   );
-//   let checkedCount = 0;
-
-//   checkboxes.forEach((checkbox, index) => {
-//     task.subTask[index].completed = checkbox.checked;
-//     if (checkbox.checked) {
-//       checkedCount++;
-//     }
-//   });
-
-//   const progressBar = document.getElementById(`progressBar-${taskId}`);
-//   if (progressBar) {
-//     const progressPercentage = (checkedCount / checkboxes.length) * 100;
-//     progressBar.style.width = `${progressPercentage}%`;
-//   }
-
-//   const subtasksAmount = document.getElementById(`subtasksAmount-${taskId}`);
-//   if (subtasksAmount) {
-//     subtasksAmount.textContent = `${checkedCount}/${checkboxes.length} Subtasks`;
-//   }
-// }
 async function updateSteps(taskId) {
+
   let task = tasks.find((t) => t.id === taskId);
-  if (!task || !task.subTasks) return;
+  if (!task || !task.subTasks) {
+    return;
+  }
 
   const checkboxes = document.querySelectorAll(
     `#taskPopUp[data-task-id='${taskId}'] .step input[type='checkbox']`
   );
 
-  if (!checkboxes.length) return; // Falls keine Checkboxen existieren, abbrechen
+  if (!checkboxes.length) {
+    return;
+  }
 
   let checkedCount = 0;
 
@@ -515,52 +253,88 @@ async function updateSteps(taskId) {
     }
   });
 
-  // Fortschrittsbalken aktualisieren
   const progressBar = document.getElementById(`progressBar-${taskId}`);
   if (progressBar) {
     const progressPercentage = (checkedCount / task.subTasks.length) * 100;
     progressBar.style.width = `${progressPercentage}%`;
   }
-
-  // Subtasks-Anzeige aktualisieren
   const subtasksAmount = document.getElementById(`subtasksAmount-${taskId}`);
   if (subtasksAmount) {
     subtasksAmount.textContent = `${checkedCount}/${task.subTasks.length} Subtasks`;
   }
 
-  // Aktualisiere das globale tasks-Array
-  const taskIndex = tasks.findIndex((t) => t.id === taskId);
-  if (taskIndex !== -1) {
-    tasks[taskIndex] = task;
-  }
-
   await saveTaskToFirebase(task);
+  renderTasks();
 }
 
 async function saveTaskToFirebase(task) {
   try {
-    let response = await fetch(`https://your-firebase-url/tasks/${task.id}.json`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(task),
-    });
 
-    if (!response.ok) {
-      throw new Error("Fehler");
-    }
+    const response = await fetch(
+      `https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/tasks/${task.id}.json`,
+      {
+        method: "PUT", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(task),
+      }
+    );
+
+    if (!response.ok) throw new Error("Fehler beim Speichern in Firebase!");
+
+    console.log(`erfolgreich.`);
   } catch (error) {
     console.error("Fehler:", error);
   }
 }
 
+async function createTaskBtn() {
+  let title = document.getElementById("titleInput").value;
+  let description = document.getElementById("descriptionTextarea").value;
+  let dueDate = document.getElementById("date").value;
+  let category = document.getElementById("category").value;
 
+  selectedContacts = Array.from(selectedContacts);
 
+  let prioUrgentEdit = document.getElementById("prioUrgentEdit");
+  let prioMediumEdit = document.getElementById("prioMediumEdit");
+  let prioLowEdit = document.getElementById("prioLowEdit");
 
+  let priority = "";
 
+  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
+    priority = "Urgent";
+  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
+    priority = "Medium";
+  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
+    priority = "Low";
+  }
 
+  let data = {
+    columnTitles: "To Do",
+    title,
+    description,
+    dueDate,
+    priority,
+    subTasks,
+    subTasks: subTasks.map((subTask) => ({
+      description: subTask.description,
+      completed: subTask.completed ?? false,
+    })),
+    category,
+    users: selectedContacts,
+  };
 
+  try {
+    await postDataToFirebase("tasks/", data);
+  } catch (error) {
+    console.error(error);
+  }
+
+  await loadTasks();
+  closeAddTaskPopUp();
+}
 
 async function createTaskPlusToDoBtn() {
   let title = document.getElementById("titleInput").value;
@@ -577,32 +351,26 @@ async function createTaskPlusToDoBtn() {
   let priority = "";
 
   if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
-    priority = "urgent";
+    priority = "Urgent";
   } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
-    priority = "medium";
+    priority = "Medium";
   } else if (prioLowEdit.classList.contains("prioLowGreen")) {
-    priority = "low";
+    priority = "Low";
   }
 
-  // let users = selectedContacts.map((contact) => {
-  //   return contact.id;
-  // });
-
-  // let initials = selectedContacts.map((contact) => {
-  //   return generateInitials(contact.name);
-  // });
-
   let data = {
-    //id: todos.length + 1,
     columnTitles: "To Do",
     title,
     description,
     dueDate,
     priority,
     subTasks,
+    subTasks: subTasks.map((subTask) => ({
+      description: subTask.description,
+      completed: subTask.completed ?? false,
+    })),
     category,
     users: selectedContacts,
-    //initials,
   };
 
   try {
@@ -610,6 +378,9 @@ async function createTaskPlusToDoBtn() {
   } catch (error) {
     console.error(error);
   }
+
+  await loadTasks();
+  closeAddTaskPopUpToDo();
 }
 
 async function createTaskPlusInProgressBtn() {
@@ -627,21 +398,24 @@ async function createTaskPlusInProgressBtn() {
   let priority = "";
 
   if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
-    priority = "urgent";
+    priority = "Urgent";
   } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
-    priority = "medium";
+    priority = "Medium";
   } else if (prioLowEdit.classList.contains("prioLowGreen")) {
-    priority = "low";
+    priority = "Low";
   }
 
   let data = {
-    //id: todos.length + 1,
     columnTitles: "In Progress",
     title,
     description,
     dueDate,
     priority,
     subTasks,
+    subTasks: subTasks.map((subTask) => ({
+      description: subTask.description,
+      completed: subTask.completed ?? false,
+    })),
     category,
     users: selectedContacts,
   };
@@ -651,6 +425,9 @@ async function createTaskPlusInProgressBtn() {
   } catch (error) {
     console.error(error);
   }
+
+  await loadTasks();
+  closeAddTaskPopUpInProgress();
 }
 
 async function createTaskPlusAwaitFeedbackBtn() {
@@ -668,21 +445,24 @@ async function createTaskPlusAwaitFeedbackBtn() {
   let priority = "";
 
   if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
-    priority = "urgent";
+    priority = "Urgent";
   } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
-    priority = "medium";
+    priority = "Medium";
   } else if (prioLowEdit.classList.contains("prioLowGreen")) {
-    priority = "low";
+    priority = "Low";
   }
 
   let data = {
-    //id: todos.length + 1,
     columnTitles: "Await Feedback",
     title,
     description,
     dueDate,
     priority,
     subTasks,
+    subTasks: subTasks.map((subTask) => ({
+      description: subTask.description,
+      completed: subTask.completed ?? false,
+    })),
     category,
     users: selectedContacts,
   };
@@ -692,14 +472,49 @@ async function createTaskPlusAwaitFeedbackBtn() {
   } catch (error) {
     console.error(error);
   }
+
+  await loadTasks();
+  closeAddTaskPopUpAwaitFeedback();
 }
 
+// function addSubTaskPopUp() {
+//   if (subTaskPopUp.value != "") {
+//     subTasks.push({
+//       description: subTaskPopUp.value,
+//     });
+//     renderSubTaskList();
+//     subTaskPopUp.value = "";
+//   }
+// }
+
 function addSubTaskPopUp() {
-  if (subTaskPopUp.value != "") {
+  let subTaskInput = document.getElementById("subTaskPopUp");
+
+  if (subTaskInput.value.trim() !== "") {
     subTasks.push({
-      description: subTaskPopUp.value,
+      id: crypto.randomUUID(),
+      description: subTaskInput.value.trim(),
     });
+
     renderSubTaskList();
-    subTaskPopUp.value = "";
+    subTaskInput.value = "";
   }
 }
+
+// function addSubTaskPopUp() {
+//   let subTaskPopUp = document.getElementById("subTaskPopUp");
+//   if (subTaskPopUp.value.trim() !== "") {
+//     let newSubtask = {
+//       id: crypto.randomUUID(),
+//       description: subTaskPopUp.value.trim(),
+//     };
+
+//     if (!subTasks.some(sub => sub.description === newSubtask.description)) {
+//       subTasks.push(newSubtask);
+//     }
+
+//     renderSubTaskList();
+//     subTaskPopUp.value = "";
+//   }
+// }
+

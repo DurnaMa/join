@@ -89,3 +89,9 @@
       display: none;
   }
 }
+
+.policyAndNotice a.active,
+.sideBarList a.active {
+  background-color: #091931;
+  color: white !important;
+}
