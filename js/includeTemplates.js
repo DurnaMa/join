@@ -44,15 +44,3 @@ function headerInitialsMobile() {
   const initials = sessionStorage.getItem("userInitials") || "";
   document.getElementById("initialsMobile").textContent = initials;
 }
-
-// function headerinitials() {
-//   const initials = sessionStorage.getItem("userInitials") || "";
-//   setTimeout(() => {
-//     const initialsElement = document.getElementById("initials");
-//     if (initialsElement) {
-//       initialsElement.textContent = initials;
-//     } else {
-//       console.error("Fehler.");
-//     }
-//   }, 50);
-// }
