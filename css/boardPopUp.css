@@ -52,7 +52,7 @@ form {
   flex-direction: column;
   gap: 5px;
   width: 440px;
-  height: 376px;
+  /* height: 376px; */
 }
 
 .required {
@@ -69,6 +69,7 @@ textarea {
 
 .hrBoardPopUp {
   border: 1px solid #d1d1d1;
+  height: 416px;
 }
 
 .formPartRight {
@@ -76,7 +77,7 @@ textarea {
   flex-direction: column;
   gap: 6px;
   width: 440px;
-  height: 416px;
+  /* height: 416px; */
 }
 
 label {
@@ -86,7 +87,8 @@ label {
 input,
 textarea,
 .assignedContainer,
-select {
+select,
+.categoryContainer {
   height: 48px;
   border: 1px solid #d1d1d1;
   line-height: 24px;
@@ -99,6 +101,8 @@ input:focus,
 textarea:focus,
 .assignedContainer:focus,
 .assignedContainer:hover,
+.categoryContainer:focus,
+.categoryContainer:hover,
 select:focus {
   outline: none !important;
   border: 1px solid #29abe2;
@@ -109,13 +113,15 @@ input,
 textarea,
 button,
 .assignedContainer,
+.categoryContainer,
 select {
   font-size: 20px;
   cursor: pointer;
   /* padding: 25px 0 25px 0; */
 }
 
-.taskCardEditPopup input,.taskCardEditPopup textarea{
+.taskCardEditPopup input,
+.taskCardEditPopup textarea {
   font-size: 20px;
   cursor: pointer;
   padding: 25px 0 25px 25px;
@@ -124,7 +130,7 @@ select {
 .taskCardEditPopup label,
 /* .taskCardEditPopup input, */
 /* .taskCardEditPopup textarea, */
-.taskCardEditPopup select{
+.taskCardEditPopup select {
   font-size: 20px;
   cursor: pointer;
   padding: 20px 0 20px 0;
@@ -205,11 +211,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-weight: 400;
 }
 
-.addSubTask{
+.addSubTask {
   border: none;
 }
 
-.addSubTask:focus{
+.addSubTask:focus {
   border: none;
 }
 
@@ -242,24 +248,26 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border: 1px solid #29abe2;
 }
 
-/* #subTaskList { */
-  /* border-radius: 10px; */
-  /* background-color: white; */
-  /* max-height: 140px; */
-  /* overflow: auto; */
-  /* position: absolute; */
-  /* top: 598px; */
-  /* padding-bottom: 96px; */
-  /* width: inherit; */
-/* } */
+#subTaskList {
+/* border-radius: 10px; */
+/* background-color: white; */
+max-height: 84px;
+overflow: auto;
+/* position: absolute; */
+/* top: 598px; */
+/* padding-bottom: 96px; */
+/* width: inherit; */
+}
 
 .taskFormButtons {
-  padding: 75px 0;
-  width: 100%;
+  /* padding: 75px 0; */
+  width: 90%;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   gap: 4px;
+  position: fixed;
+  bottom: 40px;
 }
 
 .btnSection {
@@ -326,7 +334,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   position: relative;
 }
 
-.subTask input{
+.subTask input {
   padding: 0;
 }
 
@@ -335,7 +343,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .subTask:focus {
-  border-bottom: 2px solid #29abe2
+  border-bottom: 2px solid #29abe2;
 }
 
 .subTask-edit-input {
@@ -410,8 +418,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   max-height: 165px;
   overflow: auto;
   position: absolute;
-  top: 565px;
+  top: 569px;
   width: inherit;
+  z-index: 1;
 }
 
 #assignedContactsListPopUp {
@@ -423,7 +432,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   max-height: 165px;
   overflow: auto;
   position: fixed;
-  top: 766px;
+  top: 768px;
   width: 87%;
 }
 
@@ -446,8 +455,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .assignedContactsPopUp span {
   font-size: 20px;
 }
-
-
 
 input[type="checkbox"] {
   width: 17px;
@@ -486,7 +493,7 @@ input[type="checkbox"] {
   background-color: #eeeeee;
 }
 
-.assignedContactContentPopUp{
+.assignedContactContentPopUp {
   display: flex;
   justify-content: space-between;
   padding: 0px 20px 0px 20px;
@@ -513,9 +520,55 @@ input[type="checkbox"] {
   z-index: 6;
 }
 
-
 .selectedContactsContainerPopUp {
+  display: flex;
+  padding: 12px 0 0 5px;
+  gap: 1px;
+}
+
+.selectedContactsContainer {
   display: flex;
   padding: 5px;
   gap: 1px;
+}
+
+.categoryContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  cursor: pointer;
+  background-color: white;
+  margin-bottom: -8px;
+  position: relative;
+}
+
+#categoryList {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: white;
+  max-height: 165px;
+  overflow: auto;
+  position: absolute;
+  top: 103%;
+  width: 100%;
+  margin-left: -20px;
+}
+
+.categoryTechnicalTask {
+  font-size: 20px;
+  padding: 10px 22px 10px 22px;
+  cursor: pointer;
+}
+
+.categoryUserStory {
+  font-size: 20px;
+  padding: 10px 22px 10px 22px;
+  cursor: pointer;
+}
+
+.categoryTechnicalTask:hover,
+.categoryUserStory:hover {
+  background-color: #eeeeee;
 }
