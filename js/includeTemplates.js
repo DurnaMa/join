@@ -1,5 +1,7 @@
 class IncludeHTML extends HTMLElement {
   async connectedCallback() {
+
+    setTimeout(async () => {
     const file = this.getAttribute('src');
     try {
       const response = await fetch(file);
@@ -21,6 +23,7 @@ class IncludeHTML extends HTMLElement {
       }
       console.error(error);
     }
+  }, 10);
   }
 }
 

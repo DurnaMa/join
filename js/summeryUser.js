@@ -27,10 +27,4 @@ function fullNameSummary() {
   const fullName = sessionStorage.getItem("fullName") || "Guest";
   document.getElementById("fullName").textContent = fullName;
   daliyTime();
-  //headerinitials();
 }
-
-// function headerinitials() {
-//   const initials = sessionStorage.getItem("userInitials") || "";
-//   document.getElementById("initials").textContent = initials;
-// }
