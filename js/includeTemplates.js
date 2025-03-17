@@ -29,7 +29,19 @@ class IncludeHTML extends HTMLElement {
 
 customElements.define('include-html', IncludeHTML);
 
+// function headerinitials() {
+//   const initials = sessionStorage.getItem("userInitials") || "";
+//   document.getElementById("initials").textContent = initials;
+// }
+
 function headerinitials() {
   const initials = sessionStorage.getItem("userInitials") || "";
-  document.getElementById("initials").textContent = initials;
+  setTimeout(() => {
+    const initialsElement = document.getElementById("initials");
+    if (initialsElement) {
+      initialsElement.textContent = initials;
+    } else {
+      console.error("Fehler.");
+    }
+  }, 50);
 }
