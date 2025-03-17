@@ -15,7 +15,9 @@ class IncludeHTML extends HTMLElement {
         highlightNavItem();
       }
 
-      headerinitials();
+      if (file.includes('header')) {
+        headerInitials();
+      }
 
     } catch (error) {
       if (this.isConnected) {
@@ -29,7 +31,7 @@ class IncludeHTML extends HTMLElement {
 
 customElements.define('include-html', IncludeHTML);
 
-function headerinitials() {
+function headerInitials() {
   const initials = sessionStorage.getItem("userInitials") || "";
   document.getElementById("initials").textContent = initials;
 }
