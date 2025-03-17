@@ -8,17 +8,22 @@
     <link rel="stylesheet" href="/css/fonts.css" />
     <script defer src="/js/script.js"></script>
     <script defer src="/js/header.js"></script>
+    <script defer src="/js/contacts.js"></script>
+    <script defer src="/js/summeryUser.js"></script>
+
     <title>Header</title>
   </head>
   <body>
-    <header class="header">
+    <header id="header" class="header">
       <div class="max-width">
         <span>Kanban Project Management Tool</span>
         <div class="headerNav">
           <a class="headerHelp" href="/pages/help.html">
             <img class="helpIcon" src="/assets/img/help.png" alt="" />
           </a>
-          <a onclick="toggleMenu()" id="profileName" class="headerProfile">G</a>
+          <a onclick="toggleMenu()" id="profileName" class="headerProfile">
+            <span onload="headerinitials()" id="initials"></span>
+          </a>
           <div id="subMenu" class="hidden">
             <a class="hidden" href="/pages/help.html">Help</a>
             <a href="/pages/legale-notice.html">Legal Notice</a>

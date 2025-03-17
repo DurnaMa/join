@@ -12,6 +12,9 @@ class IncludeHTML extends HTMLElement {
       if (file.includes('sidebar') || file.includes('footerMobile')) {
         highlightNavItem();
       }
+
+      headerinitials();
+
     } catch (error) {
       if (this.isConnected) {
         this.innerHTML = 'Page not found';
@@ -22,3 +25,8 @@ class IncludeHTML extends HTMLElement {
 }
 
 customElements.define('include-html', IncludeHTML);
+
+function headerinitials() {
+  const initials = sessionStorage.getItem("userInitials") || "";
+  document.getElementById("initials").textContent = initials;
+}

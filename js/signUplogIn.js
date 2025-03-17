@@ -126,6 +126,9 @@ function logIn() {
   if (user) {
     errorDiv.textContent = "Login erfolgreich!";
     errorDiv.style.color = "green";
+    sessionStorage.setItem("fullName", user.name);
+    const initials = user.name.split(' ').map(initials => initials[0]).join('').toUpperCase();
+    sessionStorage.setItem("userInitials", initials);
     window.location.href = "./pages/summary.html";
     return true;
   } else {
