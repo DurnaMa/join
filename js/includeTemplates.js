@@ -16,7 +16,11 @@ class IncludeHTML extends HTMLElement {
       }
 
       if (file.includes('header')) {
-        headerInitials();
+        headerinitials();
+      }
+
+      if (file.includes('headerMobile')) {
+        headerInitialsMobile();
       }
 
     } catch (error) {
@@ -31,19 +35,24 @@ class IncludeHTML extends HTMLElement {
 
 customElements.define('include-html', IncludeHTML);
 
-// function headerinitials() {
-//   const initials = sessionStorage.getItem("userInitials") || "";
-//   document.getElementById("initials").textContent = initials;
-// }
-
 function headerinitials() {
   const initials = sessionStorage.getItem("userInitials") || "";
-  setTimeout(() => {
-    const initialsElement = document.getElementById("initials");
-    if (initialsElement) {
-      initialsElement.textContent = initials;
-    } else {
-      console.error("Fehler.");
-    }
-  }, 50);
+  document.getElementById("initials").textContent = initials;
 }
+
+function headerInitialsMobile() {
+  const initials = sessionStorage.getItem("userInitials") || "";
+  document.getElementById("initialsMobile").textContent = initials;
+}
+
+// function headerinitials() {
+//   const initials = sessionStorage.getItem("userInitials") || "";
+//   setTimeout(() => {
+//     const initialsElement = document.getElementById("initials");
+//     if (initialsElement) {
+//       initialsElement.textContent = initials;
+//     } else {
+//       console.error("Fehler.");
+//     }
+//   }, 50);
+// }
