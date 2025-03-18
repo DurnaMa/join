@@ -64,6 +64,11 @@ h3 {
   flex-direction: column;
 }
 
+.helpIcon:hover{
+  width: 22px;
+  height: 22px;
+}
+
 @media (max-width: 992px) {
   .helpContainer {
     padding: 196px 40px 120px 40px;

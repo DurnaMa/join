@@ -28,8 +28,10 @@
 }
 
 .headerHelp {
-  padding: 0;
-  width: 50px;
+  display: flex;
+  padding-right: 16px;
+  /* padding: 0; */
+  /* width: 50px; */
 }
 
 #profileName {
