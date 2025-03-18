@@ -423,6 +423,10 @@
   .contact-details-div-icons {
     font-size: 14px;
   }
+
+  .email {
+    font-size: 18px;
+  }
 }
 
 @media screen and (max-width: 992px) {
@@ -437,6 +441,18 @@
 
   .scrollbar {
     height: 70%;
+  }
+}
+
+@media screen and (max-width: 939px) {
+  .email {
+    font-size: 15px;
+  }
+
+  .popup-right-profile {
+    height: 130px;
+    width: 130px;
+    font-size: 50px;
   }
 }
 
