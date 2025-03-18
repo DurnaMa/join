@@ -74,13 +74,19 @@
   width: 160px;
   height: 48px;
   border-radius: 10px;
-  border: 1px solid #2a3647;
+  border: none;
+  /* border: 1px solid #2a3647; */
   padding-top: 8px;
   padding-right: 16px;
   padding-bottom: 8px;
   padding-left: 16px;
   gap: 8px;
   cursor: pointer;
+}
+
+.addTaskBtn:hover{
+  background-color: #29abe2;
+  box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 .addTaskMobileBtn {
@@ -201,7 +207,27 @@
   border-radius: 8px;
   border: 2px solid #2a3647;
   cursor: pointer;
+  transition: color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
 }
+
+.add-column:hover {
+  border: 2px solid #29abe2;
+  background-color: white;
+  color: #29abe2;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.add-column img {
+  transition: filter 0.3s ease;
+}
+
+.add-column:hover img {
+  filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg)
+    brightness(100%) contrast(100%);
+}
+
+
+
 
 .task-container {
   display: flex;
@@ -538,6 +564,7 @@
 
   .addTaskMobileBtn {
     display: flex;
+    border: none;
   }
 }
 
