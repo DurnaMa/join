@@ -405,3 +405,9 @@ input[type="checkbox"] {
   color: white;
   background-color: #ff7a00;
 }
+
+.task-added-popup {
+  top: 50%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+}
