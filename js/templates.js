@@ -129,11 +129,17 @@ function renderAddTaskPopupToDoPlus() {
             </section>
             <br />
             <label for="category">Category<span class="required">*</span> </label>
-            <select id="category">
+            <!-- <select id="category">
               <option value disabled selected hidden>Select Task Category</option>
               <option value="Technical Task">Technical Task</option>
               <option value="User Story">User Story</option>
-            </select>
+            </select> -->
+            <div onclick="categorytList()" class="categoryContainer">
+              <span id="dropdownCategory" class="">Select Task Category</span>
+              <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+              <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+              <div id="categoryList" class="hidden"></div>
+            </div>
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
@@ -207,11 +213,17 @@ function renderAddTaskPopupInProgressPlus() {
             </section>
             <br />
             <label for="category">Category<span class="required">*</span> </label>
-            <select id="category">
+            <!-- <select id="category">
               <option value disabled selected hidden>Select Task Category</option>
               <option value="Technical Task">Technical Task</option>
               <option value="User Story">User Story</option>
-            </select>
+            </select> -->
+            <div onclick="categorytList()" class="categoryContainer">
+              <span id="dropdownCategory" class="">Select Task Category</span>
+              <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+              <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+              <div id="categoryList" class="hidden"></div>
+            </div>
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
@@ -285,11 +297,17 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
             </section>
             <br />
             <label for="category">Category<span class="required">*</span> </label>
-            <select id="category">
+            <!-- <select id="category">
               <option value disabled selected hidden>Select Task Category</option>
               <option value="Technical Task">Technical Task</option>
               <option value="User Story">User Story</option>
-            </select>
+            </select> -->
+            <div onclick="categorytList()" class="categoryContainer">
+              <span id="dropdownCategory" class="">Select Task Category</span>
+              <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+              <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+              <div id="categoryList" class="hidden"></div>
+            </div>
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
