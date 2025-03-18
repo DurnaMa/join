@@ -50,7 +50,7 @@ function renderAddTaskPoupBtn() {
               <option value="Technical Task">Technical Task</option>
               <option value="User Story">User Story</option>
             </select> -->
-            <div onclick="categorytList()" class="categoryContainer">
+            <div onclick="categorytList()" class="categoryContainer" id="category">
               <span id="dropdownCategory" class="">Select Task Category</span>
               <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
               <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
@@ -218,7 +218,7 @@ function renderAddTaskPopupInProgressPlus() {
               <option value="Technical Task">Technical Task</option>
               <option value="User Story">User Story</option>
             </select> -->
-            <div onclick="categorytList()" class="categoryContainer">
+            <div onclick="categorytList()" class="categoryContainer" id="category">
               <span id="dropdownCategory" class="">Select Task Category</span>
               <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
               <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
@@ -302,7 +302,7 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
               <option value="Technical Task">Technical Task</option>
               <option value="User Story">User Story</option>
             </select> -->
-            <div onclick="categorytList()" class="categoryContainer">
+            <div onclick="categorytList()" class="categoryContainer" id="category">
               <span id="dropdownCategory" class="">Select Task Category</span>
               <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
               <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />

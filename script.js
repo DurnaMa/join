@@ -61,6 +61,21 @@ async function postDataToFirebase(path = "", data = {}) {
   });
 }
 
+async function postTaskDataToFirebase(path = "", data = {}) {
+  await fetch(BASE_URL + path + ".json", {
+    method: "POST",
+    header: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  //redirectToBoardPage();
+}
+
+// function redirectToBoardPage() {
+//   window.location.href = "/pages/board.html";
+// }
+
 async function deleteDataFromFirebase(path = "") {
   await fetch(BASE_URL + path + ".json", {
     method: "DELETE",

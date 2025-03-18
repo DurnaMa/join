@@ -212,7 +212,7 @@ async function postAddTask() {
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
-  let category = document.getElementById("category").value;
+  let category = document.getElementById("dropdownCategory").innerText;
 
   selectedContacts = Array.from(selectedContacts);
 
@@ -223,11 +223,11 @@ async function postAddTask() {
   let priority = "";
 
   if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
-    priority = "urgent";
+    priority = "Urgent";
   } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
-    priority = "medium";
+    priority = "Medium";
   } else if (prioLowEdit.classList.contains("prioLowGreen")) {
-    priority = "low";
+    priority = "Low";
   }
 
   let data = {
@@ -246,7 +246,7 @@ async function postAddTask() {
   };
 
   try {
-    await postDataToFirebase("tasks/", data);
+    await postTaskDataToFirebase("tasks/", data);
   } catch (error) {
     console.error(error);
   }

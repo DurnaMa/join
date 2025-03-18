@@ -293,7 +293,7 @@ async function createTaskBtn() {
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
-  let category = document.getElementById("category").value;
+  let category = document.getElementById("dropdownCategory").innerText;
 
   selectedContacts = Array.from(selectedContacts);
 
@@ -340,7 +340,7 @@ async function createTaskPlusToDoBtn() {
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
-  let category = document.getElementById("category").value;
+  let category = document.getElementById("dropdownCategory").innerText;
 
   selectedContacts = Array.from(selectedContacts);
 
@@ -369,7 +369,7 @@ async function createTaskPlusToDoBtn() {
       description: subTask.description,
       completed: subTask.completed ?? false,
     })),
-    category,
+    category: category,
     users: selectedContacts,
   };
 
@@ -387,7 +387,7 @@ async function createTaskPlusInProgressBtn() {
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
-  let category = document.getElementById("category").value;
+  let category = document.getElementById("dropdownCategory").innerText;
 
   selectedContacts = Array.from(selectedContacts);
 
@@ -434,7 +434,7 @@ async function createTaskPlusAwaitFeedbackBtn() {
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
-  let category = document.getElementById("category").value;
+  let category = document.getElementById("dropdownCategory").innerText;
 
   selectedContacts = Array.from(selectedContacts);
 
