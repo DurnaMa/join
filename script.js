@@ -6,6 +6,8 @@ let tasks = [];
 
 function init() {}
 
+includeHTML();
+
 const colorPalette = [
   "#E63946",
   "#F4A261",
