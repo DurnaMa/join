@@ -35,12 +35,35 @@ class IncludeHTML extends HTMLElement {
 
 customElements.define('include-html', IncludeHTML);
 
+// function headerinitials() {
+//   const initials = sessionStorage.getItem("userInitials") || "";
+//   document.getElementById("initials").textContent = initials;
+// }
 function headerinitials() {
   const initials = sessionStorage.getItem("userInitials") || "";
-  document.getElementById("initials").textContent = initials;
+  setTimeout(() => {
+    const initialsElement = document.getElementById("initials");
+    if (initialsElement) {
+      initialsElement.textContent = initials;
+    } else {
+      console.error("Fehler.");
+    }
+  }, 50);
 }
+
+// function headerInitialsMobile() {
+//   const initials = sessionStorage.getItem("userInitials") || "";
+//   document.getElementById("initialsMobile").textContent = initials;
+// }
 
 function headerInitialsMobile() {
   const initials = sessionStorage.getItem("userInitials") || "";
-  document.getElementById("initialsMobile").textContent = initials;
+  setTimeout(() => {
+    const initialsElement = document.getElementById("initialsMobile");
+    if (initialsElement) {
+      initialsElement.textContent = initials;
+    } else {
+      console.error("Fehler.");
+    }
+  }, 50);
 }

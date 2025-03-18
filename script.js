@@ -223,25 +223,47 @@ function showConfirmPassword() {
   }
 }
 
-function highlightNavItem() {
-  let currentPage = getCurrentPage();
+// function highlightNavItem() {
+//   let currentPage = getCurrentPage();
 
-  let navItems = document.querySelectorAll(
-    ".sideBarList a, .policyAndNotice a, .mobileSideBar a"
+//   let navItems = document.querySelectorAll(
+//     ".sideBarList a, .policyAndNotice a, .mobileSideBar a"
+//   );
+//   navItems.forEach((item) => {
+//     let page = item.getAttribute("data-page");
+//     if (page === currentPage) {
+//       item.classList.add("active");
+//     } else {
+//       item.classList.remove("active");
+//     }
+//   });
+// }
+
+// function getCurrentPage() {
+//   let path = window.location.pathname;
+//   let fileName = path.substring(path.lastIndexOf("/") + 1);
+//   return fileName.replace(".html", "");
+// }
+
+// document.addEventListener("DOMContentLoaded", highlightNavItem);
+
+function highlightNavItem() {
+  const currentPage = getCurrentPage();
+
+  const navItems = Array.from(
+    document.querySelectorAll(".sideBarList a, .policyAndNotice a, .mobileSideBar a")
   );
-  navItems.forEach((item) => {
-    let page = item.getAttribute("data-page");
-    if (page === currentPage) {
-      item.classList.add("active");
-    } else {
-      item.classList.remove("active");
-    }
+
+  // Entfernt 'active' von allen Elementen und fügt es nur zum passenden hinzu
+  navItems.forEach(item => {
+    const isActive = item.getAttribute("data-page") === currentPage;
+    item.classList.toggle("active", isActive);
   });
 }
 
 function getCurrentPage() {
-  let path = window.location.pathname;
-  let fileName = path.substring(path.lastIndexOf("/") + 1);
+  const path = window.location.pathname;
+  const fileName = path.substring(path.lastIndexOf("/") + 1);
   return fileName.replace(".html", "");
 }
 
