@@ -3,7 +3,8 @@
   flex-wrap: wrap;
   min-height: 100vh;
   margin-left: 235px;
-  padding-left: 50px;
+  /* padding-left: 50px; */
+  padding-left: 64px;
   padding-top: 96px;
   background-color: #f6f7f8;
 }
@@ -15,7 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 40px 0px 40px;
+  padding: 0px 40px 0px 0px;
 }
 
 .board-title {
@@ -28,11 +29,11 @@
 
 .boardHeaderRight {
   display: flex;
-  justify-content: end;
-  width: 504px;
-  height: 48px;
+  /* justify-content: end; */
+  /* width: 504px; */
+  /* height: 48px; */
   gap: 32px;
-  font-size: 92px;
+  /* font-size: 92px; */
 }
 
 .searchDiv {
@@ -128,12 +129,12 @@
   line-height: 24px;
 }
 
-.columns {
+/* .columns {
   display: flex;
   width: fill 246px;
   height: fill 688px;
   gap: 24px;
-}
+} */
 
 .column {
   display: flex;
@@ -222,11 +223,9 @@
 }
 
 .add-column:hover img {
-  filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg) brightness(100%) contrast(100%);
+  filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg)
+    brightness(100%) contrast(100%);
 }
-
-
-
 
 .task-container {
   display: flex;
@@ -236,9 +235,10 @@
   margin-top: 16px;
   top: 336px;
   left: 232px;
-  gap: 24px;
+  /* gap: 24px; */
+  gap: 50px;
   padding-right: 40px;
-  padding-left: 40px;
+  /* padding-left: 40px; */
 }
 
 .column-container {
@@ -567,19 +567,10 @@
   }
 }
 
-@media screen and (max-width: 992px) {
-  .board {
-    margin: 0;
-  }
-  .boardHeader {
-    padding: 0;
-  }
-}
-
 @media screen and (max-width: 1055px) {
   .boardHeaderRight {
     display: flex;
-    justify-content: start;
+    justify-content: end;
   }
   .task-container {
     padding: 0;
@@ -587,9 +578,24 @@
   }
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 992px) {
+  .board {
+    margin: 0;
+  }
+
+  .boardHeader {
+    padding: 0;
+    padding-right: 64px;
+  }
+}
+
+@media screen and (max-width: 750px) {
   .searchDiv {
-    display: none;
+    width: 100%;
+  }
+
+  .search {
+    width: 100%;
   }
 
   .addTaskMobileBtn {
@@ -607,7 +613,7 @@
   }
 
   .board-title-plusbtn {
-    width: 396px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -622,6 +628,18 @@
     border-radius: 10px;
     background-color: white;
     border: 1px solid #a8a8a8;
+  }
+
+  .boardHeaderRight {
+    width: 100%;
+  }
+
+  .board {
+    padding-left: 25px;
+  }
+
+  .boardHeader {
+    padding-right: 25px;
   }
 }
 
