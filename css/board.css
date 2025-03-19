@@ -139,8 +139,8 @@
 .column {
   display: flex;
   flex-direction: column;
-  width: 246px;
-  height: 688px;
+  /* width: 246px; */
+  /* height: 688px; */
   gap: 24px;
 }
 
@@ -230,22 +230,22 @@
 .task-container {
   display: flex;
   flex-flow: wrap;
-  width: 1200px;
-  height: 688px;
+  /* width: 1200px; */
+  /* height: 688px; */
   margin-top: 16px;
-  top: 336px;
-  left: 232px;
+  /* top: 336px; */
+  /* left: 232px; */
   /* gap: 24px; */
   gap: 50px;
   padding-right: 40px;
   /* padding-left: 40px; */
 }
 
-.column-container {
-  width: 246px;
-  height: 688px;
-  gap: 24px;
-}
+/* .column-container { */
+/* width: 246px; */
+/* height: 688px; */
+/* gap: 24px; */
+/* } */
 
 .task-card-container {
   display: flex;
@@ -587,6 +587,10 @@
     padding: 0;
     padding-right: 64px;
   }
+
+  .task-container {
+    padding-bottom: 125px;
+  }
 }
 
 @media screen and (max-width: 750px) {
@@ -643,6 +647,50 @@
   }
 }
 
+@media screen and (max-width: 600px) {
+  .task-container {
+    gap: 70px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: row;
+    width: 248px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    /* -webkit-overflow-scrolling: touch; */
+    /* -webkit-appearance: none; */
+    touch-action: pan-x;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  @supports (touch-action: manipulation) {
+    .manipulation {
+      touch-action: manipulation;
+    }
+  }
+  .column::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* .column::-webkit-scrollbar {
+  display: none;
+} */
+
+/* .example::-webkit-scrollbar {
+  display: none;
+} */
+
+/* .example {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+} */
 /*
 @media screen and (max-width: 1080px) {
   .boardHeaderRight {
