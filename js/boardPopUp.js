@@ -1,4 +1,5 @@
 function openTaskPopup(taskId) {
+  document.getElementById("bodyId").classList.add("overflow-hidden");
   console.log("Task ID:", taskId);
   let id = tasks.findIndex((task) => task.id == taskId);
   if (id === -1) {
@@ -25,6 +26,7 @@ function openEditTaskPopup(taskId) {
   openTaskPopupDiv.classList.add("d-none");
   editTaskPopupDiv.classList.remove("d-none");
   editTaskPopupDiv.innerHTML = renderEditTasksCardPopup(currentSelectedTask, taskId);
+  
 }
 
 // async function editTask(taskId) {
@@ -602,18 +604,21 @@ async function updateEditTask(event) {
 
 
 function addTaskPopupBtn() {
+  document.getElementById("bodyId").classList.add("overflow-hidden");
   let addNewTaskBtnDiv = document.getElementById("addNewTaskBtnDiv");
   addNewTaskBtnDiv.classList.remove("d-none");
   addNewTaskBtnDiv.innerHTML = renderAddTaskPoupBtn();
 }
 
 function addTaskPopupPlusToDoBtn() {
+  document.getElementById("bodyId").classList.add("overflow-hidden");
   let openTaskPopupToDoDiv = document.getElementById("openTaskPopupToDoDiv");
   openTaskPopupToDoDiv.classList.remove("d-none");
   openTaskPopupToDoDiv.innerHTML = renderAddTaskPopupToDoPlus();
 }
 
 function addTaskPopupPlusInProgressBtn() {
+  document.getElementById("bodyId").classList.add("overflow-hidden");
   let openTaskPopupInProgressDiv = document.getElementById(
     "openTaskPopupInProgressDiv"
   );
@@ -622,6 +627,7 @@ function addTaskPopupPlusInProgressBtn() {
 }
 
 function addTaskPopupPlusAwaitFeedbackBtn() {
+  document.getElementById("bodyId").classList.add("overflow-hidden");
   let openTaskPopupAwaitFeedbackDiv = document.getElementById(
     "openTaskPopupAwaitFeedbackDiv"
   );
@@ -631,30 +637,34 @@ function addTaskPopupPlusAwaitFeedbackBtn() {
 }
 
 function closeAddTaskPopUp() {
+  document.getElementById("bodyId").classList.remove("overflow-hidden");
   document.getElementById("addNewTaskBtnDiv").classList.add("d-none");
   document.getElementById("addTaskPopupDiv").classList.add("d-none");
   document.getElementById("openTaskPopupDiv").classList.add("d-none");
 }
 
 function closeAddTaskPopUpToDo() {
+  document.getElementById("bodyId").classList.remove("overflow-hidden");
   document.getElementById("openTaskPopupToDoDiv").classList.add("d-none");
 }
 
 function closeAddTaskPopUpInProgress() {
+  document.getElementById("bodyId").classList.remove("overflow-hidden");
   document.getElementById("openTaskPopupInProgressDiv").classList.add("d-none");
 }
 
 function closeAddTaskPopUpAwaitFeedback() {
-  document
-    .getElementById("openTaskPopupAwaitFeedbackDiv")
-    .classList.add("d-none");
+  document.getElementById("bodyId").classList.remove("overflow-hidden");
+  document.getElementById("openTaskPopupAwaitFeedbackDiv").classList.add("d-none");
 }
 
 function closeTaskCardPopUp() {
+  document.getElementById("bodyId").classList.remove("overflow-hidden");
   document.getElementById("openTaskPopupDiv").classList.add("d-none");
 }
 
 function closeEditTaskCardPopUp() {
+  document.getElementById("bodyId").classList.remove("overflow-hidden");
   document.getElementById("editTaskPopupDiv").classList.add("d-none");
 }
 

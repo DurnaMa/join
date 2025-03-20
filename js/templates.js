@@ -63,10 +63,14 @@ function renderAddTaskPoupBtn() {
               <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
             <ul id="subTaskList"></ul>
+            <p class="requiredInfoResponsive">
+            <span class="required">*</span>
+            This field is required
+          </p>
           </section>
         </div>
         <div class="taskFormButtons">
-          <p>
+          <p class="requiredInfo">
             <span class="required">*</span>
             This field is required
           </p>
