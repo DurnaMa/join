@@ -406,8 +406,28 @@ input[type="checkbox"] {
   background-color: #ff7a00;
 }
 
-.task-added-popup {
-  top: 50%;
-  left: 80%;
-  transform: translate(-50%, -50%);
+.task-added-popupMahir {
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.popup-spamMahir {
+  display: flex;
+  gap: 15px;
+  background-color: #2a3647;
+  height: 74px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  font-size: 21px;
 }

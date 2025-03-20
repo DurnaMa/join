@@ -142,7 +142,6 @@ function deleteSubTask(index) {
 //   renderSubTaskList();
 // }
 
-
 function contactList() {
   let contactList = document.getElementById("assignedContactsList");
 
@@ -184,9 +183,9 @@ function updateSelectedContactsDisplay() {
     let contact = contacts.find((c) => c.name === contactName);
     if (contact) {
       selectedContainer.innerHTML += /*html*/ `
-        <span class="assignedShortcutName" style="background-color: ${contact.color};">${generateInitials(
-        contact.name
-      )}</span>
+        <span class="assignedShortcutName" style="background-color: ${
+          contact.color
+        };">${generateInitials(contact.name)}</span>
       `;
     }
   });
@@ -194,7 +193,9 @@ function updateSelectedContactsDisplay() {
 
 function toggleCheckbox(event, contactName) {
   let checkbox =
-    event.target.type === "checkbox" ? event.target : event.currentTarget.querySelector('input[type="checkbox"]');
+    event.target.type === "checkbox"
+      ? event.target
+      : event.currentTarget.querySelector('input[type="checkbox"]');
   if (checkbox) {
     checkbox.checked = !checkbox.checked;
     event.currentTarget.classList.toggle("selectedContact", checkbox.checked);
@@ -219,6 +220,7 @@ async function postAddTask() {
   let prioUrgentEdit = document.getElementById("prioUrgentEdit");
   let prioMediumEdit = document.getElementById("prioMediumEdit");
   let prioLowEdit = document.getElementById("prioLowEdit");
+  let popup = document.getElementById("popup");
 
   let priority = "";
 
@@ -247,6 +249,13 @@ async function postAddTask() {
 
   try {
     await postTaskDataToFirebase("tasks/", data);
+    if (popup) {
+      popup.classList.remove("d-none");
+    }
+    setTimeout(() => {
+      window.location.href = "/pages/board.html";
+    }, 2000);
+
   } catch (error) {
     console.error(error);
   }

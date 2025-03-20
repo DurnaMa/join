@@ -72,9 +72,9 @@ async function postTaskDataToFirebase(path = "", data = {}) {
   //redirectToBoardPage();
 }
 
-// function redirectToBoardPage() {
-//   window.location.href = "/pages/board.html";
-// }
+function redirectToBoardPage() {
+  window.location.href = "/pages/board.html";
+}
 
 async function deleteDataFromFirebase(path = "") {
   await fetch(BASE_URL + path + ".json", {
