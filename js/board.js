@@ -1,3 +1,5 @@
+const columnOrder = ["todo", "inprogress", "awaitfeedback", "done"];
+
 let currentDraggedElement;
 let currentSelectedTask;
 let currentUsers = [];
@@ -24,6 +26,7 @@ function renderTasks() {
   });
 
   checkEmptyColumns();
+  initMobileDragAndDrop();
 }
 
 function checkEmptyColumns() {
@@ -82,6 +85,10 @@ function generateTaskCard(task) {
           }</h2>
         </div>
       </div>
+      <div class="task-controls">
+      <button onclick="moveTaskToNextColumn('${task.id}', -1)">⬆️</button>
+      <button onclick="moveTaskToNextColumn('${task.id}', 1)">⬇️</button>
+        </div>
       <h3>${task.title}</h3>
       <p>${task.description}</p>
       
@@ -152,6 +159,117 @@ function generateTaskCard(task) {
 
   return taskCard;
 }
+
+
+// ----- drag and drop mobile-----
+
+// function enableMobileDragAndDrop() {
+//   let draggedElement = null;
+
+//   document.querySelectorAll(".task-card").forEach((taskCard) => {
+//     taskCard.addEventListener("touchstart", (event) => {
+//       draggedElement = taskCard;
+//       draggedElement.classList.add("dragging");
+//     });
+
+//     taskCard.addEventListener("touchmove", (event) => {
+//       if (!draggedElement) return;
+
+//       let touch = event.touches[0];
+//       draggedElement.style.position = "absolute";
+//       draggedElement.style.left = touch.clientX - 50 + "px";
+//       draggedElement.style.top = touch.clientY - 50 + "px";
+//     });
+
+//     taskCard.addEventListener("touchend", (event) => {
+//       if (!draggedElement) return;
+
+//       draggedElement.style.position = "relative";
+//       draggedElement.style.left = "";
+//       draggedElement.style.top = "";
+//       draggedElement.classList.remove("dragging");
+
+//       let dropTarget = document.elementFromPoint(
+//         event.changedTouches[0].clientX,
+//         event.changedTouches[0].clientY
+//       );
+
+//       let dropColumn = dropTarget.closest(".column");
+//       if (dropColumn) {
+//         let taskId = draggedElement.id.replace("task-", "");
+//         drop(null, dropColumn.id, taskId);
+//       }
+
+//       draggedElement = null;
+//     });
+//   });
+// }
+
+function updateTaskStatusInFirebase(taskId, newColumn) {
+  let task = tasks.find((t) => t.id === taskId);
+  if (task) {
+    task.status = newColumn;
+    patchDataToFirebase(`tasks/${taskId}`, { status: newColumn });
+  }
+}
+
+function enableMobileDragAndDrop() {
+  let draggedElement = null;
+
+  document.querySelectorAll(".task-card").forEach((taskCard) => {
+    taskCard.addEventListener("touchstart", (event) => {
+      draggedElement = taskCard;
+      draggedElement.classList.add("dragging");
+    });
+
+    taskCard.addEventListener("touchmove", (event) => {
+      if (!draggedElement) return;
+      let touch = event.touches[0];
+      draggedElement.style.position = "absolute";
+      draggedElement.style.left = touch.clientX - 50 + "px";
+      draggedElement.style.top = touch.clientY - 50 + "px";
+    });
+
+    taskCard.addEventListener("touchend", (event) => {
+      if (!draggedElement) return;
+
+      draggedElement.style.position = "relative";
+      draggedElement.style.left = "";
+      draggedElement.style.top = "";
+      draggedElement.classList.remove("dragging");
+
+      let dropTarget = document.elementFromPoint(
+        event.changedTouches[0].clientX,
+        event.changedTouches[0].clientY
+      );
+
+      let dropColumn = dropTarget.closest(".column");
+      if (dropColumn) {
+        let taskId = draggedElement.id.replace("task-", "");
+        updateTaskStatusInFirebase(taskId, dropColumn.id);
+      } else {
+        console.log("Fehler!");
+      }
+
+      draggedElement = null;
+    });
+  });
+}
+
+function updateTaskStatusInFirebase(taskId, newColumn) {
+  let task = tasks.find((t) => t.id === taskId);
+  if (task) {
+    task.status = newColumn;
+    patchDataToFirebase(`tasks/${taskId}`, { status: newColumn });
+  } else {
+    console.log("Fehler", taskId);
+  }
+}
+
+function initMobileDragAndDrop() {
+  enableMobileDragAndDrop();
+}
+
 
 function startDragging(event, id) {
   currentDraggedElement = id;
@@ -288,6 +406,29 @@ async function saveTaskToFirebase(task) {
     console.error("Fehler:", error);
   }
 }
+
+async function moveTaskToNextColumn(taskId, direction) {
+  let task = tasks.find(t => t.id === taskId);
+  if (!task) return;
+
+  let currentIndex = columnOrder.indexOf(task.columnTitles);
+  let newIndex = currentIndex + direction;
+
+  if (newIndex >= 0 && newIndex < columnOrder.length) {
+    let newColumnTitle = columnOrder[newIndex];
+
+    task.columnTitles = newColumnTitle;
+    task.status = newColumnTitle;
+
+    await patchDataToFirebase(`tasks/${taskId}`, { 
+      columnTitles: newColumnTitle,
+      status: newColumnTitle
+    });
+
+    renderTasks();
+  }
+}
+
 
 async function createTaskBtn() {
   let title = document.getElementById("titleInput").value;

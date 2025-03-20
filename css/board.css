@@ -832,3 +832,21 @@
     font-size: 92px;
   }
 } */
+
+
+/* -----Pfeile für die Tasks in mobile Ansicht!----- */
+.task-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.task-controls button {
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+
