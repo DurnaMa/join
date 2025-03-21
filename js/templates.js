@@ -151,10 +151,14 @@ function renderAddTaskPopupToDoPlus() {
               <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
             <ul id="subTaskList"></ul>
+            <p class="requiredInfoResponsive">
+            <span class="required">*</span>
+            This field is required
+          </p>
           </section>
         </div>
         <div class="taskFormButtons">
-          <p>
+          <p class="requiredInfo">
             <span class="required">*</span>
             This field is required
           </p>
@@ -235,10 +239,14 @@ function renderAddTaskPopupInProgressPlus() {
               <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
             <ul id="subTaskList"></ul>
+            <p class="requiredInfoResponsive">
+            <span class="required">*</span>
+            This field is required
+          </p>
           </section>
         </div>
         <div class="taskFormButtons">
-          <p>
+          <p class="requiredInfo">
             <span class="required">*</span>
             This field is required
           </p>
@@ -319,10 +327,14 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
               <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
             <ul id="subTaskList"></ul>
+            <p class="requiredInfoResponsive">
+            <span class="required">*</span>
+            This field is required
+          </p>
           </section>
         </div>
         <div class="taskFormButtons">
-          <p>
+          <p class="requiredInfo">
             <span class="required">*</span>
             This field is required
           </p>
@@ -362,6 +374,8 @@ function renderTasksCardPopup(task) {
         </div>
         <img onclick="closeTaskCardPopUp()" src="/assets/icons/close.png" alt="" />
       </div>
+
+      <div class="test987654test">
       <div class="taskCardPopupTitle">${task.title || "No Title"}</div>
       <div class="taskCardPopupDescription">${
         task.description || "No Description"
@@ -423,6 +437,8 @@ function renderTasksCardPopup(task) {
         </div>
       </div>
 
+
+        </div>
       <div class="taskCardPopupButtons">
         <div onclick="deleteTask('${task.id}')">
           <img src="/assets/icons/deleteContact.png" alt="">Delete
@@ -527,6 +543,7 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
           <img onclick="closeEditTaskCardPopUp()" class="task-edit-close-popup" src="/assets/icons/close.png" alt=""/>
         </div>
       </div>
+      <div class="test-test">
       <label>Title</label>
       <input id="titleInput" value="${title}" class="task-edit-input-popup" placeholder="Enter a title" type="text" />
       <label>Description</label>
@@ -595,7 +612,7 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
           )
           .join("")}
       </ul>
-    
+      </div>
       <div class="button-ok-div">
         <div class="buttontest987">
         <button onclick="updateEditTask(event)" data-task-id="${taskId}" class="button-ok">Ok <img src="/assets/icons/check.png" alt="" /></button>
