@@ -143,7 +143,7 @@ function logInVarible() {
 }
 
 function guestLogin() {
-  sessionStorage.setItem("username", "Guest");
+  sessionStorage.setItem("fullName", "Guest");
   sessionStorage.setItem("userInitials", "G");
   window.location.href = "../pages/summary.html";
 }
