@@ -176,11 +176,12 @@ function generateTaskCard(task) {
         <div class="task-card-category" id="taskCategory-${task.id}">
           <h2 class="task-card-category-h2" id="taskCategoryH2">${task.category}</h2>
         </div>
+        <div class="task-controls">
+        <img class="move-img-up" onclick="moveTaskToNextColumn('${task.id}', -1, event)" src="/assets/icons/arrow-left-line.png" alt="">
+        <img class="move-img-down" onclick="moveTaskToNextColumn('${task.id}', 1, event)" src="/assets/icons/arrow-left-line.png" alt="">
       </div>
-      <div class="task-controls">
-        <button class="move-btn" onclick="moveTaskToNextColumn('${task.id}', -1, event)">⬆️</button>
-        <button class="move-btn" onclick="moveTaskToNextColumn('${task.id}', 1, event)">⬇️</button>
       </div>
+      
       <h3>${task.title}</h3>
       <p>${task.description}</p>
       
