@@ -15,6 +15,8 @@ async function includeHTML() {
   highlightNavItem();
 }
 
+includeHTML();
+
 function headerinitials() {
   const initials = sessionStorage.getItem("userInitials") || "";
   setTimeout(() => {

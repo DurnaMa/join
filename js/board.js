@@ -64,10 +64,104 @@ function generateEmptyColumn(columnId) {
   `;
 }
 
+// function generateTaskCard(task) {
+//   let completedSubtasks = task.subTasks
+//     ? task.subTasks.filter((st) => st.completed).length
+//     : 0;
+//   let totalSubtasks = task.subTasks ? task.subTasks.length : 0;
+
+//   let taskCard = document.createElement("div");
+//   taskCard.classList.add("task-card");
+//   taskCard.id = `task-${task.id}`;
+//   taskCard.draggable = true;
+//   taskCard.ondragstart = (event) => startDragging(event, task.id);
+
+//   taskCard.innerHTML = /*html*/ `
+//     <div class="task-card-div">
+//       <div class="task-card-category-div">
+//         <div class="task-card-category" id="taskCategory-${task.id}">
+//           <h2 class="task-card-category-h2" id="taskCategoryH2">${
+//             task.category
+//           }</h2>
+//         </div>
+//       </div>
+//       <div class="task-controls">
+//       <button onclick="moveTaskToNextColumn('${task.id}', -1)">⬆️</button>
+//       <button onclick="moveTaskToNextColumn('${task.id}', 1)">⬇️</button>
+//         </div>
+//       <h3>${task.title}</h3>
+//       <p>${task.description}</p>
+      
+//       <div class="progress-container">
+//         <div class="progress-bar-container">
+//           <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
+//     totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0
+//   }%;"></div>
+//         </div>
+//         <div class="subtasks-div">
+//           <span class="subtasks-amount" id="subtasksAmount-${
+//             task.id
+//           }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
+//         </div>
+//       </div>
+//       <div class="task-footer">      
+//         <div class="task-users" id="taskUsers-${task.id}"></div>
+//         <div class="task-priority" id="taskPriority-${task.id}"></div>
+//       </div>
+//     </div>
+//   `;
+
+//   let usersContainer = taskCard.querySelector(`#taskUsers-${task.id}`);
+
+//   if (Array.isArray(task.users)) {
+//     task.users.forEach((user) => {
+//       let userDiv = document.createElement("div");
+//       userDiv.classList.add("tasks-user");
+//       userDiv.style.backgroundColor = user.color;
+//       userDiv.textContent = user.initials;
+//       usersContainer.appendChild(userDiv);
+//     });
+//   } else if (typeof task.users === "string") {
+//     let userDiv = document.createElement("div");
+//     userDiv.classList.add("tasks-user");
+//     const contact = contacts.find((c) => c.name === task.users);
+//     userDiv.style.backgroundColor = contact ? contact.color : "#000";
+//     userDiv.textContent = task.users;
+//     usersContainer.appendChild(userDiv);
+//   }
+
+//   if (task.columnTitles) {
+//     let columnTitle = task.columnTitles.toLowerCase().trim();
+//     const columnMappings = {
+//       "To Do": "To Do",
+//       "In Progress": "In Progress",
+//       "Await Feedback": "Await Feedback",
+//       Done: "Done",
+//     };
+//     task.columnTitles = columnMappings[columnTitle] || task.columnTitles;
+//   }
+
+//   let categoryElement = taskCard.querySelector(".task-card-category");
+//   if (categoryElement) {
+//     const categoryColors = {
+//       "User Story": "#0038FF",
+//       "Technical Task": "#1FD7C1",
+//     };
+//     categoryElement.style.backgroundColor =
+//       categoryColors[task.category] || "#000";
+//   }
+
+//   chooseImgPriority(taskCard, task);
+
+//   taskCard.querySelector(".task-card-div").addEventListener("click", () => {
+//     openTaskPopup(task.id);
+//   });
+
+//   return taskCard;
+// }
+
 function generateTaskCard(task) {
-  let completedSubtasks = task.subTasks
-    ? task.subTasks.filter((st) => st.completed).length
-    : 0;
+  let completedSubtasks = task.subTasks ? task.subTasks.filter((st) => st.completed).length : 0;
   let totalSubtasks = task.subTasks ? task.subTasks.length : 0;
 
   let taskCard = document.createElement("div");
@@ -80,15 +174,13 @@ function generateTaskCard(task) {
     <div class="task-card-div">
       <div class="task-card-category-div">
         <div class="task-card-category" id="taskCategory-${task.id}">
-          <h2 class="task-card-category-h2" id="taskCategoryH2">${
-            task.category
-          }</h2>
+          <h2 class="task-card-category-h2" id="taskCategoryH2">${task.category}</h2>
         </div>
       </div>
       <div class="task-controls">
-      <button onclick="moveTaskToNextColumn('${task.id}', -1)">⬆️</button>
-      <button onclick="moveTaskToNextColumn('${task.id}', 1)">⬇️</button>
-        </div>
+        <button class="move-btn" onclick="moveTaskToNextColumn('${task.id}', -1, event)">⬆️</button>
+        <button class="move-btn" onclick="moveTaskToNextColumn('${task.id}', 1, event)">⬇️</button>
+      </div>
       <h3>${task.title}</h3>
       <p>${task.description}</p>
       
@@ -99,9 +191,7 @@ function generateTaskCard(task) {
   }%;"></div>
         </div>
         <div class="subtasks-div">
-          <span class="subtasks-amount" id="subtasksAmount-${
-            task.id
-          }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
+          <span class="subtasks-amount" id="subtasksAmount-${task.id}">${completedSubtasks}/${totalSubtasks} Subtasks</span>
         </div>
       </div>
       <div class="task-footer">      
@@ -147,18 +237,20 @@ function generateTaskCard(task) {
       "User Story": "#0038FF",
       "Technical Task": "#1FD7C1",
     };
-    categoryElement.style.backgroundColor =
-      categoryColors[task.category] || "#000";
+    categoryElement.style.backgroundColor = categoryColors[task.category] || "#000";
   }
 
   chooseImgPriority(taskCard, task);
 
-  taskCard.querySelector(".task-card-div").addEventListener("click", () => {
-    openTaskPopup(task.id);
+  taskCard.querySelector(".task-card-div").addEventListener("click", (event) => {
+    if (!event.target.classList.contains("move-btn")) {
+      openTaskPopup(task.id);
+    }
   });
 
   return taskCard;
 }
+
 
 
 // ----- drag and drop mobile-----
@@ -407,7 +499,31 @@ async function saveTaskToFirebase(task) {
   }
 }
 
-async function moveTaskToNextColumn(taskId, direction) {
+// async function moveTaskToNextColumn(taskId, direction) {
+//   let task = tasks.find(t => t.id === taskId);
+//   if (!task) return;
+
+//   let currentIndex = columnOrder.indexOf(task.columnTitles);
+//   let newIndex = currentIndex + direction;
+
+//   if (newIndex >= 0 && newIndex < columnOrder.length) {
+//     let newColumnTitle = columnOrder[newIndex];
+
+//     task.columnTitles = newColumnTitle;
+//     task.status = newColumnTitle;
+
+//     await patchDataToFirebase(`tasks/${taskId}`, { 
+//       columnTitles: newColumnTitle,
+//       status: newColumnTitle
+//     });
+
+//     renderTasks();
+//   }
+// }
+
+async function moveTaskToNextColumn(taskId, direction, event) {
+  event.stopPropagation();
+
   let task = tasks.find(t => t.id === taskId);
   if (!task) return;
 
@@ -428,6 +544,7 @@ async function moveTaskToNextColumn(taskId, direction) {
     renderTasks();
   }
 }
+
 
 
 async function createTaskBtn() {
