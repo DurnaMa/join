@@ -185,6 +185,8 @@ async function loadSummaryData() {
   if (upcomingDeadline) {
     document.getElementById("date").innerText = upcomingDeadline.toDateString();
   }
+  dailyTime();
+  fullNameSummary();
 }
 
 function goBack() {
