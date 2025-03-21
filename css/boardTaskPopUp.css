@@ -280,9 +280,10 @@
     padding: 0px 15px 0px 15px;
   }
 
-
-
-
+  .task-edit-close-popup-div{
+    width: 100%;
+    padding-right: 36px;
+  }
 
 }
 
