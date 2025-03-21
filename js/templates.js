@@ -45,11 +45,17 @@ function renderAddTaskPoupBtn() {
             </section>
             <br />
             <label for="category">Category<span class="required">*</span> </label>
-            <select id="category">
+            <!-- <select id="category">
               <option value disabled selected hidden>Select Task Category</option>
               <option value="Technical Task">Technical Task</option>
               <option value="User Story">User Story</option>
-            </select>
+            </select> -->
+            <div onclick="categorytList()" class="categoryContainer" id="category">
+              <span id="dropdownCategory" class="">Select Task Category</span>
+              <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+              <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+              <div id="categoryList" class="hidden"></div>
+            </div>
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
@@ -57,10 +63,14 @@ function renderAddTaskPoupBtn() {
               <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
             <ul id="subTaskList"></ul>
+            <p class="requiredInfoResponsive">
+            <span class="required">*</span>
+            This field is required
+          </p>
           </section>
         </div>
         <div class="taskFormButtons">
-          <p>
+          <p class="requiredInfo">
             <span class="required">*</span>
             This field is required
           </p>
@@ -123,11 +133,17 @@ function renderAddTaskPopupToDoPlus() {
             </section>
             <br />
             <label for="category">Category<span class="required">*</span> </label>
-            <select id="category">
+            <!-- <select id="category">
               <option value disabled selected hidden>Select Task Category</option>
               <option value="Technical Task">Technical Task</option>
               <option value="User Story">User Story</option>
-            </select>
+            </select> -->
+            <div onclick="categorytList()" class="categoryContainer">
+              <span id="dropdownCategory" class="">Select Task Category</span>
+              <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+              <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+              <div id="categoryList" class="hidden"></div>
+            </div>
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
@@ -201,11 +217,17 @@ function renderAddTaskPopupInProgressPlus() {
             </section>
             <br />
             <label for="category">Category<span class="required">*</span> </label>
-            <select id="category">
+            <!-- <select id="category">
               <option value disabled selected hidden>Select Task Category</option>
               <option value="Technical Task">Technical Task</option>
               <option value="User Story">User Story</option>
-            </select>
+            </select> -->
+            <div onclick="categorytList()" class="categoryContainer" id="category">
+              <span id="dropdownCategory" class="">Select Task Category</span>
+              <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+              <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+              <div id="categoryList" class="hidden"></div>
+            </div>
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
@@ -279,11 +301,17 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
             </section>
             <br />
             <label for="category">Category<span class="required">*</span> </label>
-            <select id="category">
+            <!-- <select id="category">
               <option value disabled selected hidden>Select Task Category</option>
               <option value="Technical Task">Technical Task</option>
               <option value="User Story">User Story</option>
-            </select>
+            </select> -->
+            <div onclick="categorytList()" class="categoryContainer" id="category">
+              <span id="dropdownCategory" class="">Select Task Category</span>
+              <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+              <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+              <div id="categoryList" class="hidden"></div>
+            </div>
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
@@ -431,7 +459,7 @@ function renderTasksCardPopup(task) {
 //       <textarea id="descriptionTextarea" class="task-edit-input-popup" placeholder="Enter a description">${description}</textarea>
 //       <label>Due Date</label>
 //       <input id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date" />
-        
+
 //       <label>Priority</label>
 //       <div class="task-edit-prio-popup">
 //         <button onclick="prioUrgent()" id="prioUrgentEdit" class="prioBtn">
@@ -463,14 +491,14 @@ function renderTasksCardPopup(task) {
 //           )
 //           .join("")}
 //       </div>
-    
+
 //       <label class="TESTSubtasksTEST" for="subtask">Subtasks</label>
 //       <div id="addSubTask">
 //         <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
 //         <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
 //       </div>
 //       <ul id="subTaskList"></ul>
-    
+
 //       <div class="button-ok-div">
 //         <div class="buttontest987">
 //         <button onclick="updateEditTask(event)" data-task-id="${taskId}" class="button-ok">Ok <img src="/assets/icons/check.png" alt="" /></button>
@@ -544,7 +572,9 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
         <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
       </div>
       <ul id="subTaskList">
-        ${subTasks.map((subTask, i) => `
+        ${subTasks
+          .map(
+            (subTask, i) => `
           <li class="subTask" data-index="${i}">
             <input id="subInputEdit-${i}" type="text" class="subTask-edit-input d-none" value="${subTask.description}">
             <span id="subEditSpan-${i}" class="subTask-text">${subTask.description}</span>
@@ -561,7 +591,9 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
               </div>
             </div>
           </li>
-        `).join("")}
+        `
+          )
+          .join("")}
       </ul>
     
       <div class="button-ok-div">
@@ -572,18 +604,6 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
     </div>
   `;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 //--------- contact templates ---------
 function addNewContactPopup() {
@@ -710,8 +730,9 @@ function editContactPopup() {
       <hr />
     </div>
     <div class="popup-right">
-      <div class="popup-right-profile">
-        <img src="/assets/img/profileIMG.png" alt="" />
+      <div class="popup-right-profile" style="background-color: ${contact.color};">
+      ${generateInitials(contact.name)}
+        <!-- <img src="" alt="" /> -->
       </div>
       <div>
         <img

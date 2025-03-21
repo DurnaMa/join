@@ -3,13 +3,13 @@ body {
 }
 
 .addTaskContent {
-  /* display: flex;
-  align-items: center;
-  flex-direction: column; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* flex-direction: column; */
   width: 100%;
   height: 100vh;
   background-color: #f6f7f8;
-  padding: 193px 114px 96px 330px;
+  padding: 143px 114px 96px 330px;
 }
 
 .headlineDiv {
@@ -209,13 +209,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 #subTaskList {
-  border-radius: 10px;
-  background-color: white;
-  max-height: 140px;
-  overflow: auto;
-  position: absolute;
-  top: 753px;
+  /* border-radius: 10px; */
+  /* background-color: white; */
+  /* max-height: 140px; */
+  /* overflow: auto; */
+  /* position: absolute; */
+  /* top: 765px; */
+  /* width: inherit; */
+  position: fixed;
   width: inherit;
+  top: 695px;
+  background-color: white;
 }
 
 .taskFormButtons {
@@ -224,12 +228,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   justify-content: space-between;
   align-items: flex-end;
   gap: 4px;
+  max-width: 100%;
 }
 
 .btnSection {
   display: flex;
   gap: 16px;
-  
 }
 
 .clearBtn {
@@ -259,7 +263,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .clearBtn:hover img {
-  filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg) brightness(100%) contrast(100%);
+  filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg)
+    brightness(100%) contrast(100%);
 }
 
 .button {
@@ -276,7 +281,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   height: 45px;
   text-wrap: nowrap;
-
 }
 
 .button:hover {
@@ -400,4 +404,30 @@ input[type="checkbox"] {
   align-items: center;
   color: white;
   background-color: #ff7a00;
+}
+
+.task-added-popup-center {
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.popup-spamMahir {
+  display: flex;
+  gap: 15px;
+  background-color: #2a3647;
+  height: 74px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  font-size: 21px;
 }

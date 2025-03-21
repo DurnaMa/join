@@ -142,7 +142,6 @@ function deleteSubTask(index) {
 //   renderSubTaskList();
 // }
 
-
 function contactList() {
   let contactList = document.getElementById("assignedContactsList");
 
@@ -184,9 +183,9 @@ function updateSelectedContactsDisplay() {
     let contact = contacts.find((c) => c.name === contactName);
     if (contact) {
       selectedContainer.innerHTML += /*html*/ `
-        <span class="assignedShortcutName" style="background-color: ${contact.color};">${generateInitials(
-        contact.name
-      )}</span>
+        <span class="assignedShortcutName" style="background-color: ${
+          contact.color
+        };">${generateInitials(contact.name)}</span>
       `;
     }
   });
@@ -194,7 +193,9 @@ function updateSelectedContactsDisplay() {
 
 function toggleCheckbox(event, contactName) {
   let checkbox =
-    event.target.type === "checkbox" ? event.target : event.currentTarget.querySelector('input[type="checkbox"]');
+    event.target.type === "checkbox"
+      ? event.target
+      : event.currentTarget.querySelector('input[type="checkbox"]');
   if (checkbox) {
     checkbox.checked = !checkbox.checked;
     event.currentTarget.classList.toggle("selectedContact", checkbox.checked);
@@ -209,26 +210,9 @@ function toggleCheckbox(event, contactName) {
 }
 
 async function postAddTask() {
-  let title = document.getElementById("titleInput").value;
-  let description = document.getElementById("descriptionTextarea").value;
-  let dueDate = document.getElementById("date").value;
-  let category = document.getElementById("category").value;
+  let { prioUrgentEdit, priority, prioMediumEdit, prioLowEdit, title, description, dueDate, category, popup } = variablenPostAddTask();
 
-  selectedContacts = Array.from(selectedContacts);
-
-  let prioUrgentEdit = document.getElementById("prioUrgentEdit");
-  let prioMediumEdit = document.getElementById("prioMediumEdit");
-  let prioLowEdit = document.getElementById("prioLowEdit");
-
-  let priority = "";
-
-  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
-    priority = "urgent";
-  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
-    priority = "medium";
-  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
-    priority = "low";
-  }
+  priority = ifConditionPostAddTask(prioUrgentEdit, priority, prioMediumEdit, prioLowEdit);
 
   let data = {
     columnTitles: "To Do",
@@ -245,11 +229,50 @@ async function postAddTask() {
     users: selectedContacts,
   };
 
+  await tryAndCatchBlockPostAddTask(data, popup);
+}
+
+async function tryAndCatchBlockPostAddTask(data, popup) {
   try {
-    await postDataToFirebase("tasks/", data);
+    await postTaskDataToFirebase("tasks/", data);
+    if (popup) {
+      popup.classList.remove("d-none");
+    }
+    setTimeout(() => {
+      window.location.href = "/pages/board.html";
+    }, 2000);
+
   } catch (error) {
     console.error(error);
   }
+}
+
+function ifConditionPostAddTask(prioUrgentEdit, priority, prioMediumEdit, prioLowEdit) {
+  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
+    priority = "Urgent";
+  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
+    priority = "Medium";
+  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
+    priority = "Low";
+  }
+  return priority;
+}
+
+function variablenPostAddTask() {
+  let title = document.getElementById("titleInput").value;
+  let description = document.getElementById("descriptionTextarea").value;
+  let dueDate = document.getElementById("date").value;
+  let category = document.getElementById("dropdownCategory").innerText;
+
+  selectedContacts = Array.from(selectedContacts);
+
+  let prioUrgentEdit = document.getElementById("prioUrgentEdit");
+  let prioMediumEdit = document.getElementById("prioMediumEdit");
+  let prioLowEdit = document.getElementById("prioLowEdit");
+  let popup = document.getElementById("popup");
+
+  let priority = "";
+  return { prioUrgentEdit, priority, prioMediumEdit, prioLowEdit, title, description, dueDate, category, popup };
 }
 
 function categorytList() {

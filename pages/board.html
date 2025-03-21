@@ -24,15 +24,19 @@
     <script defer src="/js/contacts.js"></script>
   </head>
 
-  <body onload="initBoard()">
-    <include-html src="../templates/header/header.html"></include-html>
+  <body id="bodyId" onload="initBoard()">
+    <!-- <include-html src="../templates/header/header.html"></include-html>
     <include-html src="../templates/sidebar/sidebar.html"></include-html>
     <include-html
       src="/mobileTemplates/header/headerMobile.html"
     ></include-html>
     <include-html
       src="/mobileTemplates/footer/footerMobile.html"
-    ></include-html>
+    ></include-html> -->
+    <div w3-include-html="/templates/header/header.html"></div>
+    <div w3-include-html="/templates/sidebar/sidebar.html"></div>
+    <div w3-include-html="/mobileTemplates/header/headerMobile.html"></div>
+    <div w3-include-html="/mobileTemplates/footer/footerMobile.html"></div>
 
     <div class="board" id="board">
       <div class="boardHeader">
@@ -80,7 +84,7 @@
             />
           </button>
           
-          <div class="searchMobileDiv">
+          <!-- <div class="searchMobileDiv">
             <input
               class="search"
               type="text"
@@ -94,7 +98,7 @@
               alt="Search icon"
               onclick="searchTask()"
             />
-          </div>
+          </div> -->
         </div>
       </div>
 

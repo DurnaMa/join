@@ -110,10 +110,7 @@ function emailValidation() {
  * @returns {boolean} - Returns true if login is successful, otherwise false.
  */
 function logIn() {
-  const email = document.getElementById("loginEmail").value;
-  const password = document.getElementById("loginPassword").value;
-  const checkbox = document.getElementById("checkboxLogin");
-  const errorDiv = document.getElementById("loginError");
+  const { checkbox, errorDiv, email, password } = logInVarible();
   if (!checkbox.checked) {
     errorDiv.textContent =
       "Bitte akzeptieren Sie die Bedingungen (Remember me).";
@@ -137,7 +134,17 @@ function logIn() {
   }
 }
 
+function logInVarible() {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+  const checkbox = document.getElementById("checkboxLogin");
+  const errorDiv = document.getElementById("loginError");
+  return { checkbox, errorDiv, email, password };
+}
+
 function guestLogin() {
   sessionStorage.setItem("username", "Guest");
+  sessionStorage.setItem("userInitials", "G");
   window.location.href = "../pages/summary.html";
 }
+

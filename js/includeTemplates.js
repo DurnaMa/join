@@ -1,35 +1,40 @@
-class IncludeHTML extends HTMLElement {
-  async connectedCallback() {
-
-    setTimeout(async () => {
-    const file = this.getAttribute('src');
-    try {
-      const response = await fetch(file);
-      if (!response.ok) throw new Error(`Failed to fetch ${file}: ${response.statusText}`);
-
-      if (this.isConnected) {
-        this.innerHTML = await response.text();
-      }
-
-      if (file.includes('sidebar') || file.includes('footerMobile')) {
-        highlightNavItem();
-      }
-
-      headerinitials();
-
-    } catch (error) {
-      if (this.isConnected) {
-        this.innerHTML = 'Page not found';
-      }
-      console.error(error);
+async function includeHTML() {
+  let includeElements = document.querySelectorAll("[w3-include-html]");
+  for (let i = 0; i < includeElements.length; i++) {
+    const element = includeElements[i];
+    file = element.getAttribute("w3-include-html"); // "includes/header.html"
+    let resp = await fetch(file);
+    if (resp.ok) {
+      element.innerHTML = await resp.text();
+    } else {
+      element.innerHTML = "Page not found";
     }
-  }, 10);
   }
+  headerinitials();
+  headerInitialsMobile();
+  highlightNavItem();
 }
-
-customElements.define('include-html', IncludeHTML);
 
 function headerinitials() {
   const initials = sessionStorage.getItem("userInitials") || "";
-  document.getElementById("initials").textContent = initials;
+  setTimeout(() => {
+    const initialsElement = document.getElementById("initials");
+    if (initialsElement) {
+      initialsElement.textContent = initials;
+    } else {
+      console.error("Fehler.");
+    }
+  }, 50);
+}
+
+function headerInitialsMobile() {
+  const initials = sessionStorage.getItem("userInitials") || "";
+  setTimeout(() => {
+    const initialsElement = document.getElementById("initialsMobile");
+    if (initialsElement) {
+      initialsElement.textContent = initials;
+    } else {
+      console.error("Fehler.");
+    }
+  }, 50);
 }
