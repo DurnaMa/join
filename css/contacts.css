@@ -686,3 +686,10 @@
     height: 80%;
   }
 }
+
+.no-phone {
+  color: red;
+  font-style: italic;
+}
+
+
