@@ -210,27 +210,9 @@ function toggleCheckbox(event, contactName) {
 }
 
 async function postAddTask() {
-  let title = document.getElementById("titleInput").value;
-  let description = document.getElementById("descriptionTextarea").value;
-  let dueDate = document.getElementById("date").value;
-  let category = document.getElementById("dropdownCategory").innerText;
+  let { prioUrgentEdit, priority, prioMediumEdit, prioLowEdit, title, description, dueDate, category, popup } = variablenPostAddTask();
 
-  selectedContacts = Array.from(selectedContacts);
-
-  let prioUrgentEdit = document.getElementById("prioUrgentEdit");
-  let prioMediumEdit = document.getElementById("prioMediumEdit");
-  let prioLowEdit = document.getElementById("prioLowEdit");
-  let popup = document.getElementById("popup");
-
-  let priority = "";
-
-  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
-    priority = "Urgent";
-  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
-    priority = "Medium";
-  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
-    priority = "Low";
-  }
+  priority = ifConditionPostAddTask(prioUrgentEdit, priority, prioMediumEdit, prioLowEdit);
 
   let data = {
     columnTitles: "To Do",
@@ -247,6 +229,10 @@ async function postAddTask() {
     users: selectedContacts,
   };
 
+  await tryAndCatchBlockPostAddTask(data, popup);
+}
+
+async function tryAndCatchBlockPostAddTask(data, popup) {
   try {
     await postTaskDataToFirebase("tasks/", data);
     if (popup) {
@@ -259,6 +245,34 @@ async function postAddTask() {
   } catch (error) {
     console.error(error);
   }
+}
+
+function ifConditionPostAddTask(prioUrgentEdit, priority, prioMediumEdit, prioLowEdit) {
+  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
+    priority = "Urgent";
+  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
+    priority = "Medium";
+  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
+    priority = "Low";
+  }
+  return priority;
+}
+
+function variablenPostAddTask() {
+  let title = document.getElementById("titleInput").value;
+  let description = document.getElementById("descriptionTextarea").value;
+  let dueDate = document.getElementById("date").value;
+  let category = document.getElementById("dropdownCategory").innerText;
+
+  selectedContacts = Array.from(selectedContacts);
+
+  let prioUrgentEdit = document.getElementById("prioUrgentEdit");
+  let prioMediumEdit = document.getElementById("prioMediumEdit");
+  let prioLowEdit = document.getElementById("prioLowEdit");
+  let popup = document.getElementById("popup");
+
+  let priority = "";
+  return { prioUrgentEdit, priority, prioMediumEdit, prioLowEdit, title, description, dueDate, category, popup };
 }
 
 function categorytList() {
