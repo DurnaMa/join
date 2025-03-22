@@ -59,7 +59,7 @@ async function getDataFromFirebase(path = "") {
 function fullNameSummary() {
   const fullName = sessionStorage.getItem("fullName") || "Guest";
   document.getElementById("fullName").textContent = fullName;
-  daliyTime();
+  //daliyTime();
 }
 
 // habe bisschen vorprogrammiert und in template ist auch HTML Code und
