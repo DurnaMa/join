@@ -153,19 +153,23 @@ function guestLogin() {
 }
 
 function showMobileGreetings() {
-  const mobileGreetings = document.getElementById("mobileGreetings");
+  const isMobile = window.matchMedia("(max-width: 992px)").matches;
 
-  if (mobileGreetings) {
-    mobileGreetings.style.display = "flex"
-    mobileGreetings.style.opacity = 1;
-    setTimeout(() => {
-      mobileGreetings.style.opacity = 0;
-      mobileGreetings.style.display = "none"
-    }, 1500);
-  } else {
-    console.error(
-      "Das Element mit der ID 'mobileGreetings' wurde nicht gefunden!"
-    );
+  if (isMobile) {
+    const mobileGreetings = document.getElementById("mobileGreetings");
+
+    if (mobileGreetings) {
+      mobileGreetings.style.display = "flex";
+      mobileGreetings.style.opacity = 1;
+      setTimeout(() => {
+        mobileGreetings.style.opacity = 0;
+        mobileGreetings.style.display = "none";
+      }, 1500);
+    } else {
+      console.error(
+        "Das Element mit der ID 'mobileGreetings' wurde nicht gefunden!"
+      );
+    }
+    dailyTime();
   }
 }
-

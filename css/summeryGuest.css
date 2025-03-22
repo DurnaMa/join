@@ -254,8 +254,6 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 3s ease-in-out;
-    opacity: 0;
     transform: translate(-50%, -50%);
     z-index: 999;
   }
