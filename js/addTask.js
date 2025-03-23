@@ -6,7 +6,6 @@ async function initAddTask() {
 }
 
 let subTask = document.getElementById("subTask");
-//let subTasks = [];
 let chooseContacts = [];
 let category = ["Technical Task", "User Story"];
 let selectedCategory = "";
@@ -60,20 +59,9 @@ function addSubTask() {
   }
 }
 
-// subTask.addEventListener("keydown", function (event) {
-//   if (event.key === "Enter") {
-//     event.preventDefault();
-//     addSubTask();
-//   }
-// });
-
 function renderSubTaskList() {
   let subTasksList = document.getElementById("subTaskList");
   subTasksList.innerHTML = "";
-
-  // for (let i = 0; i < subTasks.length; i++) {
-  //   subTasksList.innerHTML += generateSubTaskList(i);
-  // }
 
   subTasks.forEach((subTask, i) => {
     subTasksList.innerHTML += generateSubTaskList(i);

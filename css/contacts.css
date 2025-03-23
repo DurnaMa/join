@@ -126,7 +126,6 @@
   width: 42px;
   color: white;
   border-radius: 50%;
-  /* background-color: #ff7a00; */
   border: 2px solid #ffffff;
 }
 
@@ -183,8 +182,6 @@
   font-weight: 400;
   line-height: 32px;
 }
-
-/* -- contactDetailsDiv -- */
 
 .contact-details-div {
   display: flex;
@@ -373,14 +370,6 @@
 }
 
 @media screen and (max-width: 1200px) {
-  /* .contact-right-area-header h1 {
-    font-size: 36px;
-  }
-
-  .contact-right-area-header h2 {
-    font-size: 15px;
-  } */
-
   .contact-name-header {
     font-size: 20px;
   }

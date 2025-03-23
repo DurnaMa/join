@@ -27,7 +27,7 @@ function renderTasks() {
   });
 
   checkEmptyColumns();
-  initMobileDragAndDrop();
+  // initMobileDragAndDrop();
 }
 
 function checkEmptyColumns() {
@@ -319,48 +319,48 @@ function updateTaskStatusInFirebase(taskId, newColumn) {
   }
 }
 
-function enableMobileDragAndDrop() {
-  let draggedElement = null;
+// function enableMobileDragAndDrop() {
+//   let draggedElement = null;
 
-  document.querySelectorAll(".task-card").forEach((taskCard) => {
-    taskCard.addEventListener("touchstart", (event) => {
-      draggedElement = taskCard;
-      draggedElement.classList.add("dragging");
-    });
+//   document.querySelectorAll(".task-card").forEach((taskCard) => {
+//     taskCard.addEventListener("touchstart", (event) => {
+//       draggedElement = taskCard;
+//       draggedElement.classList.add("dragging");
+//     });
 
-    taskCard.addEventListener("touchmove", (event) => {
-      if (!draggedElement) return;
-      let touch = event.touches[0];
-      draggedElement.style.position = "absolute";
-      draggedElement.style.left = touch.clientX - 50 + "px";
-      draggedElement.style.top = touch.clientY - 50 + "px";
-    });
+//     taskCard.addEventListener("touchmove", (event) => {
+//       if (!draggedElement) return;
+//       let touch = event.touches[0];
+//       draggedElement.style.position = "absolute";
+//       draggedElement.style.left = touch.clientX - 50 + "px";
+//       draggedElement.style.top = touch.clientY - 50 + "px";
+//     });
 
-    taskCard.addEventListener("touchend", (event) => {
-      if (!draggedElement) return;
+//     taskCard.addEventListener("touchend", (event) => {
+//       if (!draggedElement) return;
 
-      draggedElement.style.position = "relative";
-      draggedElement.style.left = "";
-      draggedElement.style.top = "";
-      draggedElement.classList.remove("dragging");
+//       draggedElement.style.position = "relative";
+//       draggedElement.style.left = "";
+//       draggedElement.style.top = "";
+//       draggedElement.classList.remove("dragging");
 
-      let dropTarget = document.elementFromPoint(
-        event.changedTouches[0].clientX,
-        event.changedTouches[0].clientY
-      );
+//       let dropTarget = document.elementFromPoint(
+//         event.changedTouches[0].clientX,
+//         event.changedTouches[0].clientY
+//       );
 
-      let dropColumn = dropTarget.closest(".column");
-      if (dropColumn) {
-        let taskId = draggedElement.id.replace("task-", "");
-        updateTaskStatusInFirebase(taskId, dropColumn.id);
-      } else {
-        console.log("Fehler!");
-      }
+//       let dropColumn = dropTarget.closest(".column");
+//       if (dropColumn) {
+//         let taskId = draggedElement.id.replace("task-", "");
+//         updateTaskStatusInFirebase(taskId, dropColumn.id);
+//       } else {
+//         console.log("Fehler!");
+//       }
 
-      draggedElement = null;
-    });
-  });
-}
+//       draggedElement = null;
+//     });
+//   });
+// }
 
 function updateTaskStatusInFirebase(taskId, newColumn) {
   let task = tasks.find((t) => t.id === taskId);
@@ -372,9 +372,9 @@ function updateTaskStatusInFirebase(taskId, newColumn) {
   }
 }
 
-function initMobileDragAndDrop() {
-  enableMobileDragAndDrop();
-}
+// function initMobileDragAndDrop() {
+//   enableMobileDragAndDrop();
+// }
 
 function startDragging(event, id) {
   currentDraggedElement = id;

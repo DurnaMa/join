@@ -25,14 +25,6 @@
   </head>
 
   <body id="bodyId" onload="initBoard()">
-    <!-- <include-html src="../templates/header/header.html"></include-html>
-    <include-html src="../templates/sidebar/sidebar.html"></include-html>
-    <include-html
-      src="/mobileTemplates/header/headerMobile.html"
-    ></include-html>
-    <include-html
-      src="/mobileTemplates/footer/footerMobile.html"
-    ></include-html> -->
     <div w3-include-html="/templates/header/header.html"></div>
     <div w3-include-html="/templates/sidebar/sidebar.html"></div>
     <div w3-include-html="/mobileTemplates/header/headerMobile.html"></div>
@@ -83,26 +75,8 @@
               alt="Add task icon"
             />
           </button>
-          
-          <!-- <div class="searchMobileDiv">
-            <input
-              class="search"
-              type="text"
-              placeholder="Find Task"
-              id="searchTask"
-            />
-            <div class="search-dividing-line"></div>
-            <img
-              class="searchIcon"
-              src="/assets/icons/search.png"
-              alt="Search icon"
-              onclick="searchTask()"
-            />
-          </div> -->
         </div>
       </div>
-
-      <!-- <div class="addNewTaskDiv d-none" id="addNewTaskDiv"></div> -->
 
       <div class="task-container" id="taskContainer">
         <div class="column-container">

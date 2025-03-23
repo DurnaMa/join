@@ -30,8 +30,6 @@
 .headerHelp {
   display: flex;
   padding-right: 16px;
-  /* padding: 0; */
-  /* width: 50px; */
 }
 
 #profileName {
@@ -76,10 +74,6 @@
 #subMenu a:hover {
   background-color: #2a3d59;
 }
-
-/* .hidden {
-  display: none;
-} */
 
 .helpIcon:hover{
   width: 22px;

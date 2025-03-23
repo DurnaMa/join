@@ -575,6 +575,25 @@ input[type="checkbox"] {
   background-color: #eeeeee;
 }
 
+/* test */
+
+.prioUrgentRed {
+  background: #ff3d00 !important;
+  color: white;
+}
+
+.prioMediumYellow {
+  background: #ffa800 !important;
+  color: white;
+}
+
+.prioLowGreen {
+  background: #7ae229 !important;
+  color: white;
+}
+
+
+
 @media screen and (max-width: 1130px) {
   .add-edit-popup-task-div {
     zoom: 80%;

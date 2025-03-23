@@ -6,54 +6,6 @@ async function contactInit() {
 let currentSelectedContact = 0;
 let contactColors = {};
 
-/**
- * Selects a contact by index, updates the current selected contact, and renders the contact details.
- * @function selectContact
- * @param {number} index - The index of the contact to select.
- */
-// function selectContact(index) {
-//   currentSelectedContact = index;
-//   renderContactsList();
-
-//   let contact = contacts[currentSelectedContact];
-//   let contactDetails = document.getElementById("contactDetailsDiv");
-//   let mobileContactDetails = document.getElementById("mobileContactDetailsDiv");
-
-//   contactDetails.innerHTML = /*html*/ `
-//     <div class="contact-details-div-header">
-//       <div class="contact-details-div-initials">
-//         <div id="contactsAbbreviationRightArea" class="contacts-abbreviation-right-area"
-//              style="background-color: ${contact.color};">
-//           ${generateInitials(contact.name)}
-//         </div>
-//       </div>
-//       <div class="contact-name">
-//         <div class="contact-name-header">${contact.name}</div>
-//         <div class="contact-details-div-name-icons">
-//           <div class="contact-details-div-icons">
-//             <div onclick="editContact(${currentSelectedContact})" class="contact-details-div-icon-edit">
-//               <img src="/assets/icons/edit-pencil.png" alt="" />Edit
-//             </div>
-//             <div onclick="deleteContact(${currentSelectedContact})" class="contact-details-div-icon-edit img">
-//               <img src="/assets/icons/deleteContact.png" alt="">Delete
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//     <div class="contact-info">
-//       <div class="contact-info-header">
-//         Contact Information
-//       </div>
-//       <div class="contact-details-div-email-phone">
-//         <label>Email</label>
-//         <a class="contact-email-link" href="mailto:${contact.email}">${contact.email}</a>
-//         <label>Phone</label>
-//         <a class="contact-phone-link" href="tel:${contact.phone}">${contact.phone}</a>
-//       </div>
-//     </div>
-//   `;
-// }
 function selectContact(index) {
   currentSelectedContact = index;
   renderContactsList();
@@ -113,7 +65,6 @@ function renderContactsList() {
   let contactsList = document.getElementById("scrollbar");
   contactsList.innerHTML = "";
 
-  // Kontakte alphabetisch sortieren
   contacts.sort((a, b) => a.name.localeCompare(b.name));
 
   let lastLetter = "";
@@ -130,10 +81,6 @@ function renderContactsList() {
 
 function generateContactsList(i) {
   const initials = generateInitials(contacts[i].name);
-
-  // if (!contactColors[contacts[i].name]) {
-  //   contactColors[contacts[i].name] = getRandomColorFromArray();
-  // }
 
   let color = contacts[i].color ? contacts[i].color : "#000000";
 
@@ -156,13 +103,6 @@ function generateContactsList(i) {
  * @param {string} name - The full name of the contact.
  * @returns {string} The initials of the contact's name.
  */
-// function generateInitials(name) {
-//   const nameParts = name.split(" ");
-//   const firstInitial = nameParts[0]?.charAt(0) || "";
-//   const lastInitial = nameParts[1]?.charAt(0) || "";
-//   return `${firstInitial}${lastInitial}`.toUpperCase();
-// }
-
 function generateInitials(name) {
   if (typeof name !== "string" || name.trim() === "") return "??";
 
@@ -172,21 +112,6 @@ function generateInitials(name) {
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
 
-// function generateInitials(name) {
-//   if (!name) return "";
-//   const nameParts = name.trim().split(" ");
-//   const firstInitial = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : "";
-//   const lastInitial = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : "";
-//   return `${firstInitial}${lastInitial}`;
-// }
-
-/**
- * Renders the "Add New Contact" form by making the corresponding div visible
- * and populating it with the necessary HTML structure.
- *
- * The form includes fields for name, email, and phone, as well as a button
- * to submit the new contact. It also includes a button to close the form.
- */
 function addNewContact() {
   const addNewContactDiv = document.getElementById("popup");
   addNewContactDiv.classList.remove("d-none");
@@ -324,7 +249,7 @@ async function mobileDeleteContact() {
     return;
   }
 
-  let contactId = contacts[currentSelectedContact].id; // Hole die Firebase ID
+  let contactId = contacts[currentSelectedContact].id;
   let path = `/contacts/${contactId}`;
 
   await deleteDataFromFirebase(path);

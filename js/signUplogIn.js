@@ -31,7 +31,6 @@ async function toTheRegistration() {
   const passwordErrorDiv = document.getElementById("passwordError");
   const checkboxErrorDiv = document.getElementById("checkboxError");
 
-  // Fehler-Reset
   errorDiv.textContent = "";
   passwordErrorDiv.textContent = "";
   checkboxErrorDiv.textContent = "";
@@ -45,7 +44,6 @@ async function toTheRegistration() {
   if (nameInput.value && emailInput.value && passwordInput.value) {
     try {
       await loadContacts();
-      // Prüfen, ob die E-Mail bereits existiert
       let emailExists = contacts.find(
         (contact) => contact.email === emailInput.value
       );
@@ -54,15 +52,10 @@ async function toTheRegistration() {
         return false;
       }
 
-      /*function getRandomColor() {
-        return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-      }*/
-
       function getRandomColorFromArray() {
         return colorPalette[Math.floor(Math.random() * colorPalette.length)];
       }
 
-      // Neue Registrierung, wenn E-Mail nicht existiert
       let data = {
         name: nameInput.value,
         email: emailInput.value,
@@ -70,11 +63,9 @@ async function toTheRegistration() {
         color: getRandomColorFromArray(),
       };
       let result = await postData("/contacts", data);
-      // Falls der Server eine ID zurückgibt, speichern wir den User
       if (result && result.name) {
-        contacts.push(data); // Fügt den neuen User zur `contacts`-Liste hinzu
+        contacts.push(data);
       }
-      // Eingabefelder zurücksetzen
       nameInput.value = "";
       emailInput.value = "";
       passwordInput.value = "";
