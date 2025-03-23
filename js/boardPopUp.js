@@ -634,20 +634,23 @@ async function updateEditTask(event) {
     description: li.innerText.trim(),
   }));
 
-  let combinedSubtasks = [...existingSubtasks];
+  // let combinedSubtasks = [...existingSubtasks];
 
-  newSubtasks.forEach((newSub) => {
-    let exists = combinedSubtasks.some(
-      (existingSub) => existingSub.id === newSub.id
-    );
-    if (!exists) {
-      combinedSubtasks.push(newSub);
-    } else {
-      combinedSubtasks = combinedSubtasks.map((sub) =>
-        sub.id === newSub.id ? newSub : sub
-      );
-    }
-  });
+  // newSubtasks.forEach((newSub) => {
+  //   let exists = combinedSubtasks.some(
+  //     (existingSub) => existingSub.id === newSub.id
+  //   );
+  //   if (!exists) {
+  //     combinedSubtasks.push(newSub);
+  //   } else {
+  //     combinedSubtasks = combinedSubtasks.map((sub) =>
+  //       sub.id === newSub.id ? newSub : sub
+  //     );
+  //   }
+  // });
+
+  let combinedSubtasks = newSubtasks; 
+
 
   if (!updatedTitle || !updatedDueDate) {
     alert("Bitte fülle alle Pflichtfelder aus.");
