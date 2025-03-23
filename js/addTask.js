@@ -1,14 +1,15 @@
+let subTasks = [];
+let selectedContacts = new Set();
+
 async function initAddTask() {
   await loadDataUsers();
 }
 
 let subTask = document.getElementById("subTask");
-let subTasks = [];
+//let subTasks = [];
 let chooseContacts = [];
 let category = ["Technical Task", "User Story"];
 let selectedCategory = "";
-
-let selectedContacts = new Set();
 
 function setPriority(priority) {
   const prioUrgentEdit = document.getElementById("prioUrgentEdit");
@@ -68,12 +69,15 @@ function addSubTask() {
 
 function renderSubTaskList() {
   let subTasksList = document.getElementById("subTaskList");
-
   subTasksList.innerHTML = "";
 
-  for (let i = 0; i < subTasks.length; i++) {
+  // for (let i = 0; i < subTasks.length; i++) {
+  //   subTasksList.innerHTML += generateSubTaskList(i);
+  // }
+
+  subTasks.forEach((subTask, i) => {
     subTasksList.innerHTML += generateSubTaskList(i);
-  }
+  });
 }
 
 function generateSubTaskList(i) {
@@ -111,29 +115,76 @@ function editSubTask(index) {
   currentSelectedSubTask = index;
 }
 
+// function saveSubTask(index) {
+//   let subInputEdit = document.getElementById(`subInputEdit-${index}`).value;
+//   subTasks[index].description = subInputEdit;
+
+//   let subEditSpan = document.getElementById(`subEditSpan-${index}`);
+//   let subEditImgPen = document.getElementById(`subEditImgPen-${index}`);
+//   let subEditImgCheck = document.getElementById(`subEditImgCheck-${index}`);
+
+//   subEditSpan.textContent = subInputEdit;
+
+//   document.getElementById(`subInputEdit-${index}`).classList.toggle("d-none");
+//   subEditSpan.classList.toggle("d-none");
+//   subEditImgPen.classList.toggle("d-none");
+//   subEditImgCheck.classList.toggle("d-none");
+
+//   renderSubTaskList();
+// }
+
+// function saveSubTask(index) {
+//   if (!subTasks[index]) {
+//       console.error(`Subtask mit Index ${index} existiert nicht.`);
+//       return;
+//   }
+
+//   let subInputEdit = document.getElementById(`subInputEdit-${index}`);
+//   let subEditSpan = document.getElementById(`subEditSpan-${index}`);
+
+//   subTasks[index].description = subInputEdit.value.trim();
+//   subEditSpan.textContent = subTasks[index].description;
+
+//   subInputEdit.classList.toggle("d-none");
+//   subEditSpan.classList.toggle("d-none");
+
+//   renderSubTaskList();
+// }
+
 function saveSubTask(index) {
-  let subInputEdit = document.getElementById(`subInputEdit-${index}`).value;
-  subTasks[index].description = subInputEdit;
-
-  let subEditSpan = document.getElementById(`subEditSpan-${index}`);
-  let subEditImgPen = document.getElementById(`subEditImgPen-${index}`);
-  let subEditImgCheck = document.getElementById(`subEditImgCheck-${index}`);
-
-  subEditSpan.textContent = subInputEdit;
-
-  document.getElementById(`subInputEdit-${index}`).classList.toggle("d-none");
-  subEditSpan.classList.toggle("d-none");
-  subEditImgPen.classList.toggle("d-none");
-  subEditImgCheck.classList.toggle("d-none");
-
+  let subInputEdit = document
+    .getElementById(`subInputEdit-${index}`)
+    .value.trim();
+  console.log("Vorher:", subTasks);
+  if (subTasks[index]) {
+    subTasks[index].description = subInputEdit;
+  } else {
+    console.warn(`Subtask mit Index ${index} nicht gefunden.`);
+  }
+  console.log("Nachher:", subTasks);
   renderSubTaskList();
 }
 
-function deleteSubTask(index) {
-  let subInputEdit = document.getElementById(`subInputEdit-${index}`);
-  subTasks[index].description = subInputEdit;
-  subTasks.splice(index, 1);
+// function deleteSubTask(index) {
+//   let subInputEdit = document.getElementById(`subInputEdit-${index}`);
+//   subTasks[index].description = subInputEdit;
+//   subTasks.splice(index, 1);
+//   renderSubTaskList();
+// }
 
+// function deleteSubTask(subTaskId) {
+//   let subTaskList = document.getElementById("subTaskList");
+//   let subTaskItem = subTaskList.querySelector(`li[data-id='${subTaskId}']`);
+
+//   if (subTaskItem) {
+//     subTaskItem.remove();
+//   }
+// }
+
+function deleteSubTask(index) {
+  console.log("Vorher:", subTasks);
+  subTasks.splice(index, 1);
+  console.log("Nachher:", subTasks);
   renderSubTaskList();
 }
 
@@ -210,9 +261,24 @@ function toggleCheckbox(event, contactName) {
 }
 
 async function postAddTask() {
-  let { prioUrgentEdit, priority, prioMediumEdit, prioLowEdit, title, description, dueDate, category, popup } = variablenPostAddTask();
+  let {
+    prioUrgentEdit,
+    priority,
+    prioMediumEdit,
+    prioLowEdit,
+    title,
+    description,
+    dueDate,
+    category,
+    popup,
+  } = variablenPostAddTask();
 
-  priority = ifConditionPostAddTask(prioUrgentEdit, priority, prioMediumEdit, prioLowEdit);
+  priority = ifConditionPostAddTask(
+    prioUrgentEdit,
+    priority,
+    prioMediumEdit,
+    prioLowEdit
+  );
 
   let data = {
     columnTitles: "To Do",
@@ -241,13 +307,17 @@ async function tryAndCatchBlockPostAddTask(data, popup) {
     setTimeout(() => {
       window.location.href = "/pages/board.html";
     }, 2000);
-
   } catch (error) {
     console.error(error);
   }
 }
 
-function ifConditionPostAddTask(prioUrgentEdit, priority, prioMediumEdit, prioLowEdit) {
+function ifConditionPostAddTask(
+  prioUrgentEdit,
+  priority,
+  prioMediumEdit,
+  prioLowEdit
+) {
   if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
     priority = "Urgent";
   } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
@@ -272,7 +342,17 @@ function variablenPostAddTask() {
   let popup = document.getElementById("popup");
 
   let priority = "";
-  return { prioUrgentEdit, priority, prioMediumEdit, prioLowEdit, title, description, dueDate, category, popup };
+  return {
+    prioUrgentEdit,
+    priority,
+    prioMediumEdit,
+    prioLowEdit,
+    title,
+    description,
+    dueDate,
+    category,
+    popup,
+  };
 }
 
 function categorytList() {

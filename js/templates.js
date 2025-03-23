@@ -530,7 +530,7 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
   let title = currentSelectedTask.title;
   let description = currentSelectedTask.description;
   let dueDate = currentSelectedTask.dueDate;
-  let subTasks = currentSelectedTask.subTasks || [];
+  subTasks = currentSelectedTask.subTasks || [];
 
   // 🛠 Sicherstellen, dass die vorhandenen Nutzer in selectedContacts gespeichert werden
   selectedContacts = new Set(assignedContacts.map((user) => user.name));

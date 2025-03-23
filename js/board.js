@@ -19,8 +19,9 @@ function renderTasks() {
 
   tasks.forEach((task) => {
     let taskCard = generateTaskCard(task);
+    //let columnId = task.columnTitles? task.columnTitles.toLowerCase().replace(" ", ""): "todo";
     let columnId = task.columnTitles
-      ? task.columnTitles.toLowerCase().replace(" ", "")
+      ? task.columnTitles.toLowerCase().replace(/\s/g, "")
       : "todo";
     document.getElementById(columnId).appendChild(taskCard);
   });
@@ -91,7 +92,7 @@ function generateEmptyColumn(columnId) {
 //         </div>
 //       <h3>${task.title}</h3>
 //       <p>${task.description}</p>
-      
+
 //       <div class="progress-container">
 //         <div class="progress-bar-container">
 //           <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
@@ -104,7 +105,7 @@ function generateEmptyColumn(columnId) {
 //           }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
 //         </div>
 //       </div>
-//       <div class="task-footer">      
+//       <div class="task-footer">
 //         <div class="task-users" id="taskUsers-${task.id}"></div>
 //         <div class="task-priority" id="taskPriority-${task.id}"></div>
 //       </div>
@@ -161,7 +162,9 @@ function generateEmptyColumn(columnId) {
 // }
 
 function generateTaskCard(task) {
-  let completedSubtasks = task.subTasks ? task.subTasks.filter((st) => st.completed).length : 0;
+  let completedSubtasks = task.subTasks
+    ? task.subTasks.filter((st) => st.completed).length
+    : 0;
   let totalSubtasks = task.subTasks ? task.subTasks.length : 0;
 
   let taskCard = document.createElement("div");
@@ -174,11 +177,17 @@ function generateTaskCard(task) {
     <div class="task-card-div">
       <div class="task-card-category-div">
         <div class="task-card-category" id="taskCategory-${task.id}">
-          <h2 class="task-card-category-h2" id="taskCategoryH2">${task.category}</h2>
+          <h2 class="task-card-category-h2" id="taskCategoryH2">${
+            task.category
+          }</h2>
         </div>
         <div class="task-controls">
-        <img class="move-img-up" onclick="moveTaskToNextColumn('${task.id}', -1, event)" src="/assets/icons/arrow-left-line.png" alt="">
-        <img class="move-img-down" onclick="moveTaskToNextColumn('${task.id}', 1, event)" src="/assets/icons/arrow-left-line.png" alt="">
+        <img class="move-img-up" onclick="moveTaskToNextColumn('${
+          task.id
+        }', -1, event)" src="/assets/icons/arrow-left-line.png" alt="">
+        <img class="move-img-down" onclick="moveTaskToNextColumn('${
+          task.id
+        }', 1, event)" src="/assets/icons/arrow-left-line.png" alt="">
       </div>
       </div>
       
@@ -192,7 +201,9 @@ function generateTaskCard(task) {
   }%;"></div>
         </div>
         <div class="subtasks-div">
-          <span class="subtasks-amount" id="subtasksAmount-${task.id}">${completedSubtasks}/${totalSubtasks} Subtasks</span>
+          <span class="subtasks-amount" id="subtasksAmount-${
+            task.id
+          }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
         </div>
       </div>
       <div class="task-footer">      
@@ -238,21 +249,23 @@ function generateTaskCard(task) {
       "User Story": "#0038FF",
       "Technical Task": "#1FD7C1",
     };
-    categoryElement.style.backgroundColor = categoryColors[task.category] || "#000";
+    //categoryElement.style.backgroundColor = categoryColors[task.category] || "#000";
+    let categoryColor = categoryColors[task.category] || "#ccc";
+    categoryElement.style.backgroundColor = categoryColor;
   }
 
   chooseImgPriority(taskCard, task);
 
-  taskCard.querySelector(".task-card-div").addEventListener("click", (event) => {
-    if (!event.target.classList.contains("move-btn")) {
-      openTaskPopup(task.id);
-    }
-  });
+  taskCard
+    .querySelector(".task-card-div")
+    .addEventListener("click", (event) => {
+      if (!event.target.classList.contains("move-btn")) {
+        openTaskPopup(task.id);
+      }
+    });
 
   return taskCard;
 }
-
-
 
 // ----- drag and drop mobile-----
 
@@ -363,7 +376,6 @@ function initMobileDragAndDrop() {
   enableMobileDragAndDrop();
 }
 
-
 function startDragging(event, id) {
   currentDraggedElement = id;
   event.dataTransfer.setData("text", id);
@@ -427,7 +439,6 @@ function searchTask() {
 
 document.getElementById("searchTask").addEventListener("keyup", searchTask);
 
-
 async function deleteTask(taskId) {
   let id = tasks.findIndex((task) => task.id == taskId);
   let path = `/tasks/${tasks[id].id}`;
@@ -439,7 +450,6 @@ async function deleteTask(taskId) {
 }
 
 async function updateSteps(taskId) {
-
   let task = tasks.find((t) => t.id === taskId);
   if (!task || !task.subTasks) {
     return;
@@ -480,11 +490,10 @@ async function updateSteps(taskId) {
 
 async function saveTaskToFirebase(task) {
   try {
-
     const response = await fetch(
       `https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/tasks/${task.id}.json`,
       {
-        method: "PUT", 
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -513,7 +522,7 @@ async function saveTaskToFirebase(task) {
 //     task.columnTitles = newColumnTitle;
 //     task.status = newColumnTitle;
 
-//     await patchDataToFirebase(`tasks/${taskId}`, { 
+//     await patchDataToFirebase(`tasks/${taskId}`, {
 //       columnTitles: newColumnTitle,
 //       status: newColumnTitle
 //     });
@@ -525,7 +534,7 @@ async function saveTaskToFirebase(task) {
 async function moveTaskToNextColumn(taskId, direction, event) {
   event.stopPropagation();
 
-  let task = tasks.find(t => t.id === taskId);
+  let task = tasks.find((t) => t.id === taskId);
   if (!task) return;
 
   let currentIndex = columnOrder.indexOf(task.columnTitles);
@@ -537,16 +546,14 @@ async function moveTaskToNextColumn(taskId, direction, event) {
     task.columnTitles = newColumnTitle;
     task.status = newColumnTitle;
 
-    await patchDataToFirebase(`tasks/${taskId}`, { 
+    await patchDataToFirebase(`tasks/${taskId}`, {
       columnTitles: newColumnTitle,
-      status: newColumnTitle
+      status: newColumnTitle,
     });
 
     renderTasks();
   }
 }
-
-
 
 async function createTaskBtn() {
   let title = document.getElementById("titleInput").value;
@@ -746,14 +753,32 @@ async function createTaskPlusAwaitFeedbackBtn() {
 //   }
 // }
 
+// function addSubTaskPopUp() {
+//   let subTaskInput = document.getElementById("subTaskPopUp");
+
+//   if (subTaskInput.value.trim() !== "") {
+//     subTasks.push({
+//       id: crypto.randomUUID(),
+//       description: subTaskInput.value.trim(),
+//     });
+
+//     renderSubTaskList();
+//     subTaskInput.value = "";
+//   }
+// }
+
 function addSubTaskPopUp() {
   let subTaskInput = document.getElementById("subTaskPopUp");
 
   if (subTaskInput.value.trim() !== "") {
-    subTasks.push({
+    let newSubtask = {
       id: crypto.randomUUID(),
       description: subTaskInput.value.trim(),
-    });
+    };
+
+    if (!subTasks.some((sub) => sub.description === newSubtask.description)) {
+      subTasks.push(newSubtask);
+    }
 
     renderSubTaskList();
     subTaskInput.value = "";
@@ -776,4 +801,3 @@ function addSubTaskPopUp() {
 //     subTaskPopUp.value = "";
 //   }
 // }
-

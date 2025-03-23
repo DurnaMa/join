@@ -25,8 +25,10 @@ function openEditTaskPopup(taskId) {
   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
   openTaskPopupDiv.classList.add("d-none");
   editTaskPopupDiv.classList.remove("d-none");
-  editTaskPopupDiv.innerHTML = renderEditTasksCardPopup(currentSelectedTask, taskId);
-  
+  editTaskPopupDiv.innerHTML = renderEditTasksCardPopup(
+    currentSelectedTask,
+    taskId
+  );
 }
 
 // async function editTask(taskId) {
@@ -45,7 +47,7 @@ function openEditTaskPopup(taskId) {
 //   let category = document.getElementById("category").value;
 //   let dueDate = document.getElementById("date").value;
 //   let priority = document.getElementById("prio").value;
-  
+
 //   let subTasksInput = document.getElementById("subTask").value;
 //   let subTasks = subTasksInput ? subTasksInput.split(",").map(task => task.trim()) : [];
 
@@ -60,8 +62,8 @@ function openEditTaskPopup(taskId) {
 
 //   try {
 //     await patchDataToFirebase(`tasks/${taskId}`, updatedTask);
-//     tasks[id] = { ...currentSelectedTask, ...updatedTask }; 
-//     renderTasks(); 
+//     tasks[id] = { ...currentSelectedTask, ...updatedTask };
+//     renderTasks();
 //   } catch (error) {
 //     console.error("Fehler beim Speichern der Änderungen:", error);
 //   }
@@ -97,8 +99,6 @@ function openEditTaskPopup(taskId) {
 //     subTask: subTask,
 //   };
 
-
-  
 //   try {
 //     await postDataToFirebase(`tasks/${taskId}`, taskCardContent);
 //   } catch (error) {
@@ -108,9 +108,9 @@ function openEditTaskPopup(taskId) {
 //   taskCard.innerHTML = renderAddTaskPoupBtn(task);
 //   renderTasks();
 // }
-// async function updateEditTask(taskId) { 
+// async function updateEditTask(taskId) {
 //   let task = tasks.find(task => task.id === taskId);
-  
+
 //   if (!task) {
 //     console.error(`Fehler: Task mit ID ${taskId} nicht gefunden!`);
 //     return;
@@ -168,7 +168,7 @@ function openEditTaskPopup(taskId) {
 //   taskCard.innerHTML = renderAddTaskPoupBtn(task);
 //   renderTasks();
 // }
-// async function updateEditTask(taskId) { 
+// async function updateEditTask(taskId) {
 //   let tasktest1 = tasks.findIndex((task) => task.id == taskId);
 //   let tasktest2 = tasks[taskId];
 //   // Debugging: Überprüfen, ob taskId existiert
@@ -251,28 +251,28 @@ function openEditTaskPopup(taskId) {
 //   let updatedTitle = document.getElementById("titleInput").value.trim();
 //   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
 //   let updatedDueDate = document.getElementById("dueDateInput").value;
-  
+
 //   // Priorität bestimmen
 //   let priority = document.querySelector(".prioEditBtn.active");
 //   let updatedPriority = priority ? priority.getAttribute("data-priority") : "Medium";
-  
+
 //   // Ausgewählte Kontakte abrufen
 //   let updatedContacts = Array.from(selectedContacts).map(name => {
 //     return allContacts.find(contact => contact.name === name);
 //   }).filter(contact => contact);
-  
+
 //   // Subtasks abrufen
 //   let updatedSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
 //     text: li.innerText,
 //     completed: li.classList.contains("completed")
 //   }));
-  
+
 //   // Sicherstellen, dass alle Felder ausgefüllt sind
 //   if (!updatedTitle || !updatedDueDate) {
 //     alert("Bitte fülle alle Pflichtfelder aus.");
 //     return;
 //   }
-  
+
 //   // Das Task-Objekt aktualisieren
 //   let updatedTask = {
 //     title: updatedTitle,
@@ -282,7 +282,7 @@ function openEditTaskPopup(taskId) {
 //     users: updatedContacts,
 //     subtasks: updatedSubtasks
 //   };
-  
+
 //   try {
 //     await putDataToFirebase("tasks/", updatedTask, taskId);
 //     console.log(taskId);
@@ -295,7 +295,7 @@ function openEditTaskPopup(taskId) {
 // }
 // async function updateEditTask(event) {
 //   event.preventDefault(); // Verhindert das Neuladen der Seite
-  
+
 //   let taskId = event.target.getAttribute("data-task-id");
 //   if (!taskId) {
 //     console.error("Task ID fehlt");
@@ -306,22 +306,22 @@ function openEditTaskPopup(taskId) {
 //   let updatedTitle = document.getElementById("titleInput").value.trim();
 //   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
 //   let updatedDueDate = document.getElementById("dueDateInput").value;
-  
+
 //   // Priorität bestimmen
 //   let priority = document.querySelector(".prioEditBtn.active");
 //   let updatedPriority = priority ? priority.getAttribute("data-priority") : "Medium";
-  
+
 //   // Ausgewählte Kontakte abrufen
 //   let updatedContacts = Array.from(selectedContacts).map(name => {
 //     return contacts.find(users => users.name === name);
 //   }).filter(name => name);
-  
+
 //   // Subtasks abrufen
 //   let updatedSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
 //     text: li.innerText,
 //     completed: li.classList.contains("completed")
 //   }));
-  
+
 //   // Sicherstellen, dass alle Felder ausgefüllt sind
 //   if (!updatedTitle || !updatedDueDate) {
 //     alert("Bitte fülle alle Pflichtfelder aus.");
@@ -337,7 +337,7 @@ function openEditTaskPopup(taskId) {
 //     users: updatedContacts,
 //     subtasks: updatedSubtasks
 //   };
-  
+
 //   try {
 //     await putDataToFirebase("tasks/", updatedTask, taskId);
 //     console.log(taskId);
@@ -350,7 +350,7 @@ function openEditTaskPopup(taskId) {
 // }
 // async function updateEditTask(event) {
 //   event.preventDefault(); // Verhindert das Neuladen der Seite
-  
+
 //   let taskId = event.target.getAttribute("data-task-id");
 //   if (!taskId) {
 //     console.error("Task ID fehlt");
@@ -361,29 +361,29 @@ function openEditTaskPopup(taskId) {
 //   let updatedTitle = document.getElementById("titleInput").value.trim();
 //   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
 //   let updatedDueDate = document.getElementById("dueDateInput").value;
-  
+
 //   // Priorität bestimmen
 //   let priority = document.querySelector(".prioEditBtn.active");
 //   let updatedPriority = priority ? priority.getAttribute("data-priority") : "Medium";
-  
+
 //   // Nur die Namen der ausgewählten Kontakte extrahieren
 //   let updatedContacts = {};
 //   Array.from(selectedContacts).forEach((name, index) => {
 //     updatedContacts[index] = name;
 //   });
-  
+
 //   // Subtasks abrufen
 //   let updatedSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
 //     text: li.innerText,
 //     completed: li.classList.contains("completed")
 //   }));
-  
+
 //   // Sicherstellen, dass alle Felder ausgefüllt sind
 //   if (!updatedTitle || !updatedDueDate) {
 //     alert("Bitte fülle alle Pflichtfelder aus.");
 //     return;
 //   }
-  
+
 //   // Das Task-Objekt aktualisieren
 //   let updatedTask = {
 //     title: updatedTitle,
@@ -393,7 +393,7 @@ function openEditTaskPopup(taskId) {
 //     users: updatedContacts,
 //     subtasks: updatedSubtasks
 //   };
-  
+
 //   try {
 //     await putDataToFirebase("tasks/", updatedTask, taskId);
 //     console.log(taskId);
@@ -406,7 +406,7 @@ function openEditTaskPopup(taskId) {
 // }
 // async function updateEditTask(event) {
 //   event.preventDefault(); // Verhindert das Neuladen der Seite
-  
+
 //   let taskId = event.target.getAttribute("data-task-id");
 //   if (!taskId) {
 //     console.error("Task ID fehlt");
@@ -417,17 +417,17 @@ function openEditTaskPopup(taskId) {
 //   let updatedTitle = document.getElementById("titleInput").value.trim();
 //   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
 //   let updatedDueDate = document.getElementById("dueDateInput").value;
-  
+
 //   // Priorität bestimmen
 //   let priority = document.querySelector(".prioEditBtn.active");
 //   let updatedPriority = priority ? priority.getAttribute("data-priority") : "Medium";
-  
+
 //   // Nur die Namen der ausgewählten Kontakte extrahieren
 //   let updatedContacts = {};
 //   Array.from(selectedContacts).forEach((name, index) => {
 //     updatedContacts[index] = name;
 //   });
-  
+
 //   let updatedSubtaskstest = {};
 //   Array.from(document.querySelectorAll("#subTaskList li")).forEach((name, index) => {
 //     updatedContacts[index] = name;
@@ -437,13 +437,13 @@ function openEditTaskPopup(taskId) {
 //   let updatedSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
 //     description: li.innerText
 //   }));
-  
+
 //   // Sicherstellen, dass alle Felder ausgefüllt sind
 //   if (!updatedTitle || !updatedDueDate) {
 //     alert("Bitte fülle alle Pflichtfelder aus.");
 //     return;
 //   }
-  
+
 //   // Bestehende Daten aus Firebase abrufen und nur geänderte Werte aktualisieren
 //   let taskRef = await getDataFromFirebase(`tasks/${taskId}`);
 //   let existingTask = taskRef || {};
@@ -458,7 +458,7 @@ function openEditTaskPopup(taskId) {
 //     subTasks: updatedSubtasks,
 //     category: existingTask.category || "" // Falls keine Kategorie existiert, leer lassen
 //   };
-  
+
 //   try {
 //     await putDataToFirebase("tasks/", updatedTask, taskId);
 //     console.log(taskId);
@@ -471,9 +471,7 @@ function openEditTaskPopup(taskId) {
 //   await loadTasks();
 // }
 
-
 //--------------------- alt -----------------------------
-
 
 // async function updateEditTask(event) {
 //   event.preventDefault(); // Verhindert das Neuladen der Seite
@@ -537,9 +535,67 @@ function openEditTaskPopup(taskId) {
 //   await loadTasks();
 // }
 
-
 //------------------------ neu ------------------------------
 
+// async function updateEditTask(event) {
+//   event.preventDefault();
+
+//   let taskId = event.target.getAttribute("data-task-id");
+//   if (!taskId) {
+//     console.error("Task ID fehlt");
+//     return;
+//   }
+
+//   let taskRef = await getDataFromFirebase(`tasks/${taskId}`);
+//   let existingTask = taskRef || {};
+
+//   let updatedTitle = document.getElementById("titleInput").value.trim();
+//   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
+//   let updatedDueDate = document.getElementById("dueDateInput").value;
+
+//   let priority = document.querySelector(".prioEditBtn.active");
+//   let updatedPriority = priority ? priority.getAttribute("data-priority") : existingTask.priority || "";
+
+//   let updatedContacts = {};
+//   Array.from(selectedContacts).forEach((name, index) => {
+//     updatedContacts[index] = name;
+//   });
+
+//   let existingSubtasks = existingTask.subTasks || [];
+
+//   let newSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
+//     id: li.getAttribute("data-id") || crypto.randomUUID(),
+//     description: li.innerText.trim(),
+//   }));
+
+//   let updatedSubtasks = newSubtasks.filter(sub => sub.description !== "");
+
+//   if (!updatedTitle || !updatedDueDate) {
+//     alert("Bitte fülle alle Pflichtfelder aus.");
+//     return;
+//   }
+
+//   let updatedTask = {
+//     title: updatedTitle,
+//     description: updatedDescription,
+//     dueDate: updatedDueDate,
+//     priority: updatedPriority,
+//     users: updatedContacts,
+//     subTasks: updatedSubtasks,
+//     category: existingTask.category || ""
+//   };
+
+//   try {
+//     await patchDataToFirebase(`tasks/${taskId}`, updatedTask);
+//     console.log("Task erfolgreich bearbeitet:", taskId);
+//     closeEditTaskCardPopUp();
+//     renderTasks();
+//   } catch (error) {
+//     console.error("Fehler beim Bearbeiten der Aufgabe:", error);
+//   }
+
+//   await loadTasks();
+// }
 
 async function updateEditTask(event) {
   event.preventDefault();
@@ -554,11 +610,15 @@ async function updateEditTask(event) {
   let existingTask = taskRef || {};
 
   let updatedTitle = document.getElementById("titleInput").value.trim();
-  let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
+  let updatedDescription = document
+    .getElementById("descriptionTextarea")
+    .value.trim();
   let updatedDueDate = document.getElementById("dueDateInput").value;
 
   let priority = document.querySelector(".prioEditBtn.active");
-  let updatedPriority = priority ? priority.getAttribute("data-priority") : existingTask.priority || "";
+  let updatedPriority = priority
+    ? priority.getAttribute("data-priority")
+    : existingTask.priority || "";
 
   let updatedContacts = {};
   Array.from(selectedContacts).forEach((name, index) => {
@@ -567,12 +627,27 @@ async function updateEditTask(event) {
 
   let existingSubtasks = existingTask.subTasks || [];
 
-  let newSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map(li => ({
+  let newSubtasks = Array.from(
+    document.querySelectorAll("#subTaskList li")
+  ).map((li) => ({
     id: li.getAttribute("data-id") || crypto.randomUUID(),
     description: li.innerText.trim(),
   }));
 
-  let updatedSubtasks = newSubtasks.filter(sub => sub.description !== ""); 
+  let combinedSubtasks = [...existingSubtasks];
+
+  newSubtasks.forEach((newSub) => {
+    let exists = combinedSubtasks.some(
+      (existingSub) => existingSub.id === newSub.id
+    );
+    if (!exists) {
+      combinedSubtasks.push(newSub);
+    } else {
+      combinedSubtasks = combinedSubtasks.map((sub) =>
+        sub.id === newSub.id ? newSub : sub
+      );
+    }
+  });
 
   if (!updatedTitle || !updatedDueDate) {
     alert("Bitte fülle alle Pflichtfelder aus.");
@@ -580,13 +655,14 @@ async function updateEditTask(event) {
   }
 
   let updatedTask = {
+    ...existingTask,
     title: updatedTitle,
     description: updatedDescription,
     dueDate: updatedDueDate,
     priority: updatedPriority,
     users: updatedContacts,
-    subTasks: updatedSubtasks,
-    category: existingTask.category || ""
+    subTasks: combinedSubtasks,
+    category: existingTask.category || "",
   };
 
   try {
@@ -597,11 +673,8 @@ async function updateEditTask(event) {
   } catch (error) {
     console.error("Fehler beim Bearbeiten der Aufgabe:", error);
   }
-
   await loadTasks();
 }
-
-
 
 function addTaskPopupBtn() {
   document.getElementById("bodyId").classList.add("overflow-hidden");
@@ -655,7 +728,9 @@ function closeAddTaskPopUpInProgress() {
 
 function closeAddTaskPopUpAwaitFeedback() {
   document.getElementById("bodyId").classList.remove("overflow-hidden");
-  document.getElementById("openTaskPopupAwaitFeedbackDiv").classList.add("d-none");
+  document
+    .getElementById("openTaskPopupAwaitFeedbackDiv")
+    .classList.add("d-none");
 }
 
 function closeTaskCardPopUp() {
