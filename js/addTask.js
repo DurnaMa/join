@@ -115,42 +115,6 @@ function editSubTask(index) {
   currentSelectedSubTask = index;
 }
 
-// function saveSubTask(index) {
-//   let subInputEdit = document.getElementById(`subInputEdit-${index}`).value;
-//   subTasks[index].description = subInputEdit;
-
-//   let subEditSpan = document.getElementById(`subEditSpan-${index}`);
-//   let subEditImgPen = document.getElementById(`subEditImgPen-${index}`);
-//   let subEditImgCheck = document.getElementById(`subEditImgCheck-${index}`);
-
-//   subEditSpan.textContent = subInputEdit;
-
-//   document.getElementById(`subInputEdit-${index}`).classList.toggle("d-none");
-//   subEditSpan.classList.toggle("d-none");
-//   subEditImgPen.classList.toggle("d-none");
-//   subEditImgCheck.classList.toggle("d-none");
-
-//   renderSubTaskList();
-// }
-
-// function saveSubTask(index) {
-//   if (!subTasks[index]) {
-//       console.error(`Subtask mit Index ${index} existiert nicht.`);
-//       return;
-//   }
-
-//   let subInputEdit = document.getElementById(`subInputEdit-${index}`);
-//   let subEditSpan = document.getElementById(`subEditSpan-${index}`);
-
-//   subTasks[index].description = subInputEdit.value.trim();
-//   subEditSpan.textContent = subTasks[index].description;
-
-//   subInputEdit.classList.toggle("d-none");
-//   subEditSpan.classList.toggle("d-none");
-
-//   renderSubTaskList();
-// }
-
 function saveSubTask(index) {
   let subInputEdit = document
     .getElementById(`subInputEdit-${index}`)
@@ -165,33 +129,12 @@ function saveSubTask(index) {
   renderSubTaskList();
 }
 
-// function deleteSubTask(index) {
-//   let subInputEdit = document.getElementById(`subInputEdit-${index}`);
-//   subTasks[index].description = subInputEdit;
-//   subTasks.splice(index, 1);
-//   renderSubTaskList();
-// }
-
-// function deleteSubTask(subTaskId) {
-//   let subTaskList = document.getElementById("subTaskList");
-//   let subTaskItem = subTaskList.querySelector(`li[data-id='${subTaskId}']`);
-
-//   if (subTaskItem) {
-//     subTaskItem.remove();
-//   }
-// }
-
 function deleteSubTask(index) {
   console.log("Vorher:", subTasks);
   subTasks.splice(index, 1);
   console.log("Nachher:", subTasks);
   renderSubTaskList();
 }
-
-// function deleteSubTask(subTaskId) {
-//   subTasks = subTasks.filter(sub => sub.id !== subTaskId);
-//   renderSubTaskList();
-// }
 
 function contactList() {
   let contactList = document.getElementById("assignedContactsList");
