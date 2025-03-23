@@ -58,9 +58,9 @@ async function toTheRegistration() {
         return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
       }*/
 
-        function getRandomColorFromArray() {
-          return colorPalette[Math.floor(Math.random() * colorPalette.length)];
-        }
+      function getRandomColorFromArray() {
+        return colorPalette[Math.floor(Math.random() * colorPalette.length)];
+      }
 
       // Neue Registrierung, wenn E-Mail nicht existiert
       let data = {
@@ -124,7 +124,11 @@ function logIn() {
     errorDiv.textContent = "Login erfolgreich!";
     errorDiv.style.color = "green";
     sessionStorage.setItem("fullName", user.name);
-    const initials = user.name.split(' ').map(initials => initials[0]).join('').toUpperCase();
+    const initials = user.name
+      .split(" ")
+      .map((initials) => initials[0])
+      .join("")
+      .toUpperCase();
     sessionStorage.setItem("userInitials", initials);
     window.location.href = "./pages/summary.html";
     return true;
@@ -148,3 +152,24 @@ function guestLogin() {
   window.location.href = "../pages/summary.html";
 }
 
+function showMobileGreetings() {
+  const isMobile = window.matchMedia("(max-width: 992px)").matches;
+
+  if (isMobile) {
+    const mobileGreetings = document.getElementById("mobileGreetings");
+
+    if (mobileGreetings) {
+      mobileGreetings.style.display = "flex";
+      mobileGreetings.style.opacity = 1;
+      setTimeout(() => {
+        mobileGreetings.style.opacity = 0;
+        mobileGreetings.style.display = "none";
+      }, 1500);
+    } else {
+      console.error(
+        "Das Element mit der ID 'mobileGreetings' wurde nicht gefunden!"
+      );
+    }
+    dailyTime();
+  }
+}

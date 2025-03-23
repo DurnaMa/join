@@ -49,6 +49,7 @@ function dailyTime() {
   }
 
   document.getElementById("time").innerHTML = greeting;
+  document.getElementById("timeMobil").innerHTML = greeting;
 }
 
 async function getDataFromFirebase(path = "") {
@@ -59,7 +60,8 @@ async function getDataFromFirebase(path = "") {
 function fullNameSummary() {
   const fullName = sessionStorage.getItem("fullName") || "Guest";
   document.getElementById("fullName").textContent = fullName;
-  daliyTime();
+  document.getElementById("fullNameMobil").textContent = fullName;
+  //daliyTime();
 }
 
 // habe bisschen vorprogrammiert und in template ist auch HTML Code und
