@@ -30,6 +30,7 @@ async function toTheRegistration() {
   const errorDiv = document.getElementById("emailError");
   const passwordErrorDiv = document.getElementById("passwordError");
   const checkboxErrorDiv = document.getElementById("checkboxError");
+  let popup = document.getElementById("singUpPopup");
 
   errorDiv.textContent = "";
   passwordErrorDiv.textContent = "";
@@ -69,8 +70,14 @@ async function toTheRegistration() {
       nameInput.value = "";
       emailInput.value = "";
       passwordInput.value = "";
+      confirmPassword.value = "";
       console.log("Anmeldung erfolgreich");
-      window.location.href = "/index.html";
+      if (popup) {
+        popup.classList.remove("d-none");
+      }
+      setTimeout(() => {
+        window.location.href = "/index.html";
+      }, 2000);
     } catch (error) {
       console.error("Fehler bei der Anmeldung:", error);
       errorDiv.textContent = "Registration failed. Please try again.";
