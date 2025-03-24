@@ -452,26 +452,460 @@ function renderTasksCardPopup(task) {
   `;
 }
 
+// function renderEditTasksCardPopup(currentSelectedTask, taskId) {
+//   let assignedContacts = currentSelectedTask.users || [];
+//   let title = currentSelectedTask.title;
+//   let description = currentSelectedTask.description;
+//   let dueDate = currentSelectedTask.dueDate;
+//   subTasks = currentSelectedTask.subTasks || [];
+//   let priority = currentSelectedTask.priority;
+
+//   if (priority === "Urgent") {
+//     prioUrgentEditPopup.classList.add("prioUrgentRed");
+//     urgentImgPopup.src = "/assets/icons/urgentWhite.png";
+//   } else if (priority === "Medium") {
+//     prioMediumEditPopup.classList.add("prioMediumYellow");
+//     mediumImgPopup.src = "/assets/icons/mediumWhite.png";
+//   } else if (priority === "Low") {
+//     let prioLowEdit = prioLowEditPopup.classList.add("prioLowGreen");
+//     let lowImg = lowImgPopup.src = "/assets/icons/lowWhite.png";
+//   }
+
+//   // 🛠 Sicherstellen, dass die vorhandenen Nutzer in selectedContacts gespeichert werden
+//   selectedContacts = new Set(assignedContacts.map((user) => user.name));
+
+//   return /*html*/ `
+//     <div class="shadow-div"></div>
+//     <div class="taskCardEditPopup">
+//       <div class="task-edit-close-popup-div">
+//         <div class="test987">
+//           <img onclick="closeEditTaskCardPopUp()" class="task-edit-close-popup" src="/assets/icons/close.png" alt=""/>
+//         </div>
+//       </div>
+//       <div class="test-test">
+//       <label>Title</label>
+//       <input id="titleInput" value="${title}" class="task-edit-input-popup" placeholder="Enter a title" type="text" />
+//       <label>Description</label>
+//       <textarea id="descriptionTextarea" class="task-edit-input-popup" placeholder="Enter a description">${description}</textarea>
+//       <label>Due Date</label>
+//       <input id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date" />
+        
+//       <label>Priority</label>
+//       <div  class="task-edit-prio-popup">
+//         <button onclick="prioUrgent()" id="prioUrgentEditPopup" class="prioBtn">
+//           Urgent
+//           <img id="urgentImgPopup" src="/assets/icons/urgentRed.png" alt="" />
+//         </button>
+//         <button onclick="prioMedium()" id="prioMediumEditPopup" class="prioBtn">
+//           Medium
+//           <img id="mediumImgPopup" src="/assets/icons/mediumYellow.png" alt="" />
+//         </button>
+//         <button onclick="prioLow()" id="prioLowEditPopup" class="prioBtn">
+//           Low
+//           <img id="lowImgPopup" src="/assets/icons/lowGreen.png" alt="" />
+//         </button>
+//       </div>
+
+//       <label class="TESTAssignedTEST" for="contactSelection">Assigned to</label>
+//       <div onclick="contactListPopUp()" class="assignedContainer">
+//         <span>Select contacts to assign</span>
+//         <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+//         <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+//       </div>
+//       <div id="assignedContactsListPopUp" class="hidden"></div>
+//       <div id="selectedContactsDisplay" class="selectedContactsContainerPopUp">
+//         ${assignedContacts
+//           .map(
+//             (contact) =>
+//               `<span class="assignedShortcutName" style="background-color: ${contact.color}">${contact.initials}</span>`
+//           )
+//           .join("")}
+//       </div>
+    
+//       <label class="TESTSubtasksTEST" for="subtask">Subtasks</label>
+//       <div id="addSubTask">
+//         <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
+//         <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
+//       </div>
+//       <ul id="subTaskList">
+//         ${subTasks
+//           .map(
+//             (subTask, i) => `
+//           <li class="subTask" data-index="${i}">
+//             <input id="subInputEdit-${i}" type="text" class="subTask-edit-input d-none" value="${subTask.description}">
+//             <span id="subEditSpan-${i}" class="subTask-text">${subTask.description}</span>
+//             <div class="subTask-actions">
+//               <div class="icon-wrapper">
+//                 <img id="subEditImgPen-${i}" src="/assets/icons/edit-icon.png" alt="Edit" onclick="editSubTask(${i})" class="action-icon edit-icon">
+//               </div>
+//               <div class="icon-wrapper">
+//                 <img src="/assets/icons/delete-icon.png" alt="Delete" onclick="deleteSubTask(${i})" class="action-icon delete-icon">
+//               </div>
+//               <div class="separator"></div>
+//               <div class="icon-wrapper">
+//                 <img id="subEditImgCheck-${i}" src="/assets/icons/checkBgWhite.png" alt="Save" onclick="saveSubTask(${i})" class="action-icon save-icon d-none">
+//               </div>
+//             </div>
+//           </li>
+//         `
+//           )
+//           .join("")}
+//       </ul>
+//       </div>
+//       <div class="button-ok-div">
+//         <div class="buttontest987">
+//         <button onclick="updateEditTask(event)" data-task-id="${taskId}" class="button-ok">Ok <img src="/assets/icons/check.png" alt="" /></button>
+//         </div>
+//       </div>
+//     </div>
+//   `;
+// }
+
+// ChatGPT
+// function renderEditTasksCardPopup(currentSelectedTask, taskId) {
+//   let assignedContacts = currentSelectedTask.users || [];
+//   let title = currentSelectedTask.title;
+//   let description = currentSelectedTask.description;
+//   let dueDate = currentSelectedTask.dueDate;
+//   subTasks = currentSelectedTask.subTasks || [];
+//   let priority = currentSelectedTask.priority;
+
+//   const priorityStyles = {
+//     Urgent: {
+//       class: "prioUrgentRed",
+//       imgSrc: "/assets/icons/urgentWhite.png",
+//     },
+//     Medium: {
+//       class: "prioMediumYellow",
+//       imgSrc: "/assets/icons/mediumWhite.png",
+//     },
+//     Low: {
+//       class: "prioLowGreen",
+//       imgSrc: "/assets/icons/lowWhite.png",
+//     },
+//   };
+
+//   selectedContacts = new Set(assignedContacts.map((user) => user.name));
+
+//   return /*html*/ `
+//     <div class="shadow-div"></div>
+//     <div class="taskCardEditPopup">
+//       <div class="task-edit-close-popup-div">
+//         <div class="test987">
+//           <img onclick="closeEditTaskCardPopUp()" class="task-edit-close-popup" src="/assets/icons/close.png" alt=""/>
+//         </div>
+//       </div>
+//       <div class="test-test">
+//       <label>Title</label>
+//       <input id="titleInput" value="${title}" class="task-edit-input-popup" placeholder="Enter a title" type="text" />
+//       <label>Description</label>
+//       <textarea id="descriptionTextarea" class="task-edit-input-popup" placeholder="Enter a description">${description}</textarea>
+//       <label>Due Date</label>
+//       <input id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date" />
+        
+//       <label>Priority</label>
+//       <div class="task-edit-prio-popup">
+//         <button onclick="prioUrgent()" id="prioUrgentEditPopup" class="prioBtn ${priority === 'Urgent' ? priorityStyles.Urgent.class : ''}">
+//           Urgent
+//           <img id="urgentImgPopup" src="${priority === 'Urgent' ? priorityStyles.Urgent.imgSrc : '/assets/icons/urgentRed.png'}" alt="" />
+//         </button>
+//         <button onclick="prioMedium()" id="prioMediumEditPopup" class="prioBtn ${priority === 'Medium' ? priorityStyles.Medium.class : ''}">
+//           Medium
+//           <img id="mediumImgPopup" src="${priority === 'Medium' ? priorityStyles.Medium.imgSrc : '/assets/icons/mediumYellow.png'}" alt="" />
+//         </button>
+//         <button onclick="prioLow()" id="prioLowEditPopup" class="prioBtn ${priority === 'Low' ? priorityStyles.Low.class : ''}">
+//           Low
+//           <img id="lowImgPopup" src="${priority === 'Low' ? priorityStyles.Low.imgSrc : '/assets/icons/lowGreen.png'}" alt="" />
+//         </button>
+//       </div>
+
+//       <label class="TESTAssignedTEST" for="contactSelection">Assigned to</label>
+//       <div onclick="contactListPopUp()" class="assignedContainer">
+//         <span>Select contacts to assign</span>
+//         <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+//         <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+//       </div>
+//       <div id="assignedContactsListPopUp" class="hidden"></div>
+//       <div id="selectedContactsDisplay" class="selectedContactsContainerPopUp">
+//         ${assignedContacts
+//           .map(
+//             (contact) =>
+//               `<span class="assignedShortcutName" style="background-color: ${contact.color}">${contact.initials}</span>`
+//           )
+//           .join("")}
+//       </div>
+    
+//       <label class="TESTSubtasksTEST" for="subtask">Subtasks</label>
+//       <div id="addSubTask">
+//         <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
+//         <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
+//       </div>
+//       <ul id="subTaskList">
+//         ${subTasks
+//           .map(
+//             (subTask, i) => `
+//           <li class="subTask" data-index="${i}">
+//             <input id="subInputEdit-${i}" type="text" class="subTask-edit-input d-none" value="${subTask.description}">
+//             <span id="subEditSpan-${i}" class="subTask-text">${subTask.description}</span>
+//             <div class="subTask-actions">
+//               <div class="icon-wrapper">
+//                 <img id="subEditImgPen-${i}" src="/assets/icons/edit-icon.png" alt="Edit" onclick="editSubTask(${i})" class="action-icon edit-icon">
+//               </div>
+//               <div class="icon-wrapper">
+//                 <img src="/assets/icons/delete-icon.png" alt="Delete" onclick="deleteSubTask(${i})" class="action-icon delete-icon">
+//               </div>
+//               <div class="separator"></div>
+//               <div class="icon-wrapper">
+//                 <img id="subEditImgCheck-${i}" src="/assets/icons/checkBgWhite.png" alt="Save" onclick="saveSubTask(${i})" class="action-icon save-icon d-none">
+//               </div>
+//             </div>
+//           </li>
+//         `
+//           )
+//           .join("")}
+//       </ul>
+//       </div>
+//       <div class="button-ok-div">
+//         <div class="buttontest987">
+//         <button onclick="updateEditTask(event)" data-task-id="${taskId}" class="button-ok">Ok <img src="/assets/icons/check.png" alt="" /></button>
+//         </div>
+//       </div>
+//     </div>
+//   `;
+// }
+
+// geht
+// function renderEditTasksCardPopup(currentSelectedTask, taskId) {
+//   let assignedContacts = currentSelectedTask.users || [];
+//   let title = currentSelectedTask.title;
+//   let description = currentSelectedTask.description;
+//   let dueDate = currentSelectedTask.dueDate;
+//   subTasks = currentSelectedTask.subTasks || [];
+//   let priority = currentSelectedTask.priority;
+
+//   const priorityStyles = {
+//     Urgent: {
+//       class: "prioUrgentRed",
+//       imgSrc: "/assets/icons/urgentWhite.png",
+//     },
+//     Medium: {
+//       class: "prioMediumYellow",
+//       imgSrc: "/assets/icons/mediumWhite.png",
+//     },
+//     Low: {
+//       class: "prioLowGreen",
+//       imgSrc: "/assets/icons/lowWhite.png",
+//     },
+//   };
+
+//   function updatePriority(newPriority) {
+//     document.getElementById("prioUrgentEditPopup").classList.remove(priorityStyles.Urgent.class);
+//     document.getElementById("prioMediumEditPopup").classList.remove(priorityStyles.Medium.class);
+//     document.getElementById("prioLowEditPopup").classList.remove(priorityStyles.Low.class);
+  
+//     document.getElementById("prioUrgentEditPopup").querySelector("img").src = "/assets/icons/urgentRed.png";
+//     document.getElementById("prioMediumEditPopup").querySelector("img").src = "/assets/icons/mediumYellow.png";
+//     document.getElementById("prioLowEditPopup").querySelector("img").src = "/assets/icons/lowGreen.png";
+  
+//     document.getElementById(`prio${newPriority}EditPopup`).classList.add(priorityStyles[newPriority].class);
+//     document.getElementById(`prio${newPriority}EditPopup`).querySelector("img").src = priorityStyles[newPriority].imgSrc;
+  
+//     priority = newPriority;
+//   }
+
+//   selectedContacts = new Set(assignedContacts.map((user) => user.name));
+
+//   return /*html*/ `
+//     <div class="shadow-div"></div>
+//     <div class="taskCardEditPopup">
+//       <div class="task-edit-close-popup-div">
+//         <div class="test987">
+//           <img onclick="closeEditTaskCardPopUp()" class="task-edit-close-popup" src="/assets/icons/close.png" alt=""/>
+//         </div>
+//       </div>
+//       <div class="test-test">
+//       <label>Title</label>
+//       <input id="titleInput" value="${title}" class="task-edit-input-popup" placeholder="Enter a title" type="text" />
+//       <label>Description</label>
+//       <textarea id="descriptionTextarea" class="task-edit-input-popup" placeholder="Enter a description">${description}</textarea>
+//       <label>Due Date</label>
+//       <input id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date" />
+        
+//       <label>Priority</label>
+//       <div class="task-edit-prio-popup">
+//         <button onclick="updatePriority('Urgent')" id="prioUrgentEditPopup" class="prioBtn ${priority === 'Urgent' ? priorityStyles.Urgent.class : ''}">
+//           Urgent
+//           <img src="${priority === 'Urgent' ? priorityStyles.Urgent.imgSrc : '/assets/icons/urgentRed.png'}" alt="" />
+//         </button>
+//         <button onclick="updatePriority('Medium')" id="prioMediumEditPopup" class="prioBtn ${priority === 'Medium' ? priorityStyles.Medium.class : ''}">
+//           Medium
+//           <img src="${priority === 'Medium' ? priorityStyles.Medium.imgSrc : '/assets/icons/mediumYellow.png'}" alt="" />
+//         </button>
+//         <button onclick="updatePriority('Low')" id="prioLowEditPopup" class="prioBtn ${priority === 'Low' ? priorityStyles.Low.class : ''}">
+//           Low
+//           <img src="${priority === 'Low' ? priorityStyles.Low.imgSrc : '/assets/icons/lowGreen.png'}" alt="" />
+//         </button>
+//       </div>
+
+//       <label class="TESTAssignedTEST" for="contactSelection">Assigned to</label>
+//       <div onclick="contactListPopUp()" class="assignedContainer">
+//         <span>Select contacts to assign</span>
+//         <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+//         <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+//       </div>
+//       <div id="assignedContactsListPopUp" class="hidden"></div>
+//       <div id="selectedContactsDisplay" class="selectedContactsContainerPopUp">
+//         ${assignedContacts
+//           .map(
+//             (contact) =>
+//               `<span class="assignedShortcutName" style="background-color: ${contact.color}">${contact.initials}</span>`
+//           )
+//           .join("")}
+//       </div>
+    
+//       <label class="TESTSubtasksTEST" for="subtask">Subtasks</label>
+//       <div id="addSubTask">
+//         <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
+//         <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
+//       </div>
+//       <ul id="subTaskList">
+//         ${subTasks
+//           .map(
+//             (subTask, i) => `
+//           <li class="subTask" data-index="${i}">
+//             <input id="subInputEdit-${i}" type="text" class="subTask-edit-input d-none" value="${subTask.description}">
+//             <span id="subEditSpan-${i}" class="subTask-text">${subTask.description}</span>
+//             <div class="subTask-actions">
+//               <div class="icon-wrapper">
+//                 <img id="subEditImgPen-${i}" src="/assets/icons/edit-icon.png" alt="Edit" onclick="editSubTask(${i})" class="action-icon edit-icon">
+//               </div>
+//               <div class="icon-wrapper">
+//                 <img src="/assets/icons/delete-icon.png" alt="Delete" onclick="deleteSubTask(${i})" class="action-icon delete-icon">
+//               </div>
+//               <div class="separator"></div>
+//               <div class="icon-wrapper">
+//                 <img id="subEditImgCheck-${i}" src="/assets/icons/checkBgWhite.png" alt="Save" onclick="saveSubTask(${i})" class="action-icon save-icon d-none">
+//               </div>
+//             </div>
+//           </li>
+//         `
+//           )
+//           .join("")}
+//       </ul>
+//       </div>
+//       <div class="button-ok-div">
+//         <div class="buttontest987">
+//         <button onclick="updateEditTask(event)" data-task-id="${taskId}" class="button-ok">Ok <img src="/assets/icons/check.png" alt="" /></button>
+//         </div>
+//       </div>
+//     </div>
+//   `;
+// }
+// function renderEditTasksCardPopup(currentSelectedTask, taskId) {
+//   window.currentSelectedTask = currentSelectedTask; // Globale Referenz für updatePriority
+//   let assignedContacts = currentSelectedTask.users || [];
+//   let title = currentSelectedTask.title;
+//   let description = currentSelectedTask.description;
+//   let dueDate = currentSelectedTask.dueDate;
+//   subTasks = currentSelectedTask.subTasks || [];
+//   let priority = currentSelectedTask.priority;
+
+//   selectedContacts = new Set(assignedContacts.map((user) => user.name));
+
+//   return /*html*/ `
+//     <div class="shadow-div"></div>
+//     <div class="taskCardEditPopup">
+//       <div class="task-edit-close-popup-div">
+//         <div class="test987">
+//           <img onclick="closeEditTaskCardPopUp()" class="task-edit-close-popup" src="/assets/icons/close.png" alt=""/>
+//         </div>
+//       </div>
+//       <div class="test-test">
+//       <label>Title</label>
+//       <input id="titleInput" value="${title}" class="task-edit-input-popup" placeholder="Enter a title" type="text" />
+//       <label>Description</label>
+//       <textarea id="descriptionTextarea" class="task-edit-input-popup" placeholder="Enter a description">${description}</textarea>
+//       <label>Due Date</label>
+//       <input id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date" />
+        
+//       <label>Priority</label>
+//       <div class="task-edit-prio-popup">
+//         <button onclick="updatePriority('Urgent')" id="prioUrgentEditPopup" class="prioBtn ${priority === 'Urgent' ? priorityStyles.Urgent.class : ''}">
+//           Urgent
+//           <img src="${priority === 'Urgent' ? priorityStyles.Urgent.imgSrc : priorityStyles.Urgent.defaultImg}" alt="" />
+//         </button>
+//         <button onclick="updatePriority('Medium')" id="prioMediumEditPopup" class="prioBtn ${priority === 'Medium' ? priorityStyles.Medium.class : ''}">
+//           Medium
+//           <img src="${priority === 'Medium' ? priorityStyles.Medium.imgSrc : priorityStyles.Medium.defaultImg}" alt="" />
+//         </button>
+//         <button onclick="updatePriority('Low')" id="prioLowEditPopup" class="prioBtn ${priority === 'Low' ? priorityStyles.Low.class : ''}">
+//           Low
+//           <img src="${priority === 'Low' ? priorityStyles.Low.imgSrc : priorityStyles.Low.defaultImg}" alt="" />
+//         </button>
+//       </div>
+
+//       <label class="TESTAssignedTEST" for="contactSelection">Assigned to</label>
+//       <div onclick="contactListPopUp()" class="assignedContainer">
+//         <span>Select contacts to assign</span>
+//         <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+//         <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+//       </div>
+//       <div id="assignedContactsListPopUp" class="hidden"></div>
+//       <div id="selectedContactsDisplay" class="selectedContactsContainerPopUp">
+//         ${assignedContacts
+//           .map(
+//             (contact) =>
+//               `<span class="assignedShortcutName" style="background-color: ${contact.color}">${contact.initials}</span>`
+//           )
+//           .join("")}
+//       </div>
+    
+//       <label class="TESTSubtasksTEST" for="subtask">Subtasks</label>
+//       <div id="addSubTask">
+//         <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
+//         <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
+//       </div>
+//       <ul id="subTaskList">
+//         ${subTasks
+//           .map(
+//             (subTask, i) => `
+//           <li class="subTask" data-index="${i}">
+//             <input id="subInputEdit-${i}" type="text" class="subTask-edit-input d-none" value="${subTask.description}">
+//             <span id="subEditSpan-${i}" class="subTask-text">${subTask.description}</span>
+//             <div class="subTask-actions">
+//               <div class="icon-wrapper">
+//                 <img id="subEditImgPen-${i}" src="/assets/icons/edit-icon.png" alt="Edit" onclick="editSubTask(${i})" class="action-icon edit-icon">
+//               </div>
+//               <div class="icon-wrapper">
+//                 <img src="/assets/icons/delete-icon.png" alt="Delete" onclick="deleteSubTask(${i})" class="action-icon delete-icon">
+//               </div>
+//               <div class="separator"></div>
+//               <div class="icon-wrapper">
+//                 <img id="subEditImgCheck-${i}" src="/assets/icons/checkBgWhite.png" alt="Save" onclick="saveSubTask(${i})" class="action-icon save-icon d-none">
+//               </div>
+//             </div>
+//           </li>
+//         `
+//           )
+//           .join("")}
+//       </ul>
+//       </div>
+//       <div class="button-ok-div">
+//         <div class="buttontest987">
+//         <button onclick="updateEditTask(event)" data-task-id="${taskId}" class="button-ok">Ok <img src="/assets/icons/check.png" alt="" /></button>
+//         </div>
+//       </div>
+//     </div>
+//   `;
+// }
 function renderEditTasksCardPopup(currentSelectedTask, taskId) {
   let assignedContacts = currentSelectedTask.users || [];
   let title = currentSelectedTask.title;
   let description = currentSelectedTask.description;
   let dueDate = currentSelectedTask.dueDate;
   subTasks = currentSelectedTask.subTasks || [];
-  let priority = currentSelectedTask.priority;
+  window.currentSelectedPriority = currentSelectedTask.priority;
 
-  // if (priority === "Urgent") {
-  //   prioUrgentEditPopup.classList.add("prioUrgentRed");
-  //   urgentImgPopup.src = "/assets/icons/urgentWhite.png";
-  // } else if (priority === "Medium") {
-  //   prioMediumEditPopup.classList.add("prioMediumYellow");
-  //   mediumImgPopup.src = "/assets/icons/mediumWhite.png";
-  // } else if (priority === "Low") {
-  //   let prioLowEdit = prioLowEditPopup.classList.add("prioLowGreen");
-  //   let lowImg = lowImgPopup.src = "/assets/icons/lowWhite.png";
-  // }
-
-  // 🛠 Sicherstellen, dass die vorhandenen Nutzer in selectedContacts gespeichert werden
   selectedContacts = new Set(assignedContacts.map((user) => user.name));
 
   return /*html*/ `
@@ -491,18 +925,18 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
       <input id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date" />
         
       <label>Priority</label>
-      <div  class="task-edit-prio-popup">
-        <button onclick="prioUrgent()" id="prioUrgentEditPopup" class="prioBtn">
+      <div class="task-edit-prio-popup">
+        <button onclick="updatePriority('Urgent')" id="prioUrgentEditPopup" class="prioBtn ${window.currentSelectedPriority === 'Urgent' ? 'prioUrgentRed' : ''}">
           Urgent
-          <img id="urgentImgPopup" src="/assets/icons/urgentRed.png" alt="" />
+          <img src="${window.currentSelectedPriority === 'Urgent' ? '/assets/icons/urgentWhite.png' : '/assets/icons/urgentRed.png'}" alt="" />
         </button>
-        <button onclick="prioMedium()" id="prioMediumEditPopup" class="prioBtn">
+        <button onclick="updatePriority('Medium')" id="prioMediumEditPopup" class="prioBtn ${window.currentSelectedPriority === 'Medium' ? 'prioMediumYellow' : ''}">
           Medium
-          <img id="mediumImgPopup" src="/assets/icons/mediumYellow.png" alt="" />
+          <img src="${window.currentSelectedPriority === 'Medium' ? '/assets/icons/mediumWhite.png' : '/assets/icons/mediumYellow.png'}" alt="" />
         </button>
-        <button onclick="prioLow()" id="prioLowEditPopup" class="prioBtn">
+        <button onclick="updatePriority('Low')" id="prioLowEditPopup" class="prioBtn ${window.currentSelectedPriority === 'Low' ? 'prioLowGreen' : ''}">
           Low
-          <img id="lowImgPopup" src="/assets/icons/lowGreen.png" alt="" />
+          <img src="${window.currentSelectedPriority === 'Low' ? '/assets/icons/lowWhite.png' : '/assets/icons/lowGreen.png'}" alt="" />
         </button>
       </div>
 
@@ -561,124 +995,40 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
   `;
 }
 
-// ChatGPT
+// test anfang!!!!!!!!!!!!!!!!!!!!!!
+function updatePriority(newPriority) {
+  window.currentSelectedPriority = newPriority;
 
-// function renderEditTasksCardPopup(currentSelectedTask, taskId) {
-//   let assignedContacts = currentSelectedTask.users || [];
-//   let title = currentSelectedTask.title;
-//   let description = currentSelectedTask.description;
-//   let dueDate = currentSelectedTask.dueDate;
-//   subTasks = currentSelectedTask.subTasks || [];
-//   let priority = currentSelectedTask.priority;
+  const priorityStyles = {
+    Urgent: {
+      class: "prioUrgentRed",
+      imgSrc: "/assets/icons/urgentWhite.png",
+    },
+    Medium: {
+      class: "prioMediumYellow",
+      imgSrc: "/assets/icons/mediumWhite.png",
+    },
+    Low: {
+      class: "prioLowGreen",
+      imgSrc: "/assets/icons/lowWhite.png",
+    },
+  };
 
-//   let popupContainer = document.createElement("div");
-//   popupContainer.innerHTML = /*html*/ `
-//     <div class="shadow-div"></div>
-//     <div class="taskCardEditPopup">
-//       <div class="task-edit-close-popup-div">
-//         <div class="test987">
-//           <img onclick="closeEditTaskCardPopUp()" class="task-edit-close-popup" src="/assets/icons/close.png" alt=""/>
-//         </div>
-//       </div>
-//       <div class="test-test">
-//       <label>Title</label>
-//       <input id="titleInput" value="${title}" class="task-edit-input-popup" placeholder="Enter a title" type="text" />
-//       <label>Description</label>
-//       <textarea id="descriptionTextarea" class="task-edit-input-popup" placeholder="Enter a description">${description}</textarea>
-//       <label>Due Date</label>
-//       <input id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date" />
-        
-//       <label>Priority</label>
-//       <div class="task-edit-prio-popup">
-//         <button onclick="prioUrgent()" id="prioUrgentEditPopup" class="prioBtn">
-//           Urgent
-//           <img id="urgentImgPopup" src="/assets/icons/urgentRed.png" alt="" />
-//         </button>
-//         <button onclick="prioMedium()" id="prioMediumEditPopup" class="prioBtn">
-//           Medium
-//           <img id="mediumImgPopup" src="/assets/icons/mediumYellow.png" alt="" />
-//         </button>
-//         <button onclick="prioLow()" id="prioLowEditPopup" class="prioBtn">
-//           Low
-//           <img id="lowImgPopup" src="/assets/icons/lowGreen.png" alt="" />
-//         </button>
-//       </div>
-      
-//       <label class="TESTAssignedTEST" for="contactSelection">Assigned to</label>
-//       <div onclick="contactListPopUp()" class="assignedContainer">
-//         <span>Select contacts to assign</span>
-//         <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
-//         <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
-//       </div>
-//       <div id="assignedContactsListPopUp" class="hidden"></div>
-//       <div id="selectedContactsDisplay" class="selectedContactsContainerPopUp">
-//         ${assignedContacts.map(contact => `<span class="assignedShortcutName" style="background-color: ${contact.color}">${contact.initials}</span>`).join("")}
-//       </div>
-    
-//       <label class="TESTSubtasksTEST" for="subtask">Subtasks</label>
-//       <div id="addSubTask">
-//         <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
-//         <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
-//       </div>
-//       <ul id="subTaskList">
-//         ${subTasks.map((subTask, i) => `
-//           <li class="subTask" data-index="${i}">
-//             <input id="subInputEdit-${i}" type="text" class="subTask-edit-input d-none" value="${subTask.description}">
-//             <span id="subEditSpan-${i}" class="subTask-text">${subTask.description}</span>
-//             <div class="subTask-actions">
-//               <div class="icon-wrapper">
-//                 <img id="subEditImgPen-${i}" src="/assets/icons/edit-icon.png" alt="Edit" onclick="editSubTask(${i})" class="action-icon edit-icon">
-//               </div>
-//               <div class="icon-wrapper">
-//                 <img src="/assets/icons/delete-icon.png" alt="Delete" onclick="deleteSubTask(${i})" class="action-icon delete-icon">
-//               </div>
-//               <div class="separator"></div>
-//               <div class="icon-wrapper">
-//                 <img id="subEditImgCheck-${i}" src="/assets/icons/checkBgWhite.png" alt="Save" onclick="saveSubTask(${i})" class="action-icon save-icon d-none">
-//               </div>
-//             </div>
-//           </li>
-//         `).join("")}
-//       </ul>
-//       </div>
-//       <div class="button-ok-div">
-//         <div class="buttontest987">
-//         <button onclick="updateEditTask(event)" data-task-id="${taskId}" class="button-ok">Ok <img src="/assets/icons/check.png" alt="" /></button>
-//         </div>
-//       </div>
-//     </div>
-//   `;
+  document.getElementById("prioUrgentEditPopup").classList.remove(priorityStyles.Urgent.class);
+  document.getElementById("prioMediumEditPopup").classList.remove(priorityStyles.Medium.class);
+  document.getElementById("prioLowEditPopup").classList.remove(priorityStyles.Low.class);
 
-//   document.body.appendChild(popupContainer);
+  document.getElementById("prioUrgentEditPopup").querySelector("img").src = "/assets/icons/urgentRed.png";
+  document.getElementById("prioMediumEditPopup").querySelector("img").src = "/assets/icons/mediumYellow.png";
+  document.getElementById("prioLowEditPopup").querySelector("img").src = "/assets/icons/lowGreen.png";
 
-//   let prioUrgentEditPopup = document.getElementById("prioUrgentEditPopup");
-//   let prioMediumEditPopup = document.getElementById("prioMediumEditPopup");
-//   let prioLowEditPopup = document.getElementById("prioLowEditPopup");
-
-//   let urgentImgPopup = document.getElementById("urgentImgPopup");
-//   let mediumImgPopup = document.getElementById("mediumImgPopup");
-//   let lowImgPopup = document.getElementById("lowImgPopup");
-
-//   if (priority === "Urgent") {
-//     prioUrgentEditPopup.classList.add("prioUrgentRed");
-//     urgentImgPopup.src = "/assets/icons/urgentWhite.png";
-//   } else if (priority === "Medium") {
-//     prioMediumEditPopup.classList.add("prioMediumYellow");
-//     mediumImgPopup.src = "/assets/icons/mediumWhite.png";
-//   } else if (priority === "Low") {
-//     prioLowEditPopup.classList.add("prioLowGreen");
-//     lowImgPopup.src = "/assets/icons/lowWhite.png";
-//   }
-// }
+  document.getElementById(`prio${newPriority}EditPopup`).classList.add(priorityStyles[newPriority].class);
+  document.getElementById(`prio${newPriority}EditPopup`).querySelector("img").src = priorityStyles[newPriority].imgSrc;
+}
 
 
 
-
-
-
-
-
-
+// Test Ende!!!!!!!!!!!!!!!!!!!!!!!!!
 
 //--------- contact templates ---------
 function addNewContactPopup() {

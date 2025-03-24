@@ -31,42 +31,46 @@ function openEditTaskPopup(taskId) {
   );
 }
 
-async function updateEditTask(event) {
-  event.preventDefault();
+// alter Conde!!!!!!!!!!
 
-  let taskId = event.target.getAttribute("data-task-id");
-  if (!taskId) {
-    console.error("Task ID fehlt");
-    return;
-  }
+// async function updateEditTask(event) {
+//   event.preventDefault();
 
-  let taskRef = await getDataFromFirebase(`tasks/${taskId}`);
-  let existingTask = taskRef || {};
+//   let taskId = event.target.getAttribute("data-task-id");
+//   if (!taskId) {
+//     console.error("Task ID fehlt");
+//     return;
+//   }
 
-  let updatedTitle = document.getElementById("titleInput").value.trim();
-  let updatedDescription = document
-    .getElementById("descriptionTextarea")
-    .value.trim();
-  let updatedDueDate = document.getElementById("dueDateInput").value;
+//   let taskRef = await getDataFromFirebase(`tasks/${taskId}`);
+//   let existingTask = taskRef || {};
 
-  let priority = document.querySelector(".prioEditBtn.active");
-  let updatedPriority = priority
-    ? priority.getAttribute("data-priority")
-    : existingTask.priority || "";
+//   let updatedTitle = document.getElementById("titleInput").value.trim();
+//   let updatedDescription = document
+//     .getElementById("descriptionTextarea")
+//     .value.trim();
+//   let updatedDueDate = document.getElementById("dueDateInput").value;
 
-  let updatedContacts = {};
-  Array.from(selectedContacts).forEach((name, index) => {
-    updatedContacts[index] = name;
-  });
+//   let priority = document.querySelector(".prioEditBtn.active");
+//   let updatedPriority = priority
+//     ? priority.getAttribute("data-priority")
+//     : existingTask.priority || "";
 
-  let existingSubtasks = existingTask.subTasks || [];
+//   let updatedContacts = {};
+//   Array.from(selectedContacts).forEach((name, index) => {
+//     updatedContacts[index] = name;
+//   });
 
-  let newSubtasks = Array.from(
-    document.querySelectorAll("#subTaskList li")
-  ).map((li) => ({
-    id: li.getAttribute("data-id") || crypto.randomUUID(),
-    description: li.innerText.trim(),
-  }));
+//   let existingSubtasks = existingTask.subTasks || [];
+
+//   let newSubtasks = Array.from(
+//     document.querySelectorAll("#subTaskList li")
+//   ).map((li) => ({
+//     id: li.getAttribute("data-id") || crypto.randomUUID(),
+//     description: li.innerText.trim(),
+//   }));
+
+// auskommentiert von hier !!!!!!!!!
 
   // let combinedSubtasks = [...existingSubtasks];
 
@@ -83,35 +87,142 @@ async function updateEditTask(event) {
   //   }
   // });
 
-  let combinedSubtasks = newSubtasks; 
+// bis hier!!!!!!!!
 
+//   let combinedSubtasks = newSubtasks; 
+
+
+//   if (!updatedTitle || !updatedDueDate) {
+//     alert("Bitte fülle alle Pflichtfelder aus.");
+//     return;
+//   }
+
+//   let updatedTask = {
+//     ...existingTask,
+//     title: updatedTitle,
+//     description: updatedDescription,
+//     dueDate: updatedDueDate,
+//     priority: updatedPriority,
+//     users: updatedContacts,
+//     subTasks: combinedSubtasks,
+//     category: existingTask.category || "",
+//   };
+
+//   try {
+//     await patchDataToFirebase(`tasks/${taskId}`, updatedTask);
+//     console.log("Task erfolgreich bearbeitet:", taskId);
+//     closeEditTaskCardPopUp();
+//     renderTasks();
+//   } catch (error) {
+//     console.error("Fehler beim Bearbeiten der Aufgabe:", error);
+//   }
+//   await loadTasks();
+// }
+
+// alter code ende!!!!!!!!
+
+// Test anfang!!!!!!!!!!
+
+
+// async function updateEditTask(event) {
+//   event.preventDefault();
+
+//   let taskId = event.target.getAttribute("data-task-id");
+//   if (!taskId) {
+//     console.error("Task ID fehlt");
+//     return;
+//   }
+
+//   let taskRef = await getDataFromFirebase(`tasks/${taskId}`);
+//   let existingTask = taskRef || {};
+
+//   let updatedTitle = document.getElementById("titleInput").value.trim();
+//   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
+//   let updatedDueDate = document.getElementById("dueDateInput").value;
+
+//   let updatedPriority = window.currentSelectedPriority || existingTask.priority || "";
+
+//   let updatedTask = {
+//     ...existingTask,
+//     title: updatedTitle,
+//     description: updatedDescription,
+//     dueDate: updatedDueDate,
+//     priority: updatedPriority,
+//   };
+
+//   try {
+//     await patchDataToFirebase(`tasks/${taskId}`, updatedTask);
+//     console.log("Task erfolgreich bearbeitet:", taskId);
+//     closeEditTaskCardPopUp();
+//     renderTasks();
+//   } catch (error) {
+//     console.error("Fehler beim Bearbeiten der Aufgabe:", error);
+//   }
+//   await loadTasks();
+// }
+async function updateEditTask(event) {
+  event.preventDefault();
+
+  let taskId = event.target.getAttribute("data-task-id");
+  if (!taskId) {
+    console.error("Task ID fehlt");
+    return;
+  }
+
+  let taskRef = await getDataFromFirebase(`tasks/${taskId}`);
+  let existingTask = taskRef || {};
+
+  let updatedTitle = document.getElementById("titleInput").value.trim();
+  let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
+  let updatedDueDate = document.getElementById("dueDateInput").value;
+
+  let updatedPriority = window.currentSelectedPriority || existingTask.priority || "";
+
+  // 🔹 **Assigned Users aktualisieren**
+  let updatedContacts = {};
+  Array.from(selectedContacts).forEach((name, index) => {
+    updatedContacts[index] = name;
+  });
+
+  // 🔹 **Subtasks aktualisieren**
+  let newSubtasks = Array.from(document.querySelectorAll("#subTaskList li")).map((li) => ({
+    id: li.getAttribute("data-id") || crypto.randomUUID(),
+    description: li.querySelector(".subTask-text") ? li.querySelector(".subTask-text").innerText.trim() : "",
+  }));
 
   if (!updatedTitle || !updatedDueDate) {
     alert("Bitte fülle alle Pflichtfelder aus.");
     return;
   }
 
+  // 🔹 **Alle Änderungen in Firebase speichern**
   let updatedTask = {
     ...existingTask,
     title: updatedTitle,
     description: updatedDescription,
     dueDate: updatedDueDate,
     priority: updatedPriority,
-    users: updatedContacts,
-    subTasks: combinedSubtasks,
+    users: updatedContacts, // Assigned Users speichern
+    subTasks: newSubtasks, // Subtasks speichern
     category: existingTask.category || "",
   };
 
   try {
     await patchDataToFirebase(`tasks/${taskId}`, updatedTask);
-    console.log("Task erfolgreich bearbeitet:", taskId);
+    console.log("Task erfolgreich bearbeitet:", updatedTask);
     closeEditTaskCardPopUp();
     renderTasks();
   } catch (error) {
     console.error("Fehler beim Bearbeiten der Aufgabe:", error);
   }
+
   await loadTasks();
 }
+
+
+// Test ende!!!!!!!!!!!!!!!!!
+
+
 
 function addTaskPopupBtn() {
   document.getElementById("bodyId").classList.add("overflow-hidden");
