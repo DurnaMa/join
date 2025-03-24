@@ -311,13 +311,13 @@ function generateTaskCard(task) {
 //   });
 // }
 
-function updateTaskStatusInFirebase(taskId, newColumn) {
-  let task = tasks.find((t) => t.id === taskId);
-  if (task) {
-    task.status = newColumn;
-    patchDataToFirebase(`tasks/${taskId}`, { status: newColumn });
-  }
-}
+// function updateTaskStatusInFirebase(taskId, newColumn) {
+//   let task = tasks.find((t) => t.id === taskId);
+//   if (task) {
+//     task.status = newColumn;
+//     patchDataToFirebase(`tasks/${taskId}`, { status: newColumn });
+//   }
+// }
 
 // function enableMobileDragAndDrop() {
 //   let draggedElement = null;
