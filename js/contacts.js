@@ -6,59 +6,18 @@ async function contactInit() {
 let currentSelectedContact = 0;
 let contactColors = {};
 
-/**
- * Selects a contact by index, updates the current selected contact, and renders the contact details.
- * @function selectContact
- * @param {number} index - The index of the contact to select.
- */
-// function selectContact(index) { 
-//   currentSelectedContact = index;
-//   renderContactsList();
-
-//   let contact = contacts[currentSelectedContact];
-//   let contactDetails = document.getElementById("contactDetailsDiv");
-//   let mobileContactDetails = document.getElementById("mobileContactDetailsDiv");
-
-//   contactDetails.innerHTML = /*html*/ `
-//     <div class="contact-details-div-header">
-//       <div class="contact-details-div-initials">
-//         <div id="contactsAbbreviationRightArea" class="contacts-abbreviation-right-area"
-//              style="background-color: ${contact.color};">
-//           ${generateInitials(contact.name)}
-//         </div>
-//       </div>
-//       <div class="contact-name">
-//         <div class="contact-name-header">${contact.name}</div>
-//         <div class="contact-details-div-name-icons">
-//           <div class="contact-details-div-icons">
-//             <div onclick="editContact(${currentSelectedContact})" class="contact-details-div-icon-edit">
-//               <img src="/assets/icons/edit-pencil.png" alt="" />Edit
-//             </div>
-//             <div onclick="deleteContact(${currentSelectedContact})" class="contact-details-div-icon-edit img">
-//               <img src="/assets/icons/deleteContact.png" alt="">Delete
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//     <div class="contact-info">    
-//       <div class="contact-info-header">
-//         Contact Information
-//       </div>
-//       <div class="contact-details-div-email-phone">
-//         <label>Email</label>
-//         <a class="contact-email-link" href="mailto:${contact.email}">${contact.email}</a>
-//         <label>Phone</label>
-//         <a class="contact-phone-link" href="tel:${contact.phone}">${contact.phone}</a>
-//       </div>
-//     </div>
-//   `;
-// }
-function selectContact(index) { 
+function selectContact(index) {
   currentSelectedContact = index;
   renderContactsList();
 
   let contact = contacts[currentSelectedContact];
+  let phoneText;
+  if (contact.phone) {
+    phoneText = `<a class="contact-phone-link" href="tel:${contact.phone}">${contact.phone}</a>`;
+  } else {
+    phoneText = `<span class="no-phone">Leider liegt uns keine Telefonnummer vor</span>`;
+  }
+
   let contactDetailsHTML = /*html*/ `
     <div class="contact-details-div-header">
       <div class="contact-details-div-initials">
@@ -87,25 +46,25 @@ function selectContact(index) {
       </div>
       <div class="contact-details-div-email-phone">
         <label>Email</label>
-        <a class="contact-email-link" href="mailto:${contact.email}">${contact.email}</a>
+        <a class="contact-email-link" href="mailto:${contact.email}">${
+    contact.email
+  }</a>
         <label>Phone</label>
-        <a class="contact-phone-link" href="tel:${contact.phone}">${contact.phone}</a>
+        ${phoneText}
       </div>
     </div>
   `;
 
   document.getElementById("contactDetailsDiv").innerHTML = contactDetailsHTML;
-  document.getElementById("mobileContactDetailsDiv").innerHTML = contactDetailsHTML;
+  document.getElementById("mobileContactDetailsDiv").innerHTML =
+    contactDetailsHTML;
   document.getElementById("mobileContactContainer").classList.remove("d-none");
-
 }
-
 
 function renderContactsList() {
   let contactsList = document.getElementById("scrollbar");
   contactsList.innerHTML = "";
 
-  // Kontakte alphabetisch sortieren
   contacts.sort((a, b) => a.name.localeCompare(b.name));
 
   let lastLetter = "";
@@ -122,10 +81,6 @@ function renderContactsList() {
 
 function generateContactsList(i) {
   const initials = generateInitials(contacts[i].name);
-
-  // if (!contactColors[contacts[i].name]) { 
-  //   contactColors[contacts[i].name] = getRandomColorFromArray(); 
-  // }
 
   let color = contacts[i].color ? contacts[i].color : "#000000";
 
@@ -148,53 +103,22 @@ function generateContactsList(i) {
  * @param {string} name - The full name of the contact.
  * @returns {string} The initials of the contact's name.
  */
-// function generateInitials(name) {
-//   const nameParts = name.split(" ");
-//   const firstInitial = nameParts[0]?.charAt(0) || "";
-//   const lastInitial = nameParts[1]?.charAt(0) || "";
-//   return `${firstInitial}${lastInitial}`.toUpperCase();
-// }
-
 function generateInitials(name) {
   if (typeof name !== "string" || name.trim() === "") return "??";
 
   let parts = name.trim().split(" ");
-  if (parts.length === 1) return parts[0][0].toUpperCase(); 
+  if (parts.length === 1) return parts[0][0].toUpperCase();
 
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase(); 
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
 
-
-
-
-// function generateInitials(name) {
-//   if (!name) return "";
-//   const nameParts = name.trim().split(" ");
-//   const firstInitial = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : "";
-//   const lastInitial = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : "";
-//   return `${firstInitial}${lastInitial}`;
-// }
-
-
-
-
-
-
-
-/**
- * Renders the "Add New Contact" form by making the corresponding div visible
- * and populating it with the necessary HTML structure.
- *
- * The form includes fields for name, email, and phone, as well as a button
- * to submit the new contact. It also includes a button to close the form.
- */
 function addNewContact() {
   const addNewContactDiv = document.getElementById("popup");
   addNewContactDiv.classList.remove("d-none");
   addNewContactDiv.innerHTML = addNewContactPopup();
 }
 
-function mobileAddNewContact(){
+function mobileAddNewContact() {
   const mobileAddNewContactDiv = document.getElementById("popup");
   mobileAddNewContactDiv.classList.remove("d-none");
   mobileAddNewContactDiv.innerHTML = mobileAddNewContactPopup();
@@ -228,7 +152,6 @@ function closePopUp() {
   document.getElementById("popup").classList.add("d-none");
   document.getElementById("mobileContactContainer").classList.add("d-none");
   document.getElementById("mobileToggleOptions").classList.add("hidden");
-
 }
 
 /**
@@ -326,23 +249,21 @@ async function mobileDeleteContact() {
     return;
   }
 
-  let contactId = contacts[currentSelectedContact].id; // Hole die Firebase ID
+  let contactId = contacts[currentSelectedContact].id;
   let path = `/contacts/${contactId}`;
 
   await deleteDataFromFirebase(path);
   await loadDataUsers();
   renderContactsList();
-  
+
   document.getElementById("mobileContactDetailsDiv").innerHTML = "";
   closePopUp();
 }
-
 
 function getRandomColorFromArray() {
   return colorPalette[Math.floor(Math.random() * colorPalette.length)];
 }
 
-function mobileToggleOptions(){
-  document.getElementById("mobileToggleOptions").classList.toggle("hidden")
+function mobileToggleOptions() {
+  document.getElementById("mobileToggleOptions").classList.toggle("hidden");
 }
-

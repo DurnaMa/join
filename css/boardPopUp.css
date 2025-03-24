@@ -9,7 +9,7 @@
   background-color: white;
   box-shadow: 0px 0px 14px 3px #0000000a;
   z-index: 5;
-  position: absolute;
+  position: fixed;
   padding: 40px;
   /* margin: 16px; */
   top: 50%;
@@ -248,16 +248,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border: 1px solid #29abe2;
 }
 
-#subTaskList {
+/* #subTaskList { */
   /* border-radius: 10px; */
   /* background-color: white; */
-  max-height: 84px;
-  overflow: auto;
+  /* max-height: 84px;                  das war aktiviert */
+  /* overflow: auto;                     das war aktiviert */
   /* position: absolute; */
   /* top: 598px; */
   /* padding-bottom: 96px; */
   /* width: inherit; */
-}
+/* } */
 
 .taskFormButtons {
   /* padding: 75px 0; */
@@ -336,6 +336,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .subTask input {
   padding: 0;
+  width: 100%;
 }
 
 .subTask:hover {
@@ -432,7 +433,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   max-height: 165px;
   overflow: auto;
   position: fixed;
-  top: 768px;
+  /* top: 768px; */
+  top: 390px;
   width: 87%;
 }
 
@@ -573,6 +575,25 @@ input[type="checkbox"] {
   background-color: #eeeeee;
 }
 
+/* test */
+
+.prioUrgentRed {
+  background: #ff3d00 !important;
+  color: white;
+}
+
+.prioMediumYellow {
+  background: #ffa800 !important;
+  color: white;
+}
+
+.prioLowGreen {
+  background: #7ae229 !important;
+  color: white;
+}
+
+
+
 @media screen and (max-width: 1130px) {
   .add-edit-popup-task-div {
     zoom: 80%;
@@ -594,7 +615,7 @@ input[type="checkbox"] {
 @media screen and (max-width: 680px) {
   .add-edit-popup-task-div {
     width: 100%;
-    height: 79%;
+    height: 80%;
     border-radius: 0;
     background-color: #f6f7f8;
   }
@@ -661,8 +682,8 @@ input[type="checkbox"] {
   #assignedContactsList{
     width: 92%;
   }
-  #subTaskList{
+  /* #subTaskList{
     max-height: 100%;
     overflow: hidden;
-  }
+  } */
 }

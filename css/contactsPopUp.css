@@ -11,8 +11,6 @@
 .add-edit-popup-contact-div {
   display: flex;
   position: fixed;
-  /* top: 16%;
-  left: 23%; */
   top: 50%;
   left: 50%;
   width: 1100px;
@@ -281,8 +279,6 @@ input:focus {
   width: 116px;
   position: absolute;
   z-index: 4;
-  /* right: 6px;
-  bottom: 105px; */
   right: 25px;
   bottom: 121px;
   border-radius: 20px 20px 0px 20px;

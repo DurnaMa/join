@@ -70,7 +70,7 @@
   /* min-width: 400px; */
   /* min-height: 475px; */
   /* gap: 23px; */
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
 .addTaskClose {
@@ -130,6 +130,7 @@
 .taskCardPopupPrio {
   display: flex;
   padding: 5px 0;
+  padding: 15px 0;
   font-size: 20px;
   color: #2a3647;
   gap: 20px;
@@ -222,3 +223,67 @@
   width: 15px;
   height: 15px;
 }
+
+.test987654test{
+  height: 614px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.test-test{
+  overflow-y: scroll;
+  scrollbar-width: none;
+  height: 735px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+}
+@media screen and (max-width: 540px){
+  .taskCardPopup{
+    width: 100%;
+    height: 80%;
+    zoom: 90%;
+    border-radius: 0;
+  }
+
+  .taskCardEditPopup{
+    width: 100%;
+    height: 80%;
+    zoom: 90%;
+    border-radius: 0;
+  }
+
+  .test987654test{
+    height: 614px;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .taskCardPopupButtons{
+    width: 100%;
+    height: 100px;
+    bottom: 2px;
+    background-color: white;
+  }
+
+  .assignedContainer span{
+    font-size: 18px;
+  }
+
+  #assignedContactsListPopUp{
+    top: 394px;
+    width: 88.5%;
+    z-index: 3;
+  }
+
+  .taskCardEditPopup{
+    padding: 0px 15px 0px 15px;
+  }
+
+  .task-edit-close-popup-div{
+    width: 100%;
+    padding-right: 36px;
+  }
+
+}
+
