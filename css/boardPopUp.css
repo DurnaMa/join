@@ -489,10 +489,21 @@ input[type="checkbox"] {
   padding: 0px 20px 0px 20px;
   width: 100%;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 .assignedContactContent:hover {
   background-color: #eeeeee;
+}
+
+.assignedContactContent.active {
+  background-color: #2a3647;
+  color: white;
+}
+
+.assignedContactContent.active:hover {
+  background-color: #2a3647;
+  color: white;
 }
 
 .assignedContactContentPopUp {
@@ -501,7 +512,24 @@ input[type="checkbox"] {
   padding: 0px 20px 0px 20px;
   width: 100%;
   cursor: pointer;
+  border-radius: 10px;
 }
+
+.assignedContactContentPopUp.active {
+  background-color: #2a3647;
+  color: white;
+}
+
+.assignedContactContentPopUp.active:hover {
+  background-color: #2a3647;
+  color: white;
+}
+
+.assignedContactContentPopUp:hover {
+  background-color: #eeeeee;
+}
+
+
 
 .task-added-popup {
   display: flex;

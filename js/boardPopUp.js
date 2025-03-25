@@ -363,13 +363,14 @@ function closeEditTaskCardPopUp() {
  */
 function contactListPopUp() {
   let contactList = document.getElementById("assignedContactsListPopUp");
-
+  
   contactList.innerHTML = contacts
     .map((contact) => {
       const initials = generateInitials(contact.name);
       const isChecked = selectedContacts.has(contact.name) ? "checked" : "";
+      const isActive = selectedContacts.has(contact.name) ? "active" : "";
       return `
-        <div class="assignedContactContentPopUp" onclick="toggleCheckbox(event, '${contact.name}')">
+        <div class="assignedContactContentPopUp ${isActive}" onclick="toggleCheckbox(event, '${contact.name}')">
           <div class="assignedContactsPopUp">
             <span class="assignedShortcutNamePopUp" style="background-color: ${contact.color};">${initials}</span>
             <span class="assignedNamePopUp">${contact.name}</span>

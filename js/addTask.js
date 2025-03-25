@@ -213,9 +213,23 @@ function contactList() {
   openclassList();
 }
 
+// function generateInitialsColor(contact, initials, isChecked) {
+//   return /*html*/`
+//       <div class="assignedContactContent" onclick="toggleCheckbox(event, '${contact.name}')">
+//         <div class="assignedContacts">
+//           <span class="assignedShortcutName" style="background-color: ${contact.color};">${initials}</span>
+//           <span class="assignedName">${contact.name}</span>
+//         </div>
+//         <input type="checkbox" name="contact-${contact.name}" id="contact-${contact.name}" ${isChecked} onclick="toggleCheckbox(event, '${contact.name}')">
+//       </div>
+//     `;
+// }
+// Test!!!!
 function generateInitialsColor(contact, initials, isChecked) {
-  return /*html*/`
-      <div class="assignedContactContent" onclick="toggleCheckbox(event, '${contact.name}')">
+  const isActive = selectedContacts.has(contact.name) ? "active" : "";
+
+  return /*html*/ `
+      <div class="assignedContactContent ${isActive}" onclick="toggleCheckbox(event, '${contact.name}')">
         <div class="assignedContacts">
           <span class="assignedShortcutName" style="background-color: ${contact.color};">${initials}</span>
           <span class="assignedName">${contact.name}</span>
@@ -224,7 +238,6 @@ function generateInitialsColor(contact, initials, isChecked) {
       </div>
     `;
 }
-
 
 function openclassList() {
   document.getElementById("assignedArrowUp").classList.toggle("d-none");
@@ -268,23 +281,46 @@ function updateSelectedContactsDisplay() {
  * name from the set and removes the CSS class. Finally, it updates the display of selected
  * contacts.
  */
+// function toggleCheckbox(event, contactName) {
+//   let checkbox =
+//     event.target.type === "checkbox"
+//       ? event.target
+//       : event.currentTarget.querySelector('input[type="checkbox"]');
+//   if (checkbox) {
+//     checkbox.checked = !checkbox.checked;
+//     event.currentTarget.classList.toggle("selectedContact", checkbox.checked);
+
+//     if (checkbox.checked) {
+//       selectedContacts.add(contactName);
+//     } else {
+//       selectedContacts.delete(contactName);
+//     }
+//     updateSelectedContactsDisplay();
+//   }
+// }
 function toggleCheckbox(event, contactName) {
   let checkbox =
     event.target.type === "checkbox"
       ? event.target
       : event.currentTarget.querySelector('input[type="checkbox"]');
+
   if (checkbox) {
     checkbox.checked = !checkbox.checked;
     event.currentTarget.classList.toggle("selectedContact", checkbox.checked);
 
     if (checkbox.checked) {
       selectedContacts.add(contactName);
+      event.currentTarget.classList.add("active");
     } else {
       selectedContacts.delete(contactName);
+      event.currentTarget.classList.remove("active");
     }
+    
     updateSelectedContactsDisplay();
   }
 }
+
+
 
 /**
  * Asynchronously posts a new task to the server with the provided details.
