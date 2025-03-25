@@ -1,4 +1,23 @@
-//--------- Board page add task templates ---------
+/**
+ * Renders the HTML structure for the "Add Task" popup button.
+ *
+ * This function returns a string containing the HTML markup for a popup form
+ * that allows users to add a new task. The form includes fields for title,
+ * description, assigned contacts, due date, priority, category, and subtasks.
+ * It also provides buttons for clearing the form and creating a task.
+ *
+ * The popup includes the following features:
+ * - Title input field (required)
+ * - Description textarea
+ * - Assigned contacts selection with dropdown
+ * - Due date input field (required)
+ * - Priority selection (Urgent, Medium, Low)
+ * - Category selection with dropdown (required)
+ * - Subtask input and list
+ * - Responsive design with required field indicators
+ *
+ * @returns {string} The HTML string for the "Add Task" popup.
+ */
 function renderAddTaskPoupBtn() {
   return /*html*/ `
 <div class="shadow-div"></div>
@@ -82,6 +101,14 @@ function renderAddTaskPoupBtn() {
     `;
 }
 
+/**
+ * Renders the HTML structure for the "Add Task" popup in the To-Do application.
+ * This function returns a string containing the HTML markup for the popup, 
+ * which includes input fields for task details, priority selection, category selection, 
+ * and subtasks, along with buttons for clearing or creating the task.
+ *
+ * @returns {string} The HTML string for the "Add Task" popup.
+ */
 function renderAddTaskPopupToDoPlus() {
   return /*html*/ `
 <div class="shadow-div"></div>
@@ -165,6 +192,14 @@ function renderAddTaskPopupToDoPlus() {
     `;
 }
 
+/**
+ * Renders the HTML structure for the "Add Task" popup in the "In Progress" section.
+ * This function returns a string containing the HTML markup for the popup, 
+ * which includes input fields for task details, priority selection, category selection, 
+ * and subtasks, as well as buttons for clearing the form or creating the task.
+ *
+ * @returns {string} The HTML string for the "Add Task" popup.
+ */
 function renderAddTaskPopupInProgressPlus() {
   return /*html*/ `
 <div class="shadow-div"></div>
@@ -248,6 +283,16 @@ function renderAddTaskPopupInProgressPlus() {
     `;
 }
 
+/**
+ * Renders the HTML structure for the "Add Task" popup with Await Feedback functionality.
+ *
+ * This function returns a string containing the HTML markup for a popup form
+ * that allows users to add a new task. The form includes fields for title, description,
+ * assigned contacts, due date, priority, category, and subtasks. It also provides
+ * buttons for clearing the form and creating the task.
+ *
+ * @returns {string} The HTML string for the "Add Task" popup.
+ */
 function renderAddTaskPopupAwaitFeedbackPlus() {
   return /*html*/ `
 <div class="shadow-div"></div>
@@ -331,6 +376,25 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
     `;
 }
 
+/**
+ * Renders a task card popup as an HTML string.
+ *
+ * @param {Object} task - The task object containing details to render.
+ * @param {string} task.id - The unique identifier of the task.
+ * @param {string} [task.category] - The category of the task (default: "No Category").
+ * @param {string} [task.title] - The title of the task (default: "No Title").
+ * @param {string} [task.description] - The description of the task (default: "No Description").
+ * @param {string} [task.dueDate] - The due date of the task (default: "N/A").
+ * @param {string} [task.priority] - The priority of the task (e.g., "Urgent", "Medium", "Low"; default: "Medium").
+ * @param {Array<Object>} [task.users] - The list of users assigned to the task.
+ * @param {string} task.users[].name - The name of the user.
+ * @param {string} task.users[].initials - The initials of the user.
+ * @param {string} task.users[].color - The background color associated with the user.
+ * @param {Array<Object>} [task.subTasks] - The list of subtasks associated with the task.
+ * @param {string} task.subTasks[].description - The description of the subtask.
+ * @param {boolean} task.subTasks[].completed - Whether the subtask is completed.
+ * @returns {string} The HTML string representing the task card popup.
+ */
 function renderTasksCardPopup(task) {
   if (!task) {
     return `<p>Fehler: Keine Daten für diese Aufgabe gefunden.</p>`;
@@ -430,6 +494,23 @@ function renderTasksCardPopup(task) {
   `;
 }
 
+/**
+ * Renders the HTML content for the Edit Task Card Popup.
+ *
+ * @param {Object} currentSelectedTask - The task object containing details of the selected task.
+ * @param {string} currentSelectedTask.title - The title of the task.
+ * @param {string} currentSelectedTask.description - The description of the task.
+ * @param {string} currentSelectedTask.dueDate - The due date of the task in YYYY-MM-DD format.
+ * @param {string} currentSelectedTask.priority - The priority level of the task (e.g., "Urgent", "Medium", "Low").
+ * @param {Array<Object>} [currentSelectedTask.users=[]] - The list of users assigned to the task.
+ * @param {string} currentSelectedTask.users[].name - The name of the assigned user.
+ * @param {string} currentSelectedTask.users[].color - The color associated with the user.
+ * @param {string} currentSelectedTask.users[].initials - The initials of the assigned user.
+ * @param {Array<Object>} [currentSelectedTask.subTasks=[]] - The list of subtasks associated with the task.
+ * @param {string} currentSelectedTask.subTasks[].description - The description of the subtask.
+ * @param {number} taskId - The unique identifier of the task.
+ * @returns {string} The HTML string for the Edit Task Card Popup.
+ */
 function renderEditTasksCardPopup(currentSelectedTask, taskId) {
   let assignedContacts = currentSelectedTask.users || [];
   let title = currentSelectedTask.title;
@@ -545,6 +626,17 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
   `;
 }
 
+/**
+ * Updates the priority styling and icon for the selected priority level.
+ * 
+ * This function modifies the CSS classes and image sources of priority elements
+ * in the DOM based on the provided `newPriority` value. It ensures that the 
+ * selected priority is visually highlighted while resetting the styles of other 
+ * priority levels.
+ * 
+ * @param {string} newPriority - The new priority level to set. 
+ *                               Expected values: "Urgent", "Medium", or "Low".
+ */
 function updatePriority(newPriority) {
   window.currentSelectedPriority = newPriority;
 
@@ -588,6 +680,16 @@ function updatePriority(newPriority) {
     .querySelector("img").src = priorityStyles[newPriority].imgSrc;
 }
 
+/**
+ * Generates the HTML template for the "Add New Contact" popup.
+ *
+ * This function returns a string containing the HTML structure for a popup
+ * that allows users to add a new contact. The popup includes fields for
+ * entering the contact's name, email, and phone number, as well as buttons
+ * for canceling or creating the contact.
+ *
+ * @returns {string} The HTML string for the "Add New Contact" popup.
+ */
 function addNewContactPopup() {
   return /*html*/ `
   <div class="shadow-div"></div>
@@ -645,6 +747,15 @@ function addNewContactPopup() {
   `;
 }
 
+/**
+ * Generates the HTML template for a mobile popup to add a new contact.
+ * 
+ * This function returns a string containing the HTML structure for a popup
+ * that allows users to input a new contact's name, email, and phone number.
+ * The popup includes a close button, a header, and a form with input fields.
+ * 
+ * @returns {string} The HTML string for the mobile add new contact popup.
+ */
 function mobileAddNewContactPopup() {
   return /*html*/ `
   <div class="shadow-div"></div>
@@ -698,6 +809,13 @@ function mobileAddNewContactPopup() {
   `;
 }
 
+/**
+ * Generates the HTML template for the "Edit Contact" popup.
+ * This popup allows users to edit the details of a selected contact,
+ * including their name, email, and phone number.
+ *
+ * @returns {string} The HTML string for the "Edit Contact" popup.
+ */
 function editContactPopup() {
   let contact = contacts[currentSelectedContact];
   let name = contact.name;
@@ -762,6 +880,16 @@ function editContactPopup() {
   </div>
   `;
 }
+
+/**
+ * Generates the HTML template for a mobile popup to edit a contact.
+ * 
+ * This function retrieves the currently selected contact's details (name, email, and phone)
+ * and populates an editable form within a popup. The popup includes options to save the 
+ * updated contact information or delete the contact.
+ * 
+ * @returns {string} The HTML string for the mobile edit contact popup.
+ */
 function mobileEditContactPopup() {
   let contact = contacts[currentSelectedContact];
   let name = contact.name;
@@ -824,6 +952,18 @@ function mobileEditContactPopup() {
   `;
 }
 
+/**
+ * Generates the HTML structure for a task card.
+ *
+ * @param {Object} task - The task object containing details about the task.
+ * @param {string} task.id - The unique identifier for the task.
+ * @param {string} task.category - The category of the task.
+ * @param {string} task.title - The title of the task.
+ * @param {string} task.description - A brief description of the task.
+ * @param {number} totalSubtasks - The total number of subtasks for the task.
+ * @param {number} completedSubtasks - The number of completed subtasks for the task.
+ * @returns {string} The HTML string representing the task card.
+ */
 function taskCardHTML(task, totalSubtasks, completedSubtasks) {
   return /*html*/ `
     <div class="task-card-div">
