@@ -830,9 +830,7 @@ function editContactPopup() {
       <hr />
     </div>
     <div class="popup-right">
-      <div class="popup-right-profile" style="background-color: ${
-        contact.color
-      };">
+      <div class="popup-right-profile" style="background-color: ${contact.color};">
       ${generateInitials(contact.name)}
       </div>
       <div>
@@ -911,9 +909,9 @@ function mobileEditContactPopup() {
       <hr />
     </div>
     <div class="mobile-edit-popup-below">
-      <div>
-        <img src="/assets/img/profileIMG.png" alt="" />
-      </div> 
+      <div class="popup-right-profile" style="background-color: ${contact.color};">
+      ${generateInitials(contact.name)}
+      </div>
       <div>
         <form class="mobile-form">
           <input
