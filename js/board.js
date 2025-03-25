@@ -19,7 +19,6 @@ function renderTasks() {
 
   tasks.forEach((task) => {
     let taskCard = generateTaskCard(task);
-    //let columnId = task.columnTitles? task.columnTitles.toLowerCase().replace(" ", ""): "todo";
     let columnId = task.columnTitles
       ? task.columnTitles.toLowerCase().replace(/\s/g, "")
       : "todo";
@@ -27,7 +26,6 @@ function renderTasks() {
   });
 
   checkEmptyColumns();
-  // initMobileDragAndDrop();
 }
 
 function checkEmptyColumns() {
@@ -65,106 +63,8 @@ function generateEmptyColumn(columnId) {
   `;
 }
 
-// function generateTaskCard(task) {
-//   let completedSubtasks = task.subTasks
-//     ? task.subTasks.filter((st) => st.completed).length
-//     : 0;
-//   let totalSubtasks = task.subTasks ? task.subTasks.length : 0;
-
-//   let taskCard = document.createElement("div");
-//   taskCard.classList.add("task-card");
-//   taskCard.id = `task-${task.id}`;
-//   taskCard.draggable = true;
-//   taskCard.ondragstart = (event) => startDragging(event, task.id);
-
-//   taskCard.innerHTML = /*html*/ `
-//     <div class="task-card-div">
-//       <div class="task-card-category-div">
-//         <div class="task-card-category" id="taskCategory-${task.id}">
-//           <h2 class="task-card-category-h2" id="taskCategoryH2">${
-//             task.category
-//           }</h2>
-//         </div>
-//       </div>
-//       <div class="task-controls">
-//       <button onclick="moveTaskToNextColumn('${task.id}', -1)">⬆️</button>
-//       <button onclick="moveTaskToNextColumn('${task.id}', 1)">⬇️</button>
-//         </div>
-//       <h3>${task.title}</h3>
-//       <p>${task.description}</p>
-
-//       <div class="progress-container">
-//         <div class="progress-bar-container">
-//           <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
-//     totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0
-//   }%;"></div>
-//         </div>
-//         <div class="subtasks-div">
-//           <span class="subtasks-amount" id="subtasksAmount-${
-//             task.id
-//           }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
-//         </div>
-//       </div>
-//       <div class="task-footer">
-//         <div class="task-users" id="taskUsers-${task.id}"></div>
-//         <div class="task-priority" id="taskPriority-${task.id}"></div>
-//       </div>
-//     </div>
-//   `;
-
-//   let usersContainer = taskCard.querySelector(`#taskUsers-${task.id}`);
-
-//   if (Array.isArray(task.users)) {
-//     task.users.forEach((user) => {
-//       let userDiv = document.createElement("div");
-//       userDiv.classList.add("tasks-user");
-//       userDiv.style.backgroundColor = user.color;
-//       userDiv.textContent = user.initials;
-//       usersContainer.appendChild(userDiv);
-//     });
-//   } else if (typeof task.users === "string") {
-//     let userDiv = document.createElement("div");
-//     userDiv.classList.add("tasks-user");
-//     const contact = contacts.find((c) => c.name === task.users);
-//     userDiv.style.backgroundColor = contact ? contact.color : "#000";
-//     userDiv.textContent = task.users;
-//     usersContainer.appendChild(userDiv);
-//   }
-
-//   if (task.columnTitles) {
-//     let columnTitle = task.columnTitles.toLowerCase().trim();
-//     const columnMappings = {
-//       "To Do": "To Do",
-//       "In Progress": "In Progress",
-//       "Await Feedback": "Await Feedback",
-//       Done: "Done",
-//     };
-//     task.columnTitles = columnMappings[columnTitle] || task.columnTitles;
-//   }
-
-//   let categoryElement = taskCard.querySelector(".task-card-category");
-//   if (categoryElement) {
-//     const categoryColors = {
-//       "User Story": "#0038FF",
-//       "Technical Task": "#1FD7C1",
-//     };
-//     categoryElement.style.backgroundColor =
-//       categoryColors[task.category] || "#000";
-//   }
-
-//   chooseImgPriority(taskCard, task);
-
-//   taskCard.querySelector(".task-card-div").addEventListener("click", () => {
-//     openTaskPopup(task.id);
-//   });
-
-//   return taskCard;
-// }
-
 function generateTaskCard(task) {
-  let completedSubtasks = task.subTasks
-    ? task.subTasks.filter((st) => st.completed).length
-    : 0;
+  let completedSubtasks = task.subTasks ? task.subTasks.filter((st) => st.completed).length : 0;
   let totalSubtasks = task.subTasks ? task.subTasks.length : 0;
 
   let taskCard = document.createElement("div");
@@ -173,48 +73,56 @@ function generateTaskCard(task) {
   taskCard.draggable = true;
   taskCard.ondragstart = (event) => startDragging(event, task.id);
 
-  taskCard.innerHTML = /*html*/ `
-    <div class="task-card-div">
-      <div class="task-card-category-div">
-        <div class="task-card-category" id="taskCategory-${task.id}">
-          <h2 class="task-card-category-h2" id="taskCategoryH2">${
-            task.category
-          }</h2>
-        </div>
-        <div class="task-controls">
-        <img class="move-img-up" onclick="moveTaskToNextColumn('${
-          task.id
-        }', -1, event)" src="/assets/icons/arrow-left-line.png" alt="">
-        <img class="move-img-down" onclick="moveTaskToNextColumn('${
-          task.id
-        }', 1, event)" src="/assets/icons/arrow-left-line.png" alt="">
-      </div>
-      </div>
-      
-      <h3>${task.title}</h3>
-      <p>${task.description}</p>
-      
-      <div class="progress-container">
-        <div class="progress-bar-container">
-          <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
-    totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0
-  }%;"></div>
-        </div>
-        <div class="subtasks-div">
-          <span class="subtasks-amount" id="subtasksAmount-${
-            task.id
-          }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
-        </div>
-      </div>
-      <div class="task-footer">      
-        <div class="task-users" id="taskUsers-${task.id}"></div>
-        <div class="task-priority" id="taskPriority-${task.id}"></div>
-      </div>
-    </div>
-  `;
+  taskCard.innerHTML += taskCardHTML(task, totalSubtasks, completedSubtasks); 
 
   let usersContainer = taskCard.querySelector(`#taskUsers-${task.id}`);
 
+  userColor(task, usersContainer);
+
+  taskColemTitel(task);
+
+  let categoryElement = taskCard.querySelector(".task-card-category");
+  categoryColor(categoryElement, task);
+
+  chooseImgPriority(taskCard, task);
+
+  taskCard
+    .querySelector(".task-card-div")
+    .addEventListener("click", (event) => {
+      if (!event.target.classList.contains("move-btn")) {
+        openTaskPopup(task.id);
+      }
+    });
+
+  return taskCard;
+}
+
+
+function categoryColor(categoryElement, task) {
+  if (categoryElement) {
+    const categoryColors = {
+      "User Story": "#0038FF",
+      "Technical Task": "#1FD7C1",
+    };
+    let categoryColor = categoryColors[task.category] || "#ccc";
+    categoryElement.style.backgroundColor = categoryColor;
+  }
+}
+
+function taskColemTitel(task) {
+  if (task.columnTitles) {
+    let columnTitle = task.columnTitles.toLowerCase().trim();
+    const columnMappings = {
+      "To Do": "To Do",
+      "In Progress": "In Progress",
+      "Await Feedback": "Await Feedback",
+      Done: "Done",
+    };
+    task.columnTitles = columnMappings[columnTitle] || task.columnTitles;
+  }
+}
+
+function userColor(task, usersContainer) {
   if (Array.isArray(task.users)) {
     task.users.forEach((user) => {
       let userDiv = document.createElement("div");
@@ -231,136 +139,7 @@ function generateTaskCard(task) {
     userDiv.textContent = task.users;
     usersContainer.appendChild(userDiv);
   }
-
-  if (task.columnTitles) {
-    let columnTitle = task.columnTitles.toLowerCase().trim();
-    const columnMappings = {
-      "To Do": "To Do",
-      "In Progress": "In Progress",
-      "Await Feedback": "Await Feedback",
-      Done: "Done",
-    };
-    task.columnTitles = columnMappings[columnTitle] || task.columnTitles;
-  }
-
-  let categoryElement = taskCard.querySelector(".task-card-category");
-  if (categoryElement) {
-    const categoryColors = {
-      "User Story": "#0038FF",
-      "Technical Task": "#1FD7C1",
-    };
-    //categoryElement.style.backgroundColor = categoryColors[task.category] || "#000";
-    let categoryColor = categoryColors[task.category] || "#ccc";
-    categoryElement.style.backgroundColor = categoryColor;
-  }
-
-  chooseImgPriority(taskCard, task);
-
-  taskCard
-    .querySelector(".task-card-div")
-    .addEventListener("click", (event) => {
-      if (!event.target.classList.contains("move-btn")) {
-        openTaskPopup(task.id);
-      }
-    });
-
-  return taskCard;
 }
-
-// ----- drag and drop mobile-----
-
-// function enableMobileDragAndDrop() {
-//   let draggedElement = null;
-
-//   document.querySelectorAll(".task-card").forEach((taskCard) => {
-//     taskCard.addEventListener("touchstart", (event) => {
-//       draggedElement = taskCard;
-//       draggedElement.classList.add("dragging");
-//     });
-
-//     taskCard.addEventListener("touchmove", (event) => {
-//       if (!draggedElement) return;
-
-//       let touch = event.touches[0];
-//       draggedElement.style.position = "absolute";
-//       draggedElement.style.left = touch.clientX - 50 + "px";
-//       draggedElement.style.top = touch.clientY - 50 + "px";
-//     });
-
-//     taskCard.addEventListener("touchend", (event) => {
-//       if (!draggedElement) return;
-
-//       draggedElement.style.position = "relative";
-//       draggedElement.style.left = "";
-//       draggedElement.style.top = "";
-//       draggedElement.classList.remove("dragging");
-
-//       let dropTarget = document.elementFromPoint(
-//         event.changedTouches[0].clientX,
-//         event.changedTouches[0].clientY
-//       );
-
-//       let dropColumn = dropTarget.closest(".column");
-//       if (dropColumn) {
-//         let taskId = draggedElement.id.replace("task-", "");
-//         drop(null, dropColumn.id, taskId);
-//       }
-
-//       draggedElement = null;
-//     });
-//   });
-// }
-
-// function updateTaskStatusInFirebase(taskId, newColumn) {
-//   let task = tasks.find((t) => t.id === taskId);
-//   if (task) {
-//     task.status = newColumn;
-//     patchDataToFirebase(`tasks/${taskId}`, { status: newColumn });
-//   }
-// }
-
-// function enableMobileDragAndDrop() {
-//   let draggedElement = null;
-
-//   document.querySelectorAll(".task-card").forEach((taskCard) => {
-//     taskCard.addEventListener("touchstart", (event) => {
-//       draggedElement = taskCard;
-//       draggedElement.classList.add("dragging");
-//     });
-
-//     taskCard.addEventListener("touchmove", (event) => {
-//       if (!draggedElement) return;
-//       let touch = event.touches[0];
-//       draggedElement.style.position = "absolute";
-//       draggedElement.style.left = touch.clientX - 50 + "px";
-//       draggedElement.style.top = touch.clientY - 50 + "px";
-//     });
-
-//     taskCard.addEventListener("touchend", (event) => {
-//       if (!draggedElement) return;
-
-//       draggedElement.style.position = "relative";
-//       draggedElement.style.left = "";
-//       draggedElement.style.top = "";
-//       draggedElement.classList.remove("dragging");
-
-//       let dropTarget = document.elementFromPoint(
-//         event.changedTouches[0].clientX,
-//         event.changedTouches[0].clientY
-//       );
-
-//       let dropColumn = dropTarget.closest(".column");
-//       if (dropColumn) {
-//         let taskId = draggedElement.id.replace("task-", "");
-//         updateTaskStatusInFirebase(taskId, dropColumn.id);
-//       } else {
-//         console.log("Fehler!");
-//       }
-
-//       draggedElement = null;
-//     });
-//   });
-// }
 
 function updateTaskStatusInFirebase(taskId, newColumn) {
   let task = tasks.find((t) => t.id === taskId);
@@ -371,10 +150,6 @@ function updateTaskStatusInFirebase(taskId, newColumn) {
     console.log("Fehler", taskId);
   }
 }
-
-// function initMobileDragAndDrop() {
-//   enableMobileDragAndDrop();
-// }
 
 function startDragging(event, id) {
   currentDraggedElement = id;
@@ -451,30 +226,25 @@ async function deleteTask(taskId) {
 
 async function updateSteps(taskId) {
   let task = tasks.find((t) => t.id === taskId);
-  if (!task || !task.subTasks) {
-    return;
-  }
+  if (!task || !task.subTasks) {return;}
 
-  const checkboxes = document.querySelectorAll(
-    `#taskPopUp[data-task-id='${taskId}'] .step input[type='checkbox']`
-  );
-
-  if (!checkboxes.length) {
-    return;
-  }
-
+  const checkboxes = document.querySelectorAll(`#taskPopUp[data-task-id='${taskId}'] .step input[type='checkbox']`);
+  if (!checkboxes.length) {return;}
   let checkedCount = 0;
-
   checkboxes.forEach((checkbox, index) => {
     if (task.subTasks[index]) {
       task.subTasks[index].completed = checkbox.checked;
       if (checkbox.checked) {
-        checkedCount++;
-      }
-    }
-  });
+        checkedCount++;}}
+      });
 
   const progressBar = document.getElementById(`progressBar-${taskId}`);
+  progressBarStatus(progressBar, checkedCount, task, taskId);
+  await saveTaskToFirebase(task);
+  renderTasks();
+}
+
+function progressBarStatus(progressBar, checkedCount, task, taskId) {
   if (progressBar) {
     const progressPercentage = (checkedCount / task.subTasks.length) * 100;
     progressBar.style.width = `${progressPercentage}%`;
@@ -483,9 +253,6 @@ async function updateSteps(taskId) {
   if (subtasksAmount) {
     subtasksAmount.textContent = `${checkedCount}/${task.subTasks.length} Subtasks`;
   }
-
-  await saveTaskToFirebase(task);
-  renderTasks();
 }
 
 async function saveTaskToFirebase(task) {
@@ -494,9 +261,7 @@ async function saveTaskToFirebase(task) {
       `https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/tasks/${task.id}.json`,
       {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(task),
       }
     );
@@ -509,28 +274,6 @@ async function saveTaskToFirebase(task) {
   }
 }
 
-// async function moveTaskToNextColumn(taskId, direction) {
-//   let task = tasks.find(t => t.id === taskId);
-//   if (!task) return;
-
-//   let currentIndex = columnOrder.indexOf(task.columnTitles);
-//   let newIndex = currentIndex + direction;
-
-//   if (newIndex >= 0 && newIndex < columnOrder.length) {
-//     let newColumnTitle = columnOrder[newIndex];
-
-//     task.columnTitles = newColumnTitle;
-//     task.status = newColumnTitle;
-
-//     await patchDataToFirebase(`tasks/${taskId}`, {
-//       columnTitles: newColumnTitle,
-//       status: newColumnTitle
-//     });
-
-//     renderTasks();
-//   }
-// }
-
 async function moveTaskToNextColumn(taskId, direction, event) {
   event.stopPropagation();
 
@@ -539,13 +282,10 @@ async function moveTaskToNextColumn(taskId, direction, event) {
 
   let currentIndex = columnOrder.indexOf(task.columnTitles);
   let newIndex = currentIndex + direction;
-
   if (newIndex >= 0 && newIndex < columnOrder.length) {
     let newColumnTitle = columnOrder[newIndex];
-
     task.columnTitles = newColumnTitle;
     task.status = newColumnTitle;
-
     await patchDataToFirebase(`tasks/${taskId}`, {
       columnTitles: newColumnTitle,
       status: newColumnTitle,
@@ -560,36 +300,13 @@ async function createTaskBtn() {
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
   let category = document.getElementById("dropdownCategory").innerText;
-
   selectedContacts = Array.from(selectedContacts);
 
-  let prioUrgentEdit = document.getElementById("prioUrgentEdit");
-  let prioMediumEdit = document.getElementById("prioMediumEdit");
-  let prioLowEdit = document.getElementById("prioLowEdit");
+  let priority = prioCategory();
 
-  let priority = "";
-
-  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
-    priority = "Urgent";
-  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
-    priority = "Medium";
-  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
-    priority = "Low";
-  }
-
-  let data = {
-    columnTitles: "To Do",
-    title,
-    description,
-    dueDate,
-    priority,
-    subTasks,
-    subTasks: subTasks.map((subTask) => ({
-      description: subTask.description,
-      completed: subTask.completed ?? false,
-    })),
-    category,
-    users: selectedContacts,
+  let data = {columnTitles: "To Do", title, description, dueDate, priority, subTasks,
+    subTasks: subTasks.map((subTask) => ({description: subTask.description, completed: subTask.completed ?? false,})),
+    category, users: selectedContacts,
   };
 
   try {
@@ -600,6 +317,25 @@ async function createTaskBtn() {
 
   await loadTasks();
   closeAddTaskPopUp();
+  showAddTaskPopup();
+  location.reload();
+}
+
+function prioCategory() {
+  let prioUrgentEdit = document.getElementById("prioUrgentEdit");
+  let prioMediumEdit = document.getElementById("prioMediumEdit");
+  let prioLowEdit = document.getElementById("prioLowEdit");
+
+  let priority = "";
+
+  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
+    priority = "Urgent";
+  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
+    priority = "Medium";
+  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
+    priority = "Low";
+  }
+  return priority;
 }
 
 async function createTaskPlusToDoBtn() {
@@ -610,33 +346,11 @@ async function createTaskPlusToDoBtn() {
 
   selectedContacts = Array.from(selectedContacts);
 
-  let prioUrgentEdit = document.getElementById("prioUrgentEdit");
-  let prioMediumEdit = document.getElementById("prioMediumEdit");
-  let prioLowEdit = document.getElementById("prioLowEdit");
+  let priority = prioCategory();
 
-  let priority = "";
-
-  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
-    priority = "Urgent";
-  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
-    priority = "Medium";
-  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
-    priority = "Low";
-  }
-
-  let data = {
-    columnTitles: "To Do",
-    title,
-    description,
-    dueDate,
-    priority,
-    subTasks,
-    subTasks: subTasks.map((subTask) => ({
-      description: subTask.description,
-      completed: subTask.completed ?? false,
-    })),
-    category: category,
-    users: selectedContacts,
+  let data = {columnTitles: "To Do", title, description, dueDate, priority, subTasks,
+    subTasks: subTasks.map((subTask) => ({description: subTask.description, completed: subTask.completed ?? false,})),
+    category, users: selectedContacts,
   };
 
   try {
@@ -647,6 +361,7 @@ async function createTaskPlusToDoBtn() {
 
   await loadTasks();
   closeAddTaskPopUpToDo();
+  location.reload();
 }
 
 async function createTaskPlusInProgressBtn() {
@@ -657,33 +372,11 @@ async function createTaskPlusInProgressBtn() {
 
   selectedContacts = Array.from(selectedContacts);
 
-  let prioUrgentEdit = document.getElementById("prioUrgentEdit");
-  let prioMediumEdit = document.getElementById("prioMediumEdit");
-  let prioLowEdit = document.getElementById("prioLowEdit");
+  let priority = prioCategory();
 
-  let priority = "";
-
-  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
-    priority = "Urgent";
-  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
-    priority = "Medium";
-  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
-    priority = "Low";
-  }
-
-  let data = {
-    columnTitles: "In Progress",
-    title,
-    description,
-    dueDate,
-    priority,
-    subTasks,
-    subTasks: subTasks.map((subTask) => ({
-      description: subTask.description,
-      completed: subTask.completed ?? false,
-    })),
-    category,
-    users: selectedContacts,
+  let data = {columnTitles: "In Progress", title, description, dueDate, priority, subTasks,
+    subTasks: subTasks.map((subTask) => ({description: subTask.description, completed: subTask.completed ?? false,})),
+    category, users: selectedContacts,
   };
 
   try {
@@ -694,6 +387,7 @@ async function createTaskPlusInProgressBtn() {
 
   await loadTasks();
   closeAddTaskPopUpInProgress();
+  location.reload();
 }
 
 async function createTaskPlusAwaitFeedbackBtn() {
@@ -704,33 +398,11 @@ async function createTaskPlusAwaitFeedbackBtn() {
 
   selectedContacts = Array.from(selectedContacts);
 
-  let prioUrgentEdit = document.getElementById("prioUrgentEdit");
-  let prioMediumEdit = document.getElementById("prioMediumEdit");
-  let prioLowEdit = document.getElementById("prioLowEdit");
+  let priority = prioCategory();
 
-  let priority = "";
-
-  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
-    priority = "Urgent";
-  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
-    priority = "Medium";
-  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
-    priority = "Low";
-  }
-
-  let data = {
-    columnTitles: "Await Feedback",
-    title,
-    description,
-    dueDate,
-    priority,
-    subTasks,
-    subTasks: subTasks.map((subTask) => ({
-      description: subTask.description,
-      completed: subTask.completed ?? false,
-    })),
-    category,
-    users: selectedContacts,
+  let data = {columnTitles: "Await Feedback", title, description, dueDate, priority, subTasks,
+    subTasks: subTasks.map((subTask) => ({description: subTask.description, completed: subTask.completed ?? false,})),
+    category, users: selectedContacts,
   };
 
   try {
@@ -741,31 +413,8 @@ async function createTaskPlusAwaitFeedbackBtn() {
 
   await loadTasks();
   closeAddTaskPopUpAwaitFeedback();
+  location.reload();
 }
-
-// function addSubTaskPopUp() {
-//   if (subTaskPopUp.value != "") {
-//     subTasks.push({
-//       description: subTaskPopUp.value,
-//     });
-//     renderSubTaskList();
-//     subTaskPopUp.value = "";
-//   }
-// }
-
-// function addSubTaskPopUp() {
-//   let subTaskInput = document.getElementById("subTaskPopUp");
-
-//   if (subTaskInput.value.trim() !== "") {
-//     subTasks.push({
-//       id: crypto.randomUUID(),
-//       description: subTaskInput.value.trim(),
-//     });
-
-//     renderSubTaskList();
-//     subTaskInput.value = "";
-//   }
-// }
 
 function addSubTaskPopUp() {
   let subTaskInput = document.getElementById("subTaskPopUp");
@@ -775,29 +424,26 @@ function addSubTaskPopUp() {
       id: crypto.randomUUID(),
       description: subTaskInput.value.trim(),
     };
-
     if (!subTasks.some((sub) => sub.description === newSubtask.description)) {
       subTasks.push(newSubtask);
     }
-
+    
     renderSubTaskList();
     subTaskInput.value = "";
   }
 }
 
-// function addSubTaskPopUp() {
-//   let subTaskPopUp = document.getElementById("subTaskPopUp");
-//   if (subTaskPopUp.value.trim() !== "") {
-//     let newSubtask = {
-//       id: crypto.randomUUID(),
-//       description: subTaskPopUp.value.trim(),
-//     };
+function showAddTaskPopup() {
+    const addTaskPopup = document.getElementById("AddTaskPopupDiv");
 
-//     if (!subTasks.some(sub => sub.description === newSubtask.description)) {
-//       subTasks.push(newSubtask);
-//     }
-
-//     renderSubTaskList();
-//     subTaskPopUp.value = "";
-//   }
-// }
+    if (addTaskPopup) {
+      addTaskPopup.classList.remove("d-none")
+      setTimeout(() => {
+        addTaskPopup.classList.add("d-none");
+      }, 1500);
+    } else {
+      console.error(
+        "Das Element mit der ID 'addTaskPopup' wurde nicht gefunden!"
+      );
+    }
+}

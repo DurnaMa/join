@@ -328,16 +328,19 @@ function closeAddTaskPopUp() {
   document.getElementById("addNewTaskBtnDiv").classList.add("d-none");
   document.getElementById("addTaskPopupDiv").classList.add("d-none");
   document.getElementById("openTaskPopupDiv").classList.add("d-none");
+  location.reload();
 }
 
 function closeAddTaskPopUpToDo() {
   document.getElementById("bodyId").classList.remove("overflow-hidden");
   document.getElementById("openTaskPopupToDoDiv").classList.add("d-none");
+  location.reload();
 }
 
 function closeAddTaskPopUpInProgress() {
   document.getElementById("bodyId").classList.remove("overflow-hidden");
   document.getElementById("openTaskPopupInProgressDiv").classList.add("d-none");
+  location.reload();
 }
 
 function closeAddTaskPopUpAwaitFeedback() {
@@ -345,16 +348,19 @@ function closeAddTaskPopUpAwaitFeedback() {
   document
     .getElementById("openTaskPopupAwaitFeedbackDiv")
     .classList.add("d-none");
+    location.reload();
 }
 
 function closeTaskCardPopUp() {
   document.getElementById("bodyId").classList.remove("overflow-hidden");
   document.getElementById("openTaskPopupDiv").classList.add("d-none");
+  location.reload();
 }
 
 function closeEditTaskCardPopUp() {
   document.getElementById("bodyId").classList.remove("overflow-hidden");
   document.getElementById("editTaskPopupDiv").classList.add("d-none");
+  location.reload();
 }
 
 function contactListPopUp() {

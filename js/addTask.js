@@ -25,6 +25,10 @@ function setPriority(priority) {
   mediumImg.src = "/assets/icons/mediumYellow.png";
   lowImg.src = "/assets/icons/lowGreen.png";
 
+  btnPriority(priority);
+}
+
+function btnPriority(priority) {
   if (priority === "urgent") {
     prioUrgentEdit.classList.add("prioUrgentRed");
     urgentImg.src = "/assets/icons/urgentWhite.png";
@@ -68,6 +72,21 @@ function renderSubTaskList() {
   });
 }
 
+
+function editSubTask(index) {
+  let subInputEdit = document.getElementById(`subInputEdit-${index}`);
+  let subEditSpan = document.getElementById(`subEditSpan-${index}`);
+  let subEditImgPen = document.getElementById(`subEditImgPen-${index}`);
+  let subEditImgCheck = document.getElementById(`subEditImgCheck-${index}`);
+
+  subInputEdit.classList.toggle("d-none");
+  subEditSpan.classList.toggle("d-none");
+  subEditImgPen.classList.toggle("d-none");
+  subEditImgCheck.classList.toggle("d-none");
+
+  currentSelectedSubTask = index;
+}
+
 function generateSubTaskList(i) {
   return /*html*/ `
     <li class="subTask" data-index="${i}">
@@ -87,20 +106,6 @@ function generateSubTaskList(i) {
       </div>
     </li>
   `;
-}
-
-function editSubTask(index) {
-  let subInputEdit = document.getElementById(`subInputEdit-${index}`);
-  let subEditSpan = document.getElementById(`subEditSpan-${index}`);
-  let subEditImgPen = document.getElementById(`subEditImgPen-${index}`);
-  let subEditImgCheck = document.getElementById(`subEditImgCheck-${index}`);
-
-  subInputEdit.classList.toggle("d-none");
-  subEditSpan.classList.toggle("d-none");
-  subEditImgPen.classList.toggle("d-none");
-  subEditImgCheck.classList.toggle("d-none");
-
-  currentSelectedSubTask = index;
 }
 
 function saveSubTask(index) {
@@ -133,15 +138,7 @@ function contactList() {
     const initials = generateInitials(contact.name);
     const isChecked = selectedContacts.has(contact.name) ? "checked" : "";
 
-    contactList.innerHTML += /*html*/ `
-      <div class="assignedContactContent" onclick="toggleCheckbox(event, '${contact.name}')">
-        <div class="assignedContacts">
-          <span class="assignedShortcutName" style="background-color: ${contact.color};">${initials}</span>
-          <span class="assignedName">${contact.name}</span>
-        </div>
-        <input type="checkbox" name="contact-${contact.name}" id="contact-${contact.name}" ${isChecked} onclick="toggleCheckbox(event, '${contact.name}')">
-      </div>
-    `;
+    contactList.innerHTML += generateInitialsColor(contact,initials, isChecked);
   });
 
   contactList.classList.toggle("hidden");
@@ -152,6 +149,19 @@ function contactList() {
   }
   openclassList();
 }
+
+function generateInitialsColor(contact, initials, isChecked) {
+  return /*html*/`
+      <div class="assignedContactContent" onclick="toggleCheckbox(event, '${contact.name}')">
+        <div class="assignedContacts">
+          <span class="assignedShortcutName" style="background-color: ${contact.color};">${initials}</span>
+          <span class="assignedName">${contact.name}</span>
+        </div>
+        <input type="checkbox" name="contact-${contact.name}" id="contact-${contact.name}" ${isChecked} onclick="toggleCheckbox(event, '${contact.name}')">
+      </div>
+    `;
+}
+
 
 function openclassList() {
   document.getElementById("assignedArrowUp").classList.toggle("d-none");
@@ -273,28 +283,15 @@ function variablenPostAddTask() {
   let popup = document.getElementById("popup");
 
   let priority = "";
-  return {
-    prioUrgentEdit,
-    priority,
-    prioMediumEdit,
-    prioLowEdit,
-    title,
-    description,
-    dueDate,
-    category,
-    popup,
-  };
+  return {prioUrgentEdit, priority, prioMediumEdit, prioLowEdit, title, description, dueDate, category, popup,};
 }
 
 function categorytList() {
   let categoryList = document.getElementById("categoryList");
-
   categoryList.innerHTML = "";
-
   categoryList.innerHTML += /*html*/ `
     <div id="technicalTask" onclick="chooseCategory(0)" class="categoryTechnicalTask">Technical Task</div>
-    <div id="userStory" onclick="chooseCategory(1)" class="categoryUserStory">User Story</div>
-    `;
+    <div id="userStory" onclick="chooseCategory(1)" class="categoryUserStory">User Story</div>`;
 
   categoryList.classList.toggle("hidden");
   categoryList.classList.toggle("d-flex");
