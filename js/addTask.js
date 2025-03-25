@@ -153,20 +153,20 @@ function saveSubTask(index) {
   let subInputEdit = document
     .getElementById(`subInputEdit-${index}`)
     .value.trim();
-  console.log("Vorher:", subTasks);
+  // console.log("Vorher:", subTasks);
   if (subTasks[index]) {
     subTasks[index].description = subInputEdit;
   } else {
     console.warn(`Subtask mit Index ${index} nicht gefunden.`);
   }
-  console.log("Nachher:", subTasks);
+  // console.log("Nachher:", subTasks);
   renderSubTaskList();
 }
 
 function deleteSubTask(index) {
-  console.log("Vorher:", subTasks);
+  // console.log("Vorher:", subTasks);
   subTasks.splice(index, 1);
-  console.log("Nachher:", subTasks);
+  // console.log("Nachher:", subTasks);
   renderSubTaskList();
 }
 

@@ -88,7 +88,7 @@ async function toTheRegistration() {
       emailInput.value = "";
       passwordInput.value = "";
       confirmPassword.value = "";
-      console.log("Anmeldung erfolgreich");
+      // console.log("Anmeldung erfolgreich");
       if (popup) {
         popup.classList.remove("d-none");
       }

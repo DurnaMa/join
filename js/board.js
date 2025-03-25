@@ -226,7 +226,7 @@ function updateTaskStatusInFirebase(taskId, newColumn) {
     task.status = newColumn;
     patchDataToFirebase(`tasks/${taskId}`, { status: newColumn });
   } else {
-    console.log("Fehler", taskId);
+    // console.log("Fehler", taskId);
   }
 }
 
@@ -418,7 +418,7 @@ async function saveTaskToFirebase(task) {
 
     if (!response.ok) throw new Error("Fehler beim Speichern in Firebase!");
 
-    console.log(`erfolgreich.`);
+    // console.log(`erfolgreich.`);
   } catch (error) {
     console.error("Fehler:", error);
   }
