@@ -23,14 +23,7 @@ async function postData(path, data) {
 }
 
 async function toTheRegistration() {
-  let nameInput = document.getElementById("name");
-  let emailInput = document.getElementById("email");
-  let passwordInput = document.getElementById("signupPassword");
-  const checkbox = document.getElementById("checkboxSingUp");
-  const errorDiv = document.getElementById("emailError");
-  const passwordErrorDiv = document.getElementById("passwordError");
-  const checkboxErrorDiv = document.getElementById("checkboxError");
-  let popup = document.getElementById("singUpPopup");
+  let { errorDiv, passwordErrorDiv, checkboxErrorDiv, checkbox, nameInput, emailInput, passwordInput, popup } = registrationVariables();
 
   errorDiv.textContent = "";
   passwordErrorDiv.textContent = "";
@@ -85,6 +78,18 @@ async function toTheRegistration() {
   } else {
     errorDiv.textContent = "Please fill in all fields";
   }
+}
+
+function registrationVariables() {
+  let nameInput = document.getElementById("name");
+  let emailInput = document.getElementById("email");
+  let passwordInput = document.getElementById("signupPassword");
+  const checkbox = document.getElementById("checkboxSingUp");
+  const errorDiv = document.getElementById("emailError");
+  const passwordErrorDiv = document.getElementById("passwordError");
+  const checkboxErrorDiv = document.getElementById("checkboxError");
+  let popup = document.getElementById("singUpPopup");
+  return { errorDiv, passwordErrorDiv, checkboxErrorDiv, checkbox, nameInput, emailInput, passwordInput, popup };
 }
 
 function emailValidation() {

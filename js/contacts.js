@@ -18,10 +18,46 @@ function selectContact(index) {
     phoneText = `<span class="no-phone">Leider liegt uns keine Telefonnummer vor</span>`;
   }
 
-  let contactDetailsHTML = document.getElementById('contactDetailsDiv');
-  contactDetailsHTML.innerHTML += contactDetailsHTML(contact, currentSelectedContact);
+  contactDetailsHTML(contact, phoneText);
+}
 
-  //document.getElementById("contactDetailsDiv").innerHTML = contactDetailsHTML;
+function contactDetailsHTML(contact, phoneText) {
+  let contactDetailsHTML = /*html*/ `
+    <div class="contact-details-div-header">
+      <div class="contact-details-div-initials">
+        <div id="contactsAbbreviationRightArea" class="contacts-abbreviation-right-area"
+             style="background-color: ${contact.color};">
+          ${generateInitials(contact.name)}
+        </div>
+      </div>
+      <div class="contact-name">
+        <div class="contact-name-header">${contact.name}</div>
+        <div class="contact-details-div-name-icons">
+          <div class="contact-details-div-icons">
+            <div onclick="editContact(${currentSelectedContact})" class="contact-details-div-icon-edit">
+              <img src="/assets/icons/edit-pencil.png" alt="" />Edit
+            </div>
+            <div onclick="deleteContact(${currentSelectedContact})" class="contact-details-div-icon-edit img">
+              <img src="/assets/icons/deleteContact.png" alt="">Delete
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-info">    
+      <div class="contact-info-header">
+        Contact Information
+      </div>
+      <div class="contact-details-div-email-phone">
+        <label>Email</label>
+        <a class="contact-email-link" href="mailto:${contact.email}">${contact.email}</a>
+        <label>Phone</label>
+        ${phoneText}
+      </div>
+    </div>
+  `;
+
+  document.getElementById("contactDetailsDiv").innerHTML = contactDetailsHTML;
   document.getElementById("mobileContactDetailsDiv").innerHTML = contactDetailsHTML;
   document.getElementById("mobileContactContainer").classList.remove("d-none");
 }

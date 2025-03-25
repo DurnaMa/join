@@ -7,6 +7,13 @@ function dailyTime() {
   let currentHours = currentTime.getHours();
   let greeting = "";
 
+  greeting = getDayTime(currentHours, greeting);
+
+  document.getElementById("time").innerHTML = greeting;
+  document.getElementById("timeMobil").innerHTML = greeting;
+}
+
+function getDayTime(currentHours, greeting) {
   if (currentHours >= 4 && currentHours < 6) {
     greeting = "Early morning!";
   } else if (currentHours >= 6 && currentHours < 10) {
@@ -24,9 +31,7 @@ function dailyTime() {
   } else {
     greeting = "Good night!";
   }
-
-  document.getElementById("time").innerHTML = greeting;
-  document.getElementById("timeMobil").innerHTML = greeting;
+  return greeting;
 }
 
 async function getDataFromFirebase(path = "") {

@@ -392,8 +392,7 @@ function renderTasksCardPopup(task) {
         }
       </div>
 
-    
-      <label class="taskCardPopupLabel">Subtasks</label>
+    <label class="taskCardPopupLabel">Subtasks</label>
       <div class="taskCardPopupSubTasks">
         <div class="progress-container-popup">
           ${
@@ -416,7 +415,6 @@ function renderTasksCardPopup(task) {
           }
         </div>
       </div>
-
 
         </div>
       <div class="taskCardPopupButtons">
@@ -460,17 +458,35 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
         
       <label>Priority</label>
       <div class="task-edit-prio-popup">
-        <button onclick="updatePriority('Urgent')" id="prioUrgentEditPopup" class="prioBtn ${window.currentSelectedPriority === 'Urgent' ? 'prioUrgentRed' : ''}">
+        <button onclick="updatePriority('Urgent')" id="prioUrgentEditPopup" class="prioBtn ${
+          window.currentSelectedPriority === "Urgent" ? "prioUrgentRed" : ""
+        }">
           Urgent
-          <img src="${window.currentSelectedPriority === 'Urgent' ? '/assets/icons/urgentWhite.png' : '/assets/icons/urgentRed.png'}" alt="" />
+          <img src="${
+            window.currentSelectedPriority === "Urgent"
+              ? "/assets/icons/urgentWhite.png"
+              : "/assets/icons/urgentRed.png"
+          }" alt="" />
         </button>
-        <button onclick="updatePriority('Medium')" id="prioMediumEditPopup" class="prioBtn ${window.currentSelectedPriority === 'Medium' ? 'prioMediumYellow' : ''}">
+        <button onclick="updatePriority('Medium')" id="prioMediumEditPopup" class="prioBtn ${
+          window.currentSelectedPriority === "Medium" ? "prioMediumYellow" : ""
+        }">
           Medium
-          <img src="${window.currentSelectedPriority === 'Medium' ? '/assets/icons/mediumWhite.png' : '/assets/icons/mediumYellow.png'}" alt="" />
+          <img src="${
+            window.currentSelectedPriority === "Medium"
+              ? "/assets/icons/mediumWhite.png"
+              : "/assets/icons/mediumYellow.png"
+          }" alt="" />
         </button>
-        <button onclick="updatePriority('Low')" id="prioLowEditPopup" class="prioBtn ${window.currentSelectedPriority === 'Low' ? 'prioLowGreen' : ''}">
+        <button onclick="updatePriority('Low')" id="prioLowEditPopup" class="prioBtn ${
+          window.currentSelectedPriority === "Low" ? "prioLowGreen" : ""
+        }">
           Low
-          <img src="${window.currentSelectedPriority === 'Low' ? '/assets/icons/lowWhite.png' : '/assets/icons/lowGreen.png'}" alt="" />
+          <img src="${
+            window.currentSelectedPriority === "Low"
+              ? "/assets/icons/lowWhite.png"
+              : "/assets/icons/lowGreen.png"
+          }" alt="" />
         </button>
       </div>
 
@@ -529,7 +545,6 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
   `;
 }
 
-// test anfang!!!!!!!!!!!!!!!!!!!!!!
 function updatePriority(newPriority) {
   window.currentSelectedPriority = newPriority;
 
@@ -548,23 +563,31 @@ function updatePriority(newPriority) {
     },
   };
 
-  document.getElementById("prioUrgentEditPopup").classList.remove(priorityStyles.Urgent.class);
-  document.getElementById("prioMediumEditPopup").classList.remove(priorityStyles.Medium.class);
-  document.getElementById("prioLowEditPopup").classList.remove(priorityStyles.Low.class);
+  document
+    .getElementById("prioUrgentEditPopup")
+    .classList.remove(priorityStyles.Urgent.class);
+  document
+    .getElementById("prioMediumEditPopup")
+    .classList.remove(priorityStyles.Medium.class);
+  document
+    .getElementById("prioLowEditPopup")
+    .classList.remove(priorityStyles.Low.class);
 
-  document.getElementById("prioUrgentEditPopup").querySelector("img").src = "/assets/icons/urgentRed.png";
-  document.getElementById("prioMediumEditPopup").querySelector("img").src = "/assets/icons/mediumYellow.png";
-  document.getElementById("prioLowEditPopup").querySelector("img").src = "/assets/icons/lowGreen.png";
+  document.getElementById("prioUrgentEditPopup").querySelector("img").src =
+    "/assets/icons/urgentRed.png";
+  document.getElementById("prioMediumEditPopup").querySelector("img").src =
+    "/assets/icons/mediumYellow.png";
+  document.getElementById("prioLowEditPopup").querySelector("img").src =
+    "/assets/icons/lowGreen.png";
 
-  document.getElementById(`prio${newPriority}EditPopup`).classList.add(priorityStyles[newPriority].class);
-  document.getElementById(`prio${newPriority}EditPopup`).querySelector("img").src = priorityStyles[newPriority].imgSrc;
+  document
+    .getElementById(`prio${newPriority}EditPopup`)
+    .classList.add(priorityStyles[newPriority].class);
+  document
+    .getElementById(`prio${newPriority}EditPopup`)
+    .querySelector("img").src = priorityStyles[newPriority].imgSrc;
 }
 
-
-
-// Test Ende!!!!!!!!!!!!!!!!!!!!!!!!!
-
-//--------- contact templates ---------
 function addNewContactPopup() {
   return /*html*/ `
   <div class="shadow-div"></div>
@@ -689,9 +712,10 @@ function editContactPopup() {
       <hr />
     </div>
     <div class="popup-right">
-      <div class="popup-right-profile" style="background-color: ${contact.color};">
+      <div class="popup-right-profile" style="background-color: ${
+        contact.color
+      };">
       ${generateInitials(contact.name)}
-        <!-- <img src="" alt="" /> -->
       </div>
       <div>
         <img
@@ -801,7 +825,7 @@ function mobileEditContactPopup() {
 }
 
 function taskCardHTML(task, totalSubtasks, completedSubtasks) {
-  return /*html*/`
+  return /*html*/ `
     <div class="task-card-div">
       <div class="task-card-category-div">
         <div class="task-card-category" id="taskCategory-${task.id}">
@@ -837,45 +861,6 @@ function taskCardHTML(task, totalSubtasks, completedSubtasks) {
       <div class="task-footer">      
         <div class="task-users" id="taskUsers-${task.id}"></div>
         <div class="task-priority" id="taskPriority-${task.id}"></div>
-      </div>
-    </div>
-  `;
-}
-
-function contactDetailsHTML(currentSelectedContact) {
-  return /*html*/`
-    <div class="contact-details-div-header">
-      <div class="contact-details-div-initials">
-        <div id="contactsAbbreviationRightArea" class="contacts-abbreviation-right-area"
-             style="background-color: ${contact.color};">
-          ${generateInitials(contact.name)}
-        </div>
-      </div>
-      <div class="contact-name">
-        <div class="contact-name-header">${contact.name}</div>
-        <div class="contact-details-div-name-icons">
-          <div class="contact-details-div-icons">
-            <div onclick="editContact(${currentSelectedContact})" class="contact-details-div-icon-edit">
-              <img src="/assets/icons/edit-pencil.png" alt="" />Edit
-            </div>
-            <div onclick="deleteContact(${currentSelectedContact})" class="contact-details-div-icon-edit img">
-              <img src="/assets/icons/deleteContact.png" alt="">Delete
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="contact-info">    
-      <div class="contact-info-header">
-        Contact Information
-      </div>
-      <div class="contact-details-div-email-phone">
-        <label>Email</label>
-        <a class="contact-email-link" href="mailto:${contact.email}">${
-    contact.email
-  }</a>
-        <label>Phone</label>
-        ${phoneText}
       </div>
     </div>
   `;
