@@ -18,11 +18,11 @@ function selectContact(index) {
     phoneText = `<span class="no-phone">Leider liegt uns keine Telefonnummer vor</span>`;
   }
 
-  let contactDetailsHTML = contactDetailsHTML(currentSelectedContact).;
+  let contactDetailsHTML = document.getElementById('contactDetailsDiv');
+  contactDetailsHTML.innerHTML += contactDetailsHTML(contact, currentSelectedContact);
 
-  document.getElementById("contactDetailsDiv").innerHTML = contactDetailsHTML;
-  document.getElementById("mobileContactDetailsDiv").innerHTML =
-    contactDetailsHTML;
+  //document.getElementById("contactDetailsDiv").innerHTML = contactDetailsHTML;
+  document.getElementById("mobileContactDetailsDiv").innerHTML = contactDetailsHTML;
   document.getElementById("mobileContactContainer").classList.remove("d-none");
 }
 
