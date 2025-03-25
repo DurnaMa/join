@@ -1,4 +1,23 @@
-//--------- Board page add task templates ---------
+/**
+ * Renders the HTML structure for the "Add Task" popup button.
+ *
+ * This function returns a string containing the HTML markup for a popup form
+ * that allows users to add a new task. The form includes fields for title,
+ * description, assigned contacts, due date, priority, category, and subtasks.
+ * It also provides buttons for clearing the form and creating a task.
+ *
+ * The popup includes the following features:
+ * - Title input field (required)
+ * - Description textarea
+ * - Assigned contacts selection with dropdown
+ * - Due date input field (required)
+ * - Priority selection (Urgent, Medium, Low)
+ * - Category selection with dropdown (required)
+ * - Subtask input and list
+ * - Responsive design with required field indicators
+ *
+ * @returns {string} The HTML string for the "Add Task" popup.
+ */
 function renderAddTaskPoupBtn() {
   return /*html*/ `
 <div class="shadow-div"></div>
@@ -45,11 +64,6 @@ function renderAddTaskPoupBtn() {
             </section>
             <br />
             <label for="category">Category<span class="required">*</span> </label>
-            <!-- <select id="category">
-              <option value disabled selected hidden>Select Task Category</option>
-              <option value="Technical Task">Technical Task</option>
-              <option value="User Story">User Story</option>
-            </select> -->
             <div onclick="categorytList()" class="categoryContainer" id="category">
               <span id="dropdownCategory" class="">Select Task Category</span>
               <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
@@ -87,6 +101,14 @@ function renderAddTaskPoupBtn() {
     `;
 }
 
+/**
+ * Renders the HTML structure for the "Add Task" popup in the To-Do application.
+ * This function returns a string containing the HTML markup for the popup, 
+ * which includes input fields for task details, priority selection, category selection, 
+ * and subtasks, along with buttons for clearing or creating the task.
+ *
+ * @returns {string} The HTML string for the "Add Task" popup.
+ */
 function renderAddTaskPopupToDoPlus() {
   return /*html*/ `
 <div class="shadow-div"></div>
@@ -133,11 +155,6 @@ function renderAddTaskPopupToDoPlus() {
             </section>
             <br />
             <label for="category">Category<span class="required">*</span> </label>
-            <!-- <select id="category">
-              <option value disabled selected hidden>Select Task Category</option>
-              <option value="Technical Task">Technical Task</option>
-              <option value="User Story">User Story</option>
-            </select> -->
             <div onclick="categorytList()" class="categoryContainer">
               <span id="dropdownCategory" class="">Select Task Category</span>
               <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
@@ -175,6 +192,14 @@ function renderAddTaskPopupToDoPlus() {
     `;
 }
 
+/**
+ * Renders the HTML structure for the "Add Task" popup in the "In Progress" section.
+ * This function returns a string containing the HTML markup for the popup, 
+ * which includes input fields for task details, priority selection, category selection, 
+ * and subtasks, as well as buttons for clearing the form or creating the task.
+ *
+ * @returns {string} The HTML string for the "Add Task" popup.
+ */
 function renderAddTaskPopupInProgressPlus() {
   return /*html*/ `
 <div class="shadow-div"></div>
@@ -221,11 +246,6 @@ function renderAddTaskPopupInProgressPlus() {
             </section>
             <br />
             <label for="category">Category<span class="required">*</span> </label>
-            <!-- <select id="category">
-              <option value disabled selected hidden>Select Task Category</option>
-              <option value="Technical Task">Technical Task</option>
-              <option value="User Story">User Story</option>
-            </select> -->
             <div onclick="categorytList()" class="categoryContainer" id="category">
               <span id="dropdownCategory" class="">Select Task Category</span>
               <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
@@ -263,6 +283,16 @@ function renderAddTaskPopupInProgressPlus() {
     `;
 }
 
+/**
+ * Renders the HTML structure for the "Add Task" popup with Await Feedback functionality.
+ *
+ * This function returns a string containing the HTML markup for a popup form
+ * that allows users to add a new task. The form includes fields for title, description,
+ * assigned contacts, due date, priority, category, and subtasks. It also provides
+ * buttons for clearing the form and creating the task.
+ *
+ * @returns {string} The HTML string for the "Add Task" popup.
+ */
 function renderAddTaskPopupAwaitFeedbackPlus() {
   return /*html*/ `
 <div class="shadow-div"></div>
@@ -309,11 +339,6 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
             </section>
             <br />
             <label for="category">Category<span class="required">*</span> </label>
-            <!-- <select id="category">
-              <option value disabled selected hidden>Select Task Category</option>
-              <option value="Technical Task">Technical Task</option>
-              <option value="User Story">User Story</option>
-            </select> -->
             <div onclick="categorytList()" class="categoryContainer" id="category">
               <span id="dropdownCategory" class="">Select Task Category</span>
               <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
@@ -351,6 +376,25 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
     `;
 }
 
+/**
+ * Renders a task card popup as an HTML string.
+ *
+ * @param {Object} task - The task object containing details to render.
+ * @param {string} task.id - The unique identifier of the task.
+ * @param {string} [task.category] - The category of the task (default: "No Category").
+ * @param {string} [task.title] - The title of the task (default: "No Title").
+ * @param {string} [task.description] - The description of the task (default: "No Description").
+ * @param {string} [task.dueDate] - The due date of the task (default: "N/A").
+ * @param {string} [task.priority] - The priority of the task (e.g., "Urgent", "Medium", "Low"; default: "Medium").
+ * @param {Array<Object>} [task.users] - The list of users assigned to the task.
+ * @param {string} task.users[].name - The name of the user.
+ * @param {string} task.users[].initials - The initials of the user.
+ * @param {string} task.users[].color - The background color associated with the user.
+ * @param {Array<Object>} [task.subTasks] - The list of subtasks associated with the task.
+ * @param {string} task.subTasks[].description - The description of the subtask.
+ * @param {boolean} task.subTasks[].completed - Whether the subtask is completed.
+ * @returns {string} The HTML string representing the task card popup.
+ */
 function renderTasksCardPopup(task) {
   if (!task) {
     return `<p>Fehler: Keine Daten für diese Aufgabe gefunden.</p>`;
@@ -412,8 +456,7 @@ function renderTasksCardPopup(task) {
         }
       </div>
 
-    
-      <label class="taskCardPopupLabel">Subtasks</label>
+    <label class="taskCardPopupLabel">Subtasks</label>
       <div class="taskCardPopupSubTasks">
         <div class="progress-container-popup">
           ${
@@ -437,7 +480,6 @@ function renderTasksCardPopup(task) {
         </div>
       </div>
 
-
         </div>
       <div class="taskCardPopupButtons">
         <div onclick="deleteTask('${task.id}')">
@@ -452,26 +494,31 @@ function renderTasksCardPopup(task) {
   `;
 }
 
+/**
+ * Renders the HTML content for the Edit Task Card Popup.
+ *
+ * @param {Object} currentSelectedTask - The task object containing details of the selected task.
+ * @param {string} currentSelectedTask.title - The title of the task.
+ * @param {string} currentSelectedTask.description - The description of the task.
+ * @param {string} currentSelectedTask.dueDate - The due date of the task in YYYY-MM-DD format.
+ * @param {string} currentSelectedTask.priority - The priority level of the task (e.g., "Urgent", "Medium", "Low").
+ * @param {Array<Object>} [currentSelectedTask.users=[]] - The list of users assigned to the task.
+ * @param {string} currentSelectedTask.users[].name - The name of the assigned user.
+ * @param {string} currentSelectedTask.users[].color - The color associated with the user.
+ * @param {string} currentSelectedTask.users[].initials - The initials of the assigned user.
+ * @param {Array<Object>} [currentSelectedTask.subTasks=[]] - The list of subtasks associated with the task.
+ * @param {string} currentSelectedTask.subTasks[].description - The description of the subtask.
+ * @param {number} taskId - The unique identifier of the task.
+ * @returns {string} The HTML string for the Edit Task Card Popup.
+ */
 function renderEditTasksCardPopup(currentSelectedTask, taskId) {
   let assignedContacts = currentSelectedTask.users || [];
   let title = currentSelectedTask.title;
   let description = currentSelectedTask.description;
   let dueDate = currentSelectedTask.dueDate;
   subTasks = currentSelectedTask.subTasks || [];
-  let priority = currentSelectedTask.priority;
+  window.currentSelectedPriority = currentSelectedTask.priority;
 
-  // if (priority === "Urgent") {
-  //   prioUrgentEditPopup.classList.add("prioUrgentRed");
-  //   urgentImgPopup.src = "/assets/icons/urgentWhite.png";
-  // } else if (priority === "Medium") {
-  //   prioMediumEditPopup.classList.add("prioMediumYellow");
-  //   mediumImgPopup.src = "/assets/icons/mediumWhite.png";
-  // } else if (priority === "Low") {
-  //   let prioLowEdit = prioLowEditPopup.classList.add("prioLowGreen");
-  //   let lowImg = lowImgPopup.src = "/assets/icons/lowWhite.png";
-  // }
-
-  // 🛠 Sicherstellen, dass die vorhandenen Nutzer in selectedContacts gespeichert werden
   selectedContacts = new Set(assignedContacts.map((user) => user.name));
 
   return /*html*/ `
@@ -491,18 +538,36 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
       <input id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date" />
         
       <label>Priority</label>
-      <div  class="task-edit-prio-popup">
-        <button onclick="prioUrgent()" id="prioUrgentEditPopup" class="prioBtn">
+      <div class="task-edit-prio-popup">
+        <button onclick="updatePriority('Urgent')" id="prioUrgentEditPopup" class="prioBtn ${
+          window.currentSelectedPriority === "Urgent" ? "prioUrgentRed" : ""
+        }">
           Urgent
-          <img id="urgentImgPopup" src="/assets/icons/urgentRed.png" alt="" />
+          <img src="${
+            window.currentSelectedPriority === "Urgent"
+              ? "/assets/icons/urgentWhite.png"
+              : "/assets/icons/urgentRed.png"
+          }" alt="" />
         </button>
-        <button onclick="prioMedium()" id="prioMediumEditPopup" class="prioBtn">
+        <button onclick="updatePriority('Medium')" id="prioMediumEditPopup" class="prioBtn ${
+          window.currentSelectedPriority === "Medium" ? "prioMediumYellow" : ""
+        }">
           Medium
-          <img id="mediumImgPopup" src="/assets/icons/mediumYellow.png" alt="" />
+          <img src="${
+            window.currentSelectedPriority === "Medium"
+              ? "/assets/icons/mediumWhite.png"
+              : "/assets/icons/mediumYellow.png"
+          }" alt="" />
         </button>
-        <button onclick="prioLow()" id="prioLowEditPopup" class="prioBtn">
+        <button onclick="updatePriority('Low')" id="prioLowEditPopup" class="prioBtn ${
+          window.currentSelectedPriority === "Low" ? "prioLowGreen" : ""
+        }">
           Low
-          <img id="lowImgPopup" src="/assets/icons/lowGreen.png" alt="" />
+          <img src="${
+            window.currentSelectedPriority === "Low"
+              ? "/assets/icons/lowWhite.png"
+              : "/assets/icons/lowGreen.png"
+          }" alt="" />
         </button>
       </div>
 
@@ -561,126 +626,70 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
   `;
 }
 
-// ChatGPT
+/**
+ * Updates the priority styling and icon for the selected priority level.
+ * 
+ * This function modifies the CSS classes and image sources of priority elements
+ * in the DOM based on the provided `newPriority` value. It ensures that the 
+ * selected priority is visually highlighted while resetting the styles of other 
+ * priority levels.
+ * 
+ * @param {string} newPriority - The new priority level to set. 
+ *                               Expected values: "Urgent", "Medium", or "Low".
+ */
+function updatePriority(newPriority) {
+  window.currentSelectedPriority = newPriority;
 
-// function renderEditTasksCardPopup(currentSelectedTask, taskId) {
-//   let assignedContacts = currentSelectedTask.users || [];
-//   let title = currentSelectedTask.title;
-//   let description = currentSelectedTask.description;
-//   let dueDate = currentSelectedTask.dueDate;
-//   subTasks = currentSelectedTask.subTasks || [];
-//   let priority = currentSelectedTask.priority;
+  const priorityStyles = {
+    Urgent: {
+      class: "prioUrgentRed",
+      imgSrc: "/assets/icons/urgentWhite.png",
+    },
+    Medium: {
+      class: "prioMediumYellow",
+      imgSrc: "/assets/icons/mediumWhite.png",
+    },
+    Low: {
+      class: "prioLowGreen",
+      imgSrc: "/assets/icons/lowWhite.png",
+    },
+  };
 
-//   let popupContainer = document.createElement("div");
-//   popupContainer.innerHTML = /*html*/ `
-//     <div class="shadow-div"></div>
-//     <div class="taskCardEditPopup">
-//       <div class="task-edit-close-popup-div">
-//         <div class="test987">
-//           <img onclick="closeEditTaskCardPopUp()" class="task-edit-close-popup" src="/assets/icons/close.png" alt=""/>
-//         </div>
-//       </div>
-//       <div class="test-test">
-//       <label>Title</label>
-//       <input id="titleInput" value="${title}" class="task-edit-input-popup" placeholder="Enter a title" type="text" />
-//       <label>Description</label>
-//       <textarea id="descriptionTextarea" class="task-edit-input-popup" placeholder="Enter a description">${description}</textarea>
-//       <label>Due Date</label>
-//       <input id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date" />
-        
-//       <label>Priority</label>
-//       <div class="task-edit-prio-popup">
-//         <button onclick="prioUrgent()" id="prioUrgentEditPopup" class="prioBtn">
-//           Urgent
-//           <img id="urgentImgPopup" src="/assets/icons/urgentRed.png" alt="" />
-//         </button>
-//         <button onclick="prioMedium()" id="prioMediumEditPopup" class="prioBtn">
-//           Medium
-//           <img id="mediumImgPopup" src="/assets/icons/mediumYellow.png" alt="" />
-//         </button>
-//         <button onclick="prioLow()" id="prioLowEditPopup" class="prioBtn">
-//           Low
-//           <img id="lowImgPopup" src="/assets/icons/lowGreen.png" alt="" />
-//         </button>
-//       </div>
-      
-//       <label class="TESTAssignedTEST" for="contactSelection">Assigned to</label>
-//       <div onclick="contactListPopUp()" class="assignedContainer">
-//         <span>Select contacts to assign</span>
-//         <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
-//         <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
-//       </div>
-//       <div id="assignedContactsListPopUp" class="hidden"></div>
-//       <div id="selectedContactsDisplay" class="selectedContactsContainerPopUp">
-//         ${assignedContacts.map(contact => `<span class="assignedShortcutName" style="background-color: ${contact.color}">${contact.initials}</span>`).join("")}
-//       </div>
-    
-//       <label class="TESTSubtasksTEST" for="subtask">Subtasks</label>
-//       <div id="addSubTask">
-//         <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
-//         <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
-//       </div>
-//       <ul id="subTaskList">
-//         ${subTasks.map((subTask, i) => `
-//           <li class="subTask" data-index="${i}">
-//             <input id="subInputEdit-${i}" type="text" class="subTask-edit-input d-none" value="${subTask.description}">
-//             <span id="subEditSpan-${i}" class="subTask-text">${subTask.description}</span>
-//             <div class="subTask-actions">
-//               <div class="icon-wrapper">
-//                 <img id="subEditImgPen-${i}" src="/assets/icons/edit-icon.png" alt="Edit" onclick="editSubTask(${i})" class="action-icon edit-icon">
-//               </div>
-//               <div class="icon-wrapper">
-//                 <img src="/assets/icons/delete-icon.png" alt="Delete" onclick="deleteSubTask(${i})" class="action-icon delete-icon">
-//               </div>
-//               <div class="separator"></div>
-//               <div class="icon-wrapper">
-//                 <img id="subEditImgCheck-${i}" src="/assets/icons/checkBgWhite.png" alt="Save" onclick="saveSubTask(${i})" class="action-icon save-icon d-none">
-//               </div>
-//             </div>
-//           </li>
-//         `).join("")}
-//       </ul>
-//       </div>
-//       <div class="button-ok-div">
-//         <div class="buttontest987">
-//         <button onclick="updateEditTask(event)" data-task-id="${taskId}" class="button-ok">Ok <img src="/assets/icons/check.png" alt="" /></button>
-//         </div>
-//       </div>
-//     </div>
-//   `;
+  document
+    .getElementById("prioUrgentEditPopup")
+    .classList.remove(priorityStyles.Urgent.class);
+  document
+    .getElementById("prioMediumEditPopup")
+    .classList.remove(priorityStyles.Medium.class);
+  document
+    .getElementById("prioLowEditPopup")
+    .classList.remove(priorityStyles.Low.class);
 
-//   document.body.appendChild(popupContainer);
+  document.getElementById("prioUrgentEditPopup").querySelector("img").src =
+    "/assets/icons/urgentRed.png";
+  document.getElementById("prioMediumEditPopup").querySelector("img").src =
+    "/assets/icons/mediumYellow.png";
+  document.getElementById("prioLowEditPopup").querySelector("img").src =
+    "/assets/icons/lowGreen.png";
 
-//   let prioUrgentEditPopup = document.getElementById("prioUrgentEditPopup");
-//   let prioMediumEditPopup = document.getElementById("prioMediumEditPopup");
-//   let prioLowEditPopup = document.getElementById("prioLowEditPopup");
+  document
+    .getElementById(`prio${newPriority}EditPopup`)
+    .classList.add(priorityStyles[newPriority].class);
+  document
+    .getElementById(`prio${newPriority}EditPopup`)
+    .querySelector("img").src = priorityStyles[newPriority].imgSrc;
+}
 
-//   let urgentImgPopup = document.getElementById("urgentImgPopup");
-//   let mediumImgPopup = document.getElementById("mediumImgPopup");
-//   let lowImgPopup = document.getElementById("lowImgPopup");
-
-//   if (priority === "Urgent") {
-//     prioUrgentEditPopup.classList.add("prioUrgentRed");
-//     urgentImgPopup.src = "/assets/icons/urgentWhite.png";
-//   } else if (priority === "Medium") {
-//     prioMediumEditPopup.classList.add("prioMediumYellow");
-//     mediumImgPopup.src = "/assets/icons/mediumWhite.png";
-//   } else if (priority === "Low") {
-//     prioLowEditPopup.classList.add("prioLowGreen");
-//     lowImgPopup.src = "/assets/icons/lowWhite.png";
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-//--------- contact templates ---------
+/**
+ * Generates the HTML template for the "Add New Contact" popup.
+ *
+ * This function returns a string containing the HTML structure for a popup
+ * that allows users to add a new contact. The popup includes fields for
+ * entering the contact's name, email, and phone number, as well as buttons
+ * for canceling or creating the contact.
+ *
+ * @returns {string} The HTML string for the "Add New Contact" popup.
+ */
 function addNewContactPopup() {
   return /*html*/ `
   <div class="shadow-div"></div>
@@ -738,6 +747,15 @@ function addNewContactPopup() {
   `;
 }
 
+/**
+ * Generates the HTML template for a mobile popup to add a new contact.
+ * 
+ * This function returns a string containing the HTML structure for a popup
+ * that allows users to input a new contact's name, email, and phone number.
+ * The popup includes a close button, a header, and a form with input fields.
+ * 
+ * @returns {string} The HTML string for the mobile add new contact popup.
+ */
 function mobileAddNewContactPopup() {
   return /*html*/ `
   <div class="shadow-div"></div>
@@ -791,6 +809,13 @@ function mobileAddNewContactPopup() {
   `;
 }
 
+/**
+ * Generates the HTML template for the "Edit Contact" popup.
+ * This popup allows users to edit the details of a selected contact,
+ * including their name, email, and phone number.
+ *
+ * @returns {string} The HTML string for the "Edit Contact" popup.
+ */
 function editContactPopup() {
   let contact = contacts[currentSelectedContact];
   let name = contact.name;
@@ -805,9 +830,10 @@ function editContactPopup() {
       <hr />
     </div>
     <div class="popup-right">
-      <div class="popup-right-profile" style="background-color: ${contact.color};">
+      <div class="popup-right-profile" style="background-color: ${
+        contact.color
+      };">
       ${generateInitials(contact.name)}
-        <!-- <img src="" alt="" /> -->
       </div>
       <div>
         <img
@@ -854,6 +880,16 @@ function editContactPopup() {
   </div>
   `;
 }
+
+/**
+ * Generates the HTML template for a mobile popup to edit a contact.
+ * 
+ * This function retrieves the currently selected contact's details (name, email, and phone)
+ * and populates an editable form within a popup. The popup includes options to save the 
+ * updated contact information or delete the contact.
+ * 
+ * @returns {string} The HTML string for the mobile edit contact popup.
+ */
 function mobileEditContactPopup() {
   let contact = contacts[currentSelectedContact];
   let name = contact.name;
@@ -913,5 +949,59 @@ function mobileEditContactPopup() {
       </div>
     </div>
   </div>
+  `;
+}
+
+/**
+ * Generates the HTML structure for a task card.
+ *
+ * @param {Object} task - The task object containing details about the task.
+ * @param {string} task.id - The unique identifier for the task.
+ * @param {string} task.category - The category of the task.
+ * @param {string} task.title - The title of the task.
+ * @param {string} task.description - A brief description of the task.
+ * @param {number} totalSubtasks - The total number of subtasks for the task.
+ * @param {number} completedSubtasks - The number of completed subtasks for the task.
+ * @returns {string} The HTML string representing the task card.
+ */
+function taskCardHTML(task, totalSubtasks, completedSubtasks) {
+  return /*html*/ `
+    <div class="task-card-div">
+      <div class="task-card-category-div">
+        <div class="task-card-category" id="taskCategory-${task.id}">
+          <h2 class="task-card-category-h2" id="taskCategoryH2">${
+            task.category
+          }</h2>
+        </div>
+        <div class="task-controls">
+        <img class="move-img-up" onclick="moveTaskToNextColumn('${
+          task.id
+        }', -1, event)" src="/assets/icons/arrow-left-line.png" alt="">
+        <img class="move-img-down" onclick="moveTaskToNextColumn('${
+          task.id
+        }', 1, event)" src="/assets/icons/arrow-left-line.png" alt="">
+      </div>
+      </div>
+      
+      <h3>${task.title}</h3>
+      <p>${task.description}</p>
+      
+      <div class="progress-container">
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
+    totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0
+  }%;"></div>
+        </div>
+        <div class="subtasks-div">
+          <span class="subtasks-amount" id="subtasksAmount-${
+            task.id
+          }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
+        </div>
+      </div>
+      <div class="task-footer">      
+        <div class="task-users" id="taskUsers-${task.id}"></div>
+        <div class="task-priority" id="taskPriority-${task.id}"></div>
+      </div>
+    </div>
   `;
 }
