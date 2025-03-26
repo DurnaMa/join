@@ -169,12 +169,12 @@ function emailValidation() {
  */
 function logIn() {
   const { checkbox, errorDiv, email, password } = logInVarible();
-  if (!checkbox.checked) {
-    errorDiv.textContent =
-      "Bitte akzeptieren Sie die Bedingungen (Remember me).";
-    errorDiv.style.color = "red";
-    return false;
-  }
+  // if (!checkbox.checked) {
+  //   errorDiv.textContent =
+  //     "Bitte akzeptieren Sie die Bedingungen (Remember me).";
+  //   errorDiv.style.color = "red";
+  //   return false;
+  // }
   const user = contacts.find(
     (contact) => contact.email === email && contact.password === password
   );
