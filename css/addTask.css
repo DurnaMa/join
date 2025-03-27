@@ -205,10 +205,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 #subTaskList {
-  position: fixed;
-  width: inherit;
-  top: 695px;
+  /* position: fixed; */
+  /* width: inherit; */
+  /* top: 695px; */
   background-color: white;
+  border-radius: 10px;
 }
 
 .taskFormButtons {
@@ -282,11 +283,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   align-items: center;
   padding: 8px;
   border-radius: 10px;
-  position: relative;
+  /* position: relative; */
 }
 
 .subTask:hover {
-  background-color: white;
+  background-color: #eeeeee;
 }
 
 .subTask.editing {
