@@ -13,6 +13,20 @@ let contactColors = {};
  * @param {number} index - The index of the contact to select.
  * @throws {TypeError} Throws an error if the index is not a number.
  */
+// function selectContact(index) {
+//   currentSelectedContact = index;
+//   renderContactsList();
+
+//   let contact = contacts[currentSelectedContact];
+//   let phoneText;
+//   if (contact.phone) {
+//     phoneText = `<a class="contact-phone-link" href="tel:${contact.phone}">${contact.phone}</a>`;
+//   } else {
+//     phoneText = `<span class="no-phone">Leider liegt uns keine Telefonnummer vor</span>`;
+//   }
+
+//   contactDetailsHTML(contact, phoneText);
+// }
 function selectContact(index) {
   currentSelectedContact = index;
   renderContactsList();
@@ -26,6 +40,16 @@ function selectContact(index) {
   }
 
   contactDetailsHTML(contact, phoneText);
+
+  setTimeout(() => {
+    const contactItems = document.querySelectorAll(".contacts-list");
+
+    contactItems.forEach(item => item.classList.remove("active"));
+
+    if (contactItems[currentSelectedContact]) {
+      contactItems[currentSelectedContact].classList.add("active");
+    }
+  }, 0);
 }
 
 /**
@@ -256,7 +280,7 @@ async function saveContact() {
       name = "";
       email = "";
       phone = "";
-      console.log("addNewcontact erfolgreich");
+      // console.log("addNewcontact erfolgreich");
     } catch (error) {
       console.error("Fehler bei der addNewcontact:", error);
     }
@@ -278,7 +302,7 @@ async function saveContact() {
  */
 async function updateContact() {
   let key = contacts[currentSelectedContact].id;
-  console.log(key);
+  // console.log(key);
   let name = document.getElementById("editContactName").value;
   let email = document.getElementById("editContactEmail").value;
   let phone = document.getElementById("editContactPhone").value;
@@ -292,8 +316,8 @@ async function updateContact() {
 
   try {
     await putDataToFirebase((path = "contacts/"), data, key);
-    console.log(key);
-    console.log("editContact erfolgreich");
+    // console.log(key);
+    // console.log("editContact erfolgreich");
   } catch (error) {
     console.error("Fehler bei der editcontact:", error);
   }

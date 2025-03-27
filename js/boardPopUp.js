@@ -10,7 +10,7 @@
  */
 function openTaskPopup(taskId) {
   document.getElementById("bodyId").classList.add("overflow-hidden");
-  console.log("Task ID:", taskId);
+  // console.log("Task ID:", taskId);
   let id = tasks.findIndex((task) => task.id == taskId);
   if (id === -1) {
     console.error("Task nicht gefunden:", taskId);
@@ -18,9 +18,9 @@ function openTaskPopup(taskId) {
   }
 
   let currentSelectedTask = tasks[id];
-  console.log("Gewählte Aufgabe:", currentSelectedTask);
-  console.log("Assigned Users:", currentSelectedTask.users);
-  console.log("Subtasks:", currentSelectedTask.subTasks);
+  // console.log("Gewählte Aufgabe:", currentSelectedTask);
+  // console.log("Assigned Users:", currentSelectedTask.users);
+  // console.log("Subtasks:", currentSelectedTask.subTasks);
 
   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
   openTaskPopupDiv.classList.remove("d-none");
@@ -98,7 +98,7 @@ async function updateEditTask(event) {
 
   try {
     await patchDataToFirebase(`tasks/${taskId}`, updatedTask);
-    console.log("Task erfolgreich bearbeitet:", updatedTask);
+    // console.log("Task erfolgreich bearbeitet:", updatedTask);
     closeEditTaskCardPopUp();
     renderTasks();
   } catch (error) {
@@ -363,13 +363,14 @@ function closeEditTaskCardPopUp() {
  */
 function contactListPopUp() {
   let contactList = document.getElementById("assignedContactsListPopUp");
-
+  
   contactList.innerHTML = contacts
     .map((contact) => {
       const initials = generateInitials(contact.name);
       const isChecked = selectedContacts.has(contact.name) ? "checked" : "";
+      const isActive = selectedContacts.has(contact.name) ? "active" : "";
       return `
-        <div class="assignedContactContentPopUp" onclick="toggleCheckbox(event, '${contact.name}')">
+        <div class="assignedContactContentPopUp ${isActive}" onclick="toggleCheckbox(event, '${contact.name}')">
           <div class="assignedContactsPopUp">
             <span class="assignedShortcutNamePopUp" style="background-color: ${contact.color};">${initials}</span>
             <span class="assignedNamePopUp">${contact.name}</span>

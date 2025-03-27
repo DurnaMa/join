@@ -248,19 +248,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border: 1px solid #29abe2;
 }
 
-/* #subTaskList { */
-  /* border-radius: 10px; */
-  /* background-color: white; */
-  /* max-height: 84px;                  das war aktiviert */
-  /* overflow: auto;                     das war aktiviert */
-  /* position: absolute; */
-  /* top: 598px; */
-  /* padding-bottom: 96px; */
-  /* width: inherit; */
-/* } */
+.subTaskList {
+  max-height: 84px;
+  overflow: auto;
+}
 
 .taskFormButtons {
-  /* padding: 75px 0; */
   width: 90%;
   display: flex;
   justify-content: space-between;
@@ -428,14 +421,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  /* border-radius: 10px; */
   background-color: white;
   max-height: 165px;
   overflow: auto;
-  position: fixed;
-  /* top: 768px; */
-  top: 390px;
-  width: 87%;
+  margin-top: 9px;
 }
 
 .assignedContacts {
@@ -489,10 +478,21 @@ input[type="checkbox"] {
   padding: 0px 20px 0px 20px;
   width: 100%;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 .assignedContactContent:hover {
   background-color: #eeeeee;
+}
+
+.assignedContactContent.active {
+  background-color: #2a3647;
+  color: white;
+}
+
+.assignedContactContent.active:hover {
+  background-color: #2a3647;
+  color: white;
 }
 
 .assignedContactContentPopUp {
@@ -501,6 +501,21 @@ input[type="checkbox"] {
   padding: 0px 20px 0px 20px;
   width: 100%;
   cursor: pointer;
+  border-radius: 10px;
+}
+
+.assignedContactContentPopUp.active {
+  background-color: #2a3647;
+  color: white;
+}
+
+.assignedContactContentPopUp.active:hover {
+  background-color: #2a3647;
+  color: white;
+}
+
+.assignedContactContentPopUp:hover {
+  background-color: #eeeeee;
 }
 
 .task-added-popup {
@@ -592,8 +607,6 @@ input[type="checkbox"] {
   color: white;
 }
 
-
-
 @media screen and (max-width: 1130px) {
   .add-edit-popup-task-div {
     zoom: 80%;
@@ -667,23 +680,19 @@ input[type="checkbox"] {
     width: 100%;
   }
 
-  textarea{
+  textarea {
     max-width: 100%;
   }
 
-  form{
+  form {
     width: 100%;
   }
 
-  .addTaskContent{
+  .addTaskContent {
     width: 100%;
   }
 
-  #assignedContactsList{
+  #assignedContactsList {
     width: 92%;
   }
-  /* #subTaskList{
-    max-height: 100%;
-    overflow: hidden;
-  } */
 }

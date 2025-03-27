@@ -76,7 +76,7 @@ function renderAddTaskPoupBtn() {
               <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
               <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
-            <ul id="subTaskList"></ul>
+            <ul id="subTaskList" class="subTaskList"></ul>
             <p class="requiredInfoResponsive">
             <span class="required">*</span>
             This field is required
@@ -90,7 +90,7 @@ function renderAddTaskPoupBtn() {
           </p>
           <div class="btnSection">
             <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
-            <button onclick="createTaskBtn()" class="button">
+            <button type="button" onclick="createTaskBtn()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>
           </div>
@@ -103,8 +103,8 @@ function renderAddTaskPoupBtn() {
 
 /**
  * Renders the HTML structure for the "Add Task" popup in the To-Do application.
- * This function returns a string containing the HTML markup for the popup, 
- * which includes input fields for task details, priority selection, category selection, 
+ * This function returns a string containing the HTML markup for the popup,
+ * which includes input fields for task details, priority selection, category selection,
  * and subtasks, along with buttons for clearing or creating the task.
  *
  * @returns {string} The HTML string for the "Add Task" popup.
@@ -167,7 +167,7 @@ function renderAddTaskPopupToDoPlus() {
               <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
               <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
-            <ul id="subTaskList"></ul>
+            <ul id="subTaskList" class="subTaskList"></ul>
             <p class="requiredInfoResponsive">
             <span class="required">*</span>
             This field is required
@@ -181,7 +181,7 @@ function renderAddTaskPopupToDoPlus() {
           </p>
           <div class="btnSection">
             <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
-            <button onclick="createTaskPlusToDoBtn()" class="button">
+            <button type="button" onclick="createTaskPlusToDoBtn()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>
           </div>
@@ -194,8 +194,8 @@ function renderAddTaskPopupToDoPlus() {
 
 /**
  * Renders the HTML structure for the "Add Task" popup in the "In Progress" section.
- * This function returns a string containing the HTML markup for the popup, 
- * which includes input fields for task details, priority selection, category selection, 
+ * This function returns a string containing the HTML markup for the popup,
+ * which includes input fields for task details, priority selection, category selection,
  * and subtasks, as well as buttons for clearing the form or creating the task.
  *
  * @returns {string} The HTML string for the "Add Task" popup.
@@ -258,7 +258,7 @@ function renderAddTaskPopupInProgressPlus() {
               <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
               <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
-            <ul id="subTaskList"></ul>
+            <ul id="subTaskList" class="subTaskList"></ul>
             <p class="requiredInfoResponsive">
             <span class="required">*</span>
             This field is required
@@ -272,7 +272,7 @@ function renderAddTaskPopupInProgressPlus() {
           </p>
           <div class="btnSection">
             <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
-            <button onclick="createTaskPlusInProgressBtn()" class="button">
+            <button type="button" onclick="createTaskPlusInProgressBtn()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>
           </div>
@@ -351,7 +351,7 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
               <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
               <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
-            <ul id="subTaskList"></ul>
+            <ul id="subTaskList" class="subTaskList"></ul>
             <p class="requiredInfoResponsive">
             <span class="required">*</span>
             This field is required
@@ -365,7 +365,7 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
           </p>
           <div class="btnSection">
             <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
-            <button onclick="createTaskPlusAwaitFeedbackBtn()" class="button">
+            <button type="button" onclick="createTaskPlusAwaitFeedbackBtn()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>
           </div>
@@ -572,12 +572,14 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
       </div>
 
       <label class="TESTAssignedTEST" for="contactSelection">Assigned to</label>
-      <div onclick="contactListPopUp()" class="assignedContainer">
-        <span>Select contacts to assign</span>
-        <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
-        <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+      <div>
+        <div onclick="contactListPopUp()" class="assignedContainer">
+          <span>Select contacts to assign</span>
+          <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+          <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+        </div>
+        <div id="assignedContactsListPopUp" class="hidden"></div>
       </div>
-      <div id="assignedContactsListPopUp" class="hidden"></div>
       <div id="selectedContactsDisplay" class="selectedContactsContainerPopUp">
         ${assignedContacts
           .map(
@@ -628,13 +630,13 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
 
 /**
  * Updates the priority styling and icon for the selected priority level.
- * 
+ *
  * This function modifies the CSS classes and image sources of priority elements
- * in the DOM based on the provided `newPriority` value. It ensures that the 
- * selected priority is visually highlighted while resetting the styles of other 
+ * in the DOM based on the provided `newPriority` value. It ensures that the
+ * selected priority is visually highlighted while resetting the styles of other
  * priority levels.
- * 
- * @param {string} newPriority - The new priority level to set. 
+ *
+ * @param {string} newPriority - The new priority level to set.
  *                               Expected values: "Urgent", "Medium", or "Low".
  */
 function updatePriority(newPriority) {
@@ -749,11 +751,11 @@ function addNewContactPopup() {
 
 /**
  * Generates the HTML template for a mobile popup to add a new contact.
- * 
+ *
  * This function returns a string containing the HTML structure for a popup
  * that allows users to input a new contact's name, email, and phone number.
  * The popup includes a close button, a header, and a form with input fields.
- * 
+ *
  * @returns {string} The HTML string for the mobile add new contact popup.
  */
 function mobileAddNewContactPopup() {
@@ -883,11 +885,11 @@ function editContactPopup() {
 
 /**
  * Generates the HTML template for a mobile popup to edit a contact.
- * 
+ *
  * This function retrieves the currently selected contact's details (name, email, and phone)
- * and populates an editable form within a popup. The popup includes options to save the 
+ * and populates an editable form within a popup. The popup includes options to save the
  * updated contact information or delete the contact.
- * 
+ *
  * @returns {string} The HTML string for the mobile edit contact popup.
  */
 function mobileEditContactPopup() {
@@ -911,9 +913,11 @@ function mobileEditContactPopup() {
       <hr />
     </div>
     <div class="mobile-edit-popup-below">
-      <div>
-        <img src="/assets/img/profileIMG.png" alt="" />
-      </div> 
+      <div class="popup-right-profile" style="background-color: ${
+        contact.color
+      };">
+      ${generateInitials(contact.name)}
+      </div>
       <div>
         <form class="mobile-form">
           <input
