@@ -90,7 +90,7 @@ function renderAddTaskPoupBtn() {
           </p>
           <div class="btnSection">
             <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
-            <button onclick="createTaskBtn()" class="button">
+            <button type="button" onclick="createTaskBtn()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>
           </div>
@@ -181,7 +181,7 @@ function renderAddTaskPopupToDoPlus() {
           </p>
           <div class="btnSection">
             <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
-            <button onclick="createTaskPlusToDoBtn()" class="button">
+            <button type="button" onclick="createTaskPlusToDoBtn()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>
           </div>
@@ -272,7 +272,7 @@ function renderAddTaskPopupInProgressPlus() {
           </p>
           <div class="btnSection">
             <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
-            <button onclick="createTaskPlusInProgressBtn()" class="button">
+            <button type="button" onclick="createTaskPlusInProgressBtn()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>
           </div>
@@ -365,7 +365,7 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
           </p>
           <div class="btnSection">
             <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
-            <button onclick="createTaskPlusAwaitFeedbackBtn()" class="button">
+            <button type="button" onclick="createTaskPlusAwaitFeedbackBtn()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>
           </div>

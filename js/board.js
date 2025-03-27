@@ -482,6 +482,9 @@ async function moveTaskToNextColumn(taskId, direction, event) {
  * 6. Reloads the page to reflect the changes.
  */
 async function createTaskBtn() {
+  if (!validateForm()) {
+    return; 
+  }
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
@@ -513,6 +516,9 @@ async function createTaskBtn() {
  * @returns {string} The priority category as a string: "Urgent", "Medium", or "Low".
  */
 function prioCategory() {
+  if (!validateForm()) {
+    return; 
+  }
   let prioUrgentEdit = document.getElementById("prioUrgentEdit");
   let prioMediumEdit = document.getElementById("prioMediumEdit");
   let prioLowEdit = document.getElementById("prioLowEdit");
@@ -541,6 +547,9 @@ function prioCategory() {
  * @throws {Error} If there is an issue with posting data to Firebase.
  */
 async function createTaskPlusToDoBtn() {
+  if (!validateForm()) {
+    return; 
+  }
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
@@ -578,6 +587,9 @@ async function createTaskPlusToDoBtn() {
  * @throws {Error} Logs an error to the console if the Firebase post operation fails.
  */
 async function createTaskPlusInProgressBtn() {
+  if (!validateForm()) {
+    return; 
+  }
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
@@ -614,6 +626,9 @@ async function createTaskPlusInProgressBtn() {
  * @throws {Error} Logs an error to the console if the Firebase operation fails.
  */
 async function createTaskPlusAwaitFeedbackBtn() {
+  if (!validateForm()) {
+    return; 
+  }
   let title = document.getElementById("titleInput").value;
   let description = document.getElementById("descriptionTextarea").value;
   let dueDate = document.getElementById("date").value;
@@ -687,3 +702,4 @@ function showAddTaskPopup() {
       );
     }
 }
+
