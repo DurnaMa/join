@@ -685,7 +685,19 @@
   }
 
   .scrollbar {
-    height: 80%;
+    /* height: 80%; */
+    height: 100vh;
+    padding-bottom: 193px;
+  }
+
+  .mobileAddButton {
+    bottom: 18%;
+  }
+}
+
+@media screen and (max-height: 667px){
+  .mobileOptionsButton{
+    bottom: 18%;
   }
 }
 

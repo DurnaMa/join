@@ -1,4 +1,4 @@
-.mobileSideBar {
+.mobileFooterBar {
   display: none;
   bottom: 0;
   position: fixed;
@@ -11,7 +11,7 @@
   padding: 20px;
 }
 
-.mobileSideBarLogin {
+.mobileFooterBarLogin {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,19 +23,19 @@
   font-size: 14px;
 }
 
-.mobileSideBarLogin span {
+.mobileFooterBarLogin span {
   text-decoration: none;
   color: #cdcdcd;
 }
 
-.mobileSideBarList {
+.mobileFooterBarList {
   display: flex;
   align-items: center;
   gap: 12px;
   font-size: 14px;
 }
 
-.mobileSideBarListLink {
+.mobileFooterBarListLink {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -45,25 +45,29 @@
   padding: 12px;
 }
 
-.mobileSideBarListLink:hover,
-.mobileSideBarLogin:hover {
+.mobileFooterBarListLink:hover,
+.mobileFooterBarLogin:hover {
   background-color: #091931;
 }
 
 @media screen and (max-width: 992px) {
-  .mobileSideBar {
+  .mobileFooterBar {
     display: flex;
+  }
+
+  .mobileSideBar {
+    display: none !important;
   }
 }
 
 @media screen and (max-width: 400px) {
-  .mobileSideBarList span {
+  .mobileFooterBarList span {
     font-size: 12px;
   }
 }
 
-.mobileSideBarListLink.active,
-.mobileSideBarLogin.active {
+.mobileFooterBarListLink.active,
+.mobileFooterBarLogin.active {
   background-color: #091931;
   color: white !important;
 }
