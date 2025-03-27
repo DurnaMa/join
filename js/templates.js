@@ -822,7 +822,8 @@ function editContactPopup() {
   let contact = contacts[currentSelectedContact];
   let name = contact.name;
   let email = contact.email;
-  let phone = contact.phone;
+  let phone = contact.phone || "";
+  let phonePlaceholder = contact.phone ? "" : "nicht vorhanden";
   return /*html*/ `
   <div class="shadow-div"></div>
   <div class="add-edit-popup-contact-div">
@@ -866,7 +867,7 @@ function editContactPopup() {
             class="phone"
             type="text"
             id="editContactPhone"
-            placeholder="Phone"
+            placeholder="${phonePlaceholder}"
           />
         </form>
         <div class="popup-buttons">
