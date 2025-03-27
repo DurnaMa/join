@@ -1,0 +1,69 @@
+.mobileSideBar {
+  display: none;
+  bottom: 0;
+  position: fixed;
+  justify-content: space-between;
+  height: 96px;
+  background-color: #2a3647;
+  align-items: center;
+  width: 100%;
+  z-index: 4;
+  padding: 20px;
+}
+
+.mobileSideBarLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  border-radius: 12px;
+  padding: 5px;
+  width: 65px;
+  font-size: 14px;
+}
+
+.mobileSideBarLogin span {
+  text-decoration: none;
+  color: #cdcdcd;
+}
+
+.mobileSideBarList {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.mobileSideBarListLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #cdcdcd;
+  height: 80px;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.mobileSideBarListLink:hover,
+.mobileSideBarLogin:hover {
+  background-color: #091931;
+}
+
+@media screen and (max-width: 992px) {
+  .mobileSideBar {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .mobileSideBarList span {
+    font-size: 12px;
+  }
+}
+
+.mobileSideBarListLink.active,
+.mobileSideBarLogin.active {
+  background-color: #091931;
+  color: white !important;
+}
