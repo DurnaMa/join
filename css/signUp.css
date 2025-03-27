@@ -257,6 +257,20 @@ input:focus {
   }
 }
 
+@media screen and (max-height: 667px){
+  .signUpContainer{
+    zoom: 77%;
+  }
+
+  .headerLogo img{
+zoom: 60%;
+  }
+
+  .signUpArrowLink {
+    margin-right: 300px;
+  }
+}
+
 .pupup-signUp {
   position: absolute;
   top: 50%;
