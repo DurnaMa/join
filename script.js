@@ -391,3 +391,67 @@ function toggleMenu() {
   document.getElementById("subMenu").classList.toggle("hidden");
   document.getElementById("subMenuMobile").classList.toggle("hidden");
 }
+
+
+// Test!!!!!!!!!!!
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   // Liste der Seiten, auf denen das Menü versteckt werden soll
+//   const restrictedPages = ["/pages/legale-notice-Nouser.html", "/pages/data-protection-Nouser.html"];
+
+//   // Aktuelle URL ermitteln
+//   const currentPath = window.location.pathname;
+
+//   // Prüfen, ob die aktuelle Seite in der Liste enthalten ist
+//   if (restrictedPages.includes(currentPath)) {
+//       const subMenu = document.getElementById("subMenu");
+//       if (subMenu) {
+//           subMenu.style.display = "none";
+//       }
+//   }
+// });
+// document.addEventListener("DOMContentLoaded", function () {
+//   console.log("Script loaded"); // Überprüfen, ob das Skript läuft
+
+//   // Liste der Seiten, auf denen das Menü versteckt werden soll
+//   const restrictedPages = ["/pages/legale-notice-Nouser.html", "/pages/data-protection-Nouser.html"];
+
+//   // Aktuelle URL ermitteln
+//   const currentPath = window.location.pathname;
+//   console.log("Aktueller Pfad:", currentPath); // Debugging
+
+//   // Prüfen, ob die aktuelle Seite in der Liste enthalten ist
+//   if (restrictedPages.includes(currentPath)) {
+//       console.log("Seite ist in der restrictedPages-Liste");
+//       const subMenu = document.getElementById("subMenu");
+//       if (subMenu) {
+//           subMenu.style.display = "none";
+//           console.log("subMenu wurde ausgeblendet");
+//       } else {
+//           console.log("subMenu nicht gefunden");
+//       }
+//   } else {
+//       console.log("Seite nicht in der restrictedPages-Liste");
+//   }
+// });
+
+function Test(){
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("Script loaded");
+
+  const restrictedPages = ["/pages/legale-notice-Nouser.html", "/pages/data-protection-Nouser.html"];
+  const currentPath = window.location.pathname;
+  console.log("Aktueller Pfad:", currentPath);
+
+  if (restrictedPages.includes(currentPath)) {
+      const interval = setInterval(() => {
+          const subMenu = document.getElementById("subMenu");
+          if (subMenu) {
+              subMenu.style.display = "none";
+              console.log("subMenu wurde ausgeblendet");
+              clearInterval(interval); // Stoppt das Intervall, wenn das Element gefunden wurde
+          }
+      }, 100); // Überprüfung alle 100ms
+  }
+});
+}

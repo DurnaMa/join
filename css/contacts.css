@@ -13,7 +13,9 @@
   align-items: center;
   top: 96px;
   width: 456px;
-  height: 928px;
+  /* height: 928px; */
+  height: 100vh;
+  padding-bottom: 100px;
   background-color: white;
 }
 
@@ -103,7 +105,7 @@
   align-items: center;
   flex-direction: column;
   width: 456px;
-  height: 75%;
+  /* height: 75%; */
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -154,6 +156,9 @@
 
 .contacts-list-item p {
   color: #007cee;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 234px;
 }
 
 .contact-right-area {
@@ -289,8 +294,8 @@
 .contact-details-div-icon-edit:hover,
 .contact-details-div-icon-edit img:hover {
   color: #007cee;
-  filter: brightness(0) saturate(100%) invert(42%) sepia(94%) saturate(3361%)
-    hue-rotate(190deg) brightness(100%) contrast(103%);
+  filter: brightness(0) saturate(100%) invert(42%) sepia(94%) saturate(3361%) hue-rotate(190deg) brightness(100%)
+    contrast(103%);
 }
 
 .contact-info {
@@ -334,6 +339,17 @@
   right: 4%;
   bottom: 13%;
   display: none;
+}
+
+.no-phone {
+  color: red;
+  font-style: italic;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 @media screen and (min-width: 1600px) {
@@ -442,7 +458,8 @@
   }
 
   .scrollbar {
-    height: 70%;
+    /* height: 70%; */
+    padding-bottom: 96px;
   }
 }
 
@@ -469,6 +486,7 @@
 
   .scrollbar {
     width: 100%;
+    padding-bottom: 96px;
   }
 
   .contact-right-area {
@@ -479,10 +497,10 @@
     display: none;
   }
 
-  .scrollbar {
+  /* .scrollbar {
     height: 80%;
     padding: 35px;
-  }
+  } */
 
   .mobileAddButton {
     display: flex;
@@ -684,26 +702,29 @@
     font-size: 14px;
   }
 
-  .scrollbar {
+  /* .scrollbar {
     /* height: 80%; */
-    height: 100vh;
-    padding-bottom: 193px;
-  }
+  /* height: 100vh; */
+  /* padding-bottom: 193px; */
+  /* } */
 
   .mobileAddButton {
     bottom: 18%;
   }
-}
 
-@media screen and (max-height: 667px){
-  .mobileOptionsButton{
-    bottom: 18%;
+  .contacts-list-item p {
+    max-width: 190px;
   }
 }
 
-.no-phone {
-  color: red;
-  font-style: italic;
+@media screen and (max-height: 667px) {
+  .mobileOptionsButton {
+    bottom: 18%;
+  }
+
+  .scrollbar {
+    /* height: 80%; */
+    height: 100vh;
+    padding-bottom: 96px;
+  }
 }
-
-
