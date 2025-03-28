@@ -210,6 +210,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   /* top: 695px; */
   background-color: white;
   border-radius: 10px;
+  overflow-y: auto;
+  max-height: 100px;
 }
 
 .taskFormButtons {
@@ -218,7 +220,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   justify-content: space-between;
   align-items: flex-end;
   gap: 4px;
-  max-width: 100%;
+  /* max-width: 100%; */
+  max-width: 1007px;
 }
 
 .btnSection {
