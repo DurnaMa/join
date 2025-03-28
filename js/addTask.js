@@ -440,7 +440,7 @@ function variablenPostAddTask() {
   let prioLowEdit = document.getElementById('prioLowEdit');
   let popup = document.getElementById('popup');
 
-  let priority = '';
+  let priority = 'Medium';
   return { prioUrgentEdit, priority, prioMediumEdit, prioLowEdit, title, description, dueDate, category, popup };
 }
 
