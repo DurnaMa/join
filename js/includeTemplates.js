@@ -10,6 +10,7 @@
  * - `headerinitials()`: Initializes the header content.
  * - `headerInitialsMobile()`: Initializes the mobile header content.
  * - `highlightNavItem()`: Highlights the current navigation item.
+ * - `hideSubMenuOnRestrictedPages()`: Hides the sub-menu on restricted pages.
  * 
  * @async
  * @function includeHTML
@@ -31,6 +32,7 @@ async function includeHTML() {
   headerinitials();
   headerInitialsMobile();
   highlightNavItem();
+  hideSubMenuOnRestrictedPages();
 }
 
 includeHTML();
