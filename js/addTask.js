@@ -504,3 +504,19 @@ function openCategoryList() {
   document.getElementById('categoryArrowUp').classList.toggle('d-none');
   document.getElementById('categoryArrowDown').classList.toggle('d-none');
 }
+
+
+function clearForm() {
+  document.getElementById('titleInput').value = ''; 
+  document.getElementById('descriptionTextarea').value = ''; 
+  document.getElementById('date').value = ''; 
+  document.getElementById('dropdownCategory').innerText = 'Select Task Category'; 
+  
+  subTasks = [];
+  document.getElementById('subTaskList').innerHTML = '';
+
+  selectedContacts.clear();
+  document.getElementById('selectedContactsDisplay').innerHTML = '';
+
+  prioMedium();
+}
