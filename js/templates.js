@@ -718,19 +718,19 @@ function addNewContactPopup() {
         <form>
           <input
             class="name"
-            type="text"
+            type="name"
             id="newContactName"
             placeholder="Name"
           />
           <input
             class="email"
-            type="text"
+            type="email"
             id="newContactEmail"
             placeholder="Email"
           />
           <input
             class="phone"
-            type="text"
+            type="number"
             id="newContactPhone"
             placeholder="Phone"
           />
@@ -871,7 +871,7 @@ function editContactPopup() {
           />
         </form>
         <div class="popup-buttons">
-          <button class="cancel-button" onclick="deleteContact()">
+          <button class="cancel-button" onclick="deleteContact(currentSelectedContact)">
             Delete
           </button>
           <button class="create-button" onclick="updateContact()">
@@ -945,7 +945,7 @@ function mobileEditContactPopup() {
           />
         </form>
         <div class="mobile-popup-button">
-          <button class="cancel-button" onclick="deleteContact()">
+          <button class="cancel-button" onclick="deleteContact(currentSelectedContact)">
               Delete
           </button>
           <button class="create-button" onclick="updateContact()">
