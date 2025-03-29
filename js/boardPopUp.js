@@ -195,6 +195,7 @@ function addTaskPopupBtn() {
   addNewTaskBtnDiv.classList.remove("d-none");
   addNewTaskBtnDiv.innerHTML = renderAddTaskPoupBtn();
   prioMedium();
+  datelimit();
 }
 
 /**
@@ -213,6 +214,7 @@ function addTaskPopupPlusToDoBtn() {
   openTaskPopupToDoDiv.classList.remove("d-none");
   openTaskPopupToDoDiv.innerHTML = renderAddTaskPopupToDoPlus();
   prioMedium();
+  datelimit();
 }
 
 /**
@@ -232,6 +234,7 @@ function addTaskPopupPlusInProgressBtn() {
   openTaskPopupInProgressDiv.classList.remove("d-none");
   openTaskPopupInProgressDiv.innerHTML = renderAddTaskPopupInProgressPlus();
   prioMedium();
+  datelimit();
 }
 
 /**
@@ -251,6 +254,7 @@ function addTaskPopupPlusAwaitFeedbackBtn() {
   openTaskPopupAwaitFeedbackDiv.innerHTML =
     renderAddTaskPopupAwaitFeedbackPlus();
     prioMedium();
+    datelimit();
 }
 
 /**

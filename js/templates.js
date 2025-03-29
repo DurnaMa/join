@@ -1022,12 +1022,12 @@ document.addEventListener('click', function (event) {
   }
 });
 
-// document.addEventListener('DOMContentLoaded', function () {
-//   let dateInput = document.getElementById('date');
-//   function setMinDate() {
-//       let today = new Date().toISOString().split('T')[0];
-//       dateInput.setAttribute('min', today);
-//   }
-//   setMinDate();
-//   dateInput.addEventListener('focus', setMinDate);
-// });
+function datelimit() {
+  let dateInput = document.getElementById('date');
+  function setMinDate() {
+      let today = new Date().toISOString().split('T')[0];
+      dateInput.setAttribute('min', today);
+  }
+  setMinDate();
+  dateInput.addEventListener('focus', setMinDate);
+}
