@@ -301,16 +301,28 @@ function validateContactData(name, email, phone) {
   const phoneRegex = /^[0-9]+$/;
 
   if (!nameRegex.test(name)) {
-    alert("Der Name darf keine Zahlen oder Sonderzeichen enthalten!");
+    let errorNewContactName = document.getElementById("errorNewContactName")
+    errorNewContactName.innerText = "Bitte keine Zahlen, Sonderzeichen oder leere Felder!";
+    // errorNewContactName.classList.toggle("d-none");
     return false;
+  }else{
+    errorNewContactName.classList.add("d-none");
   }
   if (!emailRegex.test(email)) {
-    alert("Bitte eine gültige E-Mail-Adresse eingeben!");
+    let errorNewContactEmail = document.getElementById("errorNewContactEmail")
+    errorNewContactEmail.innerText = "Bitte eine gültige E-Mail-Adresse eingeben!";
+    // errorNewContactEmail.classList.toggle("d-none");
     return false;
+  }else{
+    errorNewContactEmail.classList.add("d-none");
   }
   if (!phoneRegex.test(phone)) {
-    alert("Die Telefonnummer darf nur Zahlen enthalten!");
+    let errorNewContactPhone = document.getElementById("errorNewContactPhone")
+    errorNewContactPhone.innerText = "Die Telefonnummer darf nur Zahlen enthalten!";
+    // errorNewContactPhone.classList.toggle("d-none");
     return false;
+  }else{
+    errorNewContactPhone.classList.add("d-none");
   }
 
   return true;

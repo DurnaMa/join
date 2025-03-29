@@ -722,18 +722,21 @@ function addNewContactPopup() {
             id="newContactName"
             placeholder="Name"
           />
+          <div id="errorNewContactName" class="nameError"></div>
           <input
             class="email"
             type="email"
             id="newContactEmail"
             placeholder="Email"
           />
+          <div id="errorNewContactEmail" class="emailError"></div>
           <input
             class="phone"
             type="number"
             id="newContactPhone"
             placeholder="Phone"
           />
+          <div id="errorNewContactPhone" class="phoneError"></div>
         </form>
         <div class="popup-buttons">
           <button class="cancel-button" onclick="closePopUp()">
