@@ -46,7 +46,7 @@ function renderAddTaskPoupBtn() {
           <hr class="hrBoardPopUp" />
           <section class="formPartRight">
             <label for="dueDate">Due Date<span class="required">*</span> </label>
-            <input type="date" id="date" />
+            <input type="date" id="date" onkeydown="return false;"/>
             <br />
             <label for="prio">Prio</label>
             <section id="prio" class="prioContent">
@@ -89,7 +89,7 @@ function renderAddTaskPoupBtn() {
             This field is required
           </p>
           <div class="btnSection">
-            <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
+            <button type="reset" class="clearBtn" onclick="clearForm()">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
             <button type="button" onclick="createTaskBtn()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>
@@ -137,7 +137,7 @@ function renderAddTaskPopupToDoPlus() {
           <hr class="hrBoardPopUp" />
           <section class="formPartRight">
             <label for="dueDate">Due Date<span class="required">*</span> </label>
-            <input type="date" id="date" />
+            <input type="date" id="date" onkeydown="return false;"/>
             <br />
             <label for="prio">Prio</label>
             <section id="prio" class="prioContent">
@@ -228,7 +228,7 @@ function renderAddTaskPopupInProgressPlus() {
           <hr class="hrBoardPopUp" />
           <section class="formPartRight">
             <label for="dueDate">Due Date<span class="required">*</span> </label>
-            <input type="date" id="date" />
+            <input type="date" id="date" onkeydown="return false;"/>
             <br />
             <label for="prio">Prio</label>
             <section id="prio" class="prioContent">
@@ -321,7 +321,7 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
           <hr class="hrBoardPopUp" />
           <section class="formPartRight">
             <label for="dueDate">Due Date<span class="required">*</span> </label>
-            <input type="date" id="date" />
+            <input type="date" id="date" onkeydown="return false;"/>
             <br />
             <label for="prio">Prio</label>
             <section id="prio" class="prioContent">
@@ -535,7 +535,7 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
       <label>Description</label>
       <textarea id="descriptionTextarea" class="task-edit-input-popup" placeholder="Enter a description">${description}</textarea>
       <label>Due Date</label>
-      <input id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date" />
+      <input id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date" onkeydown="return false;"/>
         
       <label>Priority</label>
       <div class="task-edit-prio-popup">
@@ -1011,3 +1011,23 @@ function taskCardHTML(task, totalSubtasks, completedSubtasks) {
     </div>
   `;
 }
+
+document.addEventListener('click', function (event) {
+  let contactList = document.getElementById('assignedContactsListPopUp');
+  let contactContainer = document.querySelector('.assignedContainer');
+
+  if (!contactContainer.contains(event.target) && !contactList.contains(event.target)) {
+      contactList.classList.add('hidden');
+      contactList.classList.remove('d-flex');
+  }
+});
+
+// document.addEventListener('DOMContentLoaded', function () {
+//   let dateInput = document.getElementById('date');
+//   function setMinDate() {
+//       let today = new Date().toISOString().split('T')[0];
+//       dateInput.setAttribute('min', today);
+//   }
+//   setMinDate();
+//   dateInput.addEventListener('focus', setMinDate);
+// });
