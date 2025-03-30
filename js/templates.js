@@ -535,7 +535,7 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
       <label>Description</label>
       <textarea id="descriptionTextarea" class="task-edit-input-popup" placeholder="Enter a description">${description}</textarea>
       <label>Due Date</label>
-      <input id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date" onkeydown="return false;"/>
+      <input id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date"/>
         
       <label>Priority</label>
       <div class="task-edit-prio-popup">
