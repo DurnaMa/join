@@ -492,6 +492,14 @@
   border-radius: 10px;
 }
 
+#dueDateInput{
+  background: url(/assets/icons/date-icon.png) no-repeat right 13px center;
+  background-size: 27px;
+  /* background-color: white; */
+  position: relative;
+  /* color: #d1d1d1; */
+}
+
 .task-edit-prio-popup {
   display: flex;
   justify-content: space-between;

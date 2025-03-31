@@ -185,16 +185,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .prioUrgentRed {
   background: #ff3d00 !important;
   color: white;
+  box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 .prioMediumYellow {
   background: #ffa800 !important;
   color: white;
+  box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 .prioLowGreen {
   background: #7ae229 !important;
   color: white;
+  box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 #subTask {

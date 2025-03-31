@@ -160,17 +160,38 @@ function generateSubTaskList(i) {
 //   renderSubTaskList();
 // }
 
+// function saveSubTask(index) {
+//   let subInputEdit = document.getElementById(`subInputEdit-${index}`).value.trim();
+//   if (subInputEdit === "") {
+//       alert("Das Feld darf nicht leer sein!");
+//       return;
+//   }
+//   if (subTasks[index]) {
+//       subTasks[index].description = subInputEdit;
+//   } 
+//   else {
+//       console.warn(`Subtask ${index} nicht gefunden.`);
+//   }
+//   renderSubTaskList();
+// }
+
 function saveSubTask(index) {
-  let subInputEdit = document.getElementById(`subInputEdit-${index}`).value.trim();
-  if (subInputEdit === "") {
-      alert("Das Feld darf nicht leer sein!");
-      return;
+  let subInputEdit = document.getElementById(`subInputEdit-${index}`);
+  // let subInputSpan = document.getElementById(`subEditSpan-${index}`); 
+
+  let inputValue = subInputEdit.value.trim();
+
+  if (inputValue === "") {
+    subInputEdit.placeholder = "Bitte fülle dieses Feld aus!";
+    return;
   }
+
   if (subTasks[index]) {
-      subTasks[index].description = subInputEdit;
+    subTasks[index].description = inputValue;
   } else {
-      console.warn(`Subtask ${index} nicht gefunden.`);
+    console.warn(`Subtask ${index} nicht gefunden.`);
   }
+
   renderSubTaskList();
 }
 
