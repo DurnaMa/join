@@ -424,3 +424,14 @@ input[type="checkbox"] {
   color: white;
   font-size: 21px;
 }
+
+.text-custom {
+  color: #ef4444;
+  display: block;
+  font-size: 0.875rem;
+}
+
+.error {
+  border: 2px solid red;
+}
+

@@ -31,9 +31,11 @@
               <span class="required">*</span>
             </label>
             <input id="titleInput" type="text" placeholder="Enter a title" />
+            <span id="titleError" class="text-custom"></span>
             <br />
             <label for="description">Description</label>
             <textarea id="descriptionTextarea" rows="5" placeholder="Enter a Description"></textarea>
+            <span id="descriptionTextareaError" class="text-custom"></span>
             <br />
             <label for="contactSelection">Assigned to</label>
             <div onclick="contactList()" class="assignedContainer">
@@ -43,6 +45,7 @@
             </div>
             <div id="assignedContactsList" class="hidden"></div>
             <div id="selectedContactsDisplay" class="selectedContactsContainer"></div>
+            <span id="assignedContactsListError" class="text-custom"></span>
           </section>
           <hr />
           <section class="formPartRight">
@@ -51,6 +54,7 @@
               <span class="required">*</span>
             </label>
             <input type="date" id="date" onkeydown="return false;"/>
+            <span id="dateError" class="text-custom"></span>
             <br />
             <label for="prio">Prio</label>
             <section id="prio" class="prioContent">
@@ -78,6 +82,7 @@
               <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
               <div id="categoryList" class="hidden"></div>
             </div>
+            <span id="categoryError" class="text-custom"></span>
 
             <br />
             <label for="subtask">Subtasks</label>

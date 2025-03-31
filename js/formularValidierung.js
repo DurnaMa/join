@@ -1,28 +1,47 @@
 function validateForm() {
-  const title = document.getElementById('titleInput').value.trim();
-  const dueDate = document.getElementById('date').value.trim();
-  const category = document.getElementById('dropdownCategory').textContent.trim();
-  
+  const titleInput = document.getElementById('titleInput');
+  const dateInput = document.getElementById('date');
+  const categoryDropdown = document.getElementById('dropdownCategory');
+  const descriptionTextarea = document.getElementById('descriptionTextarea');
+  const assignedContactsList = document.getElementById('assignedContactsList');
+
+  const titleError = document.getElementById('titleError');
+  const dateError = document.getElementById('dateError');
+  const categoryError = document.getElementById('categoryError');
+  const descriptionTextareaError = document.getElementById('descriptionTextareaError');
+  const assignedContactsListError = document.getElementById('assignedContactsListError');
+
   let isValid = true;
-  let errorMessage = "";
 
-  if (!title) {
+  titleError.textContent = '';
+  dateError.textContent = '';
+  categoryError.textContent = '';
+  descriptionTextareaError.textContent = '';
+  assignedContactsListError.textContent = '';
+
+  if (!titleInput.value.trim()) {
     isValid = false;
-    errorMessage += "Title is required.\n";
+    titleError.textContent = 'Title is required.';
   }
 
-  if (!dueDate) {
+  if (!dateInput.value.trim()) {
     isValid = false;
-    errorMessage += "Due Date is required.\n";
+    dateError.textContent = 'Due Date is required.';
+  } 
+
+  if (!descriptionTextarea.value.trim()) {
+    isValid = false;
+    descriptionTextareaError.textContent = 'Description is required.';
   }
 
-  if (category === "Select Task Category" || !category) {
+  if (categoryDropdown.textContent.trim() === 'Select Task Category' || !categoryDropdown.textContent.trim()) {
     isValid = false;
-    errorMessage += "Category is required.\n";
+    categoryError.textContent = 'Category is required.';
   }
 
-  if (!isValid) {
-    alert(errorMessage);
+  if (assignedContactsList.textContent.trim() === 'Assigned Contacts' || !assignedContactsList.textContent.trim()) {
+    isValid = false;
+    assignedContactsListError.textContent = 'Category is required.';
   }
 
   return isValid;
