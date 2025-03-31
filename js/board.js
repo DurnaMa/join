@@ -735,3 +735,28 @@ function showAddTaskPopup() {
       );
     }
 }
+
+/**
+ * Hides the contact list popup when clicking outside of it.
+ * 
+ * This function checks if the click event occurred outside the contact list popup 
+ * and its container. If so, it hides the contact list by adding the `hidden` class 
+ * and removing the `d-flex` class. If the required elements do not exist, the function 
+ * exits early.
+ * 
+ * @function hideContactList
+ * @param {Event} event - The click event that triggers the function.
+ */
+function hideContactList(event) {
+  let contactList = document.getElementById('assignedContactsListPopUp');
+  let contactContainer = document.querySelector('.assignedContainer');
+
+  if (!contactList || !contactContainer) return; // Überprüfung, ob die Elemente existieren
+
+  if (!contactContainer.contains(event.target) && !contactList.contains(event.target)) {
+      contactList.classList.add('hidden');
+      contactList.classList.remove('d-flex');
+  }
+}
+
+document.addEventListener('click', hideContactList);

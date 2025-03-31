@@ -1,14 +1,30 @@
+/**
+ * Validates the form fields and displays error messages for invalid inputs.
+ * 
+ * This function checks if the required form fields are filled in correctly. If a field is empty,
+ * it adds an error message and applies a visual error indicator. If all fields are valid, 
+ * the function returns `true`; otherwise, it returns `false`.
+ * 
+ * Validated fields:
+ * - `#titleInput`: Task title (required)
+ * - `#date`: Due date (required)
+ * - `.categoryContainer`: Task category dropdown (required, must not be "Select Task Category")
+ * - `#descriptionTextarea`: Task description (required)
+ * 
+ * @function validateForm
+ * @returns {boolean} `true` if all fields are valid, otherwise `false`.
+ */
 function validateForm() {
   const titleInput = document.getElementById('titleInput');
   const dateInput = document.getElementById('date');
   const categoryDropdown = document.querySelector('.categoryContainer');
   const descriptionTextarea = document.getElementById('descriptionTextarea');
-  const assignedContactsList = document.querySelector('.assignedContainer');
+
   const titleError = document.getElementById('titleError');
   const dateError = document.getElementById('dateError');
   const categoryError = document.getElementById('categoryError');
   const descriptionTextareaError = document.getElementById('descriptionTextareaError');
-  const assignedContactsListError = document.getElementById('assignedContactsListError');
+
 
   let isValid = true;
 
@@ -16,7 +32,7 @@ function validateForm() {
   dateError.textContent = '';
   categoryError.textContent = '';
   descriptionTextareaError.textContent = '';
-  assignedContactsListError.textContent = '';
+
 
   if (!titleInput.value.trim()) {
     titleInput.classList.add('error');
@@ -48,17 +64,6 @@ function validateForm() {
     isValid = false;
   } else {
     categoryDropdown.classList.remove('error');
-  }
-
-  if (
-    assignedContactsList.textContent.trim() === 'Select contacts to assign' ||
-    !assignedContactsList.textContent.trim()
-  ) {
-    assignedContactsList.classList.add('error');
-    assignedContactsListError.textContent = 'Assigned Contacts are required.';
-    isValid = false;
-  } else {
-    assignedContactsList.classList.remove('error');
   }
 
   return isValid;

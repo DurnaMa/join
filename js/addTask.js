@@ -3,6 +3,7 @@ let selectedContacts = new Set();
 
 async function initAddTask() {
   await loadDataUsers();
+  datelimit();
 }
 
 let subTask = document.getElementById('subTask');
@@ -557,28 +558,23 @@ function clearForm() {
   prioMedium();
 }
 
-document.addEventListener('click', function (event) {
+document.addEventListener('click', function (event) { 
   let contactList = document.getElementById('assignedContactsList');
   let categoryList = document.getElementById('categoryList');
   let contactContainer = document.querySelector('.assignedContainer');
   let categoryContainer = document.querySelector('.categoryContainer');
 
-  if (!contactContainer.contains(event.target) && !contactList.contains(event.target)) {
-      contactList.classList.add('hidden');
-      contactList.classList.remove('d-flex');
+  if (contactContainer && contactList) {
+      if (!contactContainer.contains(event.target) && !contactList.contains(event.target)) {
+          contactList.classList.add('hidden');
+          contactList.classList.remove('d-flex');
+      }
   }
-  if (!categoryContainer.contains(event.target) && !categoryList.contains(event.target)) {
-      categoryList.classList.add('hidden');
-      categoryList.classList.remove('d-flex');
-  }
-});
 
-document.addEventListener('DOMContentLoaded', function () {
-  let dateInput = document.getElementById('date');
-  function setMinDate() {
-      let today = new Date().toISOString().split('T')[0];
-      dateInput.setAttribute('min', today);
+  if (categoryContainer && categoryList) {
+      if (!categoryContainer.contains(event.target) && !categoryList.contains(event.target)) {
+          categoryList.classList.add('hidden');
+          categoryList.classList.remove('d-flex');
+      }
   }
-  setMinDate();
-  dateInput.addEventListener('focus', setMinDate);
 });

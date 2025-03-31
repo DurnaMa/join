@@ -174,7 +174,7 @@ async function updateVariables(taskId) {
   let existingTask = taskRef || {};
   let updatedTitle = document.getElementById("titleInput").value.trim();
   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
-  let updatedDueDate = document.getElementById("dueDateInput").value;
+  let updatedDueDate = document.getElementById("date").value;
   let updatedPriority = window.currentSelectedPriority || existingTask.priority || "";
   return { existingTask, updatedTitle, updatedDueDate, updatedDescription, updatedPriority };
 }
@@ -391,22 +391,4 @@ function contactListPopUp() {
     updateSelectedContactsDisplay();
   }
   openclassList();
-}
-
-function datelimit() {
-  let editDateInput = document.getElementById('dueDateInput');
-  
-  function setMinDate() {
-      if (editDateInput) {
-          let today = new Date().toISOString().split('T')[0];
-          editDateInput.setAttribute('min', today);
-      } else {
-          console.error("Element mit ID 'dueDateInput' nicht gefunden.");
-      }
-  }
-  
-  setMinDate();
-  if (editDateInput) {
-      editDateInput.addEventListener('focus', setMinDate);
-  }
 }

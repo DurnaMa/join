@@ -419,3 +419,21 @@ function hideSubMenuOnRestrictedPages() {
     if (subMenuMobile) subMenuMobile.style.display = 'none';
   }
 }
+
+function datelimit() {
+  let editDateInput = document.getElementById('date');
+  
+  function setMinDate() {
+      if (editDateInput) {
+          let today = new Date().toISOString().split('T')[0];
+          editDateInput.setAttribute('min', today);
+      } else {
+          console.error("Element mit ID 'dueDateInput' nicht gefunden.");
+      }
+  }
+  
+  setMinDate();
+  if (editDateInput) {
+      editDateInput.addEventListener('focus', setMinDate);
+  }
+}

@@ -535,7 +535,7 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
       <label>Description</label>
       <textarea id="descriptionTextarea" class="task-edit-input-popup" placeholder="Enter a description">${description}</textarea>
       <label>Due Date</label>
-      <input onclick="datelimit()" onkeydown="return false;" id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date"/>
+      <input onclick="datelimit()" onkeydown="return false;" id="date" value="${dueDate}" class="task-edit-input-popup" type="date"/>
         
       <label>Priority</label>
       <div class="task-edit-prio-popup">
@@ -1014,13 +1014,3 @@ function taskCardHTML(task, totalSubtasks, completedSubtasks) {
     </div>
   `;
 }
-
-document.addEventListener('click', function (event) {
-  let contactList = document.getElementById('assignedContactsListPopUp');
-  let contactContainer = document.querySelector('.assignedContainer');
-
-  if (!contactContainer.contains(event.target) && !contactList.contains(event.target)) {
-      contactList.classList.add('hidden');
-      contactList.classList.remove('d-flex');
-  }
-});
