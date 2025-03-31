@@ -205,10 +205,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 #subTaskList {
-  position: fixed;
-  width: inherit;
-  top: 695px;
+  /* position: fixed; */
+  /* width: inherit; */
+  /* top: 695px; */
   background-color: white;
+  border-radius: 10px;
+  overflow-y: auto;
+  max-height: 100px;
 }
 
 .taskFormButtons {
@@ -217,7 +220,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   justify-content: space-between;
   align-items: flex-end;
   gap: 4px;
-  max-width: 100%;
+  /* max-width: 100%; */
+  max-width: 1007px;
 }
 
 .btnSection {
@@ -282,11 +286,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   align-items: center;
   padding: 8px;
   border-radius: 10px;
-  position: relative;
+  /* position: relative; */
 }
 
 .subTask:hover {
-  background-color: white;
+  background-color: #eeeeee;
 }
 
 .subTask.editing {
@@ -420,3 +424,14 @@ input[type="checkbox"] {
   color: white;
   font-size: 21px;
 }
+
+.text-custom {
+  color: #ef4444;
+  display: block;
+  font-size: 0.875rem;
+}
+
+.error {
+  border: 2px solid red;
+}
+

@@ -148,17 +148,32 @@ function generateSubTaskList(i) {
  * description. If the subtask does not exist, a warning is logged to the console.
  * After updating, the subtask list is re-rendered.
  */
+// function saveSubTask(index) {
+//   let subInputEdit = document.getElementById(`subInputEdit-${index}`).value.trim();
+//   // console.log("Vorher:", subTasks);
+//   if (subTasks[index]) {
+//     subTasks[index].description = subInputEdit;
+//   } else {
+//     console.warn(`Subtask mit Index ${index} nicht gefunden.`);
+//   }
+//   // console.log("Nachher:", subTasks);
+//   renderSubTaskList();
+// }
+
 function saveSubTask(index) {
   let subInputEdit = document.getElementById(`subInputEdit-${index}`).value.trim();
-  // console.log("Vorher:", subTasks);
-  if (subTasks[index]) {
-    subTasks[index].description = subInputEdit;
-  } else {
-    console.warn(`Subtask mit Index ${index} nicht gefunden.`);
+  if (subInputEdit === "") {
+      alert("Das Feld darf nicht leer sein!");
+      return;
   }
-  // console.log("Nachher:", subTasks);
+  if (subTasks[index]) {
+      subTasks[index].description = subInputEdit;
+  } else {
+      console.warn(`Subtask ${index} nicht gefunden.`);
+  }
   renderSubTaskList();
 }
+
 
 function deleteSubTask(index) {
   // console.log("Vorher:", subTasks);
@@ -440,7 +455,7 @@ function variablenPostAddTask() {
   let prioLowEdit = document.getElementById('prioLowEdit');
   let popup = document.getElementById('popup');
 
-  let priority = '';
+  let priority = 'Medium';
   return { prioUrgentEdit, priority, prioMediumEdit, prioLowEdit, title, description, dueDate, category, popup };
 }
 
@@ -504,3 +519,45 @@ function openCategoryList() {
   document.getElementById('categoryArrowUp').classList.toggle('d-none');
   document.getElementById('categoryArrowDown').classList.toggle('d-none');
 }
+
+
+function clearForm() {
+  document.getElementById('titleInput').value = ''; 
+  document.getElementById('descriptionTextarea').value = ''; 
+  document.getElementById('date').value = ''; 
+  document.getElementById('dropdownCategory').innerText = 'Select Task Category'; 
+  
+  subTasks = [];
+  document.getElementById('subTaskList').innerHTML = '';
+
+  selectedContacts.clear();
+  document.getElementById('selectedContactsDisplay').innerHTML = '';
+
+  prioMedium();
+}
+
+document.addEventListener('click', function (event) {
+  let contactList = document.getElementById('assignedContactsList');
+  let categoryList = document.getElementById('categoryList');
+  let contactContainer = document.querySelector('.assignedContainer');
+  let categoryContainer = document.querySelector('.categoryContainer');
+
+  if (!contactContainer.contains(event.target) && !contactList.contains(event.target)) {
+      contactList.classList.add('hidden');
+      contactList.classList.remove('d-flex');
+  }
+  if (!categoryContainer.contains(event.target) && !categoryList.contains(event.target)) {
+      categoryList.classList.add('hidden');
+      categoryList.classList.remove('d-flex');
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  let dateInput = document.getElementById('date');
+  function setMinDate() {
+      let today = new Date().toISOString().split('T')[0];
+      dateInput.setAttribute('min', today);
+  }
+  setMinDate();
+  dateInput.addEventListener('focus', setMinDate);
+});

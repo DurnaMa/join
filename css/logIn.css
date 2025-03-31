@@ -391,3 +391,13 @@ input:focus {
     font-size: 12px;
   }
 }
+
+@media screen and (max-height: 667px){
+  .signUpContainer{
+    padding: 513px 0px 0px 0px;
+  }
+
+  .logInContainer{
+    zoom: 74%;
+  }
+}

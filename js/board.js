@@ -201,15 +201,47 @@ function taskColemTitel(task) {
  * - If `task.users` is a string, it is assumed to be the name of a user, and the function will attempt to find the corresponding contact in the `contacts` array.
  * - If no matching contact is found for a string user, a default color of `#000` (black) is used.
  */
+// function userColor(task, usersContainer) {
+//   if (Array.isArray(task.users)) {
+//     task.users.forEach((user) => {
+//       let userDiv = document.createElement("div");
+//       userDiv.classList.add("tasks-user");
+//       userDiv.style.backgroundColor = user.color;
+//       userDiv.textContent = user.initials;
+//       usersContainer.appendChild(userDiv);
+//     });
+//   } else if (typeof task.users === "string") {
+//     let userDiv = document.createElement("div");
+//     userDiv.classList.add("tasks-user");
+//     const contact = contacts.find((c) => c.name === task.users);
+//     userDiv.style.backgroundColor = contact ? contact.color : "#000";
+//     userDiv.textContent = task.users;
+//     usersContainer.appendChild(userDiv);
+//   }
+// }
+
 function userColor(task, usersContainer) {
+  usersContainer.innerHTML = "";
+
   if (Array.isArray(task.users)) {
-    task.users.forEach((user) => {
+    let maxUsersToShow = 4;
+    let totalUsers = task.users.length;
+
+    task.users.slice(0, maxUsersToShow).forEach((user) => {
       let userDiv = document.createElement("div");
       userDiv.classList.add("tasks-user");
       userDiv.style.backgroundColor = user.color;
       userDiv.textContent = user.initials;
       usersContainer.appendChild(userDiv);
     });
+
+    if (totalUsers > maxUsersToShow) {
+      let extraUsersDiv = document.createElement("div");
+      extraUsersDiv.classList.add("tasks-user", "extra-users");
+      //extraUsersDiv.style.backgroundColor = "#888"; 
+      extraUsersDiv.textContent = `+${totalUsers - maxUsersToShow}`;
+      usersContainer.appendChild(extraUsersDiv);
+    }
   } else if (typeof task.users === "string") {
     let userDiv = document.createElement("div");
     userDiv.classList.add("tasks-user");
@@ -219,6 +251,7 @@ function userColor(task, usersContainer) {
     usersContainer.appendChild(userDiv);
   }
 }
+
 
 function updateTaskStatusInFirebase(taskId, newColumn) {
   let task = tasks.find((t) => t.id === taskId);

@@ -120,8 +120,7 @@ input:focus {
 }
 
 .cancel-button:hover img {
-  filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg)
-    brightness(100%) contrast(100%);
+  filter: invert(50%) sepia(100%) saturate(500%) hue-rotate(180deg) brightness(100%) contrast(100%);
 }
 
 .create-button {
@@ -327,7 +326,7 @@ input:focus {
   }
 }
 
-@media screen and (max-width: 940px){
+@media screen and (max-width: 940px) {
   .add-edit-popup-contact-div {
     width: 700px;
     height: 500px;
@@ -335,7 +334,7 @@ input:focus {
 
   .popup-left h1 {
     font-size: 40px;
-}
+  }
 
   .popup-left img {
     width: 45.6px;
@@ -381,8 +380,32 @@ input:focus {
   }
 }
 
+@media screen and (max-width: 530px){
+  #mobileToggleOptions{
+    right: 16px;
+  }
+}
+
+
 @media screen and (max-width: 470px) {
   .mobile-add-edit-popup-contact-div {
     width: 90%;
+  }
+}
+
+@media screen and (max-height: 667px) {
+  .mobile-add-edit-popup-contact-div {
+    width: 90%;
+    zoom: 70%;
+  }
+
+  .mobileContactContainer {
+    height: 100%;
+    width: 100%;
+    zoom: 89%;
+  }
+
+  .close-mobile-contact-area{
+    top: 17%;
   }
 }

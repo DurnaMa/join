@@ -1,40 +1,39 @@
-const BASE_URL =
-  "https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = 'https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.app/';
 
 let contacts = [];
 let tasks = [];
 
 const colorPalette = [
-  "#E63946",
-  "#F4A261",
-  "#2A9D8F",
-  "#264653",
-  "#D62828",
-  "#F77F00",
-  "#3D348B",
-  "#E76F51",
-  "#8E44AD",
-  "#16A085",
-  "#D7263D",
-  "#1B998B",
-  "#ECA400",
-  "#3A86FF",
-  "#8338EC",
-  "#06D6A0",
-  "#EF476F",
-  "#118AB2",
-  "#073B4C",
-  "#F25C54",
-  "#43AA8B",
-  "#FF5A5F",
-  "#5E548E",
-  "#9B5DE5",
-  "#00BBF9",
-  "#FF006E",
-  "#8AC926",
-  "#6A0572",
-  "#A60303",
-  "#FF9F1C",
+  '#E63946',
+  '#F4A261',
+  '#2A9D8F',
+  '#264653',
+  '#D62828',
+  '#F77F00',
+  '#3D348B',
+  '#E76F51',
+  '#8E44AD',
+  '#16A085',
+  '#D7263D',
+  '#1B998B',
+  '#ECA400',
+  '#3A86FF',
+  '#8338EC',
+  '#06D6A0',
+  '#EF476F',
+  '#118AB2',
+  '#073B4C',
+  '#F25C54',
+  '#43AA8B',
+  '#FF5A5F',
+  '#5E548E',
+  '#9B5DE5',
+  '#00BBF9',
+  '#FF006E',
+  '#8AC926',
+  '#6A0572',
+  '#A60303',
+  '#FF9F1C',
 ];
 
 async function loadDataUsers() {
@@ -50,8 +49,8 @@ async function loadDataUsers() {
  * @returns {Promise<Object>} A promise that resolves to the JSON-parsed response from the Firebase database.
  * @throws {Error} Throws an error if the fetch request fails or the response cannot be parsed as JSON.
  */
-async function getDataFromFirebase(path = "") {
-  let response = await fetch(BASE_URL + path + ".json");
+async function getDataFromFirebase(path = '') {
+  let response = await fetch(BASE_URL + path + '.json');
   return (responseToJson = await response.json());
 }
 
@@ -64,11 +63,11 @@ async function getDataFromFirebase(path = "") {
  * @param {Object} [data={}] - The data object to be sent to the Firebase database.
  * @returns {Promise<void>} A promise that resolves when the data has been successfully sent.
  */
-async function postDataToFirebase(path = "", data = {}) {
-  await fetch(BASE_URL + path + ".json", {
-    method: "POST",
+async function postDataToFirebase(path = '', data = {}) {
+  await fetch(BASE_URL + path + '.json', {
+    method: 'POST',
     header: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   });
@@ -81,18 +80,18 @@ async function postDataToFirebase(path = "", data = {}) {
  * @param {Object} [data={}] - The data object to be sent and stored in the database.
  * @returns {Promise<void>} A promise that resolves when the request is complete.
  */
-async function postTaskDataToFirebase(path = "", data = {}) {
-  await fetch(BASE_URL + path + ".json", {
-    method: "POST",
+async function postTaskDataToFirebase(path = '', data = {}) {
+  await fetch(BASE_URL + path + '.json', {
+    method: 'POST',
     header: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   });
 }
 
 function redirectToBoardPage() {
-  window.location.href = "/pages/board.html";
+  window.location.href = '/pages/board.html';
 }
 
 /**
@@ -103,9 +102,9 @@ function redirectToBoardPage() {
  * @param {string} [path=""] - The relative path in the Firebase database to delete data from. Defaults to an empty string.
  * @returns {Promise<void>} A promise that resolves when the data is successfully deleted.
  */
-async function deleteDataFromFirebase(path = "") {
-  await fetch(BASE_URL + path + ".json", {
-    method: "DELETE",
+async function deleteDataFromFirebase(path = '') {
+  await fetch(BASE_URL + path + '.json', {
+    method: 'DELETE',
   });
 }
 
@@ -118,11 +117,11 @@ async function deleteDataFromFirebase(path = "") {
  * @param {Object} [data={}] - The data to be updated at the specified path.
  * @returns {Promise<void>} A promise that resolves when the request is complete.
  */
-async function patchDataToFirebase(path = "", data = {}) {
-  await fetch(BASE_URL + path + ".json", {
-    method: "PATCH",
+async function patchDataToFirebase(path = '', data = {}) {
+  await fetch(BASE_URL + path + '.json', {
+    method: 'PATCH',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   });
@@ -138,7 +137,7 @@ async function patchDataToFirebase(path = "", data = {}) {
  */
 async function loadContacts() {
   contacts = [];
-  let contactsData = await getDataFromFirebase("contacts");
+  let contactsData = await getDataFromFirebase('contacts');
 
   for (const key in contactsData) {
     const SINGLE_CONTACT = contactsData[key];
@@ -155,10 +154,10 @@ async function loadContacts() {
 }
 
 /**
- * Asynchronously loads tasks from a Firebase database, processes the data, 
- * and updates the global `tasks` array with structured task objects. 
- * Each task includes details such as title, description, due date, priority, 
- * subtasks, status, category, and assigned users. 
+ * Asynchronously loads tasks from a Firebase database, processes the data,
+ * and updates the global `tasks` array with structured task objects.
+ * Each task includes details such as title, description, due date, priority,
+ * subtasks, status, category, and assigned users.
  * After processing, the tasks are rendered on the UI.
  *
  * @async
@@ -167,7 +166,7 @@ async function loadContacts() {
  */
 async function loadTasks() {
   tasks = [];
-  let tasksData = await getDataFromFirebase("tasks");
+  let tasksData = await getDataFromFirebase('tasks');
   for (const key in tasksData) {
     const SINGLE_TASK = tasksData[key];
     let task = {
@@ -187,12 +186,12 @@ async function loadTasks() {
       category: SINGLE_TASK.category,
       users: SINGLE_TASK.users
         ? SINGLE_TASK.users.map((user) => {
-            let userName = typeof user === "string" ? user : user.name;
+            let userName = typeof user === 'string' ? user : user.name;
             let contact = contacts.find((c) => c.name === userName);
             return {
               name: userName,
               initials: generateInitials(userName),
-              color: contact ? contact.color : "#FF0000",
+              color: contact ? contact.color : '#FF0000',
             };
           })
         : [],
@@ -206,7 +205,7 @@ async function loadTasks() {
  * Loads summarized task information from a Firebase database and updates the user interface.
  *
  * This function fetches data from Firebase, processes task information, and updates various
- * HTML elements with the calculated values, such as the total number of tasks, status counters, 
+ * HTML elements with the calculated values, such as the total number of tasks, status counters,
  * and the next due date.
  *
  * @async
@@ -236,32 +235,36 @@ async function loadTasks() {
  */
 
 async function loadSummaryData() {
-  let tasksData = await getDataFromFirebase("tasks");
+  let tasksData = await getDataFromFirebase('tasks');
 
   if (!tasksData) {
-    console.error("Keine Daten gefunden!");
+    console.error('Keine Daten gefunden!');
     return;
   }
 
   let tasks = Object.values(tasksData);
   let totalTasks = tasks.length;
-  let toDoCount = tasks.filter((task) => task.columnTitles === "To Do" || task.columnTitles === "todo").length;
-  let inProgressCount = tasks.filter((task) => task.columnTitles === "In Progress" || task.columnTitles === "inprogress").length;
-  let awaitFeedbackCount = tasks.filter((task) => task.columnTitles === "Await Feedback" || task.columnTitles === "awaitfeedback").length;
-  let doneCount = tasks.filter((task) => task.columnTitles === "Done" || task.columnTitles === "done").length;
-  let urgentTasks = tasks.filter((task) => task.priority === "Urgent");
+  let toDoCount = tasks.filter((task) => task.columnTitles === 'To Do' || task.columnTitles === 'todo').length;
+  let inProgressCount = tasks.filter(
+    (task) => task.columnTitles === 'In Progress' || task.columnTitles === 'inprogress'
+  ).length;
+  let awaitFeedbackCount = tasks.filter(
+    (task) => task.columnTitles === 'Await Feedback' || task.columnTitles === 'awaitfeedback'
+  ).length;
+  let doneCount = tasks.filter((task) => task.columnTitles === 'Done' || task.columnTitles === 'done').length;
+  let urgentTasks = tasks.filter((task) => task.priority === 'Urgent');
   let urgentCount = urgentTasks.length;
   let upcomingDeadline = urgentTasks.map((task) => new Date(task.dueDate)).sort((a, b) => a - b)[0];
 
-  document.getElementById("totalTaskCount").innerText = totalTasks;
-  document.getElementById("toDoCount").innerText = toDoCount;
-  document.getElementById("inProgressCount").innerText = inProgressCount;
-  document.getElementById("awaitFeedbackCount").innerText = awaitFeedbackCount;
-  document.getElementById("doneCount").innerText = doneCount;
-  document.getElementById("urgentCount").innerText = urgentCount;
+  document.getElementById('totalTaskCount').innerText = totalTasks;
+  document.getElementById('toDoCount').innerText = toDoCount;
+  document.getElementById('inProgressCount').innerText = inProgressCount;
+  document.getElementById('awaitFeedbackCount').innerText = awaitFeedbackCount;
+  document.getElementById('doneCount').innerText = doneCount;
+  document.getElementById('urgentCount').innerText = urgentCount;
 
   if (upcomingDeadline) {
-    document.getElementById("date").innerText = upcomingDeadline.toDateString();
+    document.getElementById('date').innerText = upcomingDeadline.toDateString();
   }
   dailyTime();
   fullNameSummary();
@@ -276,7 +279,7 @@ function goBack() {
   if (referrer) {
     window.location.href = referrer;
   } else {
-    window.location.href = "index.html";
+    window.location.href = 'index.html';
   }
 }
 
@@ -291,10 +294,10 @@ function goBack() {
  * @returns {Promise<void>} A promise that resolves when the data is successfully sent.
  */
 async function putDataToFirebase(path, data = {}, key) {
-  await fetch(BASE_URL + path + key + ".json", {
-    method: "PUT",
+  await fetch(BASE_URL + path + key + '.json', {
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   });
@@ -306,12 +309,12 @@ async function putDataToFirebase(path, data = {}, key) {
  * If the input field's type is "text", it changes it back to "password" to hide the password.
  */
 function showLoginPassword() {
-  let change = document.getElementById("loginPassword");
+  let change = document.getElementById('loginPassword');
 
-  if (change.type === "password") {
-    change.type = "text";
+  if (change.type === 'password') {
+    change.type = 'text';
   } else {
-    change.type = "password";
+    change.type = 'password';
   }
 }
 
@@ -321,12 +324,12 @@ function showLoginPassword() {
  * If the input type is "text", it changes it back to "password" to hide the password.
  */
 function showSignupPassword() {
-  let change = document.getElementById("signupPassword");
+  let change = document.getElementById('signupPassword');
 
-  if (change.type === "password") {
-    change.type = "text";
+  if (change.type === 'password') {
+    change.type = 'text';
   } else {
-    change.type = "password";
+    change.type = 'password';
   }
 }
 
@@ -336,12 +339,12 @@ function showSignupPassword() {
  * If the input field's type is "text", it changes it back to "password" to hide the password.
  */
 function showConfirmPassword() {
-  let change = document.getElementById("confirmPassword");
+  let change = document.getElementById('confirmPassword');
 
-  if (change.type === "password") {
-    change.type = "text";
+  if (change.type === 'password') {
+    change.type = 'text';
   } else {
-    change.type = "password";
+    change.type = 'password';
   }
 }
 
@@ -360,13 +363,11 @@ function showConfirmPassword() {
 function highlightNavItem() {
   const currentPage = getCurrentPage();
 
-  const navItems = Array.from(
-    document.querySelectorAll(".sideBarList a, .policyAndNotice a, .mobileSideBar a")
-  );
+  const navItems = Array.from(document.querySelectorAll('.sideBarList a, .policyAndNotice a, .mobileSideBar a'));
 
-  navItems.forEach(item => {
-    const isActive = item.getAttribute("data-page") === currentPage;
-    item.classList.toggle("active", isActive);
+  navItems.forEach((item) => {
+    const isActive = item.getAttribute('data-page') === currentPage;
+    item.classList.toggle('active', isActive);
   });
 }
 
@@ -377,17 +378,44 @@ function highlightNavItem() {
  */
 function getCurrentPage() {
   const path = window.location.pathname;
-  const fileName = path.substring(path.lastIndexOf("/") + 1);
-  return fileName.replace(".html", "");
+  const fileName = path.substring(path.lastIndexOf('/') + 1);
+  return fileName.replace('.html', '');
 }
 
-document.addEventListener("DOMContentLoaded", highlightNavItem);
+document.addEventListener('DOMContentLoaded', highlightNavItem);
 
 /**
  * Toggles the visibility of the menu elements by adding or removing the "hidden" class.
  * This function targets two elements with IDs "subMenu" and "subMenuMobile".
  */
 function toggleMenu() {
-  document.getElementById("subMenu").classList.toggle("hidden");
-  document.getElementById("subMenuMobile").classList.toggle("hidden");
+  document.getElementById('subMenu').classList.toggle('hidden');
+  document.getElementById('subMenuMobile').classList.toggle('hidden');
+}
+
+/**
+ * Hides the sub-menu on specific restricted pages.
+ * 
+ * This function checks the current page's pathname and hides the sub-menu elements 
+ * if the user is on a restricted page. It targets both the desktop and mobile sub-menu elements.
+ * 
+ * Restricted pages:
+ * - `/pages/legale-notice-Nouser.html`
+ * - `/pages/data-protection-Nouser.html`
+ * 
+ * Affected elements:
+ * - `#subMenu` (Desktop sub-menu)
+ * - `#subMenuMobile` (Mobile sub-menu)
+ */
+function hideSubMenuOnRestrictedPages() {
+  const restrictedPages = ['/pages/legale-notice-Nouser.html', '/pages/data-protection-Nouser.html'];
+  const currentPath = window.location.pathname;
+
+  if (restrictedPages.includes(currentPath)) {
+    const subMenu = document.getElementById('subMenu');
+    const subMenuMobile = document.getElementById('subMenuMobile');
+
+    if (subMenu) subMenu.style.display = 'none';
+    if (subMenuMobile) subMenuMobile.style.display = 'none';
+  }
 }

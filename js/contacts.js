@@ -263,33 +263,69 @@ function closePopUp() {
  * @returns {Promise<void>} A promise that resolves when the contact is saved and the UI is updated.
  * @throws Will log an error to the console if there is an issue with saving the contact.
  */
-async function saveContact() {
-  let name = document.getElementById("newContactName").value;
-  let email = document.getElementById("newContactEmail").value;
-  let phone = document.getElementById("newContactPhone").value;
-  if (name && email && phone) {
-    let data = {
-      name: name,
-      email: email,
-      phone: phone,
-      color: getRandomColorFromArray(),
-    };
 
-    try {
-      await postDataToFirebase("/contacts", data);
-      name = "";
-      email = "";
-      phone = "";
-      // console.log("addNewcontact erfolgreich");
-    } catch (error) {
-      console.error("Fehler bei der addNewcontact:", error);
-    }
+async function saveContact() {
+  let name = document.getElementById("newContactName").value.trim();
+  let email = document.getElementById("newContactEmail").value.trim();
+  let phone = document.getElementById("newContactPhone").value.trim();
+
+  if (!validateContactData(name, email, phone)) {
+    return;
+  }
+
+  let data = {
+    name: name,
+    email: email,
+    phone: phone,
+    color: getRandomColorFromArray(),
+  };
+
+  try {
+    await postDataToFirebase("/contacts", data);
+    document.getElementById("newContactName").value = "";
+    document.getElementById("newContactEmail").value = "";
+    document.getElementById("newContactPhone").value = "";
+  } catch (error) {
+    console.error("Fehler beim Hinzufügen des Kontakts:", error);
   }
 
   await loadDataUsers();
   closePopUp();
   document.getElementById("scrollbar").innerHTML = "";
   renderContactsList();
+}
+
+function validateContactData(name, email, phone) {
+  const nameRegex = /^[A-Za-zÄÖÜäöüß\s]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[0-9]+$/;
+
+  if (!nameRegex.test(name)) {
+    let errorNewContactName = document.getElementById("errorNewContactName")
+    errorNewContactName.innerText = "Bitte keine Zahlen, Sonderzeichen oder leere Felder!";
+    // errorNewContactName.classList.toggle("d-none");
+    return false;
+  }else{
+    errorNewContactName.classList.add("d-none");
+  }
+  if (!emailRegex.test(email)) {
+    let errorNewContactEmail = document.getElementById("errorNewContactEmail")
+    errorNewContactEmail.innerText = "Bitte eine gültige E-Mail-Adresse eingeben!";
+    // errorNewContactEmail.classList.toggle("d-none");
+    return false;
+  }else{
+    errorNewContactEmail.classList.add("d-none");
+  }
+  if (!phoneRegex.test(phone)) {
+    let errorNewContactPhone = document.getElementById("errorNewContactPhone")
+    errorNewContactPhone.innerText = "Die Telefonnummer darf nur Zahlen enthalten!";
+    // errorNewContactPhone.classList.toggle("d-none");
+    return false;
+  }else{
+    errorNewContactPhone.classList.add("d-none");
+  }
+
+  return true;
 }
 
 /**
@@ -302,10 +338,13 @@ async function saveContact() {
  */
 async function updateContact() {
   let key = contacts[currentSelectedContact].id;
-  // console.log(key);
-  let name = document.getElementById("editContactName").value;
-  let email = document.getElementById("editContactEmail").value;
-  let phone = document.getElementById("editContactPhone").value;
+  let name = document.getElementById("editContactName").value.trim();
+  let email = document.getElementById("editContactEmail").value.trim();
+  let phone = document.getElementById("editContactPhone").value.trim();
+
+  if (!validateContactData(name, email, phone)) {
+    return;
+  }
 
   let data = {
     name: name,

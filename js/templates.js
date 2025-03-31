@@ -46,7 +46,7 @@ function renderAddTaskPoupBtn() {
           <hr class="hrBoardPopUp" />
           <section class="formPartRight">
             <label for="dueDate">Due Date<span class="required">*</span> </label>
-            <input type="date" id="date" />
+            <input type="date" id="date" onkeydown="return false;"/>
             <br />
             <label for="prio">Prio</label>
             <section id="prio" class="prioContent">
@@ -89,7 +89,7 @@ function renderAddTaskPoupBtn() {
             This field is required
           </p>
           <div class="btnSection">
-            <button type="reset" class="clearBtn">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
+            <button type="reset" class="clearBtn" onclick="clearForm()">Clear <img src="/assets/icons/cancel.png" alt="" /></button>
             <button type="button" onclick="createTaskBtn()" class="button">
               Create Task <img src="/assets/icons/check.png" alt="" />
             </button>
@@ -137,7 +137,7 @@ function renderAddTaskPopupToDoPlus() {
           <hr class="hrBoardPopUp" />
           <section class="formPartRight">
             <label for="dueDate">Due Date<span class="required">*</span> </label>
-            <input type="date" id="date" />
+            <input type="date" id="date" onkeydown="return false;"/>
             <br />
             <label for="prio">Prio</label>
             <section id="prio" class="prioContent">
@@ -228,7 +228,7 @@ function renderAddTaskPopupInProgressPlus() {
           <hr class="hrBoardPopUp" />
           <section class="formPartRight">
             <label for="dueDate">Due Date<span class="required">*</span> </label>
-            <input type="date" id="date" />
+            <input type="date" id="date" onkeydown="return false;"/>
             <br />
             <label for="prio">Prio</label>
             <section id="prio" class="prioContent">
@@ -321,7 +321,7 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
           <hr class="hrBoardPopUp" />
           <section class="formPartRight">
             <label for="dueDate">Due Date<span class="required">*</span> </label>
-            <input type="date" id="date" />
+            <input type="date" id="date" onkeydown="return false;"/>
             <br />
             <label for="prio">Prio</label>
             <section id="prio" class="prioContent">
@@ -535,7 +535,7 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
       <label>Description</label>
       <textarea id="descriptionTextarea" class="task-edit-input-popup" placeholder="Enter a description">${description}</textarea>
       <label>Due Date</label>
-      <input id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date" />
+      <input id="dueDateInput" value="${dueDate}" class="task-edit-input-popup" type="date"/>
         
       <label>Priority</label>
       <div class="task-edit-prio-popup">
@@ -718,22 +718,25 @@ function addNewContactPopup() {
         <form>
           <input
             class="name"
-            type="text"
+            type="name"
             id="newContactName"
             placeholder="Name"
           />
+          <div id="errorNewContactName" class="nameError"></div>
           <input
             class="email"
-            type="text"
+            type="email"
             id="newContactEmail"
             placeholder="Email"
           />
+          <div id="errorNewContactEmail" class="emailError"></div>
           <input
             class="phone"
-            type="text"
+            type="number"
             id="newContactPhone"
             placeholder="Phone"
           />
+          <div id="errorNewContactPhone" class="phoneError"></div>
         </form>
         <div class="popup-buttons">
           <button class="cancel-button" onclick="closePopUp()">
@@ -822,7 +825,8 @@ function editContactPopup() {
   let contact = contacts[currentSelectedContact];
   let name = contact.name;
   let email = contact.email;
-  let phone = contact.phone;
+  let phone = contact.phone || "";
+  let phonePlaceholder = contact.phone ? "" : "nicht vorhanden";
   return /*html*/ `
   <div class="shadow-div"></div>
   <div class="add-edit-popup-contact-div">
@@ -866,11 +870,11 @@ function editContactPopup() {
             class="phone"
             type="text"
             id="editContactPhone"
-            placeholder="Phone"
+            placeholder="${phonePlaceholder}"
           />
         </form>
         <div class="popup-buttons">
-          <button class="cancel-button" onclick="deleteContact()">
+          <button class="cancel-button" onclick="deleteContact(currentSelectedContact)">
             Delete
           </button>
           <button class="create-button" onclick="updateContact()">
@@ -896,7 +900,8 @@ function mobileEditContactPopup() {
   let contact = contacts[currentSelectedContact];
   let name = contact.name;
   let email = contact.email;
-  let phone = contact.phone;
+  let phone = contact.phone || "";
+  let phonePlaceholder = contact.phone ? "" : "nicht vorhanden";
   return /*html*/ `
   <div class="shadow-div"></div>
   <div class="mobile-add-edit-popup-contact-div">
@@ -939,11 +944,11 @@ function mobileEditContactPopup() {
             class="mobile-phone"
             type="text"
             id="editContactPhone"
-            placeholder="Phone"
+            placeholder="${phonePlaceholder}"
           />
         </form>
         <div class="mobile-popup-button">
-          <button class="cancel-button" onclick="deleteContact()">
+          <button class="cancel-button" onclick="deleteContact(currentSelectedContact)">
               Delete
           </button>
           <button class="create-button" onclick="updateContact()">
@@ -1008,4 +1013,24 @@ function taskCardHTML(task, totalSubtasks, completedSubtasks) {
       </div>
     </div>
   `;
+}
+
+document.addEventListener('click', function (event) {
+  let contactList = document.getElementById('assignedContactsListPopUp');
+  let contactContainer = document.querySelector('.assignedContainer');
+
+  if (!contactContainer.contains(event.target) && !contactList.contains(event.target)) {
+      contactList.classList.add('hidden');
+      contactList.classList.remove('d-flex');
+  }
+});
+
+function datelimit() {
+  let dateInput = document.getElementById('date');
+  function setMinDate() {
+      let today = new Date().toISOString().split('T')[0];
+      dateInput.setAttribute('min', today);
+  }
+  setMinDate();
+  dateInput.addEventListener('focus', setMinDate);
 }
