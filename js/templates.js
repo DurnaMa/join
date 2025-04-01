@@ -30,9 +30,11 @@ function renderAddTaskPoupBtn() {
           <section class="formPartLeft">
             <label for="title">Title<span class="required">*</span> </label>
             <input id="titleInput" type="text" placeholder="Enter a title" />
+            <span id="titleError" class="text-custom"></span>
             <br />
             <label for="description">Description</label>
             <textarea id="descriptionTextarea" rows="5" placeholder="Enter a Description"></textarea>
+            <span id="descriptionTextareaError" class="text-custom"></span>
             <br />
             <label for="contactSelection">Assigned to</label>
             <div onclick="contactList()" class="assignedContainer">
@@ -47,6 +49,7 @@ function renderAddTaskPoupBtn() {
           <section class="formPartRight">
             <label for="dueDate">Due Date<span class="required">*</span> </label>
             <input type="date" id="date" onkeydown="return false;"/>
+            <span id="dateError" class="text-custom"></span>
             <br />
             <label for="prio">Prio</label>
             <section id="prio" class="prioContent">
@@ -70,6 +73,7 @@ function renderAddTaskPoupBtn() {
               <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
               <div id="categoryList" class="hidden"></div>
             </div>
+            <span id="categoryError" class="text-custom"></span>
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
@@ -121,9 +125,11 @@ function renderAddTaskPopupToDoPlus() {
           <section class="formPartLeft">
             <label for="title">Title<span class="required">*</span> </label>
             <input id="titleInput" type="text" placeholder="Enter a title" />
+            <span id="titleError" class="text-custom"></span>
             <br />
             <label for="description">Description</label>
             <textarea id="descriptionTextarea" rows="5" placeholder="Enter a Description"></textarea>
+            <span id="descriptionTextareaError" class="text-custom"></span>
             <br />
             <label for="contactSelection">Assigned to</label>
             <div onclick="contactList()" class="assignedContainer">
@@ -138,6 +144,7 @@ function renderAddTaskPopupToDoPlus() {
           <section class="formPartRight">
             <label for="dueDate">Due Date<span class="required">*</span> </label>
             <input type="date" id="date" onkeydown="return false;"/>
+            <span id="dateError" class="text-custom"></span>
             <br />
             <label for="prio">Prio</label>
             <section id="prio" class="prioContent">
@@ -161,6 +168,7 @@ function renderAddTaskPopupToDoPlus() {
               <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
               <div id="categoryList" class="hidden"></div>
             </div>
+            <span id="categoryError" class="text-custom"></span>
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
@@ -212,9 +220,11 @@ function renderAddTaskPopupInProgressPlus() {
           <section class="formPartLeft">
             <label for="title">Title<span class="required">*</span> </label>
             <input id="titleInput" type="text" placeholder="Enter a title" />
+            <span id="titleError" class="text-custom"></span>
             <br />
             <label for="description">Description</label>
             <textarea id="descriptionTextarea" rows="5" placeholder="Enter a Description"></textarea>
+            <span id="descriptionTextareaError" class="text-custom"></span>
             <br />
             <label for="contactSelection">Assigned to</label>
             <div onclick="contactList()" class="assignedContainer">
@@ -229,6 +239,7 @@ function renderAddTaskPopupInProgressPlus() {
           <section class="formPartRight">
             <label for="dueDate">Due Date<span class="required">*</span> </label>
             <input type="date" id="date" onkeydown="return false;"/>
+            <span id="dateError" class="text-custom"></span>
             <br />
             <label for="prio">Prio</label>
             <section id="prio" class="prioContent">
@@ -252,6 +263,7 @@ function renderAddTaskPopupInProgressPlus() {
               <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
               <div id="categoryList" class="hidden"></div>
             </div>
+            <span id="categoryError" class="text-custom"></span>
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
@@ -305,9 +317,11 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
           <section class="formPartLeft">
             <label for="title">Title<span class="required">*</span> </label>
             <input id="titleInput" type="text" placeholder="Enter a title" />
+            <span id="titleError" class="text-custom"></span>
             <br />
             <label for="description">Description</label>
             <textarea id="descriptionTextarea" rows="5" placeholder="Enter a Description"></textarea>
+            <span id="descriptionTextareaError" class="text-custom"></span>
             <br />
             <label for="contactSelection">Assigned to</label>
             <div onclick="contactList()" class="assignedContainer">
@@ -322,6 +336,7 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
           <section class="formPartRight">
             <label for="dueDate">Due Date<span class="required">*</span> </label>
             <input type="date" id="date" onkeydown="return false;"/>
+            <span id="dateError" class="text-custom"></span>
             <br />
             <label for="prio">Prio</label>
             <section id="prio" class="prioContent">
@@ -345,6 +360,7 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
               <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
               <div id="categoryList" class="hidden"></div>
             </div>
+            <span id="categoryError" class="text-custom"></span>
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
@@ -419,7 +435,7 @@ function renderTasksCardPopup(task) {
         <img onclick="closeTaskCardPopUp()" src="/assets/icons/close.png" alt="" />
       </div>
 
-      <div class="test987654test">
+      <div class="taskCardContent">
       <div class="taskCardPopupTitle">${task.title || "No Title"}</div>
       <div class="taskCardPopupDescription">${
         task.description || "No Description"
@@ -525,11 +541,11 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
     <div class="shadow-div"></div>
     <div class="taskCardEditPopup">
       <div class="task-edit-close-popup-div">
-        <div class="test987">
+        <div class="closeImgContent">
           <img onclick="closeEditTaskCardPopUp()" class="task-edit-close-popup" src="/assets/icons/close.png" alt=""/>
         </div>
       </div>
-      <div class="test-test">
+      <div class="taskCardEditContent">
       <label>Title</label>
       <input id="titleInput" value="${title}" class="task-edit-input-popup" placeholder="Enter a title" type="text" />
       <label>Description</label>
@@ -571,7 +587,7 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
         </button>
       </div>
 
-      <label class="TESTAssignedTEST" for="contactSelection">Assigned to</label>
+      <label for="contactSelection">Assigned to</label>
       <div>
         <div onclick="contactListPopUp()" class="assignedContainer">
           <span>Select contacts to assign</span>
@@ -589,7 +605,7 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
           .join("")}
       </div>
     
-      <label class="TESTSubtasksTEST" for="subtask">Subtasks</label>
+      <label for="subtask">Subtasks</label>
       <div id="addSubTask">
         <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
         <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
@@ -620,7 +636,7 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
       </ul>
       </div>
       <div class="button-ok-div">
-        <div class="buttontest987">
+        <div class="buttonContent">
         <button onclick="updateEditTask(event)" data-task-id="${taskId}" class="button-ok">Ok <img src="/assets/icons/check.png" alt="" /></button>
         </div>
       </div>
