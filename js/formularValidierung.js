@@ -56,7 +56,8 @@ function validateForm() {
     descriptionTextarea.classList.add('error');
     descriptionTextareaError.textContent = 'Description is required.';
     isValid = false;
-  
+  }
+
   descriptionTextarea.addEventListener('input', () => {
     descriptionTextarea.classList.remove('error');
     descriptionTextareaError.textContent = '';
