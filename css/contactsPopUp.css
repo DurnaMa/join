@@ -380,12 +380,11 @@ input:focus {
   }
 }
 
-@media screen and (max-width: 530px){
-  #mobileToggleOptions{
+@media screen and (max-width: 530px) {
+  #mobileToggleOptions {
     right: 16px;
   }
 }
-
 
 @media screen and (max-width: 470px) {
   .mobile-add-edit-popup-contact-div {
@@ -405,7 +404,7 @@ input:focus {
     zoom: 89%;
   }
 
-  .close-mobile-contact-area{
+  .close-mobile-contact-area {
     top: 17%;
   }
 }

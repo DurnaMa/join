@@ -321,7 +321,7 @@ input:focus {
       transform: translate(-50%, -50%);
       width: 274px;
       height: 335px;
-      background-image: url("/assets/img/logohell.png");
+      background-image: url('/assets/img/logohell.png');
     }
 
     50% {
@@ -330,7 +330,7 @@ input:focus {
       transform: translate(-50%, -50%);
       width: 274px;
       height: 335px;
-      background-image: url("/assets/img/logohell.png");
+      background-image: url('/assets/img/logohell.png');
     }
 
     100% {
@@ -339,7 +339,7 @@ input:focus {
       transform: translate(0, 0);
       width: 100px;
       height: 100px;
-      background-image: url("/assets/img/logodunkel.png");
+      background-image: url('/assets/img/logodunkel.png');
     }
   }
 
@@ -392,12 +392,12 @@ input:focus {
   }
 }
 
-@media screen and (max-height: 667px){
-  .signUpContainer{
+@media screen and (max-height: 667px) {
+  .signUpContainer {
     padding: 513px 0px 0px 0px;
   }
 
-  .logInContainer{
+  .logInContainer {
     zoom: 74%;
   }
 }
