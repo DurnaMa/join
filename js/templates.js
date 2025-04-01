@@ -874,6 +874,7 @@ function editContactPopup() {
             id="editContactName"
             placeholder="Name"
           />
+          <div id="errorEditContactName" class="nameError"></div>
           <input
             value="${email}"
             class="email"
@@ -881,6 +882,7 @@ function editContactPopup() {
             id="editContactEmail"
             placeholder="Email"
           />
+          <div id="errorEditContactEmail" class="emailError"></div>
           <input
             value="${phone}"
             class="phone"
@@ -888,6 +890,7 @@ function editContactPopup() {
             id="editContactPhone"
             placeholder="${phonePlaceholder}"
           />
+          <div id="errorEditContactPhone" class="phoneError"></div>
         </form>
         <div class="popup-buttons">
           <button class="cancel-button" onclick="deleteContact(currentSelectedContact)">

@@ -352,6 +352,8 @@ input::-webkit-inner-spin-button {
 .nameError,
 .emailError,
 .phoneError {
+  display: flex;
+  justify-content: center;
   color: red;
   font-size: 14px;
 }

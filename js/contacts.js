@@ -337,6 +337,48 @@ function validateContactData(name, email, phone) {
   return true;
 }
 
+function validateEditContactData(name, email, phone) {
+  const nameRegex = /^[A-Za-zÄÖÜäöüß\s]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[0-9]+$/;
+
+  if (!nameRegex.test(name)) {
+    let editContactName = document.getElementById("editContactName");
+    let errorEditContactName = document.getElementById("errorEditContactName")
+    editContactName.classList.add("error");
+    errorEditContactName.innerText = "Bitte keine Zahlen, Sonderzeichen oder leere Felder!";
+    // errorNewContactName.classList.toggle("d-none");
+    return false;
+  }else{
+    editContactName.classList.remove("error");
+    errorEditContactName.classList.add("d-none");
+  }
+  if (!emailRegex.test(email)) {
+    let editContactEmail = document.getElementById("editContactEmail");
+    let errorEditContactEmail = document.getElementById("errorEditContactEmail")
+    editContactEmail.classList.add("error");
+    errorEditContactEmail.innerText = "Bitte eine gültige E-Mail-Adresse eingeben!";
+    // errorNewContactEmail.classList.toggle("d-none");
+    return false;
+  }else{
+    editContactEmail.classList.remove("error");
+    errorEditContactEmail.classList.add("d-none");
+  }
+  if (!phoneRegex.test(phone)) {
+    let editContactPhone = document.getElementById("editContactPhone");
+    let errorEditContactPhone = document.getElementById("errorEditContactPhone")
+    editContactPhone.classList.add("error");
+    errorEditContactPhone.innerText = "Die Telefonnummer darf nur Zahlen enthalten!";
+    // errorNewContactPhone.classList.toggle("d-none");
+    return false;
+  }else{
+    editContactPhone.classList.remove("error");
+    errorEditContactPhone.classList.add("d-none");
+  }
+
+  return true;
+}
+
 /**
  * Updates the selected contact with new information provided by the user.
  * Retrieves the contact's key, updates its data in Firebase, and refreshes the UI.
@@ -351,7 +393,7 @@ async function updateContact() {
   let email = document.getElementById("editContactEmail").value.trim();
   let phone = document.getElementById("editContactPhone").value.trim();
 
-  if (!validateContactData(name, email, phone)) {
+  if (!validateEditContactData(name, email, phone)) {
     return;
   }
 
