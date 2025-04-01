@@ -208,9 +208,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 #subTaskList {
-  /* position: fixed; */
-  /* width: inherit; */
-  /* top: 695px; */
   background-color: white;
   border-radius: 10px;
   overflow-y: auto;
@@ -223,7 +220,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
   justify-content: space-between;
   align-items: flex-end;
   gap: 4px;
-  /* max-width: 100%; */
   max-width: 1007px;
 }
 
@@ -288,7 +284,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
   align-items: center;
   padding: 8px;
   border-radius: 10px;
-  /* position: relative; */
 }
 
 .subTask:hover {

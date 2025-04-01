@@ -67,10 +67,6 @@
   transform: translate(-50%, -50%);
   z-index: 11;
   scrollbar-width: none;
-  /* min-width: 400px; */
-  /* min-height: 475px; */
-  /* gap: 23px; */
-  /* overflow-y: auto; */
 }
 
 .addTaskClose {
@@ -193,7 +189,6 @@
   gap: 10px;
   justify-content: end;
   align-items: center;
-  /* margin-top: 115px; */
   position: fixed;
   bottom: 40px;
   right: 34px;
@@ -215,8 +210,8 @@
 .taskCardPopupButtons div:hover,
 .taskCardPopupButtons div img:hover {
   color: #007cee;
-  filter: brightness(0) saturate(100%) invert(42%) sepia(94%) saturate(3361%)
-    hue-rotate(190deg) brightness(100%) contrast(103%);
+  filter: brightness(0) saturate(100%) invert(42%) sepia(94%) saturate(3361%) hue-rotate(190deg) brightness(100%)
+    contrast(103%);
 }
 
 .taskCardEditClosePopup {
@@ -224,13 +219,13 @@
   height: 15px;
 }
 
-.test987654test{
+.test987654test {
   height: 614px;
   overflow-y: auto;
   scrollbar-width: none;
 }
 
-.test-test{
+.test-test {
   overflow-y: scroll;
   scrollbar-width: none;
   height: 735px;
@@ -239,66 +234,65 @@
   padding-top: 50px;
   background-color: white;
 }
-@media screen and (max-width: 540px){
-  .taskCardPopup{
+@media screen and (max-width: 540px) {
+  .taskCardPopup {
     width: 100%;
     height: 80%;
     zoom: 90%;
     border-radius: 0;
   }
 
-  .taskCardEditPopup{
+  .taskCardEditPopup {
     width: 100%;
     height: 80%;
     zoom: 90%;
     border-radius: 0;
   }
 
-  .test987654test{
+  .test987654test {
     height: 614px;
     overflow-y: auto;
     scrollbar-width: none;
   }
 
-  .taskCardPopupButtons{
+  .taskCardPopupButtons {
     width: 100%;
     height: 100px;
     bottom: 2px;
     background-color: white;
   }
 
-  .assignedContainer span{
+  .assignedContainer span {
     font-size: 18px;
   }
 
-  #assignedContactsListPopUp{
+  #assignedContactsListPopUp {
     top: 394px;
     width: 88.5%;
     z-index: 3;
   }
 
-  .taskCardEditPopup{
+  .taskCardEditPopup {
     padding: 0px 15px 0px 15px;
   }
 
-  .task-edit-close-popup-div{
+  .task-edit-close-popup-div {
     width: 100%;
     padding-right: 36px;
   }
-
 }
 
-@media screen and (max-height: 667px){
-  .taskCardEditPopup{
+@media screen and (max-height: 667px) {
+  .taskCardEditPopup {
     zoom: 65%;
     padding-bottom: 96px;
   }
 
-  .test987654test{
+  .test987654test {
     padding-bottom: 100px;
   }
 
-  .add-edit-popup-task-div{
+  .add-edit-popup-task-div {
     zoom: 50%;
   }
 }
