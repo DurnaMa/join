@@ -8,13 +8,13 @@
   z-index: 4;
 }
 
-.test987 {
+.closeImgContent {
   display: flex;
   height: 96px;
   align-items: center;
 }
 
-.buttontest987 {
+.buttonContent {
   display: flex;
   height: 96px;
   align-items: center;
@@ -219,13 +219,13 @@
   height: 15px;
 }
 
-.test987654test {
+.taskCardContent {
   height: 614px;
   overflow-y: auto;
   scrollbar-width: none;
 }
 
-.test-test {
+.taskCardEditContent {
   overflow-y: scroll;
   scrollbar-width: none;
   height: 735px;
@@ -249,7 +249,7 @@
     border-radius: 0;
   }
 
-  .test987654test {
+  .taskCardContent {
     height: 614px;
     overflow-y: auto;
     scrollbar-width: none;
@@ -288,7 +288,7 @@
     padding-bottom: 96px;
   }
 
-  .test987654test {
+  .taskCardContent {
     padding-bottom: 100px;
   }
 
