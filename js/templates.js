@@ -806,18 +806,21 @@ function mobileAddNewContactPopup() {
             id="newContactName"
             placeholder="Name"
           />
+          <div id="errorNewContactName" class="nameError"></div>
           <input
             class="mobile-email"
             type="text"
             id="newContactEmail"
             placeholder="Email"
           />
+          <div id="errorNewContactEmail" class="emailError"></div>
           <input
             class="mobile-phone"
             type="text"
             id="newContactPhone"
             placeholder="Phone"
           />
+          <div id="errorNewContactPhone" class="phoneError"></div>
         </form>
         <div class="mobile-popup-button">
           <button class="create-button" onclick="saveContact()">
@@ -951,6 +954,7 @@ function mobileEditContactPopup() {
             id="editContactName"
             placeholder="Name"
           />
+          <div id="errorEditContactName" class="nameError"></div>
           <input
             value="${email}"
             class="mobile-email"
@@ -958,6 +962,7 @@ function mobileEditContactPopup() {
             id="editContactEmail"
             placeholder="Email"
           />
+          <div id="errorEditContactEmail" class="emailError"></div>
           <input
             value="${phone}"
             class="mobile-phone"
@@ -965,6 +970,7 @@ function mobileEditContactPopup() {
             id="editContactPhone"
             placeholder="${phonePlaceholder}"
           />
+          <div id="errorEditContactPhone" class="phoneError"></div>
         </form>
         <div class="mobile-popup-button">
           <button class="cancel-button" onclick="deleteContact(currentSelectedContact)">
