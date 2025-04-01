@@ -56,7 +56,7 @@ function validateForm() {
     descriptionTextarea.classList.add('error');
     descriptionTextareaError.textContent = 'Description is required.';
     isValid = false;
-  }
+  
   descriptionTextarea.addEventListener('input', () => {
     descriptionTextarea.classList.remove('error');
     descriptionTextareaError.textContent = '';
@@ -67,7 +67,7 @@ function validateForm() {
     categoryError.textContent = 'Category is required.';
     isValid = false;
   }
-  categoryDropdown.addEventListener('input', () => {
+  categoryDropdown.addEventListener('click', () => {
     categoryDropdown.classList.remove('error');
     categoryError.textContent = '';
   });
