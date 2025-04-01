@@ -1,16 +1,16 @@
 /**
  * Validates the form fields and displays error messages for invalid inputs.
- * 
+ *
  * This function checks if the required form fields are filled in correctly. If a field is empty,
- * it adds an error message and applies a visual error indicator. If all fields are valid, 
+ * it adds an error message and applies a visual error indicator. If all fields are valid,
  * the function returns `true`; otherwise, it returns `false`.
- * 
+ *
  * Validated fields:
  * - `#titleInput`: Task title (required)
  * - `#date`: Due date (required)
  * - `.categoryContainer`: Task category dropdown (required, must not be "Select Task Category")
  * - `#descriptionTextarea`: Task description (required)
- * 
+ *
  * @function validateForm
  * @returns {boolean} `true` if all fields are valid, otherwise `false`.
  */
@@ -25,7 +25,6 @@ function validateForm() {
   const categoryError = document.getElementById('categoryError');
   const descriptionTextareaError = document.getElementById('descriptionTextareaError');
 
-
   let isValid = true;
 
   titleError.textContent = '';
@@ -33,38 +32,45 @@ function validateForm() {
   categoryError.textContent = '';
   descriptionTextareaError.textContent = '';
 
-
   if (!titleInput.value.trim()) {
     titleInput.classList.add('error');
     titleError.textContent = 'Title is required.';
     isValid = false;
-  } else {
-    titleInput.classList.remove('error');
   }
+  titleInput.addEventListener('input', () => {
+    titleInput.classList.remove('error');
+    titleError.textContent = '';
+  });
 
   if (!dateInput.value.trim()) {
     dateInput.classList.add('error');
     dateError.textContent = 'Due Date is required.';
     isValid = false;
-  } else {
-    dateInput.classList.remove('error');
   }
+  dateInput.addEventListener('input', () => {
+    dateInput.classList.remove('error');
+    dateError.textContent = '';
+  });
 
   if (!descriptionTextarea.value.trim()) {
     descriptionTextarea.classList.add('error');
     descriptionTextareaError.textContent = 'Description is required.';
     isValid = false;
-  } else {
-    descriptionTextarea.classList.remove('error');
   }
+  descriptionTextarea.addEventListener('input', () => {
+    descriptionTextarea.classList.remove('error');
+    descriptionTextareaError.textContent = '';
+  });
 
   if (categoryDropdown.textContent.trim() === 'Select Task Category' || !categoryDropdown.textContent.trim()) {
     categoryDropdown.classList.add('error');
     categoryError.textContent = 'Category is required.';
     isValid = false;
-  } else {
-    categoryDropdown.classList.remove('error');
   }
+  categoryDropdown.addEventListener('input', () => {
+    categoryDropdown.classList.remove('error');
+    categoryError.textContent = '';
+  });
 
   return isValid;
 }
