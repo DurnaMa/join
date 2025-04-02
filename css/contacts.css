@@ -13,7 +13,6 @@
   align-items: center;
   top: 96px;
   width: 456px;
-  /* height: 928px; */
   height: 100vh;
   padding-bottom: 100px;
   background-color: white;
@@ -87,7 +86,6 @@
 .contacts-list.active {
   background-color: #2a3647;
   color: white;
-  /* background-image: none !important; */
 }
 
 .contacts-list.active:hover {
@@ -105,7 +103,6 @@
   align-items: center;
   flex-direction: column;
   width: 456px;
-  /* height: 75%; */
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -355,6 +352,8 @@ input::-webkit-inner-spin-button {
 .nameError,
 .emailError,
 .phoneError {
+  display: flex;
+  justify-content: center;
   color: red;
   font-size: 14px;
 }
@@ -464,7 +463,6 @@ input::-webkit-inner-spin-button {
   }
 
   .scrollbar {
-    /* height: 70%; */
     padding-bottom: 96px;
   }
 }
@@ -502,11 +500,6 @@ input::-webkit-inner-spin-button {
   .add-contact-btn-div {
     display: none;
   }
-
-  /* .scrollbar {
-    height: 80%;
-    padding: 35px;
-  } */
 
   .mobileAddButton {
     display: flex;
@@ -708,12 +701,6 @@ input::-webkit-inner-spin-button {
     font-size: 14px;
   }
 
-  /* .scrollbar {
-    /* height: 80%; */
-  /* height: 100vh; */
-  /* padding-bottom: 193px; */
-  /* } */
-
   .mobileAddButton {
     bottom: 18%;
   }
@@ -729,8 +716,17 @@ input::-webkit-inner-spin-button {
   }
 
   .scrollbar {
-    /* height: 80%; */
     height: 100vh;
     padding-bottom: 96px;
   }
+}
+
+.text-custom {
+  color: #ef4444;
+  display: block;
+  font-size: 0.875rem;
+}
+
+.error {
+  border: 2px solid red;
 }

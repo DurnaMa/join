@@ -67,7 +67,7 @@
 form {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 14px;
   width: 118%;
   margin-top: 50px;
 }
@@ -380,12 +380,11 @@ input:focus {
   }
 }
 
-@media screen and (max-width: 530px){
-  #mobileToggleOptions{
+@media screen and (max-width: 530px) {
+  #mobileToggleOptions {
     right: 16px;
   }
 }
-
 
 @media screen and (max-width: 470px) {
   .mobile-add-edit-popup-contact-div {
@@ -405,7 +404,17 @@ input:focus {
     zoom: 89%;
   }
 
-  .close-mobile-contact-area{
+  .close-mobile-contact-area {
     top: 17%;
   }
+}
+
+.text-custom {
+  color: #ef4444;
+  display: block;
+  font-size: 0.875rem;
+}
+
+.error {
+  border: 2px solid red;
 }

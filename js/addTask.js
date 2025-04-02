@@ -3,6 +3,7 @@ let selectedContacts = new Set();
 
 async function initAddTask() {
   await loadDataUsers();
+  datelimit();
 }
 
 let subTask = document.getElementById('subTask');
@@ -160,17 +161,38 @@ function generateSubTaskList(i) {
 //   renderSubTaskList();
 // }
 
+// function saveSubTask(index) {
+//   let subInputEdit = document.getElementById(`subInputEdit-${index}`).value.trim();
+//   if (subInputEdit === "") {
+//       alert("Das Feld darf nicht leer sein!");
+//       return;
+//   }
+//   if (subTasks[index]) {
+//       subTasks[index].description = subInputEdit;
+//   } 
+//   else {
+//       console.warn(`Subtask ${index} nicht gefunden.`);
+//   }
+//   renderSubTaskList();
+// }
+
 function saveSubTask(index) {
-  let subInputEdit = document.getElementById(`subInputEdit-${index}`).value.trim();
-  if (subInputEdit === "") {
-      alert("Das Feld darf nicht leer sein!");
-      return;
+  let subInputEdit = document.getElementById(`subInputEdit-${index}`);
+  // let subInputSpan = document.getElementById(`subEditSpan-${index}`); 
+
+  let inputValue = subInputEdit.value.trim();
+
+  if (inputValue === "") {
+    subInputEdit.placeholder = "Bitte fülle dieses Feld aus!";
+    return;
   }
+
   if (subTasks[index]) {
-      subTasks[index].description = subInputEdit;
+    subTasks[index].description = inputValue;
   } else {
-      console.warn(`Subtask ${index} nicht gefunden.`);
+    console.warn(`Subtask ${index} nicht gefunden.`);
   }
+
   renderSubTaskList();
 }
 
@@ -536,28 +558,23 @@ function clearForm() {
   prioMedium();
 }
 
-document.addEventListener('click', function (event) {
+document.addEventListener('click', function (event) { 
   let contactList = document.getElementById('assignedContactsList');
   let categoryList = document.getElementById('categoryList');
   let contactContainer = document.querySelector('.assignedContainer');
   let categoryContainer = document.querySelector('.categoryContainer');
 
-  if (!contactContainer.contains(event.target) && !contactList.contains(event.target)) {
-      contactList.classList.add('hidden');
-      contactList.classList.remove('d-flex');
+  if (contactContainer && contactList) {
+      if (!contactContainer.contains(event.target) && !contactList.contains(event.target)) {
+          contactList.classList.add('hidden');
+          contactList.classList.remove('d-flex');
+      }
   }
-  if (!categoryContainer.contains(event.target) && !categoryList.contains(event.target)) {
-      categoryList.classList.add('hidden');
-      categoryList.classList.remove('d-flex');
-  }
-});
 
-document.addEventListener('DOMContentLoaded', function () {
-  let dateInput = document.getElementById('date');
-  function setMinDate() {
-      let today = new Date().toISOString().split('T')[0];
-      dateInput.setAttribute('min', today);
+  if (categoryContainer && categoryList) {
+      if (!categoryContainer.contains(event.target) && !categoryList.contains(event.target)) {
+          categoryList.classList.add('hidden');
+          categoryList.classList.remove('d-flex');
+      }
   }
-  setMinDate();
-  dateInput.addEventListener('focus', setMinDate);
 });

@@ -174,7 +174,7 @@ async function updateVariables(taskId) {
   let existingTask = taskRef || {};
   let updatedTitle = document.getElementById("titleInput").value.trim();
   let updatedDescription = document.getElementById("descriptionTextarea").value.trim();
-  let updatedDueDate = document.getElementById("dueDateInput").value;
+  let updatedDueDate = document.getElementById("date").value;
   let updatedPriority = window.currentSelectedPriority || existingTask.priority || "";
   return { existingTask, updatedTitle, updatedDueDate, updatedDescription, updatedPriority };
 }

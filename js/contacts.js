@@ -301,28 +301,79 @@ function validateContactData(name, email, phone) {
   const phoneRegex = /^[0-9]+$/;
 
   if (!nameRegex.test(name)) {
+    let newContactName = document.getElementById("newContactName");
     let errorNewContactName = document.getElementById("errorNewContactName")
+    newContactName.classList.add("error");
     errorNewContactName.innerText = "Bitte keine Zahlen, Sonderzeichen oder leere Felder!";
     // errorNewContactName.classList.toggle("d-none");
     return false;
   }else{
+    newContactName.classList.remove("error");
     errorNewContactName.classList.add("d-none");
   }
   if (!emailRegex.test(email)) {
+    let newContactEmail = document.getElementById("newContactEmail");
     let errorNewContactEmail = document.getElementById("errorNewContactEmail")
+    newContactEmail.classList.add("error");
     errorNewContactEmail.innerText = "Bitte eine gültige E-Mail-Adresse eingeben!";
     // errorNewContactEmail.classList.toggle("d-none");
     return false;
   }else{
+    newContactEmail.classList.remove("error");
     errorNewContactEmail.classList.add("d-none");
   }
   if (!phoneRegex.test(phone)) {
+    let newContactPhone = document.getElementById("newContactPhone");
     let errorNewContactPhone = document.getElementById("errorNewContactPhone")
+    newContactPhone.classList.add("error");
     errorNewContactPhone.innerText = "Die Telefonnummer darf nur Zahlen enthalten!";
     // errorNewContactPhone.classList.toggle("d-none");
     return false;
   }else{
+    newContactPhone.classList.remove("error");
     errorNewContactPhone.classList.add("d-none");
+  }
+
+  return true;
+}
+
+function validateEditContactData(name, email, phone) {
+  const nameRegex = /^[A-Za-zÄÖÜäöüß\s]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[0-9]+$/;
+
+  if (!nameRegex.test(name)) {
+    let editContactName = document.getElementById("editContactName");
+    let errorEditContactName = document.getElementById("errorEditContactName")
+    editContactName.classList.add("error");
+    errorEditContactName.innerText = "Bitte keine Zahlen, Sonderzeichen oder leere Felder!";
+    // errorNewContactName.classList.toggle("d-none");
+    return false;
+  }else{
+    editContactName.classList.remove("error");
+    errorEditContactName.classList.add("d-none");
+  }
+  if (!emailRegex.test(email)) {
+    let editContactEmail = document.getElementById("editContactEmail");
+    let errorEditContactEmail = document.getElementById("errorEditContactEmail")
+    editContactEmail.classList.add("error");
+    errorEditContactEmail.innerText = "Bitte eine gültige E-Mail-Adresse eingeben!";
+    // errorNewContactEmail.classList.toggle("d-none");
+    return false;
+  }else{
+    editContactEmail.classList.remove("error");
+    errorEditContactEmail.classList.add("d-none");
+  }
+  if (!phoneRegex.test(phone)) {
+    let editContactPhone = document.getElementById("editContactPhone");
+    let errorEditContactPhone = document.getElementById("errorEditContactPhone")
+    editContactPhone.classList.add("error");
+    errorEditContactPhone.innerText = "Die Telefonnummer darf nur Zahlen enthalten!";
+    // errorNewContactPhone.classList.toggle("d-none");
+    return false;
+  }else{
+    editContactPhone.classList.remove("error");
+    errorEditContactPhone.classList.add("d-none");
   }
 
   return true;
@@ -342,7 +393,7 @@ async function updateContact() {
   let email = document.getElementById("editContactEmail").value.trim();
   let phone = document.getElementById("editContactPhone").value.trim();
 
-  if (!validateContactData(name, email, phone)) {
+  if (!validateEditContactData(name, email, phone)) {
     return;
   }
 
