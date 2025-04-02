@@ -637,7 +637,7 @@
   .column {
     display: flex;
     flex-direction: row;
-    width: 264px;
+    width: 400px;
     overflow-y: hidden;
     overflow-x: auto;
     touch-action: pan-x;
