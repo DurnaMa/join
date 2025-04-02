@@ -281,40 +281,42 @@ async function saveContact() {
   renderContactsList();
 }
 
+/**
+ * The contact data entry is validated here.
+ * The system checks whether the name contains only letters and spaces,
+ * the e-mail address has a valid format and the telephone number contains only numbers.
+ * If the entries are invalid, an error message is displayed.
+ * 
+ * validateContactData: This function validates the data when a new contact is created.
+ * validateEditContactData: This function validates the data when an existing contact is edited.
+ * 
+ * @param {string} name 
+ * @param {string} email 
+ * @param {number} phone 
+ * @returns {boolean} Returns true if all entries are valid, false otherwise.
+ */
 function validateContactData(name, email, phone) {
   const nameRegex = /^[A-Za-zÄÖÜäöüß\s]+$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phoneRegex = /^[0-9]+$/;
 
-  if (!nameRegex.test(name)) {
-    let newContactName = document.getElementById("newContactName");
-    let errorNewContactName = document.getElementById("errorNewContactName")
-    newContactName.classList.add("error");
-    errorNewContactName.innerText = "Bitte keine Zahlen, Sonderzeichen oder leere Felder!";
-    return false;
-  }else{
-    newContactName.classList.remove("error");
-    errorNewContactName.classList.add("d-none");
-  }
-  if (!emailRegex.test(email)) {
-    let newContactEmail = document.getElementById("newContactEmail");
-    let errorNewContactEmail = document.getElementById("errorNewContactEmail")
-    newContactEmail.classList.add("error");
-    errorNewContactEmail.innerText = "Bitte eine gültige E-Mail-Adresse eingeben!";
-    return false;
-  }else{
-    newContactEmail.classList.remove("error");
-    errorNewContactEmail.classList.add("d-none");
-  }
-  if (!phoneRegex.test(phone)) {
-    let newContactPhone = document.getElementById("newContactPhone");
-    let errorNewContactPhone = document.getElementById("errorNewContactPhone")
-    newContactPhone.classList.add("error");
-    errorNewContactPhone.innerText = "Die Telefonnummer darf nur Zahlen enthalten!";
-    return false;
-  }else{
-    newContactPhone.classList.remove("error");
-    errorNewContactPhone.classList.add("d-none");
+  const fields = [
+    { value: name, regex: nameRegex, id: "newContactName", errorId: "errorNewContactName", errorMsg: "Bitte keine Zahlen, Sonderzeichen oder leere Felder!" },
+    { value: email, regex: emailRegex, id: "newContactEmail", errorId: "errorNewContactEmail", errorMsg: "Bitte eine gültige E-Mail-Adresse eingeben!" },
+    { value: phone, regex: phoneRegex, id: "newContactPhone", errorId: "errorNewContactPhone", errorMsg: "Die Telefonnummer darf nur Zahlen enthalten!" }
+  ];
+
+  for (const field of fields) {
+    const input = document.getElementById(field.id);
+    const error = document.getElementById(field.errorId);
+    if (!field.regex.test(field.value)) {
+      input.classList.add("error");
+      error.innerText = field.errorMsg;
+      return false;
+    } else {
+      input.classList.remove("error");
+      error.classList.add("d-none");
+    }
   }
 
   return true;
@@ -325,35 +327,23 @@ function validateEditContactData(name, email, phone) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phoneRegex = /^[0-9]+$/;
 
-  if (!nameRegex.test(name)) {
-    let editContactName = document.getElementById("editContactName");
-    let errorEditContactName = document.getElementById("errorEditContactName")
-    editContactName.classList.add("error");
-    errorEditContactName.innerText = "Bitte keine Zahlen, Sonderzeichen oder leere Felder!";
-    return false;
-  }else{
-    editContactName.classList.remove("error");
-    errorEditContactName.classList.add("d-none");
-  }
-  if (!emailRegex.test(email)) {
-    let editContactEmail = document.getElementById("editContactEmail");
-    let errorEditContactEmail = document.getElementById("errorEditContactEmail")
-    editContactEmail.classList.add("error");
-    errorEditContactEmail.innerText = "Bitte eine gültige E-Mail-Adresse eingeben!";
-    return false;
-  }else{
-    editContactEmail.classList.remove("error");
-    errorEditContactEmail.classList.add("d-none");
-  }
-  if (!phoneRegex.test(phone)) {
-    let editContactPhone = document.getElementById("editContactPhone");
-    let errorEditContactPhone = document.getElementById("errorEditContactPhone")
-    editContactPhone.classList.add("error");
-    errorEditContactPhone.innerText = "Die Telefonnummer darf nur Zahlen enthalten!";
-    return false;
-  }else{
-    editContactPhone.classList.remove("error");
-    errorEditContactPhone.classList.add("d-none");
+  const fields = [
+    { value: name, regex: nameRegex, id: "editContactName", errorId: "errorEditContactName", errorMsg: "Bitte keine Zahlen, Sonderzeichen oder leere Felder!" },
+    { value: email, regex: emailRegex, id: "editContactEmail", errorId: "errorEditContactEmail", errorMsg: "Bitte eine gültige E-Mail-Adresse eingeben!" },
+    { value: phone, regex: phoneRegex, id: "editContactPhone", errorId: "errorEditContactPhone", errorMsg: "Die Telefonnummer darf nur Zahlen enthalten!" }
+  ];
+
+  for (const field of fields) {
+    const input = document.getElementById(field.id);
+    const error = document.getElementById(field.errorId);
+    if (!field.regex.test(field.value)) {
+      input.classList.add("error");
+      error.innerText = field.errorMsg;
+      return false;
+    } else {
+      input.classList.remove("error");
+      error.classList.add("d-none");
+    }
   }
 
   return true;

@@ -14,64 +14,52 @@
  * @function validateForm
  * @returns {boolean} `true` if all fields are valid, otherwise `false`.
  */
-function validateForm() {
-  const titleInput = document.getElementById('titleInput');
-  const dateInput = document.getElementById('date');
-  const categoryDropdown = document.querySelector('.categoryContainer');
-  const descriptionTextarea = document.getElementById('descriptionTextarea');
 
-  const titleError = document.getElementById('titleError');
-  const dateError = document.getElementById('dateError');
+function validateField(inputId, errorId, message) {
+  const input = document.getElementById(inputId);
+  const error = document.getElementById(errorId);
+  error.textContent = '';
+  if (!input.value.trim()) {
+    input.classList.add('error');
+    error.textContent = message;
+    isValid = false;
+  }
+  input.addEventListener('input', () => {
+    if (input.value.trim()) {
+      input.classList.remove('error');
+      error.textContent = '';
+    }
+  });
+  isValid = true;
+}
+
+function validateCategory() {
+  const categoryDropdown = document.getElementById('dropdownCategory');
   const categoryError = document.getElementById('categoryError');
-  const descriptionTextareaError = document.getElementById('descriptionTextareaError');
-
-  let isValid = true;
-
-  titleError.textContent = '';
-  dateError.textContent = '';
   categoryError.textContent = '';
-  descriptionTextareaError.textContent = '';
+  const validCategories = ['Technical Task', 'User Story'];
 
-  if (!titleInput.value.trim()) {
-    titleInput.classList.add('error');
-    titleError.textContent = 'Title is required.';
-    isValid = false;
-  }
-  titleInput.addEventListener('input', () => {
-    titleInput.classList.remove('error');
-    titleError.textContent = '';
-  });
-
-  if (!dateInput.value.trim()) {
-    dateInput.classList.add('error');
-    dateError.textContent = 'Due Date is required.';
-    isValid = false;
-  }
-  dateInput.addEventListener('input', () => {
-    dateInput.classList.remove('error');
-    dateError.textContent = '';
-  });
-
-  if (!descriptionTextarea.value.trim()) {
-    descriptionTextarea.classList.add('error');
-    descriptionTextareaError.textContent = 'Description is required.';
-    isValid = false;
+  if (!validCategories.includes(categoryDropdown.textContent.trim())) {
+    categoryDropdown.parentElement.style.border = '2px solid red';
+    categoryError.textContent = 'Valid category is required.';
+  } else {
+    categoryDropdown.parentElement.style.border = '';
   }
 
-  descriptionTextarea.addEventListener('input', () => {
-    descriptionTextarea.classList.remove('error');
-    descriptionTextareaError.textContent = '';
+  categoryDropdown.parentElement.addEventListener('click', () => {
+    if (validCategories.includes(categoryDropdown.textContent.trim())) {
+      categoryDropdown.parentElement.style.border = '';
+      categoryError.textContent = '';
+    }
   });
+  return validCategories.includes(categoryDropdown.textContent.trim());
+}
 
-  if (categoryDropdown.textContent.trim() === 'Select Task Category' || !categoryDropdown.textContent.trim()) {
-    categoryDropdown.style.border = '2px solid red';
-    categoryError.textContent = 'Category is required.';
-    isValid = false;
-  }
-  categoryDropdown.addEventListener('click', () => {
-    categoryDropdown.style.border = '';
-    categoryError.textContent = '';
-  });
-
-  return isValid;
+function validateForm() {
+  let isValid = true;
+  isValid &= validateField('titleInput', 'titleError', 'Title is required.');
+  isValid &= validateField('date', 'dateError', 'Due Date is required.');
+  isValid &= validateField('descriptionTextarea', 'descriptionTextareaError', 'Description is required.');
+  isValid &= validateCategory();
+  return !!isValid;
 }
