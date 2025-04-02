@@ -30,18 +30,36 @@ function openTaskPopup(taskId) {
  * 
  * @param {number|string} taskId - The unique identifier of the task to be edited.
  */
+// function openEditTaskPopup(taskId) {
+//   let id = tasks.findIndex((task) => task.id == taskId);
+//   let currentSelectedTask = tasks[id];
+
+//   let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
+//   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
+//   openTaskPopupDiv.classList.add("d-none");
+//   editTaskPopupDiv.classList.remove("d-none");
+//   editTaskPopupDiv.innerHTML = renderEditTasksCardPopup(
+//     currentSelectedTask,
+//     taskId
+//   );
+// }
+
 function openEditTaskPopup(taskId) {
+  
   let id = tasks.findIndex((task) => task.id == taskId);
   let currentSelectedTask = tasks[id];
+
+  if (!currentSelectedTask) {
+    console.error("Fehler: Task nicht gefunden!");
+    return;
+  }
 
   let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
   openTaskPopupDiv.classList.add("d-none");
   editTaskPopupDiv.classList.remove("d-none");
-  editTaskPopupDiv.innerHTML = renderEditTasksCardPopup(
-    currentSelectedTask,
-    taskId
-  );
+
+  editTaskPopupDiv.innerHTML = renderEditTasksCardPopup(currentSelectedTask, taskId);
 }
 
 /**
@@ -70,7 +88,9 @@ function openEditTaskPopup(taskId) {
  */
 async function updateEditTask(event) {
   event.preventDefault();
-  let taskId = event.target.getAttribute("data-task-id");
+  //let taskId = event.target.getAttribute("data-task-id");
+  let taskId = event.currentTarget.getAttribute("data-task-id");
+
   if (!taskId) {
     console.error("Task ID fehlt");
     return;
