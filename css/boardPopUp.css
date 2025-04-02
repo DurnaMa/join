@@ -636,7 +636,7 @@ input[type='checkbox'] {
     padding-top: 25px;
     align-items: center;
     overflow-y: scroll;
-    height: 800px;
+    height: 760px;
     scrollbar-width: none;
   }
 
