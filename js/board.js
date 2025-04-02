@@ -34,22 +34,22 @@ async function initBoard() {
  * @function
  * @global
  */
-// function renderTasks() {
-//   document.getElementById("todo").innerHTML = "";
-//   document.getElementById("inprogress").innerHTML = "";
-//   document.getElementById("awaitfeedback").innerHTML = "";
-//   document.getElementById("done").innerHTML = "";
+function renderTasks() {
+  document.getElementById("todo").innerHTML = "";
+  document.getElementById("inprogress").innerHTML = "";
+  document.getElementById("awaitfeedback").innerHTML = "";
+  document.getElementById("done").innerHTML = "";
 
-//   tasks.forEach((task) => {
-//     let taskCard = generateTaskCard(task);
-//     let columnId = task.columnTitles
-//       ? task.columnTitles.toLowerCase().replace(/\s/g, "")
-//       : "todo";
-//     document.getElementById(columnId).appendChild(taskCard);
-//   });
+  tasks.forEach((task) => {
+    let taskCard = generateTaskCard(task);
+    let columnId = task.columnTitles
+      ? task.columnTitles.toLowerCase().replace(/\s/g, "")
+      : "todo";
+    document.getElementById(columnId).appendChild(taskCard);
+  });
 
-//   checkEmptyColumns();
-// }
+  checkEmptyColumns();
+}
 
 /**
  * Checks all columns in the document for child nodes and updates their content accordingly.
@@ -66,6 +66,14 @@ async function initBoard() {
 //     }
 //   });
 // }
+function checkEmptyColumns() {
+  document.querySelectorAll(".column").forEach((column) => {
+    if (!column.hasChildNodes() || column.children.length === 0) {
+      column.innerHTML = generateEmptyColumn(column.id);
+    }
+  });
+}
+
 
 /**
  * Generates an HTML string representing an empty column message based on the provided column ID.
@@ -94,11 +102,7 @@ function generateEmptyColumn(columnId) {
       break;
   }
 
-  return /*html*/ `
-    <div class="empty-column">
-      <p>${text}</p>
-    </div>
-  `;
+  return /*html*/ `<div class="empty-column"><p>${text}</p></div>`;
 }
 
 /**
@@ -140,9 +144,7 @@ function generateTaskCard(task) {
 
   chooseImgPriority(taskCard, task);
 
-  taskCard
-    .querySelector(".task-card-div")
-    .addEventListener("click", (event) => {
+  taskCard.querySelector(".task-card-div").addEventListener("click", (event) => {
       if (!event.target.classList.contains("move-btn")) {
         openTaskPopup(task.id);
       }
@@ -150,7 +152,6 @@ function generateTaskCard(task) {
 
   return taskCard;
 }
-
 
 /**
  * Sets the background color of a category element based on the task's category.
@@ -275,6 +276,13 @@ function updateTaskStatusInFirebase(taskId, newColumn) {
 function startDragging(event, id) {
   currentDraggedElement = id;
   event.dataTransfer.setData("text", id);
+  document.querySelectorAll(".column").forEach(column => {
+    let dragArea = document.createElement("div");
+    dragArea.classList.add("drag-area");
+    dragArea.setAttribute("ondragover", "allowDrop(event)");
+    dragArea.setAttribute("ondrop", `drop(event, '${column.id}')`);
+    column.appendChild(dragArea);
+  });
 }
 
 /**
@@ -289,7 +297,6 @@ function startDragging(event, id) {
 function allowDrop(event) {
   event.preventDefault();
 }
-
 
 /**
  * Handles the drop event for a drag-and-drop operation, updating the task's column
@@ -310,6 +317,7 @@ async function drop(event, column) {
     renderTasks();
     await patchDataToFirebase(`tasks/${task.id}`, { columnTitles: column });
   }
+  document.querySelectorAll(".drag-area").forEach(area => area.remove());
 }
 
 /**
@@ -778,52 +786,52 @@ function hideContactList(event) {
 document.addEventListener('click', hideContactList);
 
 // TEST!!!!!!!!!!!!!!!!
-function enableEmptyColumnDropEffect() {
-  const emptyColumns = document.querySelectorAll('.empty-column');
+// function enableEmptyColumnDropEffect() {
+//   const emptyColumns = document.querySelectorAll('.empty-column');
 
-  emptyColumns.forEach(column => {
-    column.addEventListener('dragover', (event) => {
-      allowDrop(event); // bereits vorhandene Funktion
-      column.classList.add('drag-over');
-    });
+//   emptyColumns.forEach(column => {
+//     column.addEventListener('dragover', (event) => {
+//       allowDrop(event); // bereits vorhandene Funktion
+//       column.classList.add('drag-over');
+//     });
 
-    column.addEventListener('dragleave', () => {
-      column.classList.remove('drag-over');
-    });
+//     column.addEventListener('dragleave', () => {
+//       column.classList.remove('drag-over');
+//     });
 
-    column.addEventListener('drop', async (event) => {
-      column.classList.remove('drag-over');
-      const columnId = column.dataset.column;
-      await drop(event, columnId); // bereits vorhandene Funktion
-    });
-  });
-}
-function checkEmptyColumns() {
-  const columns = ["todo", "inprogress", "awaitfeedback", "done"];
+//     column.addEventListener('drop', async (event) => {
+//       column.classList.remove('drag-over');
+//       const columnId = column.dataset.column;
+//       await drop(event, columnId); // bereits vorhandene Funktion
+//     });
+//   });
+// }
+// function checkEmptyColumns() {
+//   const columns = ["todo", "inprogress", "awaitfeedback", "done"];
 
-  columns.forEach((columnId) => {
-    const column = document.getElementById(columnId);
+//   columns.forEach((columnId) => {
+//     const column = document.getElementById(columnId);
 
-    if (column.children.length === 0) {
-      column.innerHTML = generateEmptyColumn(columnId);
-    }
-  });
+//     if (column.children.length === 0) {
+//       column.innerHTML = generateEmptyColumn(columnId);
+//     }
+//   });
 
-  enableEmptyColumnDropEffect(); // Drag-Highlight aktivieren
-}
-function renderTasks() {
-  document.getElementById("todo").innerHTML = "";
-  document.getElementById("inprogress").innerHTML = "";
-  document.getElementById("awaitfeedback").innerHTML = "";
-  document.getElementById("done").innerHTML = "";
+//   enableEmptyColumnDropEffect(); // Drag-Highlight aktivieren
+// }
+// function renderTasks() {
+//   document.getElementById("todo").innerHTML = "";
+//   document.getElementById("inprogress").innerHTML = "";
+//   document.getElementById("awaitfeedback").innerHTML = "";
+//   document.getElementById("done").innerHTML = "";
 
-  tasks.forEach((task) => {
-    let taskCard = generateTaskCard(task);
-    let columnId = task.columnTitles
-      ? task.columnTitles.toLowerCase().replace(/\s/g, "")
-      : "todo";
-    document.getElementById(columnId).appendChild(taskCard);
-  });
+//   tasks.forEach((task) => {
+//     let taskCard = generateTaskCard(task);
+//     let columnId = task.columnTitles
+//       ? task.columnTitles.toLowerCase().replace(/\s/g, "")
+//       : "todo";
+//     document.getElementById(columnId).appendChild(taskCard);
+//   });
 
-  checkEmptyColumns(); // ⬅️ Fügt leere Spalten + Drag-Effekt hinzu
-}
+//   checkEmptyColumns(); // ⬅️ Fügt leere Spalten + Drag-Effekt hinzu
+// }
