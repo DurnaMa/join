@@ -13,20 +13,6 @@ let contactColors = {};
  * @param {number} index - The index of the contact to select.
  * @throws {TypeError} Throws an error if the index is not a number.
  */
-// function selectContact(index) {
-//   currentSelectedContact = index;
-//   renderContactsList();
-
-//   let contact = contacts[currentSelectedContact];
-//   let phoneText;
-//   if (contact.phone) {
-//     phoneText = `<a class="contact-phone-link" href="tel:${contact.phone}">${contact.phone}</a>`;
-//   } else {
-//     phoneText = `<span class="no-phone">Leider liegt uns keine Telefonnummer vor</span>`;
-//   }
-
-//   contactDetailsHTML(contact, phoneText);
-// }
 function selectContact(index) {
   currentSelectedContact = index;
   renderContactsList();
@@ -178,10 +164,10 @@ function generateContactsList(i) {
  * @returns {string} The initials derived from the name. If the input is invalid or empty, returns "??".
  *
  * @example
- * generateInitials("John Doe"); // Returns "JD"
- * generateInitials("Alice"); // Returns "A"
- * generateInitials(""); // Returns "??"
- * generateInitials(123); // Returns "??"
+ * generateInitials("John Doe");
+ * generateInitials("Alice");
+ * generateInitials("");
+ * generateInitials(123);
  */
 function generateInitials(name) {
   if (typeof name !== "string" || name.trim() === "") return "??";
@@ -378,7 +364,7 @@ async function updateContact() {
   let email = document.getElementById("editContactEmail").value.trim();
   let phone = document.getElementById("editContactPhone").value.trim();
 
-  if (!validateContactData(name, email, phone)) {
+  if (!validateEditContactData(name, email, phone)) {
     return;
   }
 
@@ -391,8 +377,6 @@ async function updateContact() {
 
   try {
     await putDataToFirebase((path = "contacts/"), data, key);
-    // console.log(key);
-    // console.log("editContact erfolgreich");
   } catch (error) {
     console.error("Fehler bei der editcontact:", error);
   }

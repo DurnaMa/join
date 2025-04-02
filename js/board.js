@@ -5,6 +5,18 @@ let currentSelectedTask;
 let currentUsers = [];
 let currentPrio = [];
 
+/**
+ * Initializes the task board by loading necessary data and rendering tasks.
+ * 
+ * This asynchronous function:
+ * - Loads user data by calling `loadDataUsers()`.
+ * - Loads tasks by calling `loadTasks()`.
+ * - Renders the tasks on the board by calling `renderTasks()`.
+ * 
+ * @async
+ * @function initBoard
+ * @returns {Promise<void>} A promise that resolves when the board initialization is complete.
+ */
 async function initBoard() {
   await loadDataUsers();
   await loadTasks();
@@ -199,30 +211,9 @@ function taskColemTitel(task) {
  * Notes:
  * - If `task.users` is an array, each user object should have `color` and `initials` properties.
  * - If `task.users` is a string, it is assumed to be the name of a user, and the function will attempt to find the corresponding contact in the `contacts` array.
- * - If no matching contact is found for a string user, a default color of `#000` (black) is used.
  */
-// function userColor(task, usersContainer) {
-//   if (Array.isArray(task.users)) {
-//     task.users.forEach((user) => {
-//       let userDiv = document.createElement("div");
-//       userDiv.classList.add("tasks-user");
-//       userDiv.style.backgroundColor = user.color;
-//       userDiv.textContent = user.initials;
-//       usersContainer.appendChild(userDiv);
-//     });
-//   } else if (typeof task.users === "string") {
-//     let userDiv = document.createElement("div");
-//     userDiv.classList.add("tasks-user");
-//     const contact = contacts.find((c) => c.name === task.users);
-//     userDiv.style.backgroundColor = contact ? contact.color : "#000";
-//     userDiv.textContent = task.users;
-//     usersContainer.appendChild(userDiv);
-//   }
-// }
-
 function userColor(task, usersContainer) {
   usersContainer.innerHTML = "";
-
   if (Array.isArray(task.users)) {
     let maxUsersToShow = 4;
     let totalUsers = task.users.length;
@@ -238,7 +229,6 @@ function userColor(task, usersContainer) {
     if (totalUsers > maxUsersToShow) {
       let extraUsersDiv = document.createElement("div");
       extraUsersDiv.classList.add("tasks-user", "extra-users");
-      //extraUsersDiv.style.backgroundColor = "#888"; 
       extraUsersDiv.textContent = `+${totalUsers - maxUsersToShow}`;
       usersContainer.appendChild(extraUsersDiv);
     }
@@ -252,22 +242,50 @@ function userColor(task, usersContainer) {
   }
 }
 
-
+/**
+ * Updates the status of a task in Firebase by changing its column.
+ * 
+ * This function:
+ * - Finds the task in the `tasks` array by its `taskId`.
+ * - If the task is found, updates its `status` property to the `newColumn` value.
+ * - Sends the updated status to Firebase using the `patchDataToFirebase()` function.
+ * 
+ * @function updateTaskStatusInFirebase
+ * @param {string} taskId - The ID of the task to update.
+ * @param {string} newColumn - The new column (status) for the task.
+ */
 function updateTaskStatusInFirebase(taskId, newColumn) {
   let task = tasks.find((t) => t.id === taskId);
   if (task) {
     task.status = newColumn;
     patchDataToFirebase(`tasks/${taskId}`, { status: newColumn });
-  } else {
-    // console.log("Fehler", taskId);
   }
 }
 
+/**
+ * Initiates the dragging of an element by storing its ID and setting the drag data.
+ * 
+ * This function is called when a drag event starts on an element. It sets the `currentDraggedElement` 
+ * to the element's ID and stores the element's ID in the dataTransfer object for the drag operation.
+ * 
+ * @function startDragging
+ * @param {Event} event - The drag event triggered by the user.
+ * @param {string} id - The ID of the element being dragged.
+ */
 function startDragging(event, id) {
   currentDraggedElement = id;
   event.dataTransfer.setData("text", id);
 }
 
+/**
+ * Allows an element to accept a dragged item by preventing the default behavior.
+ * 
+ * This function is called when an element is a target for a drag-and-drop operation. It prevents 
+ * the default action to allow the element to accept the dragged content.
+ * 
+ * @function allowDrop
+ * @param {Event} event - The dragover event triggered when an element is being dragged over.
+ */
 function allowDrop(event) {
   event.preventDefault();
 }
@@ -450,8 +468,6 @@ async function saveTaskToFirebase(task) {
     );
 
     if (!response.ok) throw new Error("Fehler beim Speichern in Firebase!");
-
-    // console.log(`erfolgreich.`);
   } catch (error) {
     console.error("Fehler:", error);
   }
@@ -751,7 +767,7 @@ function hideContactList(event) {
   let contactList = document.getElementById('assignedContactsListPopUp');
   let contactContainer = document.querySelector('.assignedContainer');
 
-  if (!contactList || !contactContainer) return; // Überprüfung, ob die Elemente existieren
+  if (!contactList || !contactContainer) return;
 
   if (!contactContainer.contains(event.target) && !contactList.contains(event.target)) {
       contactList.classList.add('hidden');

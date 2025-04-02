@@ -1,6 +1,17 @@
 let subTasks = [];
 let selectedContacts = new Set();
 
+/**
+ * Initializes the "Add Task" functionality.
+ * 
+ * This asynchronous function:
+ * - Loads user data by calling `loadDataUsers()`.
+ * - Sets the minimum date restriction for the date input using `datelimit()`.
+ * 
+ * @async
+ * @function initAddTask
+ * @returns {Promise<void>} A promise that resolves when the initialization is complete.
+ */
 async function initAddTask() {
   await loadDataUsers();
   datelimit();
@@ -39,6 +50,20 @@ function setPriority(priority) {
   btnPriority(priority);
 }
 
+/**
+ * Updates the priority button styling based on the selected priority.
+ * 
+ * This function applies a specific CSS class and changes the corresponding priority 
+ * icon based on the given `priority` value.
+ * 
+ * Priority options:
+ * - `'urgent'`: Adds the class `prioUrgentRed` and updates the icon to `urgentWhite.png`.
+ * - `'medium'`: Adds the class `prioMediumYellow` and updates the icon to `mediumWhite.png`.
+ * - `'low'`: Adds the class `prioLowGreen` and updates the icon to `lowWhite.png`.
+ * 
+ * @function btnPriority
+ * @param {string} priority - The selected priority level (`'urgent'`, `'medium'`, or `'low'`).
+ */
 function btnPriority(priority) {
   if (priority === 'urgent') {
     prioUrgentEdit.classList.add('prioUrgentRed');
@@ -52,14 +77,35 @@ function btnPriority(priority) {
   }
 }
 
+/**
+ * Sets the task priority to "urgent".
+ * 
+ * Calls `setPriority('urgent')` to update the priority setting.
+ * 
+ * @function prioUrgent
+ */
 function prioUrgent() {
   setPriority('urgent');
 }
 
+/**
+ * Sets the task priority to "medium".
+ * 
+ * Calls `setPriority('medium')` to update the priority setting.
+ * 
+ * @function prioMedium
+ */
 function prioMedium() {
   setPriority('medium');
 }
 
+/**
+ * Sets the task priority to "low".
+ * 
+ * Calls `setPriority('low')` to update the priority setting.
+ * 
+ * @function prioLow
+ */
 function prioLow() {
   setPriority('low');
 }
@@ -117,6 +163,20 @@ function editSubTask(index) {
   currentSelectedSubTask = index;
 }
 
+/**
+ * Generates an HTML list item for a subtask.
+ * 
+ * This function creates an HTML string representing a subtask item, including:
+ * - A text display (`<span>`) and an editable input field (`<input>`).
+ * - Action buttons for editing, deleting, and saving the subtask.
+ * - A unique `data-index` attribute for tracking the subtask.
+ * 
+ * The function uses the global `subTasks` array to retrieve the subtask description.
+ * 
+ * @function generateSubTaskList
+ * @param {number} i - The index of the subtask in the `subTasks` array.
+ * @returns {string} An HTML string representing the subtask list item.
+ */
 function generateSubTaskList(i) {
   return /*html*/ `
     <li class="subTask" data-index="${i}">
@@ -149,37 +209,8 @@ function generateSubTaskList(i) {
  * description. If the subtask does not exist, a warning is logged to the console.
  * After updating, the subtask list is re-rendered.
  */
-// function saveSubTask(index) {
-//   let subInputEdit = document.getElementById(`subInputEdit-${index}`).value.trim();
-//   // console.log("Vorher:", subTasks);
-//   if (subTasks[index]) {
-//     subTasks[index].description = subInputEdit;
-//   } else {
-//     console.warn(`Subtask mit Index ${index} nicht gefunden.`);
-//   }
-//   // console.log("Nachher:", subTasks);
-//   renderSubTaskList();
-// }
-
-// function saveSubTask(index) {
-//   let subInputEdit = document.getElementById(`subInputEdit-${index}`).value.trim();
-//   if (subInputEdit === "") {
-//       alert("Das Feld darf nicht leer sein!");
-//       return;
-//   }
-//   if (subTasks[index]) {
-//       subTasks[index].description = subInputEdit;
-//   } 
-//   else {
-//       console.warn(`Subtask ${index} nicht gefunden.`);
-//   }
-//   renderSubTaskList();
-// }
-
 function saveSubTask(index) {
   let subInputEdit = document.getElementById(`subInputEdit-${index}`);
-  // let subInputSpan = document.getElementById(`subEditSpan-${index}`); 
-
   let inputValue = subInputEdit.value.trim();
 
   if (inputValue === "") {
@@ -192,15 +223,20 @@ function saveSubTask(index) {
   } else {
     console.warn(`Subtask ${index} nicht gefunden.`);
   }
-
   renderSubTaskList();
 }
 
-
+/**
+ * Deletes a subtask from the subTasks array and updates the UI.
+ * 
+ * This function removes the subtask at the specified index from the global `subTasks` array 
+ * and then calls `renderSubTaskList()` to refresh the displayed list of subtasks.
+ * 
+ * @function deleteSubTask
+ * @param {number} index - The index of the subtask to be deleted.
+ */
 function deleteSubTask(index) {
-  // console.log("Vorher:", subTasks);
   subTasks.splice(index, 1);
-  // console.log("Nachher:", subTasks);
   renderSubTaskList();
 }
 
@@ -228,37 +264,38 @@ function deleteSubTask(index) {
  */
 function contactList() {
   let contactList = document.getElementById('assignedContactsList');
-
   contactList.innerHTML = '';
-
   contacts.forEach((contact) => {
     const initials = generateInitials(contact.name);
     const isChecked = selectedContacts.has(contact.name) ? 'checked' : '';
-
     contactList.innerHTML += generateInitialsColor(contact, initials, isChecked);
   });
 
   contactList.classList.toggle('hidden');
   contactList.classList.toggle('d-flex');
-
   if (contactList.classList.contains('hidden')) {
     updateSelectedContactsDisplay();
   }
   openclassList();
 }
 
-// function generateInitialsColor(contact, initials, isChecked) {
-//   return /*html*/`
-//       <div class="assignedContactContent" onclick="toggleCheckbox(event, '${contact.name}')">
-//         <div class="assignedContacts">
-//           <span class="assignedShortcutName" style="background-color: ${contact.color};">${initials}</span>
-//           <span class="assignedName">${contact.name}</span>
-//         </div>
-//         <input type="checkbox" name="contact-${contact.name}" id="contact-${contact.name}" ${isChecked} onclick="toggleCheckbox(event, '${contact.name}')">
-//       </div>
-//     `;
-// }
-// Test!!!!
+/**
+ * Generates an HTML representation of a contact with initials and a checkbox.
+ * 
+ * This function creates a selectable contact element displaying:
+ * - The contact's initials with a background color.
+ * - The contact's full name.
+ * - A checkbox indicating whether the contact is selected.
+ * 
+ * The function checks if the contact is currently selected (`selectedContacts` set)
+ * and applies the `active` class accordingly.
+ * 
+ * @function generateInitialsColor
+ * @param {Object} contact - The contact object containing name and color properties.
+ * @param {string} initials - The initials of the contact.
+ * @param {string} isChecked - The `checked` attribute value (`'checked'` or an empty string).
+ * @returns {string} An HTML string representing the contact element.
+ */
 function generateInitialsColor(contact, initials, isChecked) {
   const isActive = selectedContacts.has(contact.name) ? 'active' : '';
 
@@ -273,6 +310,15 @@ function generateInitialsColor(contact, initials, isChecked) {
     `;
 }
 
+/**
+ * Toggles the visibility of assigned arrow icons.
+ * 
+ * This function switches the `d-none` class on the elements with IDs 
+ * `assignedArrowUp` and `assignedArrowDown`, effectively toggling 
+ * their visibility.
+ * 
+ * @function openclassList
+ */
 function openclassList() {
   document.getElementById('assignedArrowUp').classList.toggle('d-none');
   document.getElementById('assignedArrowDown').classList.toggle('d-none');
@@ -315,27 +361,8 @@ function updateSelectedContactsDisplay() {
  * name from the set and removes the CSS class. Finally, it updates the display of selected
  * contacts.
  */
-// function toggleCheckbox(event, contactName) {
-//   let checkbox =
-//     event.target.type === "checkbox"
-//       ? event.target
-//       : event.currentTarget.querySelector('input[type="checkbox"]');
-//   if (checkbox) {
-//     checkbox.checked = !checkbox.checked;
-//     event.currentTarget.classList.toggle("selectedContact", checkbox.checked);
-
-//     if (checkbox.checked) {
-//       selectedContacts.add(contactName);
-//     } else {
-//       selectedContacts.delete(contactName);
-//     }
-//     updateSelectedContactsDisplay();
-//   }
-// }
 function toggleCheckbox(event, contactName) {
-  let checkbox =
-    event.target.type === 'checkbox' ? event.target : event.currentTarget.querySelector('input[type="checkbox"]');
-
+  let checkbox = event.target.type === 'checkbox' ? event.target : event.currentTarget.querySelector('input[type="checkbox"]');
   if (checkbox) {
     checkbox.checked = !checkbox.checked;
     event.currentTarget.classList.toggle('selectedContact', checkbox.checked);
@@ -347,7 +374,6 @@ function toggleCheckbox(event, contactName) {
       selectedContacts.delete(contactName);
       event.currentTarget.classList.remove('active');
     }
-
     updateSelectedContactsDisplay();
   }
 }
@@ -372,7 +398,6 @@ function toggleCheckbox(event, contactName) {
  * 4. Ensures sub-tasks have a `completed` property, defaulting to `false` if not provided.
  * 5. Sends the task data to the server using `tryAndCatchBlockPostAddTask`.
  */
-
 async function postAddTask() {
   if (!validateForm()) {
     return; 
@@ -397,7 +422,6 @@ async function postAddTask() {
     category,
     users: selectedContacts,
   };
-
   await tryAndCatchBlockPostAddTask(data, popup);
 }
 
@@ -537,12 +561,32 @@ function chooseCategory(categoryIndex) {
   document.getElementById('categoryArrowDown').classList.remove('d-none');
 }
 
+/**
+ * Toggles the visibility of category arrow icons.
+ * 
+ * This function switches the `d-none` class on the elements with IDs 
+ * `categoryArrowUp` and `categoryArrowDown`, effectively toggling 
+ * their visibility.
+ * 
+ * @function openCategoryList
+ */
 function openCategoryList() {
   document.getElementById('categoryArrowUp').classList.toggle('d-none');
   document.getElementById('categoryArrowDown').classList.toggle('d-none');
 }
 
-
+/**
+ * Clears the form inputs and resets related UI elements.
+ * 
+ * This function resets the following elements:
+ * - Clears the title input (`#titleInput`), description textarea (`#descriptionTextarea`), and date input (`#date`).
+ * - Resets the category dropdown (`#dropdownCategory`) to its default text ("Select Task Category").
+ * - Clears the `subTasks` array and updates the subtask list UI (`#subTaskList`).
+ * - Clears the selected contacts set and updates the display (`#selectedContactsDisplay`).
+ * - Resets the task priority to "medium" by calling `prioMedium()`.
+ * 
+ * @function clearForm
+ */
 function clearForm() {
   document.getElementById('titleInput').value = ''; 
   document.getElementById('descriptionTextarea').value = ''; 
@@ -558,6 +602,21 @@ function clearForm() {
   prioMedium();
 }
 
+/**
+ * Handles clicks on the document to hide open contact and category lists when clicking outside of them.
+ * 
+ * This event listener listens for any click on the document and checks if the click occurs outside
+ * the assigned contacts list (`#assignedContactsList`) or the category list (`#categoryList`).
+ * If the click happens outside these elements, the corresponding list will be hidden by toggling 
+ * the `hidden` and `d-flex` classes.
+ * 
+ * It checks for clicks outside of:
+ * - The contact list (`#assignedContactsList`) and its container (`.assignedContainer`).
+ * - The category list (`#categoryList`) and its container (`.categoryContainer`).
+ * 
+ * @function documentClickHandler
+ * @listens document#click
+ */
 document.addEventListener('click', function (event) { 
   let contactList = document.getElementById('assignedContactsList');
   let categoryList = document.getElementById('categoryList');

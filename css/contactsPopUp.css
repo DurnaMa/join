@@ -67,7 +67,7 @@
 form {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 14px;
   width: 118%;
   margin-top: 50px;
 }

@@ -10,7 +10,6 @@
  */
 function openTaskPopup(taskId) {
   document.getElementById("bodyId").classList.add("overflow-hidden");
-  // console.log("Task ID:", taskId);
   let id = tasks.findIndex((task) => task.id == taskId);
   if (id === -1) {
     console.error("Task nicht gefunden:", taskId);
@@ -18,10 +17,6 @@ function openTaskPopup(taskId) {
   }
 
   let currentSelectedTask = tasks[id];
-  // console.log("Gewählte Aufgabe:", currentSelectedTask);
-  // console.log("Assigned Users:", currentSelectedTask.users);
-  // console.log("Subtasks:", currentSelectedTask.subTasks);
-
   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
   openTaskPopupDiv.classList.remove("d-none");
   openTaskPopupDiv.innerHTML = renderTasksCardPopup(currentSelectedTask);
@@ -98,7 +93,6 @@ async function updateEditTask(event) {
 
   try {
     await patchDataToFirebase(`tasks/${taskId}`, updatedTask);
-    // console.log("Task erfolgreich bearbeitet:", updatedTask);
     closeEditTaskCardPopUp();
     renderTasks();
   } catch (error) {
