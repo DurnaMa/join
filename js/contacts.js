@@ -13,20 +13,6 @@ let contactColors = {};
  * @param {number} index - The index of the contact to select.
  * @throws {TypeError} Throws an error if the index is not a number.
  */
-// function selectContact(index) {
-//   currentSelectedContact = index;
-//   renderContactsList();
-
-//   let contact = contacts[currentSelectedContact];
-//   let phoneText;
-//   if (contact.phone) {
-//     phoneText = `<a class="contact-phone-link" href="tel:${contact.phone}">${contact.phone}</a>`;
-//   } else {
-//     phoneText = `<span class="no-phone">Leider liegt uns keine Telefonnummer vor</span>`;
-//   }
-
-//   contactDetailsHTML(contact, phoneText);
-// }
 function selectContact(index) {
   currentSelectedContact = index;
   renderContactsList();
@@ -178,10 +164,10 @@ function generateContactsList(i) {
  * @returns {string} The initials derived from the name. If the input is invalid or empty, returns "??".
  *
  * @example
- * generateInitials("John Doe"); // Returns "JD"
- * generateInitials("Alice"); // Returns "A"
- * generateInitials(""); // Returns "??"
- * generateInitials(123); // Returns "??"
+ * generateInitials("John Doe");
+ * generateInitials("Alice");
+ * generateInitials("");
+ * generateInitials(123);
  */
 function generateInitials(name) {
   if (typeof name !== "string" || name.trim() === "") return "??";
@@ -305,7 +291,6 @@ function validateContactData(name, email, phone) {
     let errorNewContactName = document.getElementById("errorNewContactName")
     newContactName.classList.add("error");
     errorNewContactName.innerText = "Bitte keine Zahlen, Sonderzeichen oder leere Felder!";
-    // errorNewContactName.classList.toggle("d-none");
     return false;
   }else{
     newContactName.classList.remove("error");
@@ -316,7 +301,6 @@ function validateContactData(name, email, phone) {
     let errorNewContactEmail = document.getElementById("errorNewContactEmail")
     newContactEmail.classList.add("error");
     errorNewContactEmail.innerText = "Bitte eine gültige E-Mail-Adresse eingeben!";
-    // errorNewContactEmail.classList.toggle("d-none");
     return false;
   }else{
     newContactEmail.classList.remove("error");
@@ -327,7 +311,6 @@ function validateContactData(name, email, phone) {
     let errorNewContactPhone = document.getElementById("errorNewContactPhone")
     newContactPhone.classList.add("error");
     errorNewContactPhone.innerText = "Die Telefonnummer darf nur Zahlen enthalten!";
-    // errorNewContactPhone.classList.toggle("d-none");
     return false;
   }else{
     newContactPhone.classList.remove("error");
@@ -347,7 +330,6 @@ function validateEditContactData(name, email, phone) {
     let errorEditContactName = document.getElementById("errorEditContactName")
     editContactName.classList.add("error");
     errorEditContactName.innerText = "Bitte keine Zahlen, Sonderzeichen oder leere Felder!";
-    // errorNewContactName.classList.toggle("d-none");
     return false;
   }else{
     editContactName.classList.remove("error");
@@ -358,7 +340,6 @@ function validateEditContactData(name, email, phone) {
     let errorEditContactEmail = document.getElementById("errorEditContactEmail")
     editContactEmail.classList.add("error");
     errorEditContactEmail.innerText = "Bitte eine gültige E-Mail-Adresse eingeben!";
-    // errorNewContactEmail.classList.toggle("d-none");
     return false;
   }else{
     editContactEmail.classList.remove("error");
@@ -369,7 +350,6 @@ function validateEditContactData(name, email, phone) {
     let errorEditContactPhone = document.getElementById("errorEditContactPhone")
     editContactPhone.classList.add("error");
     errorEditContactPhone.innerText = "Die Telefonnummer darf nur Zahlen enthalten!";
-    // errorNewContactPhone.classList.toggle("d-none");
     return false;
   }else{
     editContactPhone.classList.remove("error");
@@ -406,8 +386,6 @@ async function updateContact() {
 
   try {
     await putDataToFirebase((path = "contacts/"), data, key);
-    // console.log(key);
-    // console.log("editContact erfolgreich");
   } catch (error) {
     console.error("Fehler bei der editcontact:", error);
   }

@@ -64,13 +64,11 @@ function validateForm() {
   });
 
   if (categoryDropdown.textContent.trim() === 'Select Task Category' || !categoryDropdown.textContent.trim()) {
-    // categoryDropdown.classList.add('error');
     categoryDropdown.style.border = '2px solid red';
     categoryError.textContent = 'Category is required.';
     isValid = false;
   }
   categoryDropdown.addEventListener('click', () => {
-    // categoryDropdown.classList.remove('error');
     categoryDropdown.style.border = '';
     categoryError.textContent = '';
   });

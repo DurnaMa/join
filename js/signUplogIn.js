@@ -88,7 +88,7 @@ async function toTheRegistration() {
       emailInput.value = "";
       passwordInput.value = "";
       confirmPassword.value = "";
-      // console.log("Anmeldung erfolgreich");
+
       if (popup) {
         popup.classList.remove("d-none");
       }
@@ -169,12 +169,6 @@ function emailValidation() {
  */
 function logIn() {
   const { checkbox, errorDiv, email, password } = logInVarible();
-  // if (!checkbox.checked) {
-  //   errorDiv.textContent =
-  //     "Bitte akzeptieren Sie die Bedingungen (Remember me).";
-  //   errorDiv.style.color = "red";
-  //   return false;
-  // }
   const user = contacts.find(
     (contact) => contact.email === email && contact.password === password
   );
