@@ -184,7 +184,6 @@ async function postAddTask() {
   function chooseCategory(categoryIndex) {
     const categoryList = document.getElementById('categoryList');
     const dropdownCategory = document.getElementById('dropdownCategory');
-  
     if (!categoryList || !dropdownCategory) {
       console.error('categoryList oder dropdownCategory ist nicht definiert.');
       return;
@@ -264,7 +263,6 @@ async function postAddTask() {
             contactList.classList.remove('d-flex');
         }
     }
-  
     if (categoryContainer && categoryList) {
         if (!categoryContainer.contains(event.target) && !categoryList.contains(event.target)) {
             categoryList.classList.add('hidden');

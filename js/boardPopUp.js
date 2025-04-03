@@ -30,19 +30,6 @@ function openTaskPopup(taskId) {
  * 
  * @param {number|string} taskId - The unique identifier of the task to be edited.
  */
-// function openEditTaskPopup(taskId) {
-//   let id = tasks.findIndex((task) => task.id == taskId);
-//   let currentSelectedTask = tasks[id];
-
-//   let editTaskPopupDiv = document.getElementById("editTaskPopupDiv");
-//   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
-//   openTaskPopupDiv.classList.add("d-none");
-//   editTaskPopupDiv.classList.remove("d-none");
-//   editTaskPopupDiv.innerHTML = renderEditTasksCardPopup(
-//     currentSelectedTask,
-//     taskId
-//   );
-// }
 function openEditTaskPopup(taskId) {
   let id = tasks.findIndex((task) => task.id == taskId);
   let currentSelectedTask = tasks[id];

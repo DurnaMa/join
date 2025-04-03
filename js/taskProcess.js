@@ -161,19 +161,9 @@ async function deleteTask(taskId) {
     let dueDate = document.getElementById("date").value;
     let category = document.getElementById("dropdownCategory").innerText;
     selectedContacts = Array.from(selectedContacts);
-  
     let priority = prioCategory();
   
-    let data = {columnTitles: "To Do", title, description, dueDate, priority, subTasks,
-      subTasks: subTasks.map((subTask) => ({description: subTask.description, completed: subTask.completed ?? false,})),
-      category, users: selectedContacts,
-    };
-  
-    try {
-      await postDataToFirebase("tasks/", data);
-    } catch (error) {
-      console.error(error);
-    }
+    await creatingTaskBtn(title, description, dueDate, priority, category);
   
     await loadTasks();
     closeAddTaskPopUp();
@@ -181,6 +171,20 @@ async function deleteTask(taskId) {
     location.reload();
   }
   
+async function creatingTaskBtn(title, description, dueDate, priority, category) {
+  let data = {
+    columnTitles: "To Do", title, description, dueDate, priority, subTasks,
+    subTasks: subTasks.map((subTask) => ({ description: subTask.description, completed: subTask.completed ?? false, })),
+    category, users: selectedContacts,
+  };
+
+  try {
+    await postDataToFirebase("tasks/", data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
   /**
    * Determines the priority category based on the CSS class of the priority elements.
    *
@@ -196,16 +200,21 @@ async function deleteTask(taskId) {
   
     let priority = "";
   
-    if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
-      priority = "Urgent";
-    } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
-      priority = "Medium";
-    } else if (prioLowEdit.classList.contains("prioLowGreen")) {
-      priority = "Low";
-    }
+    priority = checkPrioStatus(prioUrgentEdit, priority, prioMediumEdit, prioLowEdit);
     return priority;
   }
   
+function checkPrioStatus(prioUrgentEdit, priority, prioMediumEdit, prioLowEdit) {
+  if (prioUrgentEdit.classList.contains("prioUrgentRed")) {
+    priority = "Urgent";
+  } else if (prioMediumEdit.classList.contains("prioMediumYellow")) {
+    priority = "Medium";
+  } else if (prioLowEdit.classList.contains("prioLowGreen")) {
+    priority = "Low";
+  }
+  return priority;
+}
+
   /**
    * Asynchronously creates a new task and assigns it to the "To Do" column.
    * 
@@ -225,27 +234,30 @@ async function deleteTask(taskId) {
     let description = document.getElementById("descriptionTextarea").value;
     let dueDate = document.getElementById("date").value;
     let category = document.getElementById("dropdownCategory").innerText;
-  
     selectedContacts = Array.from(selectedContacts);
-  
     let priority = prioCategory();
   
-    let data = {columnTitles: "To Do", title, description, dueDate, priority, subTasks,
-      subTasks: subTasks.map((subTask) => ({description: subTask.description, completed: subTask.completed ?? false,})),
-      category, users: selectedContacts,
-    };
-  
-    try {
-      await postDataToFirebase("tasks/", data);
-    } catch (error) {
-      console.error(error);
-    }
+    await creatingTaskToDo(title, description, dueDate, priority, category);
   
     await loadTasks();
     closeAddTaskPopUpToDo();
     location.reload();
   }
   
+async function creatingTaskToDo(title, description, dueDate, priority, category) {
+  let data = {
+    columnTitles: "To Do", title, description, dueDate, priority, subTasks,
+    subTasks: subTasks.map((subTask) => ({ description: subTask.description, completed: subTask.completed ?? false, })),
+    category, users: selectedContacts,
+  };
+
+  try {
+    await postDataToFirebase("tasks/", data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
   /**
    * Asynchronously creates a new task with the "In Progress" status and posts it to Firebase.
    * The task details are retrieved from the DOM elements, including title, description, due date,
@@ -265,27 +277,30 @@ async function deleteTask(taskId) {
     let description = document.getElementById("descriptionTextarea").value;
     let dueDate = document.getElementById("date").value;
     let category = document.getElementById("dropdownCategory").innerText;
-  
     selectedContacts = Array.from(selectedContacts);
-  
     let priority = prioCategory();
   
-    let data = {columnTitles: "In Progress", title, description, dueDate, priority, subTasks,
-      subTasks: subTasks.map((subTask) => ({description: subTask.description, completed: subTask.completed ?? false,})),
-      category, users: selectedContacts,
-    };
-  
-    try {
-      await postDataToFirebase("tasks/", data);
-    } catch (error) {
-      console.error(error);
-    }
+    await creatingTaskProgress(title, description, dueDate, priority, category);
   
     await loadTasks();
     closeAddTaskPopUpInProgress();
     location.reload();
   }
   
+async function creatingTaskProgress(title, description, dueDate, priority, category) {
+  let data = {
+    columnTitles: "In Progress", title, description, dueDate, priority, subTasks,
+    subTasks: subTasks.map((subTask) => ({ description: subTask.description, completed: subTask.completed ?? false, })),
+    category, users: selectedContacts,
+  };
+
+  try {
+    await postDataToFirebase("tasks/", data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
   /**
    * Asynchronously creates a new task with the "Await Feedback" column title and saves it to Firebase.
    * The task includes details such as title, description, due date, category, priority, subtasks, and assigned users.
@@ -304,27 +319,30 @@ async function deleteTask(taskId) {
     let description = document.getElementById("descriptionTextarea").value;
     let dueDate = document.getElementById("date").value;
     let category = document.getElementById("dropdownCategory").innerText;
-  
     selectedContacts = Array.from(selectedContacts);
-  
     let priority = prioCategory();
   
-    let data = {columnTitles: "Await Feedback", title, description, dueDate, priority, subTasks,
-      subTasks: subTasks.map((subTask) => ({description: subTask.description, completed: subTask.completed ?? false,})),
-      category, users: selectedContacts,
-    };
-  
-    try {
-      await postDataToFirebase("tasks/", data);
-    } catch (error) {
-      console.error(error);
-    }
+    await creatingTaskFeedback(title, description, dueDate, priority, category);
   
     await loadTasks();
     closeAddTaskPopUpAwaitFeedback();
     location.reload();
   }
   
+async function creatingTaskFeedback(title, description, dueDate, priority, category) {
+  let data = {
+    columnTitles: "Await Feedback", title, description, dueDate, priority, subTasks,
+    subTasks: subTasks.map((subTask) => ({ description: subTask.description, completed: subTask.completed ?? false, })),
+    category, users: selectedContacts,
+  };
+
+  try {
+    await postDataToFirebase("tasks/", data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
   /**
    * Handles the addition of a new subtask through a popup input field.
    * 
