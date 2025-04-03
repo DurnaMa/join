@@ -658,6 +658,7 @@
 @media screen and (max-width: 400px){
   .column{
     width: 80vw;
+    gap: 10px;
   }
 
   .task-card{
