@@ -217,7 +217,6 @@ function saveSubTask(index) {
     subInputEdit.placeholder = "Bitte fülle dieses Feld aus!";
     return;
   }
-
   if (subTasks[index]) {
     subTasks[index].description = inputValue;
   } else {
@@ -408,7 +407,27 @@ async function postAddTask() {
 
   priority = ifConditionPostAddTask(prioUrgentEdit, priority, prioMediumEdit, prioLowEdit);
 
-  let data = {
+  let data = taskData(title, description, dueDate, priority, category);
+  await tryAndCatchBlockPostAddTask(data, popup);
+}
+
+/**
+ * Creates a task data object with the provided values and additional default properties.
+ * 
+ * This function generates a structured task object to be stored or sent to a database.
+ * It includes metadata such as title, description, due date, priority, category, and selected users.
+ * The `subTasks` array is also included, with each subtask containing a description and a `completed` status.
+ * 
+ * @function taskData
+ * @param {string} title - The title of the task.
+ * @param {string} description - A detailed description of the task.
+ * @param {string} dueDate - The due date of the task (in `YYYY-MM-DD` format).
+ * @param {string} priority - The priority level of the task (`urgent`, `medium`, or `low`).
+ * @param {string} category - The task's category.
+ * @returns {Object} A task object ready to be saved or transmitted.
+ */
+function taskData(title, description, dueDate, priority, category) {
+  return {
     columnTitles: 'To Do',
     title,
     description,
@@ -422,9 +441,7 @@ async function postAddTask() {
     category,
     users: selectedContacts,
   };
-  await tryAndCatchBlockPostAddTask(data, popup);
 }
-
 
 /**
  * Handles the process of posting task data to Firebase and managing UI updates.
@@ -618,10 +635,7 @@ function clearForm() {
  * @listens document#click
  */
 document.addEventListener('click', function (event) { 
-  let contactList = document.getElementById('assignedContactsList');
-  let categoryList = document.getElementById('categoryList');
-  let contactContainer = document.querySelector('.assignedContainer');
-  let categoryContainer = document.querySelector('.categoryContainer');
+  let { contactContainer, contactList, categoryContainer, categoryList } = closeContentVariablen();
 
   if (contactContainer && contactList) {
       if (!contactContainer.contains(event.target) && !contactList.contains(event.target)) {
@@ -637,3 +651,27 @@ document.addEventListener('click', function (event) {
       }
   }
 });
+
+/**
+ * Retrieves DOM elements related to contact and category UI components.
+ * 
+ * This function selects and returns the following elements:
+ * - `#assignedContactsList`: The list element containing assigned contacts.
+ * - `.assignedContainer`: The container for the assigned contacts.
+ * - `#categoryList`: The list element containing categories.
+ * - `.categoryContainer`: The container for the categories.
+ * 
+ * @function closeContentVariablen
+ * @returns {Object} An object containing the selected DOM elements:
+ * - `contactContainer` {Element|null}
+ * - `contactList` {Element|null}
+ * - `categoryContainer` {Element|null}
+ * - `categoryList` {Element|null}
+ */
+function closeContentVariablen() {
+  let contactList = document.getElementById('assignedContactsList');
+  let categoryList = document.getElementById('categoryList');
+  let contactContainer = document.querySelector('.assignedContainer');
+  let categoryContainer = document.querySelector('.categoryContainer');
+  return { contactContainer, contactList, categoryContainer, categoryList };
+}

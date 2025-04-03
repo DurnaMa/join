@@ -43,9 +43,7 @@ function openTaskPopup(taskId) {
 //     taskId
 //   );
 // }
-
 function openEditTaskPopup(taskId) {
-  
   let id = tasks.findIndex((task) => task.id == taskId);
   let currentSelectedTask = tasks[id];
 
@@ -58,7 +56,6 @@ function openEditTaskPopup(taskId) {
   let openTaskPopupDiv = document.getElementById("openTaskPopupDiv");
   openTaskPopupDiv.classList.add("d-none");
   editTaskPopupDiv.classList.remove("d-none");
-
   editTaskPopupDiv.innerHTML = renderEditTasksCardPopup(currentSelectedTask, taskId);
 }
 
@@ -88,29 +85,37 @@ function openEditTaskPopup(taskId) {
  */
 async function updateEditTask(event) {
   event.preventDefault();
-  //let taskId = event.target.getAttribute("data-task-id");
   let taskId = event.currentTarget.getAttribute("data-task-id");
-
-  if (!taskId) {
-    console.error("Task ID fehlt");
-    return;
-  }
-
   let { existingTask, updatedTitle, updatedDueDate, updatedDescription, updatedPriority } = await updateVariables(taskId);
-
   let updatedContacts = {};
   Array.from(selectedContacts).forEach((name, index) => {
     updatedContacts[index] = name;
   });
 
   let newSubtasks = subTaskList(existingTask);
-  if (!updatedTitle || !updatedDueDate) {
-    alert("Bitte fülle alle Pflichtfelder aus.");
-    return;
-  }
-
   let updatedTask = updateData(existingTask, updatedTitle, updatedDescription, updatedDueDate, updatedPriority, updatedContacts, newSubtasks);
 
+  await sendingEditDataToFirebase(taskId, updatedTask);
+  await loadTasks();
+}
+
+/**
+ * Sends updated task data to Firebase and updates the UI accordingly.
+ * 
+ * This asynchronous function:
+ * - Sends a PATCH request to Firebase to update the task data using `patchDataToFirebase()`.
+ * - Closes the task editing popup using `closeEditTaskCardPopUp()`.
+ * - Renders the updated task list with `renderTasks()`.
+ * 
+ * If an error occurs during the update, it is logged to the console.
+ * 
+ * @async
+ * @function sendingDataToFirebase
+ * @param {string} taskId - The ID of the task to be updated.
+ * @param {Object} updatedTask - The task data to update in Firebase.
+ * @returns {Promise<void>} A promise that resolves when the task has been updated and the UI refreshed.
+ */
+async function sendingEditDataToFirebase(taskId, updatedTask) {
   try {
     await patchDataToFirebase(`tasks/${taskId}`, updatedTask);
     closeEditTaskCardPopUp();
@@ -118,8 +123,6 @@ async function updateEditTask(event) {
   } catch (error) {
     console.error("Fehler beim Bearbeiten der Aufgabe:", error);
   }
-
-  await loadTasks();
 }
 
 /**
@@ -385,7 +388,6 @@ function closeEditTaskCardPopUp() {
  */
 function contactListPopUp() {
   let contactList = document.getElementById("assignedContactsListPopUp");
-  
   contactList.innerHTML = contacts
     .map((contact) => {
       const initials = generateInitials(contact.name);

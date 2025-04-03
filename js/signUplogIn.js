@@ -46,70 +46,11 @@ async function postData(path, data) {
  *
  * @throws {Error} Logs an error message and displays a registration failure message if an exception occurs.
  */
-// async function toTheRegistration() {
-//   let { errorDiv, passwordErrorDiv, checkboxErrorDiv, checkbox, nameInput, emailInput, passwordInput, popup } =
-//     registrationVariables();
-
-//   errorDiv.textContent = '';
-//   passwordErrorDiv.textContent = '';
-//   checkboxErrorDiv.textContent = '';
-
-//   if (!checkbox.checked) {
-//     checkboxErrorDiv.textContent = 'Accept the Privacy Policy';
-//     checkboxErrorDiv.style.color = 'red';
-//     return false;
-//   }
-
-//   if (nameInput.value && emailInput.value && passwordInput.value) {
-//     try {
-//       await loadContacts();
-//       let emailExists = contacts.find((contact) => contact.email === emailInput.value);
-//       if (emailExists) {
-//         errorDiv.textContent = 'Email already exists';
-//         return false;
-//       }
-
-//       function getRandomColorFromArray() {
-//         return colorPalette[Math.floor(Math.random() * colorPalette.length)];
-//       }
-
-//       let data = {
-//         name: nameInput.value,
-//         email: emailInput.value,
-//         password: passwordInput.value,
-//         color: getRandomColorFromArray(),
-//       };
-//       let result = await postData('/contacts', data);
-//       if (result && result.name) {
-//         contacts.push(data);
-//       }
-//       nameInput.value = '';
-//       emailInput.value = '';
-//       passwordInput.value = '';
-//       confirmPassword.value = '';
-
-//       if (popup) {
-//         popup.classList.remove('d-none');
-//       }
-//       setTimeout(() => {
-//         window.location.href = '/index.html';
-//       }, 2000);
-//     } catch (error) {
-//       console.error('Fehler bei der Anmeldung:', error);
-//       errorDiv.textContent = 'Registration failed. Please try again.';
-//     }
-//   } else {
-//     errorDiv.textContent = 'Please fill in all fields';
-//   }
-// }
-
 async function toTheRegistration() {
   let { errorDiv, passwordErrorDiv, checkboxErrorDiv, checkbox, nameInput, emailInput, passwordInput, popup } = registrationVariables();
   errorDiv.textContent = passwordErrorDiv.textContent = checkboxErrorDiv.textContent = '';
-
   if (!checkbox.checked) return (checkboxErrorDiv.textContent = 'Accept the Privacy Policy', checkboxErrorDiv.style.color = 'red', false);
   if (!nameInput.value || !emailInput.value || !passwordInput.value) return (errorDiv.textContent = 'Please fill in all fields');
-
   try {
     await loadContacts();
     if (contacts.some(c => c.email === emailInput.value)) return (errorDiv.textContent = 'Email already exists', false);
@@ -197,11 +138,7 @@ function logIn() {
     errorDiv.textContent = 'Login erfolgreich!';
     errorDiv.style.color = 'green';
     sessionStorage.setItem('fullName', user.name);
-    const initials = user.name
-      .split(' ')
-      .map((initials) => initials[0])
-      .join('')
-      .toUpperCase();
+    const initials = user.name.split(' ').map((initials) => initials[0]).join('').toUpperCase();
     sessionStorage.setItem('userInitials', initials);
     window.location.href = './pages/summary.html';
     return true;
@@ -260,10 +197,8 @@ function guestLogin() {
  */
 function showMobileGreetings() {
   const isMobile = window.matchMedia('(max-width: 992px)').matches;
-
   if (isMobile) {
     const mobileGreetings = document.getElementById('mobileGreetings');
-
     if (mobileGreetings) {
       mobileGreetings.style.display = 'flex';
       mobileGreetings.style.opacity = 1;

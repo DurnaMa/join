@@ -16,7 +16,6 @@ let contactColors = {};
 function selectContact(index) {
   currentSelectedContact = index;
   renderContactsList();
-
   let contact = contacts[currentSelectedContact];
   let phoneText;
   if (contact.phone) {
@@ -26,16 +25,6 @@ function selectContact(index) {
   }
 
   contactDetailsHTML(contact, phoneText);
-
-  setTimeout(() => {
-    const contactItems = document.querySelectorAll(".contacts-list");
-
-    contactItems.forEach(item => item.classList.remove("active"));
-
-    if (contactItems[currentSelectedContact]) {
-      contactItems[currentSelectedContact].classList.add("active");
-    }
-  }, 0);
 }
 
 /**
@@ -113,7 +102,6 @@ function contactDetailsHTML(contact, phoneText) {
 function renderContactsList() {
   let contactsList = document.getElementById("scrollbar");
   contactsList.innerHTML = "";
-
   contacts.sort((a, b) => a.name.localeCompare(b.name));
 
   let lastLetter = "";
@@ -141,9 +129,7 @@ function renderContactsList() {
  */
 function generateContactsList(i) {
   const initials = generateInitials(contacts[i].name);
-
   let color = contacts[i].color ? contacts[i].color : "#000000";
-
   return /*html*/ `
     <div onclick="selectContact(${i})" class="contacts-list">
       <div class="contacts-abbreviation-div" style="background-color: ${color};">
@@ -259,13 +245,31 @@ async function saveContact() {
     return;
   }
 
-  let data = {
-    name: name,
-    email: email,
-    phone: phone,
-    color: getRandomColorFromArray(),
-  };
+  let data = {name: name, email: email, phone: phone, color: getRandomColorFromArray(),};
 
+  await savingOnFirebase(data);
+
+  await loadDataUsers();
+  closePopUp();
+  document.getElementById("scrollbar").innerHTML = "";
+  renderContactsList();
+}
+
+/**
+ * Saves a new contact to Firebase and clears the input fields upon success.
+ * 
+ * This asynchronous function:
+ * - Sends the given contact data to Firebase using `postDataToFirebase()` with the `/contacts` endpoint.
+ * - Clears the input fields for name, email, and phone after successful submission.
+ * 
+ * If an error occurs during the process, it is logged to the console.
+ * 
+ * @async
+ * @function savingOnFirebase
+ * @param {Object} data - The contact data to be saved (e.g., name, email, phone).
+ * @returns {Promise<void>} A promise that resolves when the contact is saved and inputs are cleared.
+ */
+async function savingOnFirebase(data) {
   try {
     await postDataToFirebase("/contacts", data);
     document.getElementById("newContactName").value = "";
@@ -274,13 +278,25 @@ async function saveContact() {
   } catch (error) {
     console.error("Fehler beim Hinzufügen des Kontakts:", error);
   }
-
-  await loadDataUsers();
-  closePopUp();
-  document.getElementById("scrollbar").innerHTML = "";
-  renderContactsList();
 }
 
+/**
+ * Validates a form field against a regular expression and displays an error message if invalid.
+ * 
+ * This function:
+ * - Tests the input `value` against the provided `regex`.
+ * - If the test fails, it applies an error style to the input field, shows the error message, 
+ *   and returns `false`.
+ * - If the test passes, it removes any error styling and hides the error message, then returns `true`.
+ * 
+ * @function validateField
+ * @param {string} value - The value to validate.
+ * @param {RegExp} regex - The regular expression to test the value against.
+ * @param {string} fieldId - The ID of the input field to apply validation styling.
+ * @param {string} errorId - The ID of the element where the error message is displayed.
+ * @param {string} errorMessage - The message to display if validation fails.
+ * @returns {boolean} `true` if the value is valid, otherwise `false`.
+ */
 function validateField(value, regex, fieldId, errorId, errorMessage) {
   const field = document.getElementById(fieldId);
   const errorField = document.getElementById(errorId);
@@ -296,6 +312,22 @@ function validateField(value, regex, fieldId, errorId, errorMessage) {
   }
 }
 
+/**
+ * Validates contact form data including name, email, and phone number.
+ * 
+ * This function uses `validateField()` to validate each input:
+ * - `name`: Must contain only letters and spaces (no numbers or special characters).
+ * - `email`: Must follow a standard email format.
+ * - `phone`: Must contain only numeric digits.
+ * 
+ * Displays specific error messages and styles the input fields accordingly.
+ * 
+ * @function validateContactData
+ * @param {string} name - The contact's name to validate.
+ * @param {string} email - The contact's email to validate.
+ * @param {string} phone - The contact's phone number to validate.
+ * @returns {boolean} `true` if all fields are valid, otherwise `false`.
+ */
 function validateContactData(name, email, phone) {
   const nameValid = validateField(name, /^[A-Za-zÄÖÜäöüß\s]+$/, "newContactName", "errorNewContactName","Bitte keine Zahlen, Sonderzeichen oder leere Felder!"
   );
@@ -306,6 +338,24 @@ function validateContactData(name, email, phone) {
   return nameValid && emailValid && phoneValid;
 }
 
+/**
+ * Validates an input field during edit mode and displays an error message if the value is invalid.
+ * 
+ * This function:
+ * - Tests the input `value` against the provided regular expression `regex`.
+ * - If the value does not match, it adds an error class to the field, shows the error message, and returns `false`.
+ * - If the value is valid, it removes the error class, hides the error message, and returns `true`.
+ * 
+ * Intended for use in edit forms where real-time or on-submit validation is required.
+ * 
+ * @function validateEditField
+ * @param {string} value - The value to validate.
+ * @param {RegExp} regex - The regular expression to validate the value against.
+ * @param {string} fieldId - The ID of the input field to apply validation styling.
+ * @param {string} errorId - The ID of the element where the error message should be shown.
+ * @param {string} errorMessage - The error message to display if validation fails.
+ * @returns {boolean} `true` if the value is valid, otherwise `false`.
+ */
 function validateEditField(value, regex, fieldId, errorId, errorMessage) {
 const field = document.getElementById(fieldId);
 const errorField = document.getElementById(errorId);
@@ -321,6 +371,22 @@ if (!regex.test(value)) {
 }
 }
 
+/**
+ * Validates the edited contact data including name, email, and phone number.
+ * 
+ * This function uses `validateField()` to check the following fields:
+ * - `editContactName`: Must only contain letters and spaces (no numbers or special characters).
+ * - `editContactEmail`: Must be a valid email format.
+ * - `editContactPhone`: Must contain only digits.
+ * 
+ * If any of the fields are invalid, appropriate error messages are shown and the function returns `false`.
+ * 
+ * @function validateEditContactData
+ * @param {string} name - The edited name of the contact.
+ * @param {string} email - The edited email address of the contact.
+ * @param {string} phone - The edited phone number of the contact.
+ * @returns {boolean} `true` if all fields are valid, otherwise `false`.
+ */
 function validateEditContactData(name, email, phone) {
 const nameValid = validateField(name, /^[A-Za-zÄÖÜäöüß\s]+$/, "editContactName", "errorEditContactName","Bitte keine Zahlen, Sonderzeichen oder leere Felder!"
 );
@@ -344,29 +410,58 @@ async function updateContact() {
   let name = document.getElementById("editContactName").value.trim();
   let email = document.getElementById("editContactEmail").value.trim();
   let phone = document.getElementById("editContactPhone").value.trim();
-
   if (!validateEditContactData(name, email, phone)) {
     return;
   }
 
-  let data = {
-    name: name,
-    email: email,
-    phone: phone,
-    color: getRandomColorFromArray(),
-  };
-
-  try {
-    await putDataToFirebase((path = "contacts/"), data, key);
-  } catch (error) {
-    console.error("Fehler bei der editcontact:", error);
-  }
-
+  let data = updateContentContact(name, email, phone);
+  await sendingUpdateContact(data, key);
   await loadDataUsers();
   closePopUp();
   document.getElementById("scrollbar").innerHTML = "";
   renderContactsList();
   selectContact(currentSelectedContact);
+}
+
+/**
+ * Sends updated contact data to Firebase using a PUT request.
+ * 
+ * This asynchronous function updates a contact entry in Firebase at the specified key.
+ * If the operation fails, an error message is logged to the console.
+ * 
+ * @async
+ * @function sendingUpdateContact
+ * @param {Object} data - The updated contact data to be saved.
+ * @param {string} key - The unique key (ID) of the contact in Firebase.
+ * @returns {Promise<void>} A promise that resolves when the contact has been successfully updated.
+ */
+async function sendingUpdateContact(data, key) {
+  try {
+    await putDataToFirebase((path = "contacts/"), data, key);
+  } catch (error) {
+    console.error("Fehler bei der editcontact:", error);
+  }
+}
+
+/**
+ * Creates an updated contact object with a new random color.
+ * 
+ * This function returns a new contact object containing the provided name, email, and phone,
+ * and assigns a random color using `getRandomColorFromArray()`.
+ * 
+ * @function updateContentContact
+ * @param {string} name - The updated name of the contact.
+ * @param {string} email - The updated email address of the contact.
+ * @param {string} phone - The updated phone number of the contact.
+ * @returns {Object} An object representing the updated contact data.
+ */
+function updateContentContact(name, email, phone) {
+  return {
+    name: name,
+    email: email,
+    phone: phone,
+    color: getRandomColorFromArray(),
+  };
 }
 
 /**
