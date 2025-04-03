@@ -112,26 +112,13 @@ function generateEmptyColumn(columnId) {
  * @returns {HTMLDivElement} The generated task card element.
  */
 function generateTaskCard(task) {
-  let completedSubtasks = task.subTasks ? task.subTasks.filter((st) => st.completed).length : 0;
-  let totalSubtasks = task.subTasks ? task.subTasks.length : 0;
-
-  let taskCard = document.createElement("div");
-  taskCard.classList.add("task-card");
-  taskCard.id = `task-${task.id}`;
-  taskCard.draggable = true;
-  taskCard.ondragstart = (event) => startDragging(event, task.id);
-
-  taskCard.innerHTML += taskCardHTML(task, totalSubtasks, completedSubtasks); 
-
+  let taskCard = createTaskCardDiv(task); 
   let usersContainer = taskCard.querySelector(`#taskUsers-${task.id}`);
 
   userColor(task, usersContainer);
-
   taskColemTitel(task);
-
   let categoryElement = taskCard.querySelector(".task-card-category");
   categoryColor(categoryElement, task);
-
   chooseImgPriority(taskCard, task);
 
   taskCard.querySelector(".task-card-div").addEventListener("click", (event) => {
@@ -139,7 +126,18 @@ function generateTaskCard(task) {
         openTaskPopup(task.id);
       }
     });
+  return taskCard;
+}
 
+function createTaskCardDiv(task) {
+  let completedSubtasks = task.subTasks ? task.subTasks.filter((st) => st.completed).length : 0;
+  let totalSubtasks = task.subTasks ? task.subTasks.length : 0;
+  let taskCard = document.createElement("div");
+  taskCard.classList.add("task-card");
+  taskCard.id = `task-${task.id}`;
+  taskCard.draggable = true;
+  taskCard.ondragstart = (event) => startDragging(event, task.id);
+  taskCard.innerHTML += taskCardHTML(task, totalSubtasks, completedSubtasks);
   return taskCard;
 }
 
@@ -216,20 +214,27 @@ function userColor(task, usersContainer) {
       userDiv.textContent = user.initials;
       usersContainer.appendChild(userDiv);
     });
+    createContactInitialDiv(totalUsers, maxUsersToShow, usersContainer);
+  } else createStringContact(task, usersContainer);
+}
 
-    if (totalUsers > maxUsersToShow) {
-      let extraUsersDiv = document.createElement("div");
-      extraUsersDiv.classList.add("tasks-user", "extra-users");
-      extraUsersDiv.textContent = `+${totalUsers - maxUsersToShow}`;
-      usersContainer.appendChild(extraUsersDiv);
-    }
-  } else if (typeof task.users === "string") {
+function createStringContact(task, usersContainer) {
+  if (typeof task.users === "string") {
     let userDiv = document.createElement("div");
     userDiv.classList.add("tasks-user");
     const contact = contacts.find((c) => c.name === task.users);
     userDiv.style.backgroundColor = contact ? contact.color : "#000";
     userDiv.textContent = task.users;
     usersContainer.appendChild(userDiv);
+  }
+}
+
+function createContactInitialDiv(totalUsers, maxUsersToShow, usersContainer) {
+  if (totalUsers > maxUsersToShow) {
+    let extraUsersDiv = document.createElement("div");
+    extraUsersDiv.classList.add("tasks-user", "extra-users");
+    extraUsersDiv.textContent = `+${totalUsers - maxUsersToShow}`;
+    usersContainer.appendChild(extraUsersDiv);
   }
 }
 
