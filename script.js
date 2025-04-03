@@ -312,7 +312,7 @@ function goBack() {
  */
 async function putDataToFirebase(path, data = {}, key) {
   await fetch(BASE_URL + path + key + '.json', {
-    method: 'PUT',
+  method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
