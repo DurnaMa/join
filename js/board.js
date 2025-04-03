@@ -358,43 +358,34 @@ function chooseImgPriority(taskCard, task) {
  * @function
  * @returns {void}
  */
+
 function searchTask() {
   let searchTaskInput = document.getElementById("searchTask").value.toLowerCase();
   let allTasks = document.querySelectorAll(".task-card");
+  let searchInfo = document.getElementById("searchInfo");
+  let taskFound = false;
 
   allTasks.forEach((task) => {
     let title = task.querySelector("h3").innerText.toLowerCase();
     let description = task.querySelector("p").innerText.toLowerCase();
 
-    if (
-      title.includes(searchTaskInput) ||
-      description.includes(searchTaskInput)
-    ) {
+    if (title.includes(searchTaskInput) || description.includes(searchTaskInput)) {
       task.style.display = "block";
+      taskFound = true;
     } else {
       task.style.display = "none";
     }
   });
-  searchTaskInput.innerHTML = "";
-  checkEmptyColumns();
+  if (searchTaskInput === "") {
+    searchInfo.classList.add("d-none");
+  } else {
+    if (taskFound) {
+      searchInfo.classList.add("d-none");
+    } else {
+      searchInfo.classList.remove("d-none");
+    }
+  }
 }
-
-// TEST!!!!!!!!
-
-function test(){
-  let searchInfo = document.getElementById("searchInfo");
-
-  searchInfo.style.display = "flex";
-if (searchTaskInput === "") {
-  searchInfo.style.display = "none";
-}
-}
-
-
-// TEST ENDE!!!!!!!!
-
-
-
 
 document.getElementById("searchTask").addEventListener("keyup", searchTask);
 

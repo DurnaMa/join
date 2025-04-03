@@ -3,11 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="shortcut icon"
-      href="/assets/img/logodunkel.png"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
     <title>Board</title>
     <link rel="stylesheet" href="../css/board.css" />
     <link rel="stylesheet" href="/style.css" />
@@ -33,47 +29,24 @@
     <div class="board" id="board">
       <div class="boardHeader">
         <div class="board-title-plusbtn">
-        <h1 class="board-title">Board</h1>
-        <button class="addTaskMobileBtn2" onclick="addTaskPopupBtn()">
-          <img
-            class="addTaskBtnIcon2"
-            src="/assets/icons/plusAddTaskMobile.png"
-            alt="Add task icon"
-          />
-        </button>
-      </div>
+          <h1 class="board-title">Board</h1>
+          <button class="addTaskMobileBtn2" onclick="addTaskPopupBtn()">
+            <img class="addTaskBtnIcon2" src="/assets/icons/plusAddTaskMobile.png" alt="Add task icon" />
+          </button>
+        </div>
         <div class="boardHeaderRight">
           <div class="searchDiv">
-            <input
-              class="search"
-              type="text"
-              placeholder="Find Task"
-              id="searchTask"
-            />
+            <input class="search" type="text" placeholder="Find Task" id="searchTask" oninput="searchTask()" />
             <div class="search-dividing-line"></div>
-            <img
-              class="searchIcon"
-              src="/assets/icons/search.png"
-              alt="Search icon"
-              onclick="searchTask()"
-            />
+            <img class="searchIcon" src="/assets/icons/search.png" alt="Search icon" />
           </div>
-
           <button class="addTaskBtn" onclick="addTaskPopupBtn()">
             <p class="addTaskBtnText">Add task</p>
-            <img
-              class="addTaskBtnIcon"
-              src="/assets/icons/addTaskBtn.png"
-              alt="Add task icon"
-            />
+            <img class="addTaskBtnIcon" src="/assets/icons/addTaskBtn.png" alt="Add task icon" />
           </button>
 
           <button class="addTaskMobileBtn" onclick="addTaskPopupBtn()">
-            <img
-              class="addTaskBtnIcon"
-              src="/assets/icons/plusAddTaskMobile.png"
-              alt="Add task icon"
-            />
+            <img class="addTaskBtnIcon" src="/assets/icons/plusAddTaskMobile.png" alt="Add task icon" />
           </button>
         </div>
       </div>
@@ -82,11 +55,7 @@
         <div class="column-container">
           <div class="column-titles-plusBtn">
             <h2 class="column-titles-h2">To Do</h2>
-            <button
-              class="add-column"
-              id="toDoId"
-              onclick="addTaskPopupPlusToDoBtn()"
-            >
+            <button class="add-column" id="toDoId" onclick="addTaskPopupPlusToDoBtn()">
               <img src="/assets/icons/plusblack.png" alt="Add icon" />
             </button>
           </div>
@@ -103,11 +72,7 @@
         <div class="column-container">
           <div class="column-titles-plusBtn">
             <h2 class="column-titles-h2">In progress</h2>
-            <button
-              class="add-column"
-              id="inProgressId"
-              onclick="addTaskPopupPlusInProgressBtn()"
-            >
+            <button class="add-column" id="inProgressId" onclick="addTaskPopupPlusInProgressBtn()">
               <img src="/assets/icons/plusblack.png" alt="Add icon" />
             </button>
           </div>
@@ -124,11 +89,7 @@
         <div class="column-container">
           <div class="column-titles-plusBtn">
             <h2 class="column-titles-h2">Await feedback</h2>
-            <button
-              class="add-column"
-              id="awaitFeedbackId"
-              onclick="addTaskPopupPlusAwaitFeedbackBtn()"
-            >
+            <button class="add-column" id="awaitFeedbackId" onclick="addTaskPopupPlusAwaitFeedbackBtn()">
               <img src="/assets/icons/plusblack.png" alt="Add icon" />
             </button>
           </div>
@@ -161,21 +122,15 @@
     <div class="editTaskPopupDiv" id="openTaskPopupDiv"></div>
     <div class="editTaskPopupDiv" id="editTaskPopupDiv"></div>
     <div class="openTaskPopupToDoDiv d-none" id="openTaskPopupToDoDiv"></div>
-    <div class=" d-none" id="addTaskPopupDiv">
+    <div class="d-none" id="addTaskPopupDiv">
       <div class="shadow-div-added"></div>
       <div class="task-added-popup d-none">
-        <span>Task added to board</span
-        ><img src="/assets/img/board-icon.png" alt="" />
+        <span>Task added to board</span>
+        <img src="/assets/img/board-icon.png" alt="" />
       </div>
     </div>
     <div class="searchInfo d-none" id="searchInfo">No tasks found!</div>
-    <div
-      class="openTaskPopupInProgressDiv d-none"
-      id="openTaskPopupInProgressDiv"
-    ></div>
-    <div
-      class="openTaskPopupAwaitFeedbackDiv d-none"
-      id="openTaskPopupAwaitFeedbackDiv"
-    ></div>
+    <div class="openTaskPopupInProgressDiv d-none" id="openTaskPopupInProgressDiv"></div>
+    <div class="openTaskPopupAwaitFeedbackDiv d-none" id="openTaskPopupAwaitFeedbackDiv"></div>
   </body>
 </html>
