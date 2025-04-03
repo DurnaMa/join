@@ -359,9 +359,7 @@ function chooseImgPriority(taskCard, task) {
  * @returns {void}
  */
 function searchTask() {
-  let searchTaskInput = document
-    .getElementById("searchTask")
-    .value.toLowerCase();
+  let searchTaskInput = document.getElementById("searchTask").value.toLowerCase();
   let allTasks = document.querySelectorAll(".task-card");
 
   allTasks.forEach((task) => {
@@ -377,10 +375,26 @@ function searchTask() {
       task.style.display = "none";
     }
   });
-
   searchTaskInput.innerHTML = "";
   checkEmptyColumns();
 }
+
+// TEST!!!!!!!!
+
+function test(){
+  let searchInfo = document.getElementById("searchInfo");
+
+  searchInfo.style.display = "flex";
+if (searchTaskInput === "") {
+  searchInfo.style.display = "none";
+}
+}
+
+
+// TEST ENDE!!!!!!!!
+
+
+
 
 document.getElementById("searchTask").addEventListener("keyup", searchTask);
 
@@ -784,54 +798,3 @@ function hideContactList(event) {
 }
 
 document.addEventListener('click', hideContactList);
-
-// TEST!!!!!!!!!!!!!!!!
-// function enableEmptyColumnDropEffect() {
-//   const emptyColumns = document.querySelectorAll('.empty-column');
-
-//   emptyColumns.forEach(column => {
-//     column.addEventListener('dragover', (event) => {
-//       allowDrop(event); // bereits vorhandene Funktion
-//       column.classList.add('drag-over');
-//     });
-
-//     column.addEventListener('dragleave', () => {
-//       column.classList.remove('drag-over');
-//     });
-
-//     column.addEventListener('drop', async (event) => {
-//       column.classList.remove('drag-over');
-//       const columnId = column.dataset.column;
-//       await drop(event, columnId); // bereits vorhandene Funktion
-//     });
-//   });
-// }
-// function checkEmptyColumns() {
-//   const columns = ["todo", "inprogress", "awaitfeedback", "done"];
-
-//   columns.forEach((columnId) => {
-//     const column = document.getElementById(columnId);
-
-//     if (column.children.length === 0) {
-//       column.innerHTML = generateEmptyColumn(columnId);
-//     }
-//   });
-
-//   enableEmptyColumnDropEffect(); // Drag-Highlight aktivieren
-// }
-// function renderTasks() {
-//   document.getElementById("todo").innerHTML = "";
-//   document.getElementById("inprogress").innerHTML = "";
-//   document.getElementById("awaitfeedback").innerHTML = "";
-//   document.getElementById("done").innerHTML = "";
-
-//   tasks.forEach((task) => {
-//     let taskCard = generateTaskCard(task);
-//     let columnId = task.columnTitles
-//       ? task.columnTitles.toLowerCase().replace(/\s/g, "")
-//       : "todo";
-//     document.getElementById(columnId).appendChild(taskCard);
-//   });
-
-//   checkEmptyColumns(); // ⬅️ Fügt leere Spalten + Drag-Effekt hinzu
-// }

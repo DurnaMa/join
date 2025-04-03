@@ -89,7 +89,8 @@
             
             <div>
             <div id="addSubTask">
-              <input id="subTask" class="addSubTask" placeholder="Add new subtask" type="text" />
+              <input id="subTask" class="addSubTask" placeholder="Add new subtask" type="text"
+              onkeydown="if(event.key === 'Enter') { event.preventDefault(); addSubTask(); }">
               <img onclick="addSubTask()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
             <ul id="subTaskList"></ul>

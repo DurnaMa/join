@@ -77,7 +77,8 @@ function renderAddTaskPoupBtn() {
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
-              <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
+              <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text"
+              onkeydown="if(event.key === 'Enter') { event.preventDefault(); addSubTaskPopUp(); }">
               <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
             <ul id="subTaskList" class="subTaskList"></ul>
@@ -172,7 +173,8 @@ function renderAddTaskPopupToDoPlus() {
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
-              <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
+              <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text"
+              onkeydown="if(event.key === 'Enter') { event.preventDefault(); addSubTaskPopUp(); }">
               <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
             <ul id="subTaskList" class="subTaskList"></ul>
@@ -267,7 +269,8 @@ function renderAddTaskPopupInProgressPlus() {
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
-              <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
+              <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text"
+              onkeydown="if(event.key === 'Enter') { event.preventDefault(); addSubTaskPopUp(); }">
               <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
             <ul id="subTaskList" class="subTaskList"></ul>
@@ -364,7 +367,8 @@ function renderAddTaskPopupAwaitFeedbackPlus() {
             <br />
             <label for="subtask">Subtasks</label>
             <div id="addSubTask">
-              <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
+              <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text"
+              onkeydown="if(event.key === 'Enter') { event.preventDefault(); addSubTaskPopUp(); }">
               <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
             <ul id="subTaskList" class="subTaskList"></ul>
@@ -607,7 +611,8 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
     
       <label for="subtask">Subtasks</label>
       <div id="addSubTask">
-        <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text" />
+        <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text"
+              onkeydown="if(event.key === 'Enter') { event.preventDefault(); addSubTaskPopUp(); }">
         <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
       </div>
       <ul id="subTaskList">
