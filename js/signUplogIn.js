@@ -46,62 +46,6 @@ async function postData(path, data) {
  *
  * @throws {Error} Logs an error message and displays a registration failure message if an exception occurs.
  */
-// async function toTheRegistration() {
-//   let { errorDiv, passwordErrorDiv, checkboxErrorDiv, checkbox, nameInput, emailInput, passwordInput, popup } =
-//     registrationVariables();
-
-//   errorDiv.textContent = '';
-//   passwordErrorDiv.textContent = '';
-//   checkboxErrorDiv.textContent = '';
-
-//   if (!checkbox.checked) {
-//     checkboxErrorDiv.textContent = 'Accept the Privacy Policy';
-//     checkboxErrorDiv.style.color = 'red';
-//     return false;
-//   }
-
-//   if (nameInput.value && emailInput.value && passwordInput.value) {
-//     try {
-//       await loadContacts();
-//       let emailExists = contacts.find((contact) => contact.email === emailInput.value);
-//       if (emailExists) {
-//         errorDiv.textContent = 'Email already exists';
-//         return false;
-//       }
-
-//       function getRandomColorFromArray() {
-//         return colorPalette[Math.floor(Math.random() * colorPalette.length)];
-//       }
-
-//       let data = {
-//         name: nameInput.value,
-//         email: emailInput.value,
-//         password: passwordInput.value,
-//         color: getRandomColorFromArray(),
-//       };
-//       let result = await postData('/contacts', data);
-//       if (result && result.name) {
-//         contacts.push(data);
-//       }
-//       nameInput.value = '';
-//       emailInput.value = '';
-//       passwordInput.value = '';
-//       confirmPassword.value = '';
-
-//       if (popup) {
-//         popup.classList.remove('d-none');
-//       }
-//       setTimeout(() => {
-//         window.location.href = '/index.html';
-//       }, 2000);
-//     } catch (error) {
-//       console.error('Fehler bei der Anmeldung:', error);
-//       errorDiv.textContent = 'Registration failed. Please try again.';
-//     }
-//   } else {
-//     errorDiv.textContent = 'Please fill in all fields';
-//   }
-// }
 
 async function toTheRegistration() {
   let { errorDiv, passwordErrorDiv, checkboxErrorDiv, checkbox, nameInput, emailInput, passwordInput, popup } = registrationVariables();
