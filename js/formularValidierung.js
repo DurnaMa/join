@@ -16,6 +16,7 @@
  */
 
 function validateField(inputId, errorId, message) {
+  let isValid = true;
   const input = document.getElementById(inputId);
   const error = document.getElementById(errorId);
   error.textContent = '';
@@ -30,7 +31,7 @@ function validateField(inputId, errorId, message) {
       error.textContent = '';
     }
   });
-  isValid = true;
+  return isValid;
 }
 
 function validateCategory() {
