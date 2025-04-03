@@ -665,8 +665,6 @@
   height: 25px;
 }
 
-/* -------------------- dragarea -------------------- */
-
 .drag-area {
   width: 252px;
   height: 244px;
@@ -680,7 +678,6 @@
   padding: 10px;
 }
 
-/* Test!!!!!! */
 .searchInfo {
   width: 207px;
   position: absolute;
