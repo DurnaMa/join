@@ -136,37 +136,12 @@
   align-items: center;
   width: 246px;
   height: 48px;
-  /* height: 200px; */
   border-radius: 10px;
   border: 1px;
   gap: 10px;
   background-color: #e7e7e7;
-  border: 2px dashed #a8a8a8; 
-  /* box-shadow: 0 0 10px #29abe2;
-  border: 2px dashed #ccc;
-  transition: all 0.5s ease; */
-
+  border: 2px dashed #a8a8a8;
 }
-/* .columns {
-  padding: 20px;
-  background-color: #f9f9f9;
-  text-align: center;
-  border: 2px dashed #ccc;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  min-height: 100px;
-}  */
-
-/* .empty-column.drag-over {
-  /* background-color: #e0ffe0; */
-  /* background-color: #2cbaf7; */
-  /* box-shadow: 0 0 10px #29abe2; */
-  /* box-shadow: 0 0 10px #29abe2;
-  color: white; */
-/* } */ 
-
-
-
 
 .task {
   width: fill 220px;
@@ -199,6 +174,13 @@
   font-size: 16px;
   line-height: 19.2px;
   text-align: left;
+}
+
+.h3TaskCard {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .column-todo {
@@ -384,7 +366,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 24px;
+  padding-top: 10px;
 }
 
 .addNewTaskDiv {
@@ -655,13 +637,13 @@
   }
 }
 
-@media screen and (max-width: 400px){
-  .column{
+@media screen and (max-width: 400px) {
+  .column {
     width: 80vw;
     gap: 10px;
   }
 
-  .task-card{
+  .task-card {
     zoom: 90%;
   }
 }
@@ -681,7 +663,6 @@
   transform: rotate(-90deg);
   height: 25px;
 }
-
 
 /* -------------------- dragarea -------------------- */
 

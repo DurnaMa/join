@@ -1017,8 +1017,8 @@ function taskCardHTML(task, totalSubtasks, completedSubtasks) {
       </div>
       </div>
       
-      <h3>${task.title}</h3>
-      <p>${task.description}</p>
+      <h3 class="h3TaskCard">${task.title}</h3>
+      <p>${task.description.substring(0,40)}...</p>
       
       <div class="progress-container">
         <div class="progress-bar-container">
