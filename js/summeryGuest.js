@@ -28,22 +28,12 @@ function dailyTime() {
  * @returns {string} The greeting message corresponding to the time of day.
  */
 function getDayTime(currentHours, greeting) {
-  if (currentHours >= 4 && currentHours < 6) {
-    greeting = "Early morning!";
-  } else if (currentHours >= 6 && currentHours < 10) {
+  if (currentHours >= 0 && currentHours < 12) {
     greeting = "Good morning!";
-  } else if (currentHours >= 10 && currentHours < 12) {
-    greeting = "Good morning/Hello!";
-  } else if (currentHours >= 12 && currentHours < 13) {
-    greeting = "Hello!";
-  } else if (currentHours >= 13 && currentHours < 17) {
+  } else if (currentHours >= 12 && currentHours < 17) {
     greeting = "Good afternoon!";
-  } else if (currentHours >= 17 && currentHours < 19) {
-    greeting = "Good evening/Hello!";
-  } else if (currentHours >= 19 && currentHours < 22) {
+  } else if (currentHours >= 17 && currentHours < 24) {
     greeting = "Good evening!";
-  } else {
-    greeting = "Good night!";
   }
   return greeting;
 }

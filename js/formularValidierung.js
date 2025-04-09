@@ -14,66 +14,97 @@
  * @function validateForm
  * @returns {boolean} `true` if all fields are valid, otherwise `false`.
  */
-function validateForm() {
-  const titleInput = document.getElementById('titleInput');
-  const dateInput = document.getElementById('date');
-  const categoryDropdown = document.querySelector('.categoryContainer');
-  const descriptionTextarea = document.getElementById('descriptionTextarea');
-
-  const titleError = document.getElementById('titleError');
-  const dateError = document.getElementById('dateError');
-  const categoryError = document.getElementById('categoryError');
-  const descriptionTextareaError = document.getElementById('descriptionTextareaError');
-
+function validateField(inputId, errorId, message) {
   let isValid = true;
-
-  titleError.textContent = '';
-  dateError.textContent = '';
-  categoryError.textContent = '';
-  descriptionTextareaError.textContent = '';
-
-  if (!titleInput.value.trim()) {
-    titleInput.classList.add('error');
-    titleError.textContent = 'Title is required.';
+  const input = document.getElementById(inputId);
+  const error = document.getElementById(errorId);
+  error.textContent = '';
+  if (!input.value.trim()) {
+    input.classList.add('error');
+    error.textContent = message;
     isValid = false;
   }
-  titleInput.addEventListener('input', () => {
-    titleInput.classList.remove('error');
-    titleError.textContent = '';
+  input.addEventListener('input', () => {
+    if (input.value.trim()) {
+      input.classList.remove('error');
+      error.textContent = '';
+    }
   });
-
-  if (!dateInput.value.trim()) {
-    dateInput.classList.add('error');
-    dateError.textContent = 'Due Date is required.';
-    isValid = false;
-  }
-  dateInput.addEventListener('input', () => {
-    dateInput.classList.remove('error');
-    dateError.textContent = '';
-  });
-
-  if (!descriptionTextarea.value.trim()) {
-    descriptionTextarea.classList.add('error');
-    descriptionTextareaError.textContent = 'Description is required.';
-    isValid = false;
-  }
-
-  descriptionTextarea.addEventListener('input', () => {
-    descriptionTextarea.classList.remove('error');
-    descriptionTextareaError.textContent = '';
-  });
-
-  if (categoryDropdown.textContent.trim() === 'Select Task Category' || !categoryDropdown.textContent.trim()) {
-    // categoryDropdown.classList.add('error');
-    categoryDropdown.style.border = '2px solid red';
-    categoryError.textContent = 'Category is required.';
-    isValid = false;
-  }
-  categoryDropdown.addEventListener('click', () => {
-    // categoryDropdown.classList.remove('error');
-    categoryDropdown.style.border = '';
-    categoryError.textContent = '';
-  });
-
   return isValid;
+}
+
+/**
+ * Validates the selected category from the category dropdown.
+ * 
+ * This function:
+ * - Clears any previous error message in the `#categoryError` element.
+ * - Checks if the currently selected category (text content of `#dropdownCategory`) 
+ *   is one of the predefined valid categories (`'Technical Task'`, `'User Story'`).
+ * - Calls `ifValidationCategory()` to handle additional visual validation (e.g., styling or messaging).
+ * 
+ * @function validateCategory
+ * @returns {boolean} `true` if the selected category is valid, otherwise `false`.
+ */
+function validateCategory() {
+  const categoryDropdown = document.getElementById('dropdownCategory');
+  const categoryError = document.getElementById('categoryError');
+  categoryError.textContent = '';
+  const validCategories = ['Technical Task', 'User Story'];
+
+  ifValidationCategory(validCategories, categoryDropdown, categoryError);
+  return validCategories.includes(categoryDropdown.textContent.trim());
+}
+
+/**
+ * Applies visual feedback for invalid category selection and clears it on valid user interaction.
+ * 
+ * This function:
+ * - Checks whether the selected category (from `categoryDropdown`) is included in the provided `validCategories` array.
+ * - If not valid, it visually marks the category dropdown container with a red border and displays an error message.
+ * - Adds a click event listener that removes the red border and error message once a valid category is selected.
+ * 
+ * @function ifValidationCategory
+ * @param {string[]} validCategories - An array of valid category names.
+ * @param {HTMLElement} categoryDropdown - The DOM element displaying the selected category.
+ * @param {HTMLElement} categoryError - The DOM element where the error message should be shown.
+ */
+function ifValidationCategory(validCategories, categoryDropdown, categoryError) {
+  if (!validCategories.includes(categoryDropdown.textContent.trim())) {
+    categoryDropdown.parentElement.style.border = '2px solid red';
+    categoryError.textContent = 'Valid category is required.';
+  } else {
+    categoryDropdown.parentElement.style.border = '';
+  }
+
+  categoryDropdown.parentElement.addEventListener('click', () => {
+    if (validCategories.includes(categoryDropdown.textContent.trim())) {
+      categoryDropdown.parentElement.style.border = '';
+      categoryError.textContent = '';
+    }
+  });
+}
+
+/**
+ * Validates the task form by checking required fields and category selection.
+ * 
+ * This function uses `validateField()` to check if the following fields are filled:
+ * - Title (`#titleInput`)
+ * - Due date (`#date`)
+ * - Description (`#descriptionTextarea`)
+ * 
+ * It also validates the category selection using `validateCategory()`.
+ * 
+ * The function uses bitwise AND (`&=`) to accumulate validation results.  
+ * It returns `true` only if all validations pass.
+ * 
+ * @function validateForm
+ * @returns {boolean} `true` if all required fields are valid, otherwise `false`.
+ */
+function validateForm() {
+  let isValid = true;
+  isValid &= validateField('titleInput', 'titleError', 'Title is required.');
+  isValid &= validateField('date', 'dateError', 'Due Date is required.');
+  isValid &= validateField('descriptionTextarea', 'descriptionTextareaError', 'Description is required.');
+  isValid &= validateCategory();
+  return !!isValid;
 }

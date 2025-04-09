@@ -9,8 +9,8 @@ async function singUpInit() {
  * @returns {Promise<Object>} A promise that resolves to the parsed JSON object.
  * @throws {Error} If the fetch request fails or the response cannot be parsed as JSON.
  */
-async function loadData(path = "") {
-  let response = await fetch(BASE_URL + path + ".json");
+async function loadData(path = '') {
+  let response = await fetch(BASE_URL + path + '.json');
   return (responseToJson = await response.json());
 }
 
@@ -25,9 +25,9 @@ async function loadData(path = "") {
  */
 async function postData(path, data) {
   let response = await fetch(`${BASE_URL}${path}.json`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   });
@@ -48,61 +48,25 @@ async function postData(path, data) {
  */
 async function toTheRegistration() {
   let { errorDiv, passwordErrorDiv, checkboxErrorDiv, checkbox, nameInput, emailInput, passwordInput, popup } = registrationVariables();
+  errorDiv.textContent = passwordErrorDiv.textContent = checkboxErrorDiv.textContent = '';
+  if (!checkbox.checked) return (checkboxErrorDiv.textContent = 'Accept the Privacy Policy', checkboxErrorDiv.style.color = 'red', false);
+  if (!nameInput.value || !emailInput.value || !passwordInput.value) return (errorDiv.textContent = 'Please fill in all fields');
+  try {
+    await loadContacts();
+    if (contacts.some(c => c.email === emailInput.value)) return (errorDiv.textContent = 'Email already exists', false);
 
-  errorDiv.textContent = "";
-  passwordErrorDiv.textContent = "";
-  checkboxErrorDiv.textContent = "";
+    let data = { name: nameInput.value, email: emailInput.value, password: passwordInput.value, color: colorPalette[Math.floor(Math.random() * colorPalette.length)] };
+    if (await postData('/contacts', data)) contacts.push(data);
 
-  if (!checkbox.checked) {
-    checkboxErrorDiv.textContent = "Accept the Privacy Policy";
-    checkboxErrorDiv.style.color = "red";
-    return false;
-  }
-
-  if (nameInput.value && emailInput.value && passwordInput.value) {
-    try {
-      await loadContacts();
-      let emailExists = contacts.find(
-        (contact) => contact.email === emailInput.value
-      );
-      if (emailExists) {
-        errorDiv.textContent = "Email already exists";
-        return false;
-      }
-
-      function getRandomColorFromArray() {
-        return colorPalette[Math.floor(Math.random() * colorPalette.length)];
-      }
-
-      let data = {
-        name: nameInput.value,
-        email: emailInput.value,
-        password: passwordInput.value,
-        color: getRandomColorFromArray(),
-      };
-      let result = await postData("/contacts", data);
-      if (result && result.name) {
-        contacts.push(data);
-      }
-      nameInput.value = "";
-      emailInput.value = "";
-      passwordInput.value = "";
-      confirmPassword.value = "";
-      // console.log("Anmeldung erfolgreich");
-      if (popup) {
-        popup.classList.remove("d-none");
-      }
-      setTimeout(() => {
-        window.location.href = "/index.html";
-      }, 2000);
-    } catch (error) {
-      console.error("Fehler bei der Anmeldung:", error);
-      errorDiv.textContent = "Registration failed. Please try again.";
-    }
-  } else {
-    errorDiv.textContent = "Please fill in all fields";
+    [nameInput.value, emailInput.value, passwordInput.value, confirmPassword.value] = ['', '', '', ''];
+    popup?.classList.remove('d-none');
+    setTimeout(() => (window.location.href = '/index.html'), 2000);
+  } catch (error) {
+    console.error('Fehler bei der Anmeldung:', error);
+    errorDiv.textContent = 'Registration failed. Please try again.';
   }
 }
+
 
 /**
  * Retrieves and returns references to various DOM elements used for user registration.
@@ -118,14 +82,14 @@ async function toTheRegistration() {
  *   - {HTMLElement} popup - The popup element for the sign-up process.
  */
 function registrationVariables() {
-  let nameInput = document.getElementById("name");
-  let emailInput = document.getElementById("email");
-  let passwordInput = document.getElementById("signupPassword");
-  const checkbox = document.getElementById("checkboxSingUp");
-  const errorDiv = document.getElementById("emailError");
-  const passwordErrorDiv = document.getElementById("passwordError");
-  const checkboxErrorDiv = document.getElementById("checkboxError");
-  let popup = document.getElementById("singUpPopup");
+  let nameInput = document.getElementById('name');
+  let emailInput = document.getElementById('email');
+  let passwordInput = document.getElementById('signupPassword');
+  const checkbox = document.getElementById('checkboxSingUp');
+  const errorDiv = document.getElementById('emailError');
+  const passwordErrorDiv = document.getElementById('passwordError');
+  const checkboxErrorDiv = document.getElementById('checkboxError');
+  let popup = document.getElementById('singUpPopup');
   return { errorDiv, passwordErrorDiv, checkboxErrorDiv, checkbox, nameInput, emailInput, passwordInput, popup };
 }
 
@@ -141,23 +105,23 @@ function registrationVariables() {
  * @returns {void} This function does not return a value.
  */
 function emailValidation() {
-  let emailInput = document.getElementById("email");
+  let emailInput = document.getElementById('email');
   let emailValue = emailInput.value;
 
-  if (emailValue.includes("@") && emailValue.includes(".")) {
-    emailInput.style.border = "1px solid green";
+  if (emailValue.includes('@') && emailValue.includes('.')) {
+    emailInput.style.border = '1px solid green';
   } else if (emailValue) {
-    emailInput.style.border = "1px solid red";
+    emailInput.style.border = '1px solid red';
   } else if (emailValue) {
-    emailInput.style.border = "1px solid blue";
+    emailInput.style.border = '1px solid blue';
   }
 }
 
 /**
  * Handles the login process by validating user credentials and managing session data.
- * 
+ *
  * @returns {boolean} Returns `true` if login is successful, otherwise `false`.
- * 
+ *
  * @description
  * - Checks if the "Remember me" checkbox is selected. If not, displays an error message.
  * - Searches for a user in the `contacts` array that matches the provided email and password.
@@ -169,29 +133,17 @@ function emailValidation() {
  */
 function logIn() {
   const { checkbox, errorDiv, email, password } = logInVarible();
-  // if (!checkbox.checked) {
-  //   errorDiv.textContent =
-  //     "Bitte akzeptieren Sie die Bedingungen (Remember me).";
-  //   errorDiv.style.color = "red";
-  //   return false;
-  // }
-  const user = contacts.find(
-    (contact) => contact.email === email && contact.password === password
-  );
+  const user = contacts.find((contact) => contact.email === email && contact.password === password);
   if (user) {
-    errorDiv.textContent = "Login erfolgreich!";
-    errorDiv.style.color = "green";
-    sessionStorage.setItem("fullName", user.name);
-    const initials = user.name
-      .split(" ")
-      .map((initials) => initials[0])
-      .join("")
-      .toUpperCase();
-    sessionStorage.setItem("userInitials", initials);
-    window.location.href = "./pages/summary.html";
+    errorDiv.textContent = 'Login erfolgreich!';
+    errorDiv.style.color = 'green';
+    sessionStorage.setItem('fullName', user.name);
+    const initials = user.name.split(' ').map((initials) => initials[0]).join('').toUpperCase();
+    sessionStorage.setItem('userInitials', initials);
+    window.location.href = './pages/summary.html';
     return true;
   } else {
-    errorDiv.textContent = "Das Passwort oder die E-Mail ist falsch.";
+    errorDiv.textContent = 'Das Passwort oder die E-Mail ist falsch.';
     return false;
   }
 }
@@ -206,10 +158,10 @@ function logIn() {
  *   - {string} password - The value of the password input field.
  */
 function logInVarible() {
-  const email = document.getElementById("loginEmail").value;
-  const password = document.getElementById("loginPassword").value;
-  const checkbox = document.getElementById("checkboxLogin");
-  const errorDiv = document.getElementById("loginError");
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  const checkbox = document.getElementById('checkboxLogin');
+  const errorDiv = document.getElementById('loginError');
   return { checkbox, errorDiv, email, password };
 }
 
@@ -225,41 +177,37 @@ function logInVarible() {
  * summary page located at "../pages/summary.html".
  */
 function guestLogin() {
-  sessionStorage.setItem("fullName", "Guest");
-  sessionStorage.setItem("userInitials", "G");
-  window.location.href = "../pages/summary.html";
+  sessionStorage.setItem('fullName', 'Guest');
+  sessionStorage.setItem('userInitials', 'G');
+  window.location.href = '../pages/summary.html';
 }
 
 /**
  * Displays a greeting message on mobile devices if the screen width is 992px or less.
  * The greeting message fades in and out over a short duration.
- * 
+ *
  * - Checks if the screen width matches the mobile criteria.
  * - Displays the element with the ID "mobileGreetings" if it exists.
  * - Fades the element in and out over 1.5 seconds.
  * - Logs an error if the element with the ID "mobileGreetings" is not found.
  * - Calls the `dailyTime` function after displaying the greeting.
- * 
+ *
  * @function
  * @throws {Error} Logs an error if the element with the ID "mobileGreetings" is not found.
  */
 function showMobileGreetings() {
-  const isMobile = window.matchMedia("(max-width: 992px)").matches;
-
+  const isMobile = window.matchMedia('(max-width: 992px)').matches;
   if (isMobile) {
-    const mobileGreetings = document.getElementById("mobileGreetings");
-
+    const mobileGreetings = document.getElementById('mobileGreetings');
     if (mobileGreetings) {
-      mobileGreetings.style.display = "flex";
+      mobileGreetings.style.display = 'flex';
       mobileGreetings.style.opacity = 1;
       setTimeout(() => {
         mobileGreetings.style.opacity = 0;
-        mobileGreetings.style.display = "none";
+        mobileGreetings.style.display = 'none';
       }, 1500);
     } else {
-      console.error(
-        "Das Element mit der ID 'mobileGreetings' wurde nicht gefunden!"
-      );
+      console.error("Das Element mit der ID 'mobileGreetings' wurde nicht gefunden!");
     }
     dailyTime();
   }

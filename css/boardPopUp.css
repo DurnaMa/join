@@ -245,7 +245,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .subTaskList {
-  max-height: 84px;
+  max-height: 75px;
   overflow: auto;
 }
 
@@ -256,7 +256,9 @@ input[type='date']::-webkit-calendar-picker-indicator {
   align-items: flex-end;
   gap: 4px;
   position: fixed;
-  bottom: 40px;
+  bottom: 34px;
+  z-index: 2;
+  background: white;
 }
 
 .btnSection {
@@ -636,7 +638,7 @@ input[type='checkbox'] {
     padding-top: 25px;
     align-items: center;
     overflow-y: scroll;
-    height: 800px;
+    height: 760px;
     scrollbar-width: none;
   }
 

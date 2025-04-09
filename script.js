@@ -3,39 +3,20 @@ const BASE_URL = 'https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.
 let contacts = [];
 let tasks = [];
 
-const colorPalette = [
-  '#E63946',
-  '#F4A261',
-  '#2A9D8F',
-  '#264653',
-  '#D62828',
-  '#F77F00',
-  '#3D348B',
-  '#E76F51',
-  '#8E44AD',
-  '#16A085',
-  '#D7263D',
-  '#1B998B',
-  '#ECA400',
-  '#3A86FF',
-  '#8338EC',
-  '#06D6A0',
-  '#EF476F',
-  '#118AB2',
-  '#073B4C',
-  '#F25C54',
-  '#43AA8B',
-  '#FF5A5F',
-  '#5E548E',
-  '#9B5DE5',
-  '#00BBF9',
-  '#FF006E',
-  '#8AC926',
-  '#6A0572',
-  '#A60303',
-  '#FF9F1C',
-];
+const colorPalette = ['#E63946','#F4A261','#2A9D8F','#264653','#D62828','#F77F00','#3D348B','#E76F51','#8E44AD','#16A085','#D7263D',
+  '#1B998B','#ECA400','#3A86FF','#8338EC','#06D6A0','#EF476F','#118AB2','#073B4C','#F25C54','#43AA8B','#FF5A5F','#5E548E','#9B5DE5',
+  '#00BBF9','#FF006E','#8AC926','#6A0572','#A60303','#FF9F1C',];
 
+/**
+ * Asynchronously loads user data by fetching contact information.
+ * 
+ * This function calls `loadContacts()` to retrieve and load contact data.
+ * It uses `await` to ensure that the contacts are fully loaded before proceeding.
+ * 
+ * @async
+ * @function loadDataUsers
+ * @returns {Promise<void>} A promise that resolves when the contacts have been loaded.
+ */
 async function loadDataUsers() {
   await loadContacts();
 }
@@ -90,6 +71,14 @@ async function postTaskDataToFirebase(path = '', data = {}) {
   });
 }
 
+/**
+ * Redirects the user to the board page.
+ * 
+ * This function changes the current window location to `/pages/board.html`,
+ * navigating the user to the board page.
+ * 
+ * @function redirectToBoardPage
+ */
 function redirectToBoardPage() {
   window.location.href = '/pages/board.html';
 }
@@ -177,17 +166,11 @@ async function loadTasks() {
       dueDate: SINGLE_TASK.dueDate,
       priority: SINGLE_TASK.priority,
       subTasks: SINGLE_TASK.subTasks
-        ? SINGLE_TASK.subTasks.map((subTask) => ({
-            description: subTask.description,
-            completed: subTask.completed ?? false,
-          }))
-        : [],
+        ? SINGLE_TASK.subTasks.map((subTask) => ({description: subTask.description,completed: subTask.completed ?? false,})): [],
       status: SINGLE_TASK.status,
       category: SINGLE_TASK.category,
       users: SINGLE_TASK.users
-        ? SINGLE_TASK.users.map((user) => {
-            let userName = typeof user === 'string' ? user : user.name;
-            let contact = contacts.find((c) => c.name === userName);
+        ? SINGLE_TASK.users.map((user) => {let userName = typeof user === 'string' ? user : user.name;let contact = contacts.find((c) => c.name === userName);
             return {
               name: userName,
               initials: generateInitials(userName),
@@ -202,38 +185,24 @@ async function loadTasks() {
 }
 
 /**
- * Loads summarized task information from a Firebase database and updates the user interface.
- *
- * This function fetches data from Firebase, processes task information, and updates various
- * HTML elements with the calculated values, such as the total number of tasks, status counters,
- * and the next due date.
- *
+ * Loads task data from Firebase and updates the summary section of the application.
+ * 
+ * This asynchronous function:
+ * - Retrieves all tasks from the `'tasks'` collection in Firebase.
+ * - If no data is found, logs an error and stops execution.
+ * - Calculates summary statistics using `summaryVariable()`, including:
+ *   - Total tasks
+ *   - Counts for specific statuses (To Do, In Progress, Await Feedback, Done)
+ *   - Count of urgent tasks
+ *   - Nearest upcoming deadline
+ * - Updates the DOM with the computed summary values via `summaryIDs()`.
+ * - If an upcoming deadline exists, it's displayed in the element with ID `date`.
+ * - Additionally calls `dailyTime()` and `fullNameSummary()` to complete summary rendering.
+ * 
  * @async
  * @function loadSummaryData
- * @throws {Error} Logs an error to the console if no data can be retrieved from Firebase.
- *
- * @description
- * The function performs the following steps:
- * 1. Fetch task information from the Firebase database.
- * 2. Process the tasks to calculate various metrics:
- *    - Total number of tasks.
- *    - Number of tasks in the categories: "To Do," "In Progress," "Await Feedback," and "Done."
- *    - Number of tasks with high priority ("Urgent").
- *    - The next upcoming due date for tasks with high priority.
- * 3. Update the corresponding HTML elements with the calculated values.
- * 4. Call additional functions `dailyTime` and `fullNameSummary` at the end of the process.
- *
- * @requires getDataFromFirebase - A function that retrieves data from the Firebase database.
- * @requires dailyTime - A function for processing the current time.
- * @requires fullNameSummary - A function for updating a name summary section.
- *
- * @example
- * // Example usage:
- * loadSummaryData();
- *
- * @see {@link getDataFromFirebase} for more information on the data retrieval function.
+ * @returns {Promise<void>} A promise that resolves when the summary data has been loaded and rendered.
  */
-
 async function loadSummaryData() {
   let tasksData = await getDataFromFirebase('tasks');
 
@@ -241,33 +210,39 @@ async function loadSummaryData() {
     console.error('Keine Daten gefunden!');
     return;
   }
+  let { totalTasks, toDoCount, inProgressCount, awaitFeedbackCount, doneCount, urgentCount, upcomingDeadline } = summaryVariable(tasksData);
+  summaryIDs(totalTasks, toDoCount, inProgressCount, awaitFeedbackCount, doneCount, urgentCount);
+  if (upcomingDeadline) {
+    document.getElementById('date').innerText = upcomingDeadline.toDateString();
+  }
+  dailyTime();
+  fullNameSummary();
+}
 
-  let tasks = Object.values(tasksData);
-  let totalTasks = tasks.length;
-  let toDoCount = tasks.filter((task) => task.columnTitles === 'To Do' || task.columnTitles === 'todo').length;
-  let inProgressCount = tasks.filter(
-    (task) => task.columnTitles === 'In Progress' || task.columnTitles === 'inprogress'
-  ).length;
-  let awaitFeedbackCount = tasks.filter(
-    (task) => task.columnTitles === 'Await Feedback' || task.columnTitles === 'awaitfeedback'
-  ).length;
-  let doneCount = tasks.filter((task) => task.columnTitles === 'Done' || task.columnTitles === 'done').length;
-  let urgentTasks = tasks.filter((task) => task.priority === 'Urgent');
-  let urgentCount = urgentTasks.length;
-  let upcomingDeadline = urgentTasks.map((task) => new Date(task.dueDate)).sort((a, b) => a - b)[0];
 
+function summaryIDs(totalTasks, toDoCount, inProgressCount, awaitFeedbackCount, doneCount, urgentCount) {
   document.getElementById('totalTaskCount').innerText = totalTasks;
   document.getElementById('toDoCount').innerText = toDoCount;
   document.getElementById('inProgressCount').innerText = inProgressCount;
   document.getElementById('awaitFeedbackCount').innerText = awaitFeedbackCount;
   document.getElementById('doneCount').innerText = doneCount;
   document.getElementById('urgentCount').innerText = urgentCount;
+}
 
-  if (upcomingDeadline) {
-    document.getElementById('date').innerText = upcomingDeadline.toDateString();
-  }
-  dailyTime();
-  fullNameSummary();
+
+function summaryVariable(tasksData) {
+  let tasks = Object.values(tasksData);
+  let totalTasks = tasks.length;
+  let toDoCount = tasks.filter((task) => task.columnTitles === 'To Do' || task.columnTitles === 'todo').length;
+  let inProgressCount = tasks.filter(
+    (task) => task.columnTitles === 'In Progress' || task.columnTitles === 'inprogress').length;
+  let awaitFeedbackCount = tasks.filter(
+    (task) => task.columnTitles === 'Await Feedback' || task.columnTitles === 'awaitfeedback').length;
+  let doneCount = tasks.filter((task) => task.columnTitles === 'Done' || task.columnTitles === 'done').length;
+  let urgentTasks = tasks.filter((task) => task.priority === 'Urgent');
+  let urgentCount = urgentTasks.length;
+  let upcomingDeadline = urgentTasks.map((task) => new Date(task.dueDate)).sort((a, b) => a - b)[0];
+  return { totalTasks, toDoCount, inProgressCount, awaitFeedbackCount, doneCount, urgentCount, upcomingDeadline };
 }
 
 /**
@@ -295,7 +270,7 @@ function goBack() {
  */
 async function putDataToFirebase(path, data = {}, key) {
   await fetch(BASE_URL + path + key + '.json', {
-    method: 'PUT',
+  method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -420,6 +395,17 @@ function hideSubMenuOnRestrictedPages() {
   }
 }
 
+/**
+ * Sets a minimum date restriction on the date input field.
+ * 
+ * This function ensures that the date input (`#date`) cannot be set to a past date.
+ * It updates the `min` attribute of the input field to today's date.
+ * Additionally, it re-applies the minimum date restriction each time the input field is focused.
+ * 
+ * If the element is not found, an error is logged to the console.
+ * 
+ * @function datelimit
+ */
 function datelimit() {
   let editDateInput = document.getElementById('date');
   
