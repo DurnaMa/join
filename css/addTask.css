@@ -3,13 +3,10 @@ body {
 }
 
 .addTaskContent {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
   width: 100%;
   height: 100vh;
   background-color: #f6f7f8;
-  padding: 206px 114px 96px 330px;
+  padding: 143px 114px 96px 330px;
 }
 
 .headlineDiv {
@@ -25,6 +22,7 @@ h1 {
 
 form {
   margin-right: auto;
+  padding-bottom: 96px;
 }
 
 .formParts {
@@ -50,7 +48,6 @@ textarea {
   padding-top: 20px;
   min-height: 140px;
   max-height: 140px;
-  max-width: 495px;
 }
 
 .formParts hr {
@@ -70,6 +67,8 @@ label {
 
 input,
 textarea,
+.assignedContainer,
+.categoryContainer,
 select {
   height: 48px;
   border: 1px solid #d1d1d1;
@@ -81,6 +80,10 @@ select {
 
 input:focus,
 textarea:focus,
+.assignedContainer:focus,
+.assignedContainer:hover,
+.categoryContainer:focus,
+.categoryContainer:hover,
 select:focus {
   outline: none !important;
   border: 1px solid #29abe2;
@@ -90,6 +93,8 @@ label,
 input,
 textarea,
 button,
+.assignedContainer,
+.categoryContainer,
 select {
   font-size: 20px;
   cursor: pointer;
@@ -124,7 +129,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 .prioBtn {
-  width: 136px;
+  width: 110%;
   height: 56px;
   border-radius: 10px;
   background: white;
@@ -144,16 +149,19 @@ input[type='date']::-webkit-calendar-picker-indicator {
 .prioUrgentRed {
   background: #ff3d00 !important;
   color: white;
+  box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 .prioMediumYellow {
   background: #ffa800 !important;
   color: white;
+  box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 .prioLowGreen {
   background: #7ae229 !important;
   color: white;
+  box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 #subTask {
@@ -181,7 +189,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
 }
 
 #addSubTask img {
-  margin-left: 10px;
+  margin-right: 10px;
   cursor: pointer;
 }
 
@@ -199,13 +207,20 @@ input[type='date']::-webkit-calendar-picker-indicator {
   border: 1px solid #29abe2;
 }
 
+#subTaskList {
+  background-color: white;
+  border-radius: 10px;
+  overflow-y: auto;
+  max-height: 100px;
+}
+
 .taskFormButtons {
-  padding: 75px 0;
-  width: 100%;
+  padding: 75px 0 0 0;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   gap: 4px;
+  max-width: 1007px;
 }
 
 .btnSection {
@@ -256,6 +271,7 @@ input[type='date']::-webkit-calendar-picker-indicator {
   font-size: 20px;
   cursor: pointer;
   height: 45px;
+  text-wrap: nowrap;
 }
 
 .button:hover {
@@ -268,7 +284,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
   align-items: center;
   padding: 8px;
   border-radius: 10px;
-  position: relative;
 }
 
 .subTask:hover {
@@ -283,12 +298,24 @@ input[type='date']::-webkit-calendar-picker-indicator {
   flex-grow: 1;
   padding: 5px;
   font-size: 16px;
-  border: none !important;
+  border-bottom: 2px solid #29abe2;
+  border-top: none;
+  border-left: none;
+  border-right: none;
   outline: none;
   background: white;
   border-radius: 0;
   height: auto;
   appearance: none;
+}
+
+.subTask-edit-input::placeholder {
+  color: red;
+}
+
+.subTask-edit-input:focus {
+  border: none;
+  border-bottom: 2px solid #29abe2;
 }
 
 .subTask span {
@@ -319,4 +346,92 @@ input[type='date']::-webkit-calendar-picker-indicator {
   width: 20px;
   height: 20px;
   cursor: pointer;
+}
+
+.show {
+  display: block;
+}
+
+.assignedContainer,
+.categoryContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  cursor: pointer;
+  background-color: white;
+  margin-bottom: -8px;
+  position: relative;
+}
+
+#assignedContactsList {
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 10px;
+  background-color: white;
+  max-height: 165px;
+  overflow: auto;
+  width: inherit;
+  top: 719px;
+}
+
+.assignedContacts {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.assignedContacts span {
+  font-size: 20px;
+}
+
+input[type='checkbox'] {
+  width: 17px;
+}
+
+.assignedShortcutName {
+  display: flex;
+  width: 42px;
+  height: 42px;
+  border-radius: 45px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #ff7a00;
+}
+
+.task-added-popup-center {
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.popup-spamMahir {
+  display: flex;
+  gap: 15px;
+  background-color: #2a3647;
+  height: 74px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  font-size: 21px;
+}
+
+.text-custom {
+  color: #ef4444;
+  display: block;
+  font-size: 0.875rem;
+}
+
+.error {
+  border: 2px solid red;
 }

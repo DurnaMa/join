@@ -16,12 +16,18 @@ h2 {
 .summaryContainer {
   display: flex;
   flex-direction: column;
-  padding: 206px 0 96px 330px;
+  padding: 206px 0px 0px 330px;
   width: 100%;
   background-color: #f6f7f8;
 }
 
 .summaryHeadline {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.mobileHeader {
   display: flex;
   align-items: center;
   gap: 30px;
@@ -38,7 +44,7 @@ h2 {
   max-width: 1920px;
 }
 
-.overview {
+.overviewContent {
   width: 60%;
 }
 
@@ -117,7 +123,6 @@ h2 {
   gap: 10px;
   height: 168px;
   width: 100%;
-  padding: 28px 48px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
   background-color: white;
@@ -145,6 +150,10 @@ h2 {
 
 .largeBoxHr {
   border: 1px solid #d1d1d1;
+  height: 64%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 26px;
 }
 
 .date {
@@ -198,6 +207,10 @@ h2 {
   color: white;
 }
 
+.boxInfo {
+  text-align: center;
+}
+
 .greetings {
   display: flex;
   width: 40%;
@@ -217,17 +230,65 @@ h2 {
   color: #29abe2;
 }
 
-
 @media (max-width: 992px) {
   .summaryContainer {
-      padding: 196px 40px 120px 40px;
+    padding: 130px 40px 120px 40px;
   }
 
-  .overview{
+  .overviewContent {
     width: 100%;
   }
 
-  .greetings{
+  .greetings {
     display: none;
+  }
+
+  #mobileGreetings {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    display: none;
+  }
+}
+
+@media (max-width: 740px) {
+  .summaryHeadline {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .mobileHeader {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column-reverse;
+    gap: 14px;
+  }
+
+  .headlineHr {
+    border: 2px solid #29abe2;
+    border-radius: 20px;
+    width: 126px;
+    height: 0px;
+  }
+
+  .summaryContainer {
+    padding: 188px 40px 120px 40px;
+    zoom: 80%;
+  }
+}
+
+@media (max-width: 430px) {
+  .summaryContainer {
+    padding: 194px 40px 0px 40px;
+    zoom: 60%;
   }
 }

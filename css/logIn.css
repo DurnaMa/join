@@ -35,7 +35,7 @@ body {
     opacity: 1;
   }
 
-  40% {
+  50% {
     background-color: #f6f7f8;
     opacity: 1;
   }
@@ -65,7 +65,7 @@ body {
     height: 335px;
   }
 
-  40% {
+  50% {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -86,7 +86,7 @@ body {
   display: flex;
   width: 100%;
   justify-content: flex-end;
-  padding: 64px 63px 0 68px;
+  padding: 28px 63px 0px 0px;
   position: fixed;
 }
 
@@ -278,4 +278,126 @@ input:focus {
   line-height: 19.2px;
   text-align: left;
   color: #29abe2;
+}
+
+@media screen and (max-width: 680px) {
+  .logInContainer {
+    width: 85%;
+    z-index: 2;
+  }
+
+  .signUpContainer {
+    padding: 770px 0px 0px 0px;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .animationBg {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    background-color: #2a3647;
+    animation: fadeBackground 1.5s forwards;
+  }
+
+  .animationLogo {
+    background-image: url(/assets/img/logodunkel.png);
+    height: 335px;
+    width: 274px;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 4;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: moveLogoSmall 1.5s forwards;
+  }
+
+  @keyframes moveLogoSmall {
+    0% {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 274px;
+      height: 335px;
+      background-image: url('/assets/img/logohell.png');
+    }
+
+    50% {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 274px;
+      height: 335px;
+      background-image: url('/assets/img/logohell.png');
+    }
+
+    100% {
+      top: 16px;
+      left: 16px;
+      transform: translate(0, 0);
+      width: 100px;
+      height: 100px;
+      background-image: url('/assets/img/logodunkel.png');
+    }
+  }
+
+  @keyframes fadeBackground {
+    0% {
+      background-color: #2a3647;
+      opacity: 1;
+    }
+
+    50% {
+      background-color: #2a3647;
+      opacity: 1;
+    }
+
+    100% {
+      background-color: transparent;
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .buttonLogin {
+    flex-direction: column;
+    padding: 0px 40px 0px 40px;
+    gap: 18px;
+  }
+
+  h1 {
+    font-size: 50px;
+  }
+
+  hr {
+    border: 1px solid #29abe2;
+    width: 110px;
+  }
+
+  .button,
+  .guestButton {
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .email,
+  .password,
+  .name {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-height: 667px) {
+  .signUpContainer {
+    padding: 513px 0px 0px 0px;
+  }
+
+  .logInContainer {
+    zoom: 74%;
+  }
 }

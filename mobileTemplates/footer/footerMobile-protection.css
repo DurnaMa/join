@@ -1,0 +1,73 @@
+.mobileFooterBar {
+  display: none;
+  bottom: 0;
+  position: fixed;
+  justify-content: space-between;
+  height: 96px;
+  background-color: #2a3647;
+  align-items: center;
+  width: 100%;
+  z-index: 4;
+  padding: 20px;
+}
+
+.mobileFooterBarLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  border-radius: 12px;
+  padding: 5px;
+  width: 65px;
+  font-size: 14px;
+}
+
+.mobileFooterBarLogin span {
+  text-decoration: none;
+  color: #cdcdcd;
+}
+
+.mobileFooterBarList {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.mobileFooterBarListLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #cdcdcd;
+  height: 80px;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.mobileFooterBarListLink:hover,
+.mobileFooterBarLogin:hover {
+  background-color: #091931;
+}
+
+@media screen and (max-width: 992px) {
+  .mobileFooterBar {
+    display: flex;
+  }
+
+  .mobileSideBar {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .mobileFooterBarList span {
+    font-size: 12px;
+  }
+}
+
+.mobileFooterBarListLink.active,
+.mobileFooterBarLogin.active {
+  background-color: #091931;
+  color: white !important;
+}

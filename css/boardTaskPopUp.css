@@ -1,0 +1,303 @@
+.shadow-div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000060;
+  z-index: 4;
+}
+
+.closeImgContent {
+  display: flex;
+  height: 96px;
+  align-items: center;
+}
+
+.buttonContent {
+  display: flex;
+  height: 96px;
+  align-items: center;
+}
+
+.shadow-div-added {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000060;
+  z-index: 5;
+}
+
+.taskCardPopup {
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+  width: 525px;
+  height: 90vh;
+  background-color: white;
+  padding: 40px 35px 30px 35px;
+  border-radius: 30px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+  scrollbar-width: none;
+  min-width: 400px;
+  min-height: 475px;
+  gap: 23px;
+}
+
+.taskCardEditPopup {
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+  width: 525px;
+  height: 90vh;
+  background-color: white;
+  padding: 0px 35px 0px 35px;
+  border-radius: 30px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+  scrollbar-width: none;
+}
+
+.addTaskClose {
+  position: relative;
+  margin-left: auto;
+  top: 23px;
+}
+
+.addTaskClose img {
+  cursor: pointer;
+}
+
+.taskCardPopupCategory {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskCardPopupCategory img {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.taskCardPopupCategory h2 {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.taskCardPopupCategoryColor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 208px;
+  height: 36px;
+  color: white;
+  border-radius: 8px;
+  background-color: rgb(0, 56, 255);
+}
+
+.taskCardPopupCategoryColor h2 {
+  font-size: 23px;
+}
+
+.taskCardPopupTitle {
+  font-weight: 700;
+  font-size: 61px;
+}
+
+.taskCardPopupDescription {
+  font-size: 20px;
+  color: black;
+}
+
+.taskCardPopupLabel,
+.taskCardPopupDate,
+.taskCardPopupPrio {
+  display: flex;
+  padding: 5px 0;
+  padding: 15px 0;
+  font-size: 20px;
+  color: #2a3647;
+  gap: 20px;
+}
+
+.taskCardPopupDate span,
+.taskCardPopupPrio span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: black;
+}
+
+.taskCardPopupContact {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 0 20px;
+  gap: 10px;
+}
+
+.taskCardPopupContactName {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.taskCardPopupContactInitials {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  gap: 10px;
+  padding: 5px;
+}
+
+.tasks-user1 {
+  background-color: #0038ff;
+}
+
+.tasks-user2 {
+  background-color: #46da84;
+}
+
+.tasks-user3 {
+  background-color: #9b7d2d;
+}
+
+.progress-container-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 0 0 20px;
+}
+
+.taskCardPopupButtons {
+  display: flex;
+  gap: 10px;
+  justify-content: end;
+  align-items: center;
+  position: fixed;
+  bottom: 40px;
+  right: 34px;
+}
+
+.taskCardPopupButtons div {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+}
+
+.hrBoardTaskPopUp {
+  height: 24px;
+  border: 1px solid #d1d1d1;
+  border-radius: 20px;
+}
+
+.taskCardPopupButtons div:hover,
+.taskCardPopupButtons div img:hover {
+  color: #007cee;
+  filter: brightness(0) saturate(100%) invert(42%) sepia(94%) saturate(3361%) hue-rotate(190deg) brightness(100%)
+    contrast(103%);
+}
+
+.taskCardEditClosePopup {
+  width: 15px;
+  height: 15px;
+}
+
+.taskCardContent {
+  height: 614px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.taskCardEditContent {
+  overflow-y: scroll;
+  scrollbar-width: none;
+  height: 735px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+  background-color: white;
+}
+@media screen and (max-width: 540px) {
+  .taskCardPopup {
+    width: 100%;
+    height: 80%;
+    zoom: 90%;
+    border-radius: 0;
+  }
+
+  .taskCardEditPopup {
+    width: 100%;
+    height: 80%;
+    zoom: 90%;
+    border-radius: 0;
+  }
+
+  .taskCardContent {
+    height: 614px;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .taskCardPopupButtons {
+    width: 100%;
+    height: 100px;
+    bottom: 2px;
+    background-color: white;
+  }
+
+  .assignedContainer span {
+    font-size: 18px;
+  }
+
+  #assignedContactsListPopUp {
+    top: 394px;
+    width: 88.5%;
+    z-index: 3;
+  }
+
+  .taskCardEditPopup {
+    padding: 0px 15px 0px 15px;
+  }
+
+  .task-edit-close-popup-div {
+    width: 100%;
+    padding-right: 36px;
+  }
+
+  .taskCardPopupTitle {
+    font-size: 40px;
+    padding-bottom: 15px;
+  }
+}
+
+@media screen and (max-height: 667px) {
+  .taskCardEditPopup {
+    zoom: 65%;
+    padding-bottom: 96px;
+  }
+
+  .taskCardContent {
+    padding-bottom: 100px;
+  }
+
+  .add-edit-popup-task-div {
+    zoom: 50%;
+  }
+}

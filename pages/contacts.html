@@ -6,21 +6,25 @@
     <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
     <title>Contacts</title>
     <link rel="stylesheet" href="../css/contacts.css" />
+    <link rel="stylesheet" href="/css/contactsPopUp.css" />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="../css/fonts.css" />
-    <script defer src="../js/includeTemplates.js"></script>
+    <script defer src="/js/contacts.js"></script>
+    <script defer src="/js/mainContactPart.js"></script>
+    <script defer src="/js/contactsPopUp.js"></script>
+    <script defer src="/js/templates.js"></script>
+    <script defer src="/js/contactNewAndEditPopUpTemplates.js"></script>
+    <script defer src="/js/includeTemplates.js"></script>
     <script defer src="/script.js"></script>
-    <script defer src="../js/contacts.js"></script>
-    <script defer src="/js/header.js"></script>
   </head>
 
   <body onload="contactInit()">
-    <include-html src="../templates/header/header.html"></include-html>
-    <include-html src="../templates/sidebar/sidebar.html"></include-html>
-    <include-html src="/mobileTemplates/header/headerMobile.html"></include-html>
-    <include-html src="/mobileTemplates/footer/footerMobile.html"></include-html>
-
-    <div class="contacts-container">
+    <div w3-include-html="/templates/header/header.html"></div>
+    <div w3-include-html="/templates/sidebar/sidebar.html"></div>
+    <div w3-include-html="/mobileTemplates/header/headerMobile.html"></div>
+    <div w3-include-html="/mobileTemplates/footer/footerMobile.html"></div>
+    
+    <div id="contact" class="contacts-container">
       <div class="contacts-list-div" id="contactsListDiv">
         <div class="add-contact-btn-div">
           <button onclick="addNewContact()" class="add-contact-btn" id="addContactBtn">
@@ -28,22 +32,55 @@
             <img src="../assets/icons/person_add.png" alt="" />
           </button>
         </div>
-        <div class="d-none" id="addNewContactDiv"></div>
-        <div class="d-none" id="editContactDiv"></div>
         <div class="scrollbar" id="scrollbar"></div>
       </div>
 
       <div class="contact-right-area">
         <div class="contact-right-area-header">
           <h1>Contacts</h1>
-          <div class="contact-right-area-header-dividing-line"></div>
-          <h2>Better with a team</h2>
+          <div class="contact-right-area-header-dividing-line-content">
+            <div class="contact-right-area-header-dividing-line"></div>
+            <h2>Better with a team</h2>
+          </div>
         </div>
 
-        <div class="contact-details-div" id="contactDetailsDiv">
-          
-        </div>
+        <div class="contact-details-div" id="contactDetailsDiv"></div>
       </div>
     </div>
+    <div class="succesfull-popup d-none"><span>Contact succesfully created</span></div>
+    <div class="mobileAddButton">
+      <img onclick="mobileAddNewContact()" src="/assets/icons/add-button.png" alt="">
+    </div>
+    <div id="mobileContactContainer" class="mobileContactContainer d-none">
+      <div class="mobile-contact-right-area">
+        <div class="close-mobile-contact-area">
+          <img onclick="closePopUp()" src="/assets/icons/arrow-left-line.png" alt="">
+        </div>
+        <div class="mobile-contact-right-area-header">
+          <h1>Contacts</h1>
+          <div class="mobile-contact-right-area-header-dividing-line-content">
+            <hr>
+            <h2>Better with a team</h2>
+          </div>
+        </div>
+
+        <div class="mobile-contact-details-div" id="mobileContactDetailsDiv"></div>
+      
+      </div>
+      <div class="mobileOptionsButton">
+        <img onclick="mobileToggleOptions()" src="/assets/icons/options.png" alt="">
+      </div>
+    </div>
+    <div id="mobileToggleOptions" class="hidden">
+      <div onclick="mobileEditContact()" class="contact-details-div-icon-edit">
+        <img src="/assets/icons/edit-pencil.png" alt="">
+        Edit
+      </div>
+      <div onclick="mobileDeleteContact()" class="contact-details-div-icon-edit img">
+        <img src="/assets/icons/deleteContact.png" alt="">
+        Delete
+      </div>
+    </div>
+    <div id="popup"></div>
   </body>
 </html>

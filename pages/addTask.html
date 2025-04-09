@@ -6,38 +6,57 @@
     <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/css/addTask.css" />
+    <link rel="stylesheet" href="/css/addTaskMedia.css" />
+    <link rel="stylesheet" href="/css/addTaskPopUp.css" />
     <script defer src="/js/includeTemplates.js"></script>
     <script defer src="/script.js"></script>
     <script defer src="/js/addTask.js"></script>
-    <script defer src="/js/header.js"></script>
+    <script defer src="/js/taskManagement.js"></script>
+    <script defer src="/js/contacts.js"></script>
+    <script defer src="/js/mainContactPart.js"></script>
+    <script defer src="/js/formularValidierung.js"></script>
     <title>Add Task</title>
   </head>
-  <body onload="init()">
-    <include-html src="../templates/header/header.html"></include-html>
-    <include-html src="../templates/sidebar/sidebar.html"></include-html>
-    <include-html src="/mobileTemplates/header/headerMobile.html"></include-html>
-    <include-html src="/mobileTemplates/footer/footerMobile.html"></include-html>
+  <body onload="initAddTask(); prioMedium();">
+    <div w3-include-html="/templates/header/header.html"></div>
+    <div w3-include-html="/templates/sidebar/sidebar.html"></div>
+    <div w3-include-html="/mobileTemplates/header/headerMobile.html"></div>
+    <div w3-include-html="/mobileTemplates/footer/footerMobile.html"></div>
+
     <div class="addTaskContent">
       <div class="headlineDiv"><h1>Add Task</h1></div>
-      <form method="post">
+      <form >
         <div class="formParts">
           <section class="formPartLeft">
-            <label for="title">Title<span class="required">*</span> </label>
+            <label for="title">
+              Title
+              <span class="required">*</span>
+            </label>
             <input id="titleInput" type="text" placeholder="Enter a title" />
+            <span id="titleError" class="text-custom"></span>
             <br />
             <label for="description">Description</label>
             <textarea id="descriptionTextarea" rows="5" placeholder="Enter a Description"></textarea>
+            <span id="descriptionTextareaError" class="text-custom"></span>
             <br />
             <label for="contactSelection">Assigned to</label>
-            <select name="contactList" id="contactList">
-              <option value disabled selected hidden>Select contacts to assign</option>
-              <option value=""></option>
-            </select>
+            <div onclick="contactList()" class="assignedContainer">
+              <span>Select contacts to assign</span>
+              <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+              <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+            </div>
+            <div id="assignedContactsList" class="hidden"></div>
+            <div id="selectedContactsDisplay" class="selectedContactsContainer"></div>
+            <span id="assignedContactsListError" class="text-custom"></span>
           </section>
           <hr />
           <section class="formPartRight">
-            <label for="dueDate">Due Date<span class="required">*</span> </label>
-            <input type="date" id="date" />
+            <label for="dueDate">
+              Due Date
+              <span class="required">*</span>
+            </label>
+            <input type="date" id="date" onkeydown="return false;"/>
+            <span id="dateError" class="text-custom"></span>
             <br />
             <label for="prio">Prio</label>
             <section id="prio" class="prioContent">
@@ -50,23 +69,35 @@
                 <img id="mediumImg" src="/assets/icons/mediumYellow.png" alt="" />
               </button>
               <button type="button" id="prioLowEdit" class="prioBtn" onclick="prioLow()">
-                Low <img id="lowImg" src="/assets/icons/lowGreen.png" alt="" />
+                Low
+                <img id="lowImg" src="/assets/icons/lowGreen.png" alt="" />
               </button>
             </section>
             <br />
-            <label for="category">Category<span class="required">*</span> </label>
-            <select id="category">
-              <option value disabled selected hidden>Select Task Category</option>
-              <option value="Technical Task">Technical Task</option>
-              <option value="User Story">User Story</option>
-            </select>
+            <label for="category">
+              Category
+              <span class="required">*</span>
+            </label>
+            <div onclick="categorytList()" class="categoryContainer">
+              <span id="dropdownCategory" class="">Select Task Category</span>
+              <img id="categoryArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
+              <img id="categoryArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+              <div id="categoryList" class="hidden"></div>
+            </div>
+            <span id="categoryError" class="text-custom"></span>
+
             <br />
             <label for="subtask">Subtasks</label>
+            
+            <div>
             <div id="addSubTask">
-              <input id="subTask" class="addSubTask" placeholder="Add new subtask" type="text" />
+              <input id="subTask" class="addSubTask" placeholder="Add new subtask" type="text"
+              onkeydown="if(event.key === 'Enter') { event.preventDefault(); addSubTask(); }">
               <img onclick="addSubTask()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
             </div>
             <ul id="subTaskList"></ul>
+          </div>
+
           </section>
         </div>
         <div class="taskFormButtons">
@@ -75,13 +106,24 @@
             This field is required
           </p>
           <div class="btnSection">
-            <button onclick="resetAddTask()" type="reset" class="clearBtn">
-              Clear <img src="/assets/icons/cancel.png" alt="" />
+            <button onclick="clearForm()" type="button" class="clearBtn">
+              Clear
+              <img src="/assets/icons/cancel.png" alt="" />
             </button>
-            <button type="submit" class="button">Create Task <img src="/assets/icons/check.png" alt="" /></button>
+            <button type="button" onclick="postAddTask()" class="button">
+              Create Task
+              <img src="/assets/icons/check.png" alt="" />
+            </button>
           </div>
         </div>
       </form>
+    </div>
+
+    <div id="popup" class="task-added-popup-center d-none">
+      <div class="popup-spamMahir">
+        <span>Task added to board</span>
+        <img src="/assets/img/board-icon.png" alt="" />
+      </div>
     </div>
   </body>
 </html>
