@@ -3,11 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="shortcut icon"
-      href="/assets/img/logodunkel.png"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
     <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="/css/signUp.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
@@ -21,52 +17,21 @@
     </div>
     <div class="signUpContainer">
       <a class="signUpArrowLink" href="/index.html">
-        <img
-          class="arrowSignUpImg"
-          src="/assets/icons/arrow-left-line.png"
-          alt=""
-        />
+        <img class="arrowSignUpImg" src="/assets/icons/arrow-left-line.png" alt="" />
       </a>
       <h1>Sign Up</h1>
       <hr />
       <form class="formSignUp" onsubmit="return false">
         <div class="signUpInput">
-          <input
-            id="name"
-            class="name"
-            type="text"
-            placeholder="Name"
-            required
-          />
-          <input
-            id="email"
-            class="email"
-            type="email"
-            placeholder="Email"
-            required
-          />
+          <input id="name" class="name" type="text" placeholder="Name" required />
+          <input id="email" class="email" type="email" placeholder="Email" required />
           <div id="emailError" class="signUpEmailError"></div>
           <div class="passwordContainer">
-            <input
-              id="signupPassword"
-              class="password"
-              type="password"
-              placeholder="Password"
-            />
-            <img
-              onclick="showSignupPassword()"
-              class="passwordSignupIcon"
-              src="/assets/icons/lock.png"
-              alt=""
-            />
+            <input id="signupPassword" class="password" type="password" placeholder="Password" />
+            <img onclick="showSignupPassword()" class="passwordSignupIcon" src="/assets/icons/lock.png" alt="" />
           </div>
           <div class="passwordContainer">
-            <input
-              id="confirmPassword"
-              class="password"
-              type="password"
-              placeholder="Confirm Password"
-            />
+            <input id="confirmPassword" class="password" type="password" placeholder="Confirm Password" />
             <img
               onclick="showConfirmPassword()"
               class="passwordSignupConfirmIcon"
@@ -76,22 +41,16 @@
           </div>
           <div id="passwordError" class="signUpPasswordError"></div>
           <div class="checkboxSignUp">
-            <input
-              id="checkboxSingUp"
-              type="checkbox"
-              name="checkboxPrivacyPolicy"
-            />
-            <label for=""
-              >I accept the
+            <input id="checkboxSingUp" type="checkbox" name="checkboxPrivacyPolicy" />
+            <label for="">
+              I accept the
               <a href="/pages/data-protection.html">Privacy Policy</a>
             </label>
           </div>
           <div id="checkboxError" class="signUpCheckboxError"></div>
         </div>
         <div class="signUpButton">
-          <button onclick="toTheRegistration()" id="" class="button">
-            Sign up
-          </button>
+          <button onclick="toTheRegistration()" id="" class="button">Sign up</button>
           <div class="pupup-signUp d-none" id="singUpPopup">
             <img src="/assets/icons/youSignedUpSuccessfully.png" alt="" />
           </div>
