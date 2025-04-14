@@ -4,38 +4,94 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Legale Notice</title>
-    <link rel="stylesheet" href="/templates/header/header.css" />
-    <link rel="stylesheet" href="/templates/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/sidebar.css" />
     <link rel="stylesheet" href="/mobileTemplates/footer/footerMobile.css" />
     <link rel="stylesheet" href="/mobileTemplates/header/headerMobile.css" />
     <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
-    <link rel="stylesheet" href="/css/legale-notice.css" id="">
+    <link rel="stylesheet" href="/css/legale-notice.css" id="" />
     <script defer src="../js/includeTemplates.js"></script>
     <script defer src="/script.js"></script>
   </head>
   <body>
     <div w3-include-html="/templates/header/header.html"></div>
-    <div w3-include-html="/templates/sidebar/sidebar.html"></div>
     <div w3-include-html="/mobileTemplates/header/headerMobile.html"></div>
-    <div w3-include-html="/mobileTemplates/footer/footerMobile.html"></div>
+
+    <aside class="sideBar">
+      <img class="logo-sidenav" src="/assets/img/logohell.png" alt="" />
+      <nav class="sideBarLogin d-none">
+        <a href="/index.html">
+          <img src="/assets/icons/loginIcon.png" alt="" />
+          <span>Log In</span>
+        </a>
+      </nav>
+      <nav class="sideBarList">
+        <a href="/pages/summary.html" data-page="summary">
+          <img src="/assets/img/summary-icon.png" alt="" />
+          <span>Summary</span>
+        </a>
+        <a href="/pages/addTask.html" data-page="addTask">
+          <img src="/assets/img/addtask-icon.png" alt="" />
+          <span>Add Task</span>
+        </a>
+        <a href="/pages/board.html" data-page="board">
+          <img src="/assets/img/board-icon.png" alt="" />
+          <span>Board</span>
+        </a>
+        <a href="/pages/contacts.html" data-page="contacts">
+          <img src="/assets/img/contacts-icon.png" alt="" />
+          <span>Contacts</span>
+        </a>
+      </nav>
+      <div class="policyAndNotice">
+        <a href="/pages/data-protection.html" data-page="data-protection"><span>Privacy Policy</span></a>
+        <a href="/pages/legale-notice.html" data-page="legale-notice"><span>Legal notice</span></a>
+      </div>
+    </aside>
     <main class="main-content">
       <div>
         <h1>Impressum</h1>
 
         <p>
-          Mahir Durna<br />
-          Mobergen. 3<br />
+          Mahir Durna
+          <br />
+          Mobergen. 3
+          <br />
           49696 Molbergen
         </p>
 
         <h2>Kontakt</h2>
         <p>
-          Telefon: &#91;+491621234567&#93;<br />
+          Telefon: &#91;+491621234567&#93;
+          <br />
           E-Mail:
         </p>
 
-        <p>Quelle: <a href="https://www.e-recht24.de">eRecht24</a></p>
+        <p>
+          Quelle:
+          <a href="https://www.e-recht24.de">eRecht24</a>
+        </p>
       </div>
     </main>
+    <footer>
+      <nav class="mobileSideBar">
+        <a class="mobileSideBarList" href="/pages/summary.html" data-page="summary">
+          <img src="/assets/img/summary-icon.png" alt="" />
+          <span>Summary</span>
+        </a>
+        <a class="mobileSideBarList" href="/pages/board.html" data-page="board">
+          <img src="/assets/img/board-icon.png" alt="" />
+          <span>Board</span>
+        </a>
+        <a class="mobileSideBarList" href="/pages/addTask.html" data-page="addTask">
+          <img src="/assets/img/addtask-icon.png" alt="" />
+          <span>Add Tasks</span>
+        </a>
+        <a class="mobileSideBarList" href="/pages/contacts.html" data-page="contacts">
+          <img src="/assets/img/contacts-icon.png" alt="" />
+          <span>Contacts</span>
+        </a>
+      </nav>
+    </footer>
   </body>
 </html>

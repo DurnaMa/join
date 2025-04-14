@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/templates/header/header.css" />
-    <link rel="stylesheet" href="/templates/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/sidebar.css" />
     <link rel="stylesheet" href="/mobileTemplates/footer/footerMobile.css" />
     <link rel="stylesheet" href="/mobileTemplates/header/headerMobile.css" />
     <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
@@ -21,11 +21,41 @@
     <script defer src="/js/formularValidierung.js"></script>
     <title>Add Task</title>
   </head>
-  <body onload="initAddTask(); prioMedium();">
+  <body onload="initAddTask()">
     <div w3-include-html="/templates/header/header.html"></div>
-    <div w3-include-html="/templates/sidebar/sidebar.html"></div>
     <div w3-include-html="/mobileTemplates/header/headerMobile.html"></div>
-    <div w3-include-html="/mobileTemplates/footer/footerMobile.html"></div>
+
+    <aside class="sideBar">
+      <img class="logo-sidenav" src="/assets/img/logohell.png" alt="" />
+      <nav class="sideBarLogin d-none">
+        <a href="/index.html">
+          <img src="/assets/icons/loginIcon.png" alt="" />
+          <span>Log In</span>
+        </a>
+      </nav>
+      <nav class="sideBarList">
+        <a href="/pages/summary.html" data-page="summary">
+          <img src="/assets/img/summary-icon.png" alt="" />
+          <span>Summary</span>
+        </a>
+        <a href="/pages/addTask.html" data-page="addTask">
+          <img src="/assets/img/addtask-icon.png" alt="" />
+          <span>Add Task</span>
+        </a>
+        <a href="/pages/board.html" data-page="board">
+          <img src="/assets/img/board-icon.png" alt="" />
+          <span>Board</span>
+        </a>
+        <a href="/pages/contacts.html" data-page="contacts">
+          <img src="/assets/img/contacts-icon.png" alt="" />
+          <span>Contacts</span>
+        </a>
+      </nav>
+      <div class="policyAndNotice">
+        <a href="/pages/data-protection.html" data-page="data-protection"><span>Privacy Policy</span></a>
+        <a href="/pages/legale-notice.html" data-page="legale-notice"><span>Legal notice</span></a>
+      </div>
+    </aside>
 
     <div class="addTaskContent">
       <div class="headlineDiv"><h1>Add Task</h1></div>
@@ -127,11 +157,32 @@
       </form>
     </div>
 
-    <div id="popup" class="task-added-popup-center d-none">
+    <div id="popup" class="task-added-popup-center">
       <div class="popup-spamMahir">
         <span>Task added to board</span>
         <img src="/assets/img/board-icon.png" alt="" />
       </div>
     </div>
+
+    <footer>
+      <nav class="mobileSideBar">
+        <a class="mobileSideBarList" href="/pages/summary.html" data-page="summary">
+          <img src="/assets/img/summary-icon.png" alt="" />
+          <span>Summary</span>
+        </a>
+        <a class="mobileSideBarList" href="/pages/board.html" data-page="board">
+          <img src="/assets/img/board-icon.png" alt="" />
+          <span>Board</span>
+        </a>
+        <a class="mobileSideBarList" href="/pages/addTask.html" data-page="addTask">
+          <img src="/assets/img/addtask-icon.png" alt="" />
+          <span>Add Tasks</span>
+        </a>
+        <a class="mobileSideBarList" href="/pages/contacts.html" data-page="contacts">
+          <img src="/assets/img/contacts-icon.png" alt="" />
+          <span>Contacts</span>
+        </a>
+      </nav>
+    </footer>
   </body>
 </html>
