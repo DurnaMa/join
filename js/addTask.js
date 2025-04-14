@@ -3,11 +3,11 @@ let selectedContacts = new Set();
 
 /**
  * Initializes the "Add Task" functionality.
- * 
+ *
  * This asynchronous function:
  * - Loads user data by calling `loadDataUsers()`.
  * - Sets the minimum date restriction for the date input using `datelimit()`.
- * 
+ *
  * @async
  * @function initAddTask
  * @returns {Promise<void>} A promise that resolves when the initialization is complete.
@@ -15,6 +15,7 @@ let selectedContacts = new Set();
 async function initAddTask() {
   await loadDataUsers();
   datelimit();
+  prioMedium();
 }
 
 let subTask = document.getElementById('subTask');
@@ -52,15 +53,15 @@ function setPriority(priority) {
 
 /**
  * Updates the priority button styling based on the selected priority.
- * 
- * This function applies a specific CSS class and changes the corresponding priority 
+ *
+ * This function applies a specific CSS class and changes the corresponding priority
  * icon based on the given `priority` value.
- * 
+ *
  * Priority options:
  * - `'urgent'`: Adds the class `prioUrgentRed` and updates the icon to `urgentWhite.png`.
  * - `'medium'`: Adds the class `prioMediumYellow` and updates the icon to `mediumWhite.png`.
  * - `'low'`: Adds the class `prioLowGreen` and updates the icon to `lowWhite.png`.
- * 
+ *
  * @function btnPriority
  * @param {string} priority - The selected priority level (`'urgent'`, `'medium'`, or `'low'`).
  */
@@ -79,9 +80,9 @@ function btnPriority(priority) {
 
 /**
  * Sets the task priority to "urgent".
- * 
+ *
  * Calls `setPriority('urgent')` to update the priority setting.
- * 
+ *
  * @function prioUrgent
  */
 function prioUrgent() {
@@ -90,9 +91,9 @@ function prioUrgent() {
 
 /**
  * Sets the task priority to "medium".
- * 
+ *
  * Calls `setPriority('medium')` to update the priority setting.
- * 
+ *
  * @function prioMedium
  */
 function prioMedium() {
@@ -101,9 +102,9 @@ function prioMedium() {
 
 /**
  * Sets the task priority to "low".
- * 
+ *
  * Calls `setPriority('low')` to update the priority setting.
- * 
+ *
  * @function prioLow
  */
 function prioLow() {
@@ -165,14 +166,14 @@ function editSubTask(index) {
 
 /**
  * Generates an HTML list item for a subtask.
- * 
+ *
  * This function creates an HTML string representing a subtask item, including:
  * - A text display (`<span>`) and an editable input field (`<input>`).
  * - Action buttons for editing, deleting, and saving the subtask.
  * - A unique `data-index` attribute for tracking the subtask.
- * 
+ *
  * The function uses the global `subTasks` array to retrieve the subtask description.
- * 
+ *
  * @function generateSubTaskList
  * @param {number} i - The index of the subtask in the `subTasks` array.
  * @returns {string} An HTML string representing the subtask list item.
@@ -213,8 +214,8 @@ function saveSubTask(index) {
   let subInputEdit = document.getElementById(`subInputEdit-${index}`);
   let inputValue = subInputEdit.value.trim();
 
-  if (inputValue === "") {
-    subInputEdit.placeholder = "Bitte fülle dieses Feld aus!";
+  if (inputValue === '') {
+    subInputEdit.placeholder = 'Bitte fülle dieses Feld aus!';
     return;
   }
   if (subTasks[index]) {
@@ -227,10 +228,10 @@ function saveSubTask(index) {
 
 /**
  * Deletes a subtask from the subTasks array and updates the UI.
- * 
- * This function removes the subtask at the specified index from the global `subTasks` array 
+ *
+ * This function removes the subtask at the specified index from the global `subTasks` array
  * and then calls `renderSubTaskList()` to refresh the displayed list of subtasks.
- * 
+ *
  * @function deleteSubTask
  * @param {number} index - The index of the subtask to be deleted.
  */
@@ -280,15 +281,15 @@ function contactList() {
 
 /**
  * Generates an HTML representation of a contact with initials and a checkbox.
- * 
+ *
  * This function creates a selectable contact element displaying:
  * - The contact's initials with a background color.
  * - The contact's full name.
  * - A checkbox indicating whether the contact is selected.
- * 
+ *
  * The function checks if the contact is currently selected (`selectedContacts` set)
  * and applies the `active` class accordingly.
- * 
+ *
  * @function generateInitialsColor
  * @param {Object} contact - The contact object containing name and color properties.
  * @param {string} initials - The initials of the contact.
@@ -311,11 +312,11 @@ function generateInitialsColor(contact, initials, isChecked) {
 
 /**
  * Toggles the visibility of assigned arrow icons.
- * 
- * This function switches the `d-none` class on the elements with IDs 
- * `assignedArrowUp` and `assignedArrowDown`, effectively toggling 
+ *
+ * This function switches the `d-none` class on the elements with IDs
+ * `assignedArrowUp` and `assignedArrowDown`, effectively toggling
  * their visibility.
- * 
+ *
  * @function openclassList
  */
 function openclassList() {
@@ -361,7 +362,8 @@ function updateSelectedContactsDisplay() {
  * contacts.
  */
 function toggleCheckbox(event, contactName) {
-  let checkbox = event.target.type === 'checkbox' ? event.target : event.currentTarget.querySelector('input[type="checkbox"]');
+  let checkbox =
+    event.target.type === 'checkbox' ? event.target : event.currentTarget.querySelector('input[type="checkbox"]');
   if (checkbox) {
     checkbox.checked = !checkbox.checked;
     event.currentTarget.classList.toggle('selectedContact', checkbox.checked);
