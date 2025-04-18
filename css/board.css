@@ -666,12 +666,19 @@
 }
 
 .drag-area {
-  width: 252px;
-  height: 244px;
-  border: 2px dashed gray;
-  margin: 10px 0;
-  border-radius: 20px;
+  min-height: 50px; /* Mindesthöhe der Drop-Zone */
+  margin: 4px 0;
+  border-radius: 8px;
+  border: 2px dashed #29ABE2; /* Sichtbarer Rahmen */
+  background-color: rgba(41, 171, 226, 0.1); /* Hintergrundfarbe */
 }
+
+
+.column-drop-target {
+  border: 2px dashed #29abe2;
+  background-color: rgba(41, 171, 226, 0.05);
+}
+
 .empty-column {
   text-align: center;
   color: gray;
