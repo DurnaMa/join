@@ -102,6 +102,7 @@
               id="todo"
               ondrop="drop(event, 'todo'); checkEmptyColumns()"
               ondragover="allowDrop(event)"
+              ondragleave="clearHighlight(event)" 
             ></div>
           </div>
         </div>
@@ -119,6 +120,7 @@
               id="inprogress"
               ondrop="drop(event, 'inprogress'); checkEmptyColumns()"
               ondragover="allowDrop(event)"
+              ondragleave="clearHighlight(event)" 
             ></div>
           </div>
         </div>
@@ -136,6 +138,7 @@
               id="awaitfeedback"
               ondrop="drop(event, 'awaitfeedback'); checkEmptyColumns()"
               ondragover="allowDrop(event)"
+              ondragleave="clearHighlight(event)" 
             ></div>
           </div>
         </div>
@@ -150,6 +153,7 @@
               id="done"
               ondrop="drop(event, 'done'); checkEmptyColumns()"
               ondragover="allowDrop(event)"
+              ondragleave="clearHighlight(event)" 
             ></div>
           </div>
         </div>
