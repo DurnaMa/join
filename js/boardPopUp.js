@@ -24,10 +24,10 @@ function openTaskPopup(taskId) {
 
 /**
  * Opens the edit task popup for a specific task.
- * 
+ *
  * This function locates the task by its ID, retrieves the task data,
  * and updates the DOM to display the edit task popup while hiding the open task popup.
- * 
+ *
  * @param {number|string} taskId - The unique identifier of the task to be edited.
  */
 function openEditTaskPopup(taskId) {
@@ -48,19 +48,19 @@ function openEditTaskPopup(taskId) {
 
 /**
  * Updates an existing task with new data provided through the edit task form.
- * 
+ *
  * @async
  * @function
  * @param {Event} event - The event object triggered by the form submission.
  * @returns {Promise<void>} - A promise that resolves when the task is successfully updated.
- * 
+ *
  * @throws Will log an error if the task ID is missing or if there is an issue updating the task in Firebase.
- * 
+ *
  * @description
  * This function handles the process of updating a task. It retrieves the task ID from the event target,
  * validates the required fields, updates the task data, and sends the updated task to Firebase.
  * If the update is successful, it closes the edit task popup and re-renders the tasks.
- * 
+ *
  * Steps:
  * 1. Prevents the default form submission behavior.
  * 2. Retrieves the task ID from the event target.
@@ -88,14 +88,14 @@ async function updateEditTask(event) {
 
 /**
  * Sends updated task data to Firebase and updates the UI accordingly.
- * 
+ *
  * This asynchronous function:
  * - Sends a PATCH request to Firebase to update the task data using `patchDataToFirebase()`.
  * - Closes the task editing popup using `closeEditTaskCardPopUp()`.
  * - Renders the updated task list with `renderTasks()`.
- * 
+ *
  * If an error occurs during the update, it is logged to the console.
- * 
+ *
  * @async
  * @function sendingDataToFirebase
  * @param {string} taskId - The ID of the task to be updated.
@@ -185,12 +185,12 @@ async function updateVariables(taskId) {
 
 /**
  * Displays the "Add Task" popup button by modifying the DOM.
- * 
+ *
  * This function performs the following actions:
  * 1. Adds the "overflow-hidden" class to the body element to prevent scrolling.
  * 2. Removes the "d-none" class from the "addNewTaskBtnDiv" element to make it visible.
  * 3. Sets the inner HTML of the "addNewTaskBtnDiv" element to the rendered "Add Task" popup button.
- * 
+ *
  * @function
  */
 function addTaskPopupBtn() {
@@ -204,11 +204,11 @@ function addTaskPopupBtn() {
 
 /**
  * Displays the "Add Task" popup for the "To-Do" section and prevents body scrolling.
- * 
+ *
  * This function adds a CSS class to the body element to disable scrolling and makes
  * the "Add Task" popup visible by removing the "d-none" class from its container.
  * It also populates the popup container with the rendered HTML content.
- * 
+ *
  * @function
  * @returns {void}
  */
@@ -223,11 +223,11 @@ function addTaskPopupPlusToDoBtn() {
 
 /**
  * Displays the "Add Task" popup for tasks in progress.
- * 
+ *
  * This function adds a CSS class to the body element to prevent scrolling,
  * makes the "Add Task" popup for tasks in progress visible by removing the
  * "d-none" class, and sets its inner HTML content by rendering the popup.
- * 
+ *
  * @function
  */
 function addTaskPopupPlusInProgressBtn() {
@@ -243,7 +243,7 @@ function addTaskPopupPlusInProgressBtn() {
 
 /**
  * Displays a task popup for adding a task and awaiting feedback.
- * 
+ *
  * This function modifies the DOM by adding an "overflow-hidden" class to the body element
  * to prevent scrolling and makes the "openTaskPopupAwaitFeedbackDiv" element visible
  * by removing the "d-none" class. It also updates the inner HTML of the popup
@@ -263,7 +263,7 @@ function addTaskPopupPlusAwaitFeedbackBtn() {
 
 /**
  * Closes the "Add Task" popup and resets the UI state.
- * 
+ *
  * This function performs the following actions:
  * - Removes the "overflow-hidden" class from the body element to restore scrolling.
  * - Hides the "Add New Task" button by adding the "d-none" class.
@@ -281,7 +281,7 @@ function closeAddTaskPopUp() {
 
 /**
  * Closes the "Add Task" popup for the "To-Do" section.
- * 
+ *
  * This function removes the "overflow-hidden" class from the body element to restore scrolling,
  * hides the popup by adding the "d-none" class to its container, and reloads the page to reflect
  * any changes made.
@@ -294,7 +294,7 @@ function closeAddTaskPopUpToDo() {
 
 /**
  * Closes the "Add Task" popup in the "In Progress" section.
- * 
+ *
  * This function performs the following actions:
  * - Removes the "overflow-hidden" class from the body element to restore scrolling.
  * - Adds the "d-none" class to the popup container to hide it.
@@ -308,7 +308,7 @@ function closeAddTaskPopUpInProgress() {
 
 /**
  * Closes the "Add Task" popup for the "Await Feedback" section.
- * 
+ *
  * This function performs the following actions:
  * - Removes the "overflow-hidden" class from the body element to restore scrolling.
  * - Adds the "d-none" class to the popup element to hide it.
@@ -348,13 +348,13 @@ function closeEditTaskCardPopUp() {
 
 /**
  * Toggles the visibility of the contact list popup and updates its content.
- * 
+ *
  * This function dynamically generates the HTML content for a list of contacts
  * and displays it in a popup. Each contact is represented with their initials,
  * name, and a checkbox to select or deselect them. The function also handles
  * toggling the visibility of the popup and updates the display of selected
  * contacts when the popup is hidden.
- * 
+ *
  * Dependencies:
  * - `contacts`: An array of contact objects, where each object contains `name` and `color` properties.
  * - `selectedContacts`: A Set containing the names of currently selected contacts.
@@ -362,11 +362,11 @@ function closeEditTaskCardPopUp() {
  * - `toggleCheckbox(event, name)`: A function that handles checkbox toggle events.
  * - `updateSelectedContactsDisplay()`: A function that updates the display of selected contacts.
  * - `openclassList()`: A function that performs additional operations when the popup is opened.
- * 
+ *
  * HTML Structure:
  * - The popup content is rendered inside an element with the ID `assignedContactsListPopUp`.
  * - Each contact is displayed with a colored initials badge, their name, and a checkbox.
- * 
+ *
  * Side Effects:
  * - Modifies the innerHTML of the `assignedContactsListPopUp` element.
  * - Toggles the `hidden` class on the `assignedContactsListPopUp` element.

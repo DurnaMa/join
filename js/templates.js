@@ -1,10 +1,10 @@
 /**
  * Prepares and returns the HTML for a task popup card, including the appropriate priority icon.
- * 
+ *
  * This function selects the correct priority image based on the task's priority value
  * (`'Urgent'`, `'Medium'`, or `'Low'`), and passes it along with the task data
  * to `renderTasksCardPopupHTML()` to generate the final HTML string.
- * 
+ *
  * @function renderTasksCardPopup
  * @param {Object} task - The task object containing all necessary task data.
  * @param {string} task.priority - The priority of the task (used to determine the icon).
@@ -24,17 +24,17 @@ function renderTasksCardPopup(task) {
 
 /**
  * Generates the HTML markup for a task detail popup card.
- * 
+ *
  * This function returns a string of HTML that represents a task's detailed view in a popup, including:
  * - Category and close button
  * - Task title, description, due date, and priority with corresponding icon
  * - Assigned users with colored initials
  * - Subtasks with checkboxes to mark them as complete
  * - Buttons to delete or edit the task
- * 
+ *
  * The function includes fallbacks for missing data (e.g. "No Title", "No Description").
  * It also integrates event handlers for closing the popup, updating subtasks, editing, and deleting the task.
- * 
+ *
  * @function renderTasksCardPopupHTML
  * @param {Object} task - The task object containing details to display.
  * @param {string} task.id - The unique ID of the task.
@@ -64,13 +64,13 @@ function renderTasksCardPopupHTML(task, priorityImageSrc) {
       <div class="taskCardPopupDescription">${task.description || "No Description"}</div>
       <div class="taskCardPopupDate">
         <label>Due date:</label>
-        <span>${task.dueDate || "N/A"}</span> 
+        <span>${task.dueDate || "N/A"}</span>
       </div>
       <div class="taskCardPopupPrio">
         <label>Priority:</label>
-        <span>${task.priority || "Medium"} 
+        <span>${task.priority || "Medium"}
           <img src="${priorityImageSrc}" alt="${task.priority}">
-        </span> 
+        </span>
       </div>
       <label class="taskCardPopupLabel">Assigned To:</label>
       <div class="taskCardPopupContact">
@@ -78,7 +78,7 @@ function renderTasksCardPopupHTML(task, priorityImageSrc) {
       ? task.users
         .map(
           (user) => `<div class="taskCardPopupContactName"><div class="taskCardPopupContactInitials" style="background-color: ${user.color}">
-                    ${user.initials || "??"} 
+                    ${user.initials || "??"}
                   </div>
                   <div>${user.name || "No Name"}</div>
                   </div>
@@ -96,7 +96,7 @@ function renderTasksCardPopupHTML(task, priorityImageSrc) {
           (subtasks, index) => `
                     <div class="step">
                       <input type="checkbox" id="step${index}-${task.id}"
-                        onchange="updateSteps('${task.id}')" 
+                        onchange="updateSteps('${task.id}')"
                         ${subtasks.completed ? "checked" : ""}>
                       <label for="step${index}-${task.id}">${subtasks.description || "Unnamed Subtask"}</label>
                     </div>
@@ -123,15 +123,15 @@ function renderTasksCardPopupHTML(task, priorityImageSrc) {
 
 /**
  * Prepares and returns the HTML for the edit task popup, initializing necessary state.
- * 
+ *
  * This function extracts relevant task data from the `currentSelectedTask` object, such as:
  * - Title, description, due date
  * - Assigned users (used to update `selectedContacts`)
  * - Subtasks (assigned to global `subTasks`)
  * - Priority (assigned to global `window.currentSelectedPriority`)
- * 
+ *
  * It then calls `renderEditTasksCardPopupHTML()` with the extracted data to generate the HTML content.
- * 
+ *
  * @function renderEditTasksCardPopup
  * @param {Object} currentSelectedTask - The task object containing all editable fields.
  * @param {string} currentSelectedTask.title - The task title.
@@ -158,19 +158,19 @@ function renderEditTasksCardPopup(currentSelectedTask, taskId) {
 
 /**
  * Generates the HTML markup for the edit task popup interface.
- * 
+ *
  * This function returns a full HTML string that represents the popup form
  * used to edit an existing task. It includes:
- * 
+ *
  * - Title, description, and due date inputs
  * - Priority selection buttons with appropriate styling and icons
  * - Assigned contacts with dropdown selection and current visual display
  * - Subtask list with inline editing, deleting, and saving capabilities
  * - A submit button to confirm the changes
- * 
- * It uses global variables like `subTasks` and `window.currentSelectedPriority` to 
+ *
+ * It uses global variables like `subTasks` and `window.currentSelectedPriority` to
  * maintain state across renders and actions.
- * 
+ *
  * @function renderEditTasksCardPopupHTML
  * @param {string} title - The current title of the task.
  * @param {string} description - The current description of the task.
@@ -195,7 +195,7 @@ function renderEditTasksCardPopupHTML(title, description, dueDate, assignedConta
       <textarea id="descriptionTextarea" class="task-edit-input-popup" placeholder="Enter a description">${description}</textarea>
       <label>Due Date</label>
       <input onclick="datelimit()" onkeydown="return false;" id="date" value="${dueDate}" class="task-edit-input-popup" type="date"/>
-        
+
       <label>Priority</label>
       <div class="task-edit-prio-popup">
         <button onclick="updatePriority('Urgent')" id="prioUrgentEditPopup" class="prioBtn ${window.currentSelectedPriority === "Urgent" ? "prioUrgentRed" : ""}">
@@ -234,7 +234,7 @@ function renderEditTasksCardPopupHTML(title, description, dueDate, assignedConta
       )
       .join("")}
       </div>
-    
+
       <label for="subtask">Subtasks</label>
       <div id="addSubTask">
         <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text"
@@ -245,7 +245,7 @@ function renderEditTasksCardPopupHTML(title, description, dueDate, assignedConta
         ${subTasks
       .map(
         (subTask, i) => `
-          <li class="subTask" data-index="${i}">
+          <li class="subTask" data-index="${i}" data-id="${subTask.id || ''}">
             <input id="subInputEdit-${i}" type="text" class="subTask-edit-input d-none" value="${subTask.description}">
             <span id="subEditSpan-${i}" class="subTask-text">${subTask.description}</span>
             <div class="subTask-actions">
@@ -335,10 +335,10 @@ function taskCardHTML(task, totalSubtasks, completedSubtasks) {
         }', 1, event)" src="/assets/icons/arrow-left-line.png" alt="">
       </div>
       </div>
-      
+
       <h3 class="h3TaskCard">${task.title}</h3>
       <p>${task.description.substring(0,40)}...</p>
-      
+
       <div class="progress-container">
         <div class="progress-bar-container">
           <div class="progress-bar" id="progressBar-${task.id}" style="width: ${
@@ -351,7 +351,7 @@ function taskCardHTML(task, totalSubtasks, completedSubtasks) {
           }">${completedSubtasks}/${totalSubtasks} Subtasks</span>
         </div>
       </div>
-      <div class="task-footer">      
+      <div class="task-footer">
         <div class="task-users" id="taskUsers-${task.id}"></div>
         <div class="task-priority" id="taskPriority-${task.id}"></div>
       </div>

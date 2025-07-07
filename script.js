@@ -9,10 +9,10 @@ const colorPalette = ['#E63946','#F4A261','#2A9D8F','#264653','#D62828','#F77F00
 
 /**
  * Asynchronously loads user data by fetching contact information.
- * 
+ *
  * This function calls `loadContacts()` to retrieve and load contact data.
  * It uses `await` to ensure that the contacts are fully loaded before proceeding.
- * 
+ *
  * @async
  * @function loadDataUsers
  * @returns {Promise<void>} A promise that resolves when the contacts have been loaded.
@@ -47,7 +47,7 @@ async function getDataFromFirebase(path = '') {
 async function postDataToFirebase(path = '', data = {}) {
   await fetch(BASE_URL + path + '.json', {
     method: 'POST',
-    header: {
+    headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
@@ -64,7 +64,7 @@ async function postDataToFirebase(path = '', data = {}) {
 async function postTaskDataToFirebase(path = '', data = {}) {
   await fetch(BASE_URL + path + '.json', {
     method: 'POST',
-    header: {
+    headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
@@ -73,10 +73,10 @@ async function postTaskDataToFirebase(path = '', data = {}) {
 
 /**
  * Redirects the user to the board page.
- * 
+ *
  * This function changes the current window location to `/pages/board.html`,
  * navigating the user to the board page.
- * 
+ *
  * @function redirectToBoardPage
  */
 function redirectToBoardPage() {
@@ -186,7 +186,7 @@ async function loadTasks() {
 
 /**
  * Loads task data from Firebase and updates the summary section of the application.
- * 
+ *
  * This asynchronous function:
  * - Retrieves all tasks from the `'tasks'` collection in Firebase.
  * - If no data is found, logs an error and stops execution.
@@ -198,7 +198,7 @@ async function loadTasks() {
  * - Updates the DOM with the computed summary values via `summaryIDs()`.
  * - If an upcoming deadline exists, it's displayed in the element with ID `date`.
  * - Additionally calls `dailyTime()` and `fullNameSummary()` to complete summary rendering.
- * 
+ *
  * @async
  * @function loadSummaryData
  * @returns {Promise<void>} A promise that resolves when the summary data has been loaded and rendered.
@@ -370,14 +370,14 @@ function toggleMenu() {
 
 /**
  * Hides the sub-menu on specific restricted pages.
- * 
- * This function checks the current page's pathname and hides the sub-menu elements 
+ *
+ * This function checks the current page's pathname and hides the sub-menu elements
  * if the user is on a restricted page. It targets both the desktop and mobile sub-menu elements.
- * 
+ *
  * Restricted pages:
  * - `/pages/legale-notice-Nouser.html`
  * - `/pages/data-protection-Nouser.html`
- * 
+ *
  * Affected elements:
  * - `#subMenu` (Desktop sub-menu)
  * - `#subMenuMobile` (Mobile sub-menu)
@@ -397,18 +397,18 @@ function hideSubMenuOnRestrictedPages() {
 
 /**
  * Sets a minimum date restriction on the date input field.
- * 
+ *
  * This function ensures that the date input (`#date`) cannot be set to a past date.
  * It updates the `min` attribute of the input field to today's date.
  * Additionally, it re-applies the minimum date restriction each time the input field is focused.
- * 
+ *
  * If the element is not found, an error is logged to the console.
- * 
+ *
  * @function datelimit
  */
 function datelimit() {
   let editDateInput = document.getElementById('date');
-  
+
   function setMinDate() {
       if (editDateInput) {
           let today = new Date().toISOString().split('T')[0];
@@ -417,7 +417,7 @@ function datelimit() {
           console.error("Element mit ID 'dueDateInput' nicht gefunden.");
       }
   }
-  
+
   setMinDate();
   if (editDateInput) {
       editDateInput.addEventListener('focus', setMinDate);

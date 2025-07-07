@@ -152,11 +152,15 @@ function createTaskCardDiv(task) {
  */
 function categoryColor(categoryElement, task) {
   if (categoryElement) {
+    // Support both string and object for category
+    let categoryName = typeof task.category === 'object' && task.category !== null
+      ? task.category.name
+      : task.category;
     const categoryColors = {
       'User Story': '#0038FF',
       'Technical Task': '#1FD7C1',
     };
-    let categoryColor = categoryColors[task.category] || '#ccc';
+    let categoryColor = categoryColors[categoryName] || '#ccc';
     categoryElement.style.backgroundColor = categoryColor;
   }
 }
@@ -174,10 +178,10 @@ function taskColemTitel(task) {
   if (task.columnTitles) {
     let columnTitle = task.columnTitles.toLowerCase().trim();
     const columnMappings = {
-      'To Do': 'To Do',
-      'In Progress': 'In Progress',
-      'Await Feedback': 'Await Feedback',
-      Done: 'Done',
+      'to do': 'To Do',
+      'in progress': 'In Progress',
+      'await feedback': 'Await Feedback',
+      'done': 'Done',
     };
     task.columnTitles = columnMappings[columnTitle] || task.columnTitles;
   }
