@@ -136,6 +136,11 @@ function createTaskCardDiv(task) {
   taskCard.ondragstart = (event) => startDragging(event, task.id);
   taskCard.ondragend = (event) => handleDragEnd(event);
   taskCard.innerHTML += taskCardHTML(task, totalSubtasks, completedSubtasks);
+
+  // Touch events für mobile Drag-and-Drop
+  taskCard.addEventListener('touchstart', (e) => touchStart(e, task.id), {passive: false});
+  taskCard.addEventListener('touchmove', touchMove, {passive: false});
+  taskCard.addEventListener('touchend', touchEnd, {passive: false});
   return taskCard;
 }
 
@@ -411,4 +416,66 @@ function searchTaskCotainerContent(allTasks, searchTaskInput, taskFound) {
     }
   });
   return taskFound;
+}
+
+// Touch Drag-and-Drop Variablen
+let touchDragTaskId = null;
+let touchDragElem = null;
+let touchCurrentColumn = null;
+
+function touchStart(e, id) {
+  if (e.touches.length !== 1) return;
+  touchDragTaskId = id;
+  touchDragElem = e.currentTarget;
+  touchDragElem.classList.add('dragging-touch');
+  document.body.classList.add('dragging-touch-mode');
+  e.preventDefault();
+}
+
+function touchMove(e) {
+  if (!touchDragElem) return;
+  let touch = e.touches[0];
+  touchDragElem.style.position = 'fixed';
+  touchDragElem.style.zIndex = 1000;
+  touchDragElem.style.left = (touch.clientX - touchDragElem.offsetWidth / 2) + 'px';
+  touchDragElem.style.top = (touch.clientY - touchDragElem.offsetHeight / 2) + 'px';
+
+  // Spalte unter Finger erkennen
+  let elem = document.elementFromPoint(touch.clientX, touch.clientY);
+  let column = elem && elem.closest('.column');
+  document.querySelectorAll('.column').forEach(col => col.classList.remove('drag-area-highlight'));
+  if (column) {
+    column.classList.add('drag-area-highlight');
+    touchCurrentColumn = column.id;
+  } else {
+    touchCurrentColumn = null;
+  }
+  e.preventDefault();
+}
+
+async function touchEnd(e) {
+  if (!touchDragElem) return;
+  // Task in neue Spalte verschieben, falls Spalte erkannt
+  if (touchCurrentColumn && touchDragTaskId) {
+    let task = tasks.find((t) => t.id == touchDragTaskId);
+    if (task) {
+      task.columnTitles = touchCurrentColumn;
+      renderTasks();
+      await patchDataToFirebase(`tasks/${task.id}`, { columnTitles: touchCurrentColumn });
+    }
+  }
+  // Reset Styles und Variablen
+  if (touchDragElem) {
+    touchDragElem.style.position = '';
+    touchDragElem.style.zIndex = '';
+    touchDragElem.style.left = '';
+    touchDragElem.style.top = '';
+    touchDragElem.classList.remove('dragging-touch');
+  }
+  document.body.classList.remove('dragging-touch-mode');
+  document.querySelectorAll('.column').forEach(col => col.classList.remove('drag-area-highlight'));
+  touchDragTaskId = null;
+  touchDragElem = null;
+  touchCurrentColumn = null;
+  e.preventDefault();
 }
