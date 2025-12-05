@@ -47,10 +47,10 @@ function selectContact(index) {
           <div class="contact-details-div-name-icons">
             <div class="contact-details-div-icons">
               <div onclick="editContact(${currentSelectedContact})" class="contact-details-div-icon-edit">
-                <img src="/assets/icons/edit-pencil.png" alt="" />Edit
+                <img src="../assets/icons/edit-pencil.png" alt="" />Edit
               </div>
               <div onclick="deleteContact(${currentSelectedContact})" class="contact-details-div-icon-edit img">
-                <img src="/assets/icons/deleteContact.png" alt="">Delete
+                <img src="../assets/icons/deleteContact.png" alt="">Delete
               </div>
             </div>
           </div>

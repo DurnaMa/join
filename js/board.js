@@ -363,7 +363,7 @@ function chooseImgPriority(taskCard, task) {
       Low: 'lowGreen.png',
     };
     let priorityImage = document.createElement('img');
-    priorityImage.src = `/assets/icons/${priorityImages[task.priority] || 'default.png'}`;
+    priorityImage.src = `../assets/icons/${priorityImages[task.priority] || 'default.png'}`;
     priorityImage.alt = task.priority;
     priorityElement.appendChild(priorityImage);
   }

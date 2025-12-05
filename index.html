@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/css/logIn.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./css/logIn.css" />
+    <link rel="stylesheet" href="./css/fonts.css" />
+    <link rel="shortcut icon" href="./assets/img/logodunkel.png" type="image/x-icon" />
     <script defer src="./js/signUplogIn.js"></script>
-    <script defer src="script.js"></script>
+    <script defer src="./script.js"></script>
     <title>Join</title>
   </head>
   <body onload="loadDataUsers()">
@@ -17,18 +17,18 @@
     <div class="signUpContainer">
       <div class="signUpButtonContainer">
         <h3>Not a Join user?</h3>
-        <button onclick="window.location.href='/pages/signUp.html';" class="button">Sign up</button>
+        <button onclick="window.location.href='./pages/signUp.html';" class="button">Sign up</button>
       </div>
     </div>
     <div class="logInContainer">
       <h1>Log in</h1>
       <hr />
-      <form id="loginForm" action="/pages/summary.html">
+      <form id="loginForm" action="./pages/summary.html">
         <div class="inputLogIn">
           <input class="email" type="email" placeholder="Email" id="loginEmail" required />
           <div class="inputPassword">
             <input class="password" type="password" placeholder="Password" id="loginPassword" required />
-            <img onclick="showLoginPassword()" class="passwordLoginIcon" src="/assets/icons/lock.png" alt="" />
+            <img onclick="showLoginPassword()" class="passwordLoginIcon" src="./assets/icons/lock.png" alt="" />
           </div>
           <div id="loginError" class="loginError"></div>
           <div class="buttonLogin">
@@ -39,8 +39,8 @@
       </form>
     </div>
     <footer class="footerContent">
-      <a href="/pages/data-protection-Nouser.html">Privacy Policy</a>
-      <a href="/pages/legale-notice-Nouser.html">Legal notice</a>
+      <a href="./pages/data-protection-Nouser.html">Privacy Policy</a>
+      <a href="./pages/legale-notice-Nouser.html">Legal notice</a>
     </footer>
   </body>
 </html>

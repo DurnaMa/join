@@ -13,20 +13,20 @@ function addNewContactPopup() {
     <div class="shadow-div"></div>
     <div class="add-edit-popup-contact-div">
       <div class="popup-left">
-        <img src="/assets/img/logohell.png" alt="" />
+        <img src="../assets/img/logohell.png" alt="" />
         <h1>Add contact</h1>
         <span>Tasks are better with a team!</span>
         <hr />
       </div>
       <div class="popup-right">
         <div>
-          <img src="/assets/img/profileIMG.png" alt="" />
+          <img src="../assets/img/profileIMG.png" alt="" />
         </div>
         <div>
           <img
             class="popup-close-img"
             onclick="closePopUp()"
-            src="/assets/icons/close.png"
+            src="../assets/icons/close.png"
             alt=""
           />
         </div>
@@ -56,10 +56,10 @@ function addNewContactPopup() {
           </form>
           <div class="popup-buttons">
             <button class="cancel-button" onclick="closePopUp()">
-              Cancel <img src="/assets/icons/cancel.png" alt="" />
+              Cancel <img src="../assets/icons/cancel.png" alt="" />
             </button>
             <button class="create-button" onclick="saveContact()">
-              Create contact <img src="/assets/icons/check.png" alt="" />
+              Create contact <img src="../assets/icons/check.png" alt="" />
             </button>
           </div>
         </div>
@@ -85,7 +85,7 @@ function addNewContactPopup() {
           <img
             class="mobile-popup-close-img"
             onclick="closePopUp()"
-            src="/assets/icons/close-white.png"
+            src="../assets/icons/close-white.png"
             alt=""
           />
         </div>
@@ -96,7 +96,7 @@ function addNewContactPopup() {
       </div>
       <div class="mobile-popup-below">
         <div>
-          <img src="/assets/img/profileIMG.png" alt="" />
+          <img src="../assets/img/profileIMG.png" alt="" />
         </div> 
         <div>
           <form class="mobile-form">
@@ -124,7 +124,7 @@ function addNewContactPopup() {
           </form>
           <div class="mobile-popup-button">
             <button class="create-button" onclick="saveContact()">
-              Create contact <img src="/assets/icons/check.png" alt="" />
+              Create contact <img src="../assets/icons/check.png" alt="" />
             </button>
           </div>
         </div>
@@ -176,7 +176,7 @@ function addNewContactPopup() {
     <div class="shadow-div"></div>
     <div class="add-edit-popup-contact-div">
       <div class="popup-left">
-        <img src="/assets/img/logohell.png" alt="" />
+        <img src="../assets/img/logohell.png" alt="" />
         <h1>Edit contact</h1>
         <hr />
       </div>
@@ -188,7 +188,7 @@ function addNewContactPopup() {
           <img
             class="popup-close-img"
             onclick="closePopUp()"
-            src="/assets/icons/close.png"
+            src="../assets/icons/close.png"
             alt=""
           />
         </div>
@@ -224,7 +224,7 @@ function addNewContactPopup() {
               Delete
             </button>
             <button class="create-button" onclick="updateContact()">
-              Save <img src="/assets/icons/check.png" alt="" />
+              Save <img src="../assets/icons/check.png" alt="" />
             </button>
           </div>
         </div>
@@ -281,7 +281,7 @@ function addNewContactPopup() {
           <img
             class="mobile-popup-close-img"
             onclick="closePopUp()"
-            src="/assets/icons/close-white.png"
+            src="../assets/icons/close-white.png"
             alt=""
           />
         </div>
@@ -325,7 +325,7 @@ function addNewContactPopup() {
                 Delete
             </button>
             <button class="create-button" onclick="updateContact()">
-                Save <img src="/assets/icons/check.png" alt="" />
+                Save <img src="../assets/icons/check.png" alt="" />
             </button>
           </div>
         </div>

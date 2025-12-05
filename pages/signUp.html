@@ -3,21 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
-    <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/css/signUp.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <script defer src="/js/signUplogIn.js"></script>
-    <script defer src="/script.js"></script>
+    <link rel="shortcut icon" href="../assets/img/logodunkel.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../css/signUp.css" />
+    <link rel="stylesheet" href="../css/fonts.css" />
+    <script defer src="../js/signUplogIn.js"></script>
+    <script defer src="../script.js"></script>
     <title>Join</title>
   </head>
   <body onload="singUpInit()">
     <div class="headerLogo">
-      <img src="/assets/img/logodunkel.png" alt="" />
+      <img src="../assets/img/logodunkel.png" alt="" />
     </div>
     <div class="signUpContainer">
-      <a class="signUpArrowLink" href="/index.html">
-        <img class="arrowSignUpImg" src="/assets/icons/arrow-left-line.png" alt="" />
+      <a class="signUpArrowLink" href="../index.html">
+        <img class="arrowSignUpImg" src="../assets/icons/arrow-left-line.png" alt="" />
       </a>
       <h1>Sign Up</h1>
       <hr />
@@ -28,14 +28,14 @@
           <div id="emailError" class="signUpEmailError"></div>
           <div class="passwordContainer">
             <input id="signupPassword" class="password" type="password" placeholder="Password" />
-            <img onclick="showSignupPassword()" class="passwordSignupIcon" src="/assets/icons/lock.png" alt="" />
+            <img onclick="showSignupPassword()" class="passwordSignupIcon" src="../assets/icons/lock.png" alt="" />
           </div>
           <div class="passwordContainer">
             <input id="confirmPassword" class="password" type="password" placeholder="Confirm Password" />
             <img
               onclick="showConfirmPassword()"
               class="passwordSignupConfirmIcon"
-              src="/assets/icons/lock.png"
+              src="../assets/icons/lock.png"
               alt=""
             />
           </div>
@@ -44,7 +44,7 @@
             <input id="checkboxSingUp" type="checkbox" name="checkboxPrivacyPolicy" />
             <label for="">
               I accept the
-              <a href="/pages/data-protection.html">Privacy Policy</a>
+              <a href="../pages/data-protection.html">Privacy Policy</a>
             </label>
           </div>
           <div id="checkboxError" class="signUpCheckboxError"></div>
@@ -52,15 +52,15 @@
         <div class="signUpButton">
           <button onclick="toTheRegistration()" id="" class="button">Sign up</button>
           <div class="pupup-signUp d-none" id="singUpPopup">
-            <img src="/assets/icons/youSignedUpSuccessfully.png" alt="" />
+            <img src="../assets/icons/youSignedUpSuccessfully.png" alt="" />
           </div>
         </div>
       </form>
     </div>
 
     <footer class="footerContent">
-      <a href="/pages/data-protection-Nouser.html">Privacy Policy</a>
-      <a href="/pages/legale-notice-Nouser.html">Legal notice</a>
+      <a href="../pages/data-protection-Nouser.html">Privacy Policy</a>
+      <a href="../pages/legale-notice-Nouser.html">Legal notice</a>
     </footer>
   </body>
 </html>

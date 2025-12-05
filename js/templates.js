@@ -16,7 +16,7 @@ function renderTasksCardPopup(task) {
     Medium: "mediumYellow.png",
     Low: "lowGreen.png",
   };
-  let priorityImageSrc = `/assets/icons/${
+  let priorityImageSrc = `../assets/icons/${
     priorityImages[task.priority] || "default.png"
   }`;
   return /*html*/ renderTasksCardPopupHTML(task, priorityImageSrc);
@@ -56,7 +56,7 @@ function renderTasksCardPopupHTML(task, priorityImageSrc) {
         <div class="taskCardPopupCategoryColor">
           <h2>${task.category || "No Category"}</h2>
         </div>
-        <img onclick="closeTaskCardPopUp()" src="/assets/icons/close.png" alt="" />
+        <img onclick="closeTaskCardPopUp()" src="../assets/icons/close.png" alt="" />
       </div>
 
       <div class="taskCardContent">
@@ -110,11 +110,11 @@ function renderTasksCardPopupHTML(task, priorityImageSrc) {
         </div>
       <div class="taskCardPopupButtons">
         <div onclick="deleteTask('${task.id}')">
-          <img src="/assets/icons/deleteContact.png" alt="">Delete
+          <img src="../assets/icons/deleteContact.png" alt="">Delete
         </div>
         <hr class="hrBoardTaskPopUp">
         <div onclick="openEditTaskPopup('${task.id}')">
-          <img src="/assets/icons/edit-pencil.png" alt="">Edit
+          <img src="../assets/icons/edit-pencil.png" alt="">Edit
         </div>
       </div>
     </div>
@@ -185,7 +185,7 @@ function renderEditTasksCardPopupHTML(title, description, dueDate, assignedConta
     <div class="taskCardEditPopup">
       <div class="task-edit-close-popup-div">
         <div class="closeImgContent">
-          <img onclick="closeEditTaskCardPopUp()" class="task-edit-close-popup" src="/assets/icons/close.png" alt=""/>
+          <img onclick="closeEditTaskCardPopUp()" class="task-edit-close-popup" src="../assets/icons/close.png" alt=""/>
         </div>
       </div>
       <div class="taskCardEditContent">
@@ -222,8 +222,8 @@ function renderEditTasksCardPopupHTML(title, description, dueDate, assignedConta
       <div>
         <div onclick="contactListPopUp()" class="assignedContainer">
           <span>Select contacts to assign</span>
-          <img id="assignedArrowDown" src="/assets/icons/arrow_drop_down.png" alt="" />
-          <img id="assignedArrowUp" class="d-none" src="/assets/icons/arrow_drop_up.png" alt="" />
+          <img id="assignedArrowDown" src="../assets/icons/arrow_drop_down.png" alt="" />
+          <img id="assignedArrowUp" class="d-none" src="../assets/icons/arrow_drop_up.png" alt="" />
         </div>
         <div id="assignedContactsListPopUp" class="hidden"></div>
       </div>
@@ -239,7 +239,7 @@ function renderEditTasksCardPopupHTML(title, description, dueDate, assignedConta
       <div id="addSubTask">
         <input id="subTaskPopUp" class="addSubTask" placeholder="Add new subtask" type="text"
               onkeydown="if(event.key === 'Enter') { event.preventDefault(); addSubTaskPopUp(); }">
-        <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="/assets/icons/Subtasks_plus.png" alt="" />
+        <img onclick="addSubTaskPopUp()" style="cursor: pointer" src="../assets/icons/Subtasks_plus.png" alt="" />
       </div>
       <ul id="subTaskList">
         ${subTasks
@@ -250,14 +250,14 @@ function renderEditTasksCardPopupHTML(title, description, dueDate, assignedConta
             <span id="subEditSpan-${i}" class="subTask-text">${subTask.description}</span>
             <div class="subTask-actions">
               <div class="icon-wrapper">
-                <img id="subEditImgPen-${i}" src="/assets/icons/edit-icon.png" alt="Edit" onclick="editSubTask(${i})" class="action-icon edit-icon">
+                <img id="subEditImgPen-${i}" src="../assets/icons/edit-icon.png" alt="Edit" onclick="editSubTask(${i})" class="action-icon edit-icon">
               </div>
               <div class="icon-wrapper">
-                <img src="/assets/icons/delete-icon.png" alt="Delete" onclick="deleteSubTask(${i})" class="action-icon delete-icon">
+                <img src="../assets/icons/delete-icon.png" alt="Delete" onclick="deleteSubTask(${i})" class="action-icon delete-icon">
               </div>
               <div class="separator"></div>
               <div class="icon-wrapper">
-                <img id="subEditImgCheck-${i}" src="/assets/icons/checkBgWhite.png" alt="Save" onclick="saveSubTask(${i})" class="action-icon save-icon d-none">
+                <img id="subEditImgCheck-${i}" src="../assets/icons/checkBgWhite.png" alt="Save" onclick="saveSubTask(${i})" class="action-icon save-icon d-none">
               </div>
             </div>
           </li>
@@ -268,7 +268,7 @@ function renderEditTasksCardPopupHTML(title, description, dueDate, assignedConta
       </div>
       <div class="button-ok-div">
         <div class="buttonContent">
-        <button onclick="updateEditTask(event)" data-task-id="${taskId}" class="button-ok">Ok <img src="/assets/icons/check.png" alt="" /></button>
+        <button onclick="updateEditTask(event)" data-task-id="${taskId}" class="button-ok">Ok <img src="../assets/icons/check.png" alt="" /></button>
         </div>
       </div>
     </div>
@@ -329,10 +329,10 @@ function taskCardHTML(task, totalSubtasks, completedSubtasks) {
         <div class="task-controls">
         <img class="move-img-up" onclick="moveTaskToNextColumn('${
           task.id
-        }', -1, event)" src="/assets/icons/arrow-left-line.png" alt="">
+        }', -1, event)" src="../assets/icons/arrow-left-line.png" alt="">
         <img class="move-img-down" onclick="moveTaskToNextColumn('${
           task.id
-        }', 1, event)" src="/assets/icons/arrow-left-line.png" alt="">
+        }', 1, event)" src="../assets/icons/arrow-left-line.png" alt="">
       </div>
       </div>
 

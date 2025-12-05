@@ -44,9 +44,9 @@ function setPriority(priority) {
   prioUrgentEdit.classList.remove('prioUrgentRed');
   prioMediumEdit.classList.remove('prioMediumYellow');
   prioLowEdit.classList.remove('prioLowGreen');
-  urgentImg.src = '/assets/icons/urgentRed.png';
-  mediumImg.src = '/assets/icons/mediumYellow.png';
-  lowImg.src = '/assets/icons/lowGreen.png';
+  urgentImg.src = '../assets/icons/urgentRed.png';
+  mediumImg.src = '../assets/icons/mediumYellow.png';
+  lowImg.src = '../assets/icons/lowGreen.png';
 
   btnPriority(priority);
 }
@@ -68,13 +68,13 @@ function setPriority(priority) {
 function btnPriority(priority) {
   if (priority === 'urgent') {
     prioUrgentEdit.classList.add('prioUrgentRed');
-    urgentImg.src = '/assets/icons/urgentWhite.png';
+    urgentImg.src = '../assets/icons/urgentWhite.png';
   } else if (priority === 'medium') {
     prioMediumEdit.classList.add('prioMediumYellow');
-    mediumImg.src = '/assets/icons/mediumWhite.png';
+    mediumImg.src = '../assets/icons/mediumWhite.png';
   } else if (priority === 'low') {
     prioLowEdit.classList.add('prioLowGreen');
-    lowImg.src = '/assets/icons/lowWhite.png';
+    lowImg.src = '../assets/icons/lowWhite.png';
   }
 }
 
@@ -185,14 +185,14 @@ function generateSubTaskList(i) {
       <span id="subEditSpan-${i}" class="subTask-text">${subTasks[i].description}</span>
       <div class="subTask-actions">
         <div class="icon-wrapper">
-          <img id="subEditImgPen-${i}" src="/assets/icons/edit-icon.png" alt="Edit" onclick="editSubTask(${i})" class="action-icon edit-icon">
+          <img id="subEditImgPen-${i}" src="../assets/icons/edit-icon.png" alt="Edit" onclick="editSubTask(${i})" class="action-icon edit-icon">
         </div>
         <div class="icon-wrapper">
-          <img src="/assets/icons/delete-icon.png" alt="Delete" onclick="deleteSubTask(${i})" class="action-icon delete-icon">
+          <img src="../assets/icons/delete-icon.png" alt="Delete" onclick="deleteSubTask(${i})" class="action-icon delete-icon">
         </div>
         <div class="separator"></div>
         <div class="icon-wrapper">
-          <img id="subEditImgCheck-${i}" src="/assets/icons/checkBgWhite.png" alt="Save" onclick="saveSubTask(${i})" class="action-icon save-icon d-none">
+          <img id="subEditImgCheck-${i}" src="../assets/icons/checkBgWhite.png" alt="Save" onclick="saveSubTask(${i})" class="action-icon save-icon d-none">
         </div>
       </div>
     </li>

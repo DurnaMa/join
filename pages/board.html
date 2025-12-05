@@ -3,64 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="/assets/img/logodunkel.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="../assets/img/logodunkel.png" type="image/x-icon" />
     <title>Board</title>
-    <link rel="stylesheet" href="/css/header.css" />
-    <link rel="stylesheet" href="/css/sidebar.css" />
-    <link rel="stylesheet" href="/mobileTemplates/footer/footerMobile.css" />
-    <link rel="stylesheet" href="/mobileTemplates/header/headerMobile.css" />
-    <link rel="stylesheet" href="/css/board.css" />
-    <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/css/fonts.css" />
-    <link rel="stylesheet" href="/css/boardPopUp.css" />
-    <link rel="stylesheet" href="/css/boardTaskPopUp.css" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/sidebar.css" />
+    <link rel="stylesheet" href="../mobileTemplates/footer/footerMobile.css" />
+    <link rel="stylesheet" href="../mobileTemplates/header/headerMobile.css" />
+    <link rel="stylesheet" href="../css/board.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../css/fonts.css" />
+    <link rel="stylesheet" href="../css/boardPopUp.css" />
+    <link rel="stylesheet" href="../css/boardTaskPopUp.css" />
     <script defer src="../js/includeTemplates.js"></script>
-    <script defer src="/script.js"></script>
-    <script defer src="/js/board.js"></script>
-    <script defer src="/js/taskProcess.js"></script>
-    <script defer src="/js/boardPopUp.js"></script>
-    <script defer src="/js/addTask.js"></script>
-    <script defer src="/js/taskManagement.js"></script>
-    <script defer src="/js/templates.js"></script>
-    <script defer src="/js/boradAddTaskPopUpTemplates.js"></script>
-    <script defer src="/js/contacts.js"></script>
-    <script defer src="/js/mainContactPart.js"></script>
-    <script defer src="/js/formularValidierung.js"></script>
+    <script defer src="../script.js"></script>
+    <script defer src="../js/board.js"></script>
+    <script defer src="../js/taskProcess.js"></script>
+    <script defer src="../js/boardPopUp.js"></script>
+    <script defer src="../js/addTask.js"></script>
+    <script defer src="../js/taskManagement.js"></script>
+    <script defer src="../js/templates.js"></script>
+    <script defer src="../js/boradAddTaskPopUpTemplates.js"></script>
+    <script defer src="../js/contacts.js"></script>
+    <script defer src="../js/mainContactPart.js"></script>
+    <script defer src="../js/formularValidierung.js"></script>
   </head>
 
   <body id="bodyId" onload="initBoard()">
-    <div w3-include-html="/templates/header/header.html"></div>
-    <div w3-include-html="/mobileTemplates/header/headerMobile.html"></div>
+    <div w3-include-html="../templates/header/header.html"></div>
+    <div w3-include-html="../mobileTemplates/header/headerMobile.html"></div>
 
     <aside class="sideBar">
-      <img class="logo-sidenav" src="/assets/img/logohell.png" alt="" />
+      <img class="logo-sidenav" src="../assets/img/logohell.png" alt="" />
       <nav class="sideBarLogin d-none">
-        <a href="/index.html">
-          <img src="/assets/icons/loginIcon.png" alt="" />
+        <a href="../index.html">
+          <img src="../assets/icons/loginIcon.png" alt="" />
           <span>Log In</span>
         </a>
       </nav>
       <nav class="sideBarList">
-        <a href="/pages/summary.html" data-page="summary">
-          <img src="/assets/img/summary-icon.png" alt="" />
+        <a href="../pages/summary.html" data-page="summary">
+          <img src="../assets/img/summary-icon.png" alt="" />
           <span>Summary</span>
         </a>
-        <a href="/pages/addTask.html" data-page="addTask">
-          <img src="/assets/img/addtask-icon.png" alt="" />
+        <a href="../pages/addTask.html" data-page="addTask">
+          <img src="../assets/img/addtask-icon.png" alt="" />
           <span>Add Task</span>
         </a>
-        <a href="/pages/board.html" data-page="board">
-          <img src="/assets/img/board-icon.png" alt="" />
+        <a href="../pages/board.html" data-page="board">
+          <img src="../assets/img/board-icon.png" alt="" />
           <span>Board</span>
         </a>
-        <a href="/pages/contacts.html" data-page="contacts">
-          <img src="/assets/img/contacts-icon.png" alt="" />
+        <a href="../pages/contacts.html" data-page="contacts">
+          <img src="../assets/img/contacts-icon.png" alt="" />
           <span>Contacts</span>
         </a>
       </nav>
       <div class="policyAndNotice">
-        <a href="/pages/data-protection.html" data-page="data-protection"><span>Privacy Policy</span></a>
-        <a href="/pages/legale-notice.html" data-page="legale-notice"><span>Legal notice</span></a>
+        <a href="../pages/data-protection.html" data-page="data-protection"><span>Privacy Policy</span></a>
+        <a href="../pages/legale-notice.html" data-page="legale-notice"><span>Legal notice</span></a>
       </div>
     </aside>
     <div class="board" id="board">
@@ -68,22 +68,22 @@
         <div class="board-title-plusbtn">
           <h1 class="board-title">Board</h1>
           <button class="addTaskMobileBtn2" onclick="addTaskPopupBtn()">
-            <img class="addTaskBtnIcon2" src="/assets/icons/plusAddTaskMobile.png" alt="Add task icon" />
+            <img class="addTaskBtnIcon2" src="../assets/icons/plusAddTaskMobile.png" alt="Add task icon" />
           </button>
         </div>
         <div class="boardHeaderRight">
           <div class="searchDiv">
             <input class="search" type="text" placeholder="Find Task" id="searchTask" oninput="searchTask()" />
             <div class="search-dividing-line"></div>
-            <img class="searchIcon" src="/assets/icons/search.png" alt="Search icon" />
+            <img class="searchIcon" src="../assets/icons/search.png" alt="Search icon" />
           </div>
           <button class="addTaskBtn" onclick="addTaskPopupBtn()">
             <p class="addTaskBtnText">Add task</p>
-            <img class="addTaskBtnIcon" src="/assets/icons/addTaskBtn.png" alt="Add task icon" />
+            <img class="addTaskBtnIcon" src="../assets/icons/addTaskBtn.png" alt="Add task icon" />
           </button>
 
           <button class="addTaskMobileBtn" onclick="addTaskPopupBtn()">
-            <img class="addTaskBtnIcon" src="/assets/icons/plusAddTaskMobile.png" alt="Add task icon" />
+            <img class="addTaskBtnIcon" src="../assets/icons/plusAddTaskMobile.png" alt="Add task icon" />
           </button>
         </div>
       </div>
@@ -93,7 +93,7 @@
           <div class="column-titles-plusBtn">
             <h2 class="column-titles-h2">To Do</h2>
             <button class="add-column" id="toDoId" onclick="addTaskPopupPlusToDoBtn()">
-              <img src="/assets/icons/plusblack.png" alt="Add icon" />
+              <img src="../assets/icons/plusblack.png" alt="Add icon" />
             </button>
           </div>
           <div class="columns" id="columnsToDo">
@@ -111,7 +111,7 @@
           <div class="column-titles-plusBtn">
             <h2 class="column-titles-h2">In progress</h2>
             <button class="add-column" id="inProgressId" onclick="addTaskPopupPlusInProgressBtn()">
-              <img src="/assets/icons/plusblack.png" alt="Add icon" />
+              <img src="../assets/icons/plusblack.png" alt="Add icon" />
             </button>
           </div>
           <div class="columns" id="columnsInProgress">
@@ -129,7 +129,7 @@
           <div class="column-titles-plusBtn">
             <h2 class="column-titles-h2">Await feedback</h2>
             <button class="add-column" id="awaitFeedbackId" onclick="addTaskPopupPlusAwaitFeedbackBtn()">
-              <img src="/assets/icons/plusblack.png" alt="Add icon" />
+              <img src="../assets/icons/plusblack.png" alt="Add icon" />
             </button>
           </div>
           <div class="columns" id="columnsAwaitFeedback">
@@ -168,7 +168,7 @@
       <div class="shadow-div-added"></div>
       <div class="task-added-popup d-none">
         <span>Task added to board</span>
-        <img src="/assets/img/board-icon.png" alt="" />
+        <img src="../assets/img/board-icon.png" alt="" />
       </div>
     </div>
     <div class="searchInfo d-none" id="searchInfo">No tasks found!</div>
@@ -177,20 +177,20 @@
 
     <footer>
       <nav class="mobileSideBar">
-        <a class="mobileSideBarList" href="/pages/summary.html" data-page="summary">
-          <img src="/assets/img/summary-icon.png" alt="" />
+        <a class="mobileSideBarList" href="../pages/summary.html" data-page="summary">
+          <img src="../assets/img/summary-icon.png" alt="" />
           <span>Summary</span>
         </a>
-        <a class="mobileSideBarList" href="/pages/board.html" data-page="board">
-          <img src="/assets/img/board-icon.png" alt="" />
+        <a class="mobileSideBarList" href="../pages/board.html" data-page="board">
+          <img src="../assets/img/board-icon.png" alt="" />
           <span>Board</span>
         </a>
-        <a class="mobileSideBarList" href="/pages/addTask.html" data-page="addTask">
-          <img src="/assets/img/addtask-icon.png" alt="" />
+        <a class="mobileSideBarList" href="../pages/addTask.html" data-page="addTask">
+          <img src="../assets/img/addtask-icon.png" alt="" />
           <span>Add Tasks</span>
         </a>
-        <a class="mobileSideBarList" href="/pages/contacts.html" data-page="contacts">
-          <img src="/assets/img/contacts-icon.png" alt="" />
+        <a class="mobileSideBarList" href="../pages/contacts.html" data-page="contacts">
+          <img src="../assets/img/contacts-icon.png" alt="" />
           <span>Contacts</span>
         </a>
       </nav>
