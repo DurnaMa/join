@@ -354,7 +354,7 @@ function highlightNavItem() {
 function getCurrentPage() {
   const path = window.location.pathname;
   const fileName = path.substring(path.lastIndexOf('/') + 1);
-  return fileName.replace('.html', '');
+  return fileName.replace('./html', '');
 }
 
 document.addEventListener('DOMContentLoaded', highlightNavItem);
@@ -383,7 +383,7 @@ function toggleMenu() {
  * - `#subMenuMobile` (Mobile sub-menu)
  */
 function hideSubMenuOnRestrictedPages() {
-  const restrictedPages = ['/pages/legale-notice-Nouser.html', '/pages/data-protection-Nouser.html'];
+  const restrictedPages = ['./pages/legale-notice-Nouser.html', './pages/data-protection-Nouser.html'];
   const currentPath = window.location.pathname;
 
   if (restrictedPages.includes(currentPath)) {

@@ -290,9 +290,9 @@ function updatePriority(newPriority) {
   window.currentSelectedPriority = newPriority;
 
   const priorityStyles = {
-    Urgent: {class: "prioUrgentRed",imgSrc: "/assets/icons/urgentWhite.png",},
-    Medium: {class: "prioMediumYellow",imgSrc: "/assets/icons/mediumWhite.png",},
-    Low: {class: "prioLowGreen",imgSrc: "/assets/icons/lowWhite.png",},
+    Urgent: {class: "prioUrgentRed",imgSrc: './assets/icons/urgentWhite.png',},
+    Medium: {class: "prioMediumYellow",imgSrc: './assets/icons/mediumWhite.png',},
+    Low: {class: "prioLowGreen",imgSrc: './assets/icons/lowWhite.png',},
   };
 
   document.getElementById("prioUrgentEditPopup").classList.remove(priorityStyles.Urgent.class);
