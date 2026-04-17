@@ -150,7 +150,7 @@ async function savingOnFirebase(data) {
  *   and returns `false`.
  * - If the test passes, it removes any error styling and hides the error message, then returns `true`.
  * 
- * @function validateField
+ * @function validateContactField
  * @param {string} value - The value to validate.
  * @param {RegExp} regex - The regular expression to test the value against.
  * @param {string} fieldId - The ID of the input field to apply validation styling.
@@ -158,7 +158,7 @@ async function savingOnFirebase(data) {
  * @param {string} errorMessage - The message to display if validation fails.
  * @returns {boolean} `true` if the value is valid, otherwise `false`.
  */
-function validateField(value, regex, fieldId, errorId, errorMessage) {
+function validateContactField(value, regex, fieldId, errorId, errorMessage) {
   const field = document.getElementById(fieldId);
   const errorField = document.getElementById(errorId);
   if (!regex.test(value)) {
@@ -190,9 +190,9 @@ function validateField(value, regex, fieldId, errorId, errorMessage) {
  * @returns {boolean} `true` if all fields are valid, otherwise `false`.
  */
 function validateContactData(name, email, phone) {
-  const nameValid = validateField(name, /^[A-Za-zÄÖÜäöüß\s]+$/, "newContactName", "errorNewContactName","Bitte keine Zahlen, Sonderzeichen oder leere Felder!");
-  const emailValid = validateField(email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/, "newContactEmail", "errorNewContactEmail","Bitte eine gültige E-Mail-Adresse eingeben!");
-  const phoneValid = validateField(phone, /^[0-9]+$/, "newContactPhone", "errorNewContactPhone","Die Telefonnummer darf nur Zahlen enthalten!");
+  const nameValid = validateContactField(name, /^[A-Za-zÄÖÜäöüß\s]+$/, "newContactName", "errorNewContactName","Bitte keine Zahlen, Sonderzeichen oder leere Felder!");
+  const emailValid = validateContactField(email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/, "newContactEmail", "errorNewContactEmail","Bitte eine gültige E-Mail-Adresse eingeben!");
+  const phoneValid = validateContactField(phone, /^[0-9]+$/, "newContactPhone", "errorNewContactPhone","Die Telefonnummer darf nur Zahlen enthalten!");
   return nameValid && emailValid && phoneValid;
 }
 
@@ -232,7 +232,7 @@ if (!regex.test(value)) {
 /**
  * Validates the edited contact data including name, email, and phone number.
  * 
- * This function uses `validateField()` to check the following fields:
+ * This function uses `validateContactField()` to check the following fields:
  * - `editContactName`: Must only contain letters and spaces (no numbers or special characters).
  * - `editContactEmail`: Must be a valid email format.
  * - `editContactPhone`: Must contain only digits.
@@ -246,9 +246,9 @@ if (!regex.test(value)) {
  * @returns {boolean} `true` if all fields are valid, otherwise `false`.
  */
 function validateEditContactData(name, email, phone) {
-const nameValid = validateField(name, /^[A-Za-zÄÖÜäöüß\s]+$/, "editContactName", "errorEditContactName","Bitte keine Zahlen, Sonderzeichen oder leere Felder!");
-const emailValid = validateField(email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/, "editContactEmail", "errorEditContactEmail","Bitte eine gültige E-Mail-Adresse eingeben!");
-const phoneValid = validateField(phone, /^[0-9]+$/, "editContactPhone", "errorEditContactPhone","Die Telefonnummer darf nur Zahlen enthalten!");
+const nameValid = validateContactField(name, /^[A-Za-zÄÖÜäöüß\s]+$/, "editContactName", "errorEditContactName","Bitte keine Zahlen, Sonderzeichen oder leere Felder!");
+const emailValid = validateContactField(email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/, "editContactEmail", "errorEditContactEmail","Bitte eine gültige E-Mail-Adresse eingeben!");
+const phoneValid = validateContactField(phone, /^[0-9]+$/, "editContactPhone", "errorEditContactPhone","Die Telefonnummer darf nur Zahlen enthalten!");
 return nameValid && emailValid && phoneValid;
 }
 

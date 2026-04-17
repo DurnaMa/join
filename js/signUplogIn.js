@@ -3,6 +3,19 @@ async function singUpInit() {
 }
 
 /**
+ * Hashes a plain-text password using SHA-256 via the Web Crypto API.
+ * @param {string} password
+ * @returns {Promise<string>} Hex-encoded hash
+ */
+async function hashPassword(password) {
+  const encoded = new TextEncoder().encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', encoded);
+  return Array.from(new Uint8Array(hashBuffer))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+/**
  * Asynchronously fetches and loads JSON data from a specified path.
  *
  * @param {string} [path=""] - The relative path to the JSON file (excluding the `.json` extension).
@@ -55,10 +68,13 @@ async function toTheRegistration() {
     await loadContacts();
     if (contacts.some(c => c.email === emailInput.value)) return (errorDiv.textContent = 'Email already exists', false);
 
-    let data = { name: nameInput.value, email: emailInput.value, password: passwordInput.value, color: colorPalette[Math.floor(Math.random() * colorPalette.length)] };
+    const hashedPassword = await hashPassword(passwordInput.value);
+    let data = { name: nameInput.value, email: emailInput.value, password: hashedPassword, color: colorPalette[Math.floor(Math.random() * colorPalette.length)] };
     if (await postData('/contacts', data)) contacts.push(data);
 
-    [nameInput.value, emailInput.value, passwordInput.value, confirmPassword.value] = ['', '', '', ''];
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    nameInput.value = emailInput.value = passwordInput.value = '';
+    if (confirmPasswordInput) confirmPasswordInput.value = '';
     popup?.classList.remove('d-none');
     setTimeout(() => (window.location.href = '/index.html'), 2000);
   } catch (error) {
@@ -131,9 +147,10 @@ function emailValidation() {
  *   - Redirects the user to the summary page.
  * - If no matching user is found, displays an error message indicating incorrect credentials.
  */
-function logIn() {
+async function logIn() {
   const { checkbox, errorDiv, email, password } = logInVarible();
-  const user = contacts.find((contact) => contact.email === email && contact.password === password);
+  const hashedPassword = await hashPassword(password);
+  const user = contacts.find((contact) => contact.email === email && contact.password === hashedPassword);
   if (user) {
     errorDiv.textContent = 'Login erfolgreich!';
     errorDiv.style.color = 'green';

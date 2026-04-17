@@ -337,7 +337,7 @@ function taskCardHTML(task, totalSubtasks, completedSubtasks) {
       </div>
 
       <h3 class="h3TaskCard">${task.title}</h3>
-      <p>${task.description.substring(0,40)}...</p>
+      <p>${(task.description || '').substring(0, 40)}${task.description && task.description.length > 40 ? '...' : ''}</p>
 
       <div class="progress-container">
         <div class="progress-bar-container">

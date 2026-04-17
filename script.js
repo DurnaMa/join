@@ -423,3 +423,13 @@ function datelimit() {
       editDateInput.addEventListener('focus', setMinDate);
   }
 }
+
+/**
+ * Redirects unauthenticated users to the login page.
+ * Call via onload on protected pages.
+ */
+function authGuard() {
+  if (!sessionStorage.getItem('fullName')) {
+    window.location.replace('../index.html');
+  }
+}
