@@ -480,3 +480,18 @@ function authGuard() {
 function logOut() {
   sessionStorage.clear();
 }
+
+/**
+ * Shows the help page with the same sidebar as the public Privacy Policy page
+ * when no user is logged in: only "Log In" plus the public policy links.
+ */
+function showHelpForGuest() {
+  if (sessionStorage.getItem('fullName')) return;
+  document.querySelector('.sideBarLogin').classList.remove('d-none');
+  document.querySelector('.sideBarList').classList.add('d-none');
+  document.getElementById('mobileSideBarUser').classList.add('d-none');
+  document.getElementById('mobileSideBarGuest').classList.remove('d-none');
+  document.querySelector('.policyAndNotice a[data-page="data-protection"]').href =
+    '../pages/data-protection-Nouser.html';
+  document.querySelector('.policyAndNotice a[data-page="legale-notice"]').href = '../pages/legale-notice-Nouser.html';
+}
