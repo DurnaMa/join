@@ -39,6 +39,10 @@
   background-color: #e1e5ec;
 }
 
+#profileName.d-none {
+  display: none;
+}
+
 #subMenuMobile {
   display: flex;
   flex-direction: column;

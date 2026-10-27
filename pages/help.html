@@ -14,7 +14,7 @@
     <script defer src="../script.js"></script>
     <title>Help</title>
   </head>
-  <body>
+  <body onload="showHelpForGuest()">
     <div w3-include-html="../templates/header/header.html"></div>
     <div w3-include-html="../mobileTemplates/header/headerMobile.html"></div>
 
@@ -174,7 +174,13 @@
       <h2>Enjoy using Join!</h2>
     </div>
     <footer>
-      <nav class="mobileSideBar">
+      <nav class="mobileSideBar d-none" id="mobileSideBarGuest">
+        <a class="mobileSideBarList" href="../index.html">
+          <img src="../assets/icons/loginIcon.png" alt="" />
+          <span>Log In</span>
+        </a>
+      </nav>
+      <nav class="mobileSideBar" id="mobileSideBarUser">
         <a class="mobileSideBarList" href="../pages/summary.html" data-page="summary">
           <img src="../assets/img/summary-icon.png" alt="" />
           <span>Summary</span>

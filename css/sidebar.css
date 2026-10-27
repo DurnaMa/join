@@ -38,6 +38,10 @@
   flex-direction: column;
 }
 
+.sideBarList.d-none {
+  display: none;
+}
+
 .sideBarList a {
   display: flex;
   width: 235px;

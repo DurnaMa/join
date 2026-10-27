@@ -3,9 +3,38 @@ const BASE_URL = 'https://join-7f1d9-default-rtdb.europe-west1.firebasedatabase.
 let contacts = [];
 let tasks = [];
 
-const colorPalette = ['#E63946','#F4A261','#2A9D8F','#264653','#D62828','#F77F00','#3D348B','#E76F51','#8E44AD','#16A085','#D7263D',
-  '#1B998B','#ECA400','#3A86FF','#8338EC','#06D6A0','#EF476F','#118AB2','#073B4C','#F25C54','#43AA8B','#FF5A5F','#5E548E','#9B5DE5',
-  '#00BBF9','#FF006E','#8AC926','#6A0572','#A60303','#FF9F1C',];
+const colorPalette = [
+  '#E63946',
+  '#F4A261',
+  '#2A9D8F',
+  '#264653',
+  '#D62828',
+  '#F77F00',
+  '#3D348B',
+  '#E76F51',
+  '#8E44AD',
+  '#16A085',
+  '#D7263D',
+  '#1B998B',
+  '#ECA400',
+  '#3A86FF',
+  '#8338EC',
+  '#06D6A0',
+  '#EF476F',
+  '#118AB2',
+  '#073B4C',
+  '#F25C54',
+  '#43AA8B',
+  '#FF5A5F',
+  '#5E548E',
+  '#9B5DE5',
+  '#00BBF9',
+  '#FF006E',
+  '#8AC926',
+  '#6A0572',
+  '#A60303',
+  '#FF9F1C',
+];
 
 /**
  * Asynchronously loads user data by fetching contact information.
@@ -166,11 +195,17 @@ async function loadTasks() {
       dueDate: SINGLE_TASK.dueDate,
       priority: SINGLE_TASK.priority,
       subTasks: SINGLE_TASK.subTasks
-        ? SINGLE_TASK.subTasks.map((subTask) => ({description: subTask.description,completed: subTask.completed ?? false,})): [],
+        ? SINGLE_TASK.subTasks.map((subTask) => ({
+            description: subTask.description,
+            completed: subTask.completed ?? false,
+          }))
+        : [],
       status: SINGLE_TASK.status,
       category: SINGLE_TASK.category,
       users: SINGLE_TASK.users
-        ? SINGLE_TASK.users.map((user) => {let userName = typeof user === 'string' ? user : user.name;let contact = contacts.find((c) => c.name === userName);
+        ? SINGLE_TASK.users.map((user) => {
+            let userName = typeof user === 'string' ? user : user.name;
+            let contact = contacts.find((c) => c.name === userName);
             return {
               name: userName,
               initials: generateInitials(userName),
@@ -210,7 +245,8 @@ async function loadSummaryData() {
     console.error('Keine Daten gefunden!');
     return;
   }
-  let { totalTasks, toDoCount, inProgressCount, awaitFeedbackCount, doneCount, urgentCount, upcomingDeadline } = summaryVariable(tasksData);
+  let { totalTasks, toDoCount, inProgressCount, awaitFeedbackCount, doneCount, urgentCount, upcomingDeadline } =
+    summaryVariable(tasksData);
   summaryIDs(totalTasks, toDoCount, inProgressCount, awaitFeedbackCount, doneCount, urgentCount);
   if (upcomingDeadline) {
     document.getElementById('date').innerText = upcomingDeadline.toDateString();
@@ -218,7 +254,6 @@ async function loadSummaryData() {
   dailyTime();
   fullNameSummary();
 }
-
 
 function summaryIDs(totalTasks, toDoCount, inProgressCount, awaitFeedbackCount, doneCount, urgentCount) {
   document.getElementById('totalTaskCount').innerText = totalTasks;
@@ -229,15 +264,16 @@ function summaryIDs(totalTasks, toDoCount, inProgressCount, awaitFeedbackCount, 
   document.getElementById('urgentCount').innerText = urgentCount;
 }
 
-
 function summaryVariable(tasksData) {
   let tasks = Object.values(tasksData);
   let totalTasks = tasks.length;
   let toDoCount = tasks.filter((task) => task.columnTitles === 'To Do' || task.columnTitles === 'todo').length;
   let inProgressCount = tasks.filter(
-    (task) => task.columnTitles === 'In Progress' || task.columnTitles === 'inprogress').length;
+    (task) => task.columnTitles === 'In Progress' || task.columnTitles === 'inprogress'
+  ).length;
   let awaitFeedbackCount = tasks.filter(
-    (task) => task.columnTitles === 'Await Feedback' || task.columnTitles === 'awaitfeedback').length;
+    (task) => task.columnTitles === 'Await Feedback' || task.columnTitles === 'awaitfeedback'
+  ).length;
   let doneCount = tasks.filter((task) => task.columnTitles === 'Done' || task.columnTitles === 'done').length;
   let urgentTasks = tasks.filter((task) => task.priority === 'Urgent');
   let urgentCount = urgentTasks.length;
@@ -270,7 +306,7 @@ function goBack() {
  */
 async function putDataToFirebase(path, data = {}, key) {
   await fetch(BASE_URL + path + key + '.json', {
-  method: 'PATCH',
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -410,17 +446,17 @@ function datelimit() {
   let editDateInput = document.getElementById('date');
 
   function setMinDate() {
-      if (editDateInput) {
-          let today = new Date().toISOString().split('T')[0];
-          editDateInput.setAttribute('min', today);
-      } else {
-          console.error("Element mit ID 'dueDateInput' nicht gefunden.");
-      }
+    if (editDateInput) {
+      let today = new Date().toISOString().split('T')[0];
+      editDateInput.setAttribute('min', today);
+    } else {
+      console.error("Element mit ID 'dueDateInput' nicht gefunden.");
+    }
   }
 
   setMinDate();
   if (editDateInput) {
-      editDateInput.addEventListener('focus', setMinDate);
+    editDateInput.addEventListener('focus', setMinDate);
   }
 }
 
@@ -432,4 +468,30 @@ function authGuard() {
   if (!sessionStorage.getItem('fullName')) {
     window.location.replace('../index.html');
   }
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) authGuard();
+  });
+}
+
+/**
+ * Ends the current session by clearing all session data.
+ * Navigation to the login page is done by the calling link.
+ */
+function logOut() {
+  sessionStorage.clear();
+}
+
+/**
+ * Shows the help page with the same sidebar as the public Privacy Policy page
+ * when no user is logged in: only "Log In" plus the public policy links.
+ */
+function showHelpForGuest() {
+  if (sessionStorage.getItem('fullName')) return;
+  document.querySelector('.sideBarLogin').classList.remove('d-none');
+  document.querySelector('.sideBarList').classList.add('d-none');
+  document.getElementById('mobileSideBarUser').classList.add('d-none');
+  document.getElementById('mobileSideBarGuest').classList.remove('d-none');
+  document.querySelector('.policyAndNotice a[data-page="data-protection"]').href =
+    '../pages/data-protection-Nouser.html';
+  document.querySelector('.policyAndNotice a[data-page="legale-notice"]').href = '../pages/legale-notice-Nouser.html';
 }
